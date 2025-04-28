@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Audiitor2.css';
 
@@ -11,112 +11,53 @@ const allMeasures = [
 ];
 const correctMeasures = ["Pilve turvalahendus", "Regulaarne sissetungitestimine"];
 
-function shuffleArray(array) {
-  const newArr = [...array];
-  for (let i = newArr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-  }
-  return newArr;
-}
-
-function generateMeasureOptions() {
-  const correct = allMeasures.filter(m => correctMeasures.includes(m));
-  const distractors = allMeasures.filter(m => !correctMeasures.includes(m));
-  const subsetSize = Math.floor(Math.random() * 2) + 3;
-  shuffleArray(distractors);
-
-  const selected = [...correct];
-  let i = 0;
-  while (selected.length < subsetSize && i < distractors.length) {
-    selected.push(distractors[i]);
-    i++;
-  }
-  return shuffleArray(selected);
-}
-
-function Audiitor2() {
+export default function Audiitor2() {
   const navigate = useNavigate();
-  const [measures, setMeasures] = useState(generateMeasureOptions());
-  const [selectedMeasures, setSelectedMeasures] = useState([]);
+  const [measures, setMeasures] = useState(allMeasures);
+  const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
+  const [report, setReport] = useState("");
 
-  const isSelectionCorrect = () => {
-    const sortedSelected = [...selectedMeasures].sort();
-    const sortedCorrect = [...correctMeasures].sort();
-    return (
-      sortedSelected.length === sortedCorrect.length &&
-      sortedSelected.every((val, idx) => val === sortedCorrect[idx])
-    );
+  const scenario = "IT-infrastruktuuris oli plaanimatu hooldusaken, kus turvasüsteemid olid ajutiselt väljalülitatud.",
+        reference = "Viide: ISO/IEC 27001 Annex A.12.6 ja A.14.2";
+
+  const toggleMeasure = m => {
+    if (selected.includes(m)) setSelected(prev => prev.filter(x => x !== m));
+    else setSelected(prev => [...prev, m]);
   };
 
-  const toggleMeasure = (measure) => {
-    if (isLocked) return;
-    if (selectedMeasures.includes(measure)) {
-      setSelectedMeasures(selectedMeasures.filter(m => m !== measure));
+  const isCorrect = () => selected.length === correctMeasures.length && correctMeasures.every(m => selected.includes(m));
+
+  const handleSubmit = () => {
+    if (isCorrect()) {
+      setFeedback("Õige! Kõik vajalikud meetmed valitud.");
+      setReport(`Audit kokkuvõte: ${scenario} Soovitused: ${correctMeasures.join(', ')}. ${reference}.`);
     } else {
-      setSelectedMeasures([...selectedMeasures, measure]);
+      setFeedback("Vale valik! Kontrolli uuesti.");
     }
   };
-
-  useEffect(() => {
-    if (selectedMeasures.length > 0 && !isSelectionCorrect()) {
-      setFeedback("Vale valik! Õige vastused täidetakse automaatselt...");
-      const timer = setTimeout(() => {
-        setSelectedMeasures(correctMeasures);
-        setFeedback("");
-        setIsLocked(true);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else {
-      setFeedback("");
-    }
-  }, [selectedMeasures]);
 
   const handleReset = () => {
-    setMeasures(generateMeasureOptions());
-    setSelectedMeasures([]);
+    setSelected([]);
     setFeedback("");
-    setIsLocked(false);
-  };
-
-  const handleNext = () => {
-    if (isSelectionCorrect()) {
-      navigate('audiitor3');
-    }
+    setReport("");
   };
 
   return (
-    <div className={`cyadvice-stage2 ${isLocked ? "correct-bg" : feedback ? "incorrect-bg" : ""}`}>
+    <div className="cyadvice-stage2">
       <h2>Turvameetmete kava</h2>
-      <p>Vali meetmed, mis sobivad organisatsiooni turvalahenduseks:</p>
+      <p><em>{scenario}</em></p>
       <ul className="measure-list">
-        {measures.map(measure => (
-          <li 
-            key={measure} 
-            onClick={() => toggleMeasure(measure)}
-            className={selectedMeasures.includes(measure) ? "selected" : ""}
-          >
-            <input
-              type="checkbox"
-              checked={selectedMeasures.includes(measure)}
-              readOnly
-            />
-            {measure}
+        {measures.map(m => (
+          <li key={m} onClick={() => toggleMeasure(m)} className={selected.includes(m) ? "selected" : ""}>
+            <input type="checkbox" checked={selected.includes(m)} readOnly /> {m}
           </li>
         ))}
       </ul>
+      <button onClick={handleSubmit}>Esita</button>
       {feedback && <div className="feedback">{feedback}</div>}
-      <div className="buttons">
-        {!isLocked ? (
-          <button onClick={handleReset}>Alusta uuesti</button>
-        ) : (
-          <button onClick={handleNext}>Edasi</button>
-        )}
-      </div>
+      {report && <div className="report">{report}</div>}
+      {report && <button onClick={() => navigate('/audiitor3')}>Edasi</button>}
     </div>
   );
 }
-
-export default Audiitor2;
