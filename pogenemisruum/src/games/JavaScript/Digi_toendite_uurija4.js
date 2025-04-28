@@ -3,21 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Digi_toendite_uurija4.css';
 
 const evidencePairs = [
-  { id: 1, content: "Encrypted USB" },
-  { id: 2, content: "Malware Sample" },
-  { id: 3, content: "System Log" },
-  { id: 4, content: "Network Packet Capture" },
-  { id: 5, content: "Forensic Image" }
+  { id: 1, content: "Krüpteeritud USB" },
+  { id: 2, content: "Kahjuriprogrammi proov" },
+  { id: 3, content: "Süsteemilogifail" },
+  { id: 4, content: "Võrgu paketikaapamine" },
+  { id: 5, content: "Forenseeriline kujutis" }
 ];
 
-function Digi_toendite_uurija4() {
-  const shuffleArray = (array) => {
-    const newArr = [...array];
-    for (let i = newArr.length - 1; i > 0; i--) {
+export default function Digi_toendite_uurija4() {
+  const navigate = useNavigate();
+
+  const colorMap = {
+    1: "#e63946",
+    2: "#457b9d",
+    3: "#2a9d8f",
+    4: "#f4a261",
+    5: "#9d4edd"
+  };
+
+  const shuffleArray = array => {
+    const a = [...array];
+    for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+      [a[i], a[j]] = [a[j], a[i]];
     }
-    return newArr;
+    return a;
   };
 
   const createCards = () => {
@@ -46,46 +56,40 @@ function Digi_toendite_uurija4() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [matchesFound, setMatchesFound] = useState(0);
   const [message, setMessage] = useState("");
-  
-  const navigate = useNavigate();
 
-  const handleCardClick = (index) => {
+  const handleCardClick = idx => {
     if (isProcessing) return;
-    const card = cards[index];
+    const card = cards[idx];
     if (card.flipped || card.matched) return;
-    
-    const newCards = [...cards];
-    newCards[index].flipped = true;
-    const newFlipped = [...flippedIndices, index];
-    setCards(newCards);
-    setFlippedIndices(newFlipped);
 
-    if (newFlipped.length === 2) {
+    const c = [...cards];
+    c[idx].flipped = true;
+    const f = [...flippedIndices, idx];
+    setCards(c);
+    setFlippedIndices(f);
+
+    if (f.length === 2) {
       setIsProcessing(true);
-      const [firstIndex, secondIndex] = newFlipped;
-      const card1 = newCards[firstIndex];
-      const card2 = newCards[secondIndex];
-      
-      if (card1.pairId === card2.pairId) {
-        newCards[firstIndex].matched = true;
-        newCards[secondIndex].matched = true;
-        setCards(newCards);
-        setMatchesFound(matchesFound + 1);
+      const [i1, i2] = f;
+      const c1 = c[i1], c2 = c[i2];
+      if (c1.pairId === c2.pairId) {
+        c1.matched = c2.matched = true;
+        setCards(c);
+        setMatchesFound(m => m + 1);
         setTimeout(() => {
           setFlippedIndices([]);
           setIsProcessing(false);
           if (matchesFound + 1 === evidencePairs.length) {
-            setMessage("All matching pairs found!");
+            setMessage("Kõik paarid leitud!");
           }
         }, 800);
       } else {
         setTimeout(() => {
-          newCards[firstIndex].flipped = false;
-          newCards[secondIndex].flipped = false;
-          setCards(newCards);
+          c[i1].flipped = c[i2].flipped = false;
+          setCards(c);
           setFlippedIndices([]);
           setIsProcessing(false);
-          setMessage("Incorrect match! Try again.");
+          setMessage("Sobitus vale! Proovi uuesti.");
         }, 1000);
       }
     }
@@ -105,36 +109,35 @@ function Digi_toendite_uurija4() {
 
   return (
     <div className="digital-memory">
-      <h1>Digital Evidence Memory Game</h1>
-      <p>Match the pairs of digital evidence:</p>
+      <h1>Digitaalsete tõendite mälu mäng</h1>
+      <p>Mäleta ja ühenda digitaalsete tõendite paarid:</p>
       <div className="cards-grid">
-        {cards.map((card, index) => (
-          <div 
+        {cards.map((card, idx) => (
+          <div
             key={card.id}
-            className={`card ${card.flipped || card.matched ? "flipped" : ""} ${card.matched ? "matched" : ""}`}
-            onClick={() => handleCardClick(index)}
+            className={
+              "card " +
+              (card.flipped || card.matched ? "flipped " : "") +
+              (card.matched ? "matched" : "")
+            }
+            onClick={() => handleCardClick(idx)}
+            style={{ border: `3px solid ${colorMap[card.pairId]}` }}
           >
             <div className="card-inner">
-              <div className="card-front">
-                {/* Kaardi tagumine disain */}
-              </div>
-              <div className="card-back">
-                {card.content}
-              </div>
+              <div className="card-front"></div>
+              <div className="card-back">{card.content}</div>
             </div>
           </div>
         ))}
       </div>
       <div className="buttons">
         {matchesFound === evidencePairs.length ? (
-          <button onClick={handleEnd}>Finish Game</button>
+          <button onClick={handleEnd}>Lõpeta mäng</button>
         ) : (
-          <button onClick={handleReset}>Reset</button>
+          <button onClick={handleReset}>Lähtesta</button>
         )}
       </div>
       {message && <div className="message">{message}</div>}
     </div>
   );
 }
-
-export default Digi_toendite_uurija4;
