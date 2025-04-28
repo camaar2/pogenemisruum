@@ -2,36 +2,34 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Digi_toendite_uurija2.css';
 
-function Digi_toendite_uurija2() {
-  const logs = [
-    { id: 1, line: "2023-05-01 08:15:23 - INFO - System boot successful", anomaly: false },
-    { id: 2, line: "2023-05-01 08:16:10 - WARNING - Unusual login attempt from 192.168.1.100", anomaly: true },
-    { id: 3, line: "2023-05-01 08:17:55 - INFO - Scheduled backup completed", anomaly: false },
-    { id: 4, line: "2023-05-01 08:18:45 - ERROR - Multiple failed login attempts detected", anomaly: true },
-    { id: 5, line: "2023-05-01 08:20:00 - INFO - User admin logged in", anomaly: false }
+export default function Digi_toendite_uurija2() {
+  const navigate = useNavigate();
+  const logid = [
+    { id: 1, line: "2023-05-01 08:15:23 - INFO - Süsteem käivitus edukalt", anomaly: false },
+    { id: 2, line: "2023-05-01 08:16:10 - WARNING - Ebatavaline sisselogimine aadressilt 192.168.1.100", anomaly: true },
+    { id: 3, line: "2023-05-01 08:17:55 - INFO - Planeeritud varukoopia lõpetatud", anomaly: false },
+    { id: 4, line: "2023-05-01 08:18:45 - ERROR - Mitu ebaõnnestunud sisselogimist tuvastatud", anomaly: true },
+    { id: 5, line: "2023-05-01 08:20:00 - INFO - Admin-kasutaja sisse logitud", anomaly: false }
   ];
 
   const [selected, setSelected] = useState({});
   const [message, setMessage] = useState("");
   const [isLocked, setIsLocked] = useState(false);
-  const navigate = useNavigate();
 
-  const handleCheckboxChange = (id) => {
+  const handleCheckboxChange = id => {
     setSelected(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
   const handleSubmit = () => {
     let correct = true;
-    logs.forEach(log => {
-      if (log.anomaly !== !!selected[log.id]) {
-        correct = false;
-      }
+    logid.forEach(log => {
+      if (log.anomaly !== !!selected[log.id]) correct = false;
     });
     if (correct) {
-      setMessage("All anomalies correctly identified!");
+      setMessage("Kõik anomaaliad tuvastatud!");
       setIsLocked(true);
     } else {
-      setMessage("Some anomalies were missed or false positives selected. Try again.");
+      setMessage("Mõned anomaaliad jäid märkimata või valepositiivsed valitud. Proovi uuesti.");
     }
   };
 
@@ -42,27 +40,36 @@ function Digi_toendite_uurija2() {
   };
 
   const handleNext = () => {
-    navigate("/digi_toendite_uurija3"); 
+    navigate("/digi_toendite_uurija3");
   };
 
   return (
     <div className="log-anomaly">
-      <h1>Log Anomaly Detection</h1>
-      <p>Select the log entries that indicate anomalies:</p>
+      <h1>Logianomaaliate tuvastamine</h1>
+      <p>Vali logikirjed, mis viitavad anomaaliatele:</p>
       <table className="log-table">
         <thead>
           <tr>
-            <th>Select</th>
-            <th>Log Entry</th>
+            <th>Vali</th>
+            <th>Logikirje</th>
           </tr>
         </thead>
         <tbody>
-          {logs.map(log => (
-            <tr key={log.id} className={isLocked ? (log.anomaly === !!selected[log.id] ? "correct" : "incorrect") : ""}>
+          {logid.map(log => (
+            <tr
+              key={log.id}
+              className={
+                isLocked
+                  ? log.anomaly === !!selected[log.id]
+                    ? "correct"
+                    : "incorrect"
+                  : ""
+              }
+            >
               <td>
-                <input 
-                  type="checkbox" 
-                  checked={!!selected[log.id]} 
+                <input
+                  type="checkbox"
+                  checked={!!selected[log.id]}
                   onChange={() => handleCheckboxChange(log.id)}
                   disabled={isLocked}
                 />
@@ -74,18 +81,14 @@ function Digi_toendite_uurija2() {
       </table>
       <div className="buttons">
         {!isLocked && (
-          <>
-            <button onClick={handleSubmit}>Check Selections</button>
-            <button onClick={handleReset}>Reset</button>
+          <> 
+            <button onClick={handleSubmit}>Kontrolli valikuid</button>
+            <button onClick={handleReset}>Lähtesta</button>
           </>
         )}
-        {isLocked && (
-          <button onClick={handleNext}>Edasi</button>
-        )}
+        {isLocked && <button onClick={handleNext}>Edasi</button>}
       </div>
       {message && <div className="message">{message}</div>}
     </div>
   );
 }
-
-export default Digi_toendite_uurija2;
