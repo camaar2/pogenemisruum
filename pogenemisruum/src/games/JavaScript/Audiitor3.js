@@ -91,7 +91,7 @@ function Audiitor3() {
 
   return (
     <div className={`cyadvice-stage3 ${isLocked ? "correct-bg" : feedback ? "incorrect-bg" : ""}`}>
-      <h2>3. Etapp: Lahenduse rakendamise juhendamine</h2>
+      <h2>Lahenduse rakendamise juhendamine</h2>
       <p>Vali meetodid, mis on projekti jaoks olulised:</p>
       <ul className="task-list">
         {taskOptions.map((task) => (

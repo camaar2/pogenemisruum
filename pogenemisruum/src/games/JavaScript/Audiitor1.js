@@ -92,7 +92,7 @@ function Audiitor1() {
 
   return (
     <div className={`cyadvice-stage1 ${isLocked ? "correct-bg" : feedback ? "incorrect-bg" : ""}`}>
-      <h2>1. Etapp: Riskianalüüs</h2>
+      <h2>Riskianalüüs</h2>
       <p>Vali riskid, mida organisatsioonil võib esineda:</p>
       <ul className="risk-list">
         {riskOptions.map(risk => (

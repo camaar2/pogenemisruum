@@ -94,7 +94,7 @@ function Audiitor4() {
 
   return (
     <div className={`cyadvice-stage4 ${isLocked ? "correct-bg" : feedback ? "incorrect-bg" : ""}`}>
-      <h2>4. Etapp: Lõplik audit ja järelevalve</h2>
+      <h2>Lõplik audit ja järelevalve</h2>
       <p>Vali järelmeetmed:</p>
       <ul className="recommendation-list">
         {recommendationOptions.map(rec => (

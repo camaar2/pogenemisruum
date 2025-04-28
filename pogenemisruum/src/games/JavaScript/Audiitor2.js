@@ -89,7 +89,7 @@ function Audiitor2() {
 
   return (
     <div className={`cyadvice-stage2 ${isLocked ? "correct-bg" : feedback ? "incorrect-bg" : ""}`}>
-      <h2>2. Etapp: Turvameetmete kava</h2>
+      <h2>Turvameetmete kava</h2>
       <p>Vali meetmed, mis sobivad organisatsiooni turvalahenduseks:</p>
       <ul className="measure-list">
         {measures.map(measure => (

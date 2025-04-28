@@ -80,7 +80,7 @@ function Norkustestija2() {
 
   return (
     <div className="scanning-game">
-      <h1>2. ETAPP: Tööriistade paigutamine</h1>
+      <h1>Tööriistade paigutamine</h1>
       <p>Lohista õigeid skanneri tööriistu vastavatele sihtsüsteemidele.</p>
       <div className="game-container">
         <div className="pool">

@@ -66,7 +66,7 @@ function Norkustestija1() {
 
   return (
     <div className="recon">
-      <h1>1. ETAPP: Sihikeskkonna kaardistamine</h1>
+      <h1>Sihikeskkonna kaardistamine</h1>
       <p>Klõpsa allolevatel allikatel, et koguda kasulikku infot sihtsüsteemi kohta:</p>
       <div className="sources">
         {sources.map(source => {

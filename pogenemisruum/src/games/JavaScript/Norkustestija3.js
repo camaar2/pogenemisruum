@@ -40,7 +40,7 @@ function Norkustestija3() {
 
   return (
     <div className="exploitation">
-      <h1>3. ETAPP: Süsteemi “murdmine”</h1>
+      <h1>Süsteemi “murdmine”</h1>
       <p>Vali payload, mis antud sihtsüsteemis on edukalt ärakasutatav:</p>
       <table className="options-table">
         <thead>
