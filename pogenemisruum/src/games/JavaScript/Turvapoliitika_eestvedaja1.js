@@ -5,16 +5,18 @@ import '../CSS/Turvapoliitika_eestvedaja1.css';
 function Turvapoliitika_eestvedaja1() {
   const navigate = useNavigate();
 
-  const correctThreats = ['Riiklikult toetatud ründegrupp'];
+  const correctLaws = ['GDPR', 'NIS2 direktiiv'];
 
-  const threats = shuffleArray([
-    'Tõenäoline DDoS rünnak',
-    'Pahavara levik',
-    'Riiklikult toetatud ründegrupp'
+  const laws = shuffleArray([
+    'GDPR',
+    'ISO 27001 standard',
+    'NIS2 direktiiv',
+    'Põllumajanduse toetuste seadus'
   ]);
 
-  const [selectedThreats, setSelectedThreats] = useState([]);
+  const [selectedLaws, setSelectedLaws] = useState([]);
   const [feedback, setFeedback] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
 
   function shuffleArray(array) {
     const newArr = [...array];
@@ -25,53 +27,55 @@ function Turvapoliitika_eestvedaja1() {
     return newArr;
   }
 
-  useEffect(() => {
-    if (selectedThreats.length === 0) return;
-    const timer = setTimeout(() => {
-      const isCorrect =
-        selectedThreats.length === correctThreats.length &&
-        selectedThreats.every(threat => correctThreats.includes(threat));
-      if (isCorrect) {
-        setFeedback("Õige! Ülesanne täidetud.");
-        navigate('/turvapoliitika_eestvedaja2');
-      } else {
-        setFeedback('Vale valik! Õige oht täidetakse automaatselt...');
-        setSelectedThreats(correctThreats);
-        setTimeout(() => {
-          navigate('/stage2');
-        }, 1000);
-      }
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [selectedThreats, navigate]);
-
-  const toggleThreat = (threat) => {
-    if (selectedThreats.length === correctThreats.length) return;
-    if (selectedThreats.includes(threat)) {
-      setSelectedThreats(selectedThreats.filter(t => t !== threat));
+  const toggleLaw = (law) => {
+    if (isChecked) return;
+    if (selectedLaws.includes(law)) {
+      setSelectedLaws(selectedLaws.filter(t => t !== law));
     } else {
-      setSelectedThreats([...selectedThreats, threat]);
+      setSelectedLaws([...selectedLaws, law]);
     }
+  };
+
+  const checkAnswers = () => {
+    const isCorrect =
+      selectedLaws.length === correctLaws.length &&
+      selectedLaws.every(law => correctLaws.includes(law));
+    if (isCorrect) {
+      setFeedback("Õige! Ülesanne täidetud.");
+    } else {
+      setFeedback("Vale! Õiged vastused on nüüd näidatud.");
+      setSelectedLaws(correctLaws);
+    }
+    setIsChecked(true);
+  };
+
+  const goToNextStage = () => {
+    navigate('/turvapoliitika_eestvedaja2');
   };
 
   return (
     <div className="stage stage1">
-      <h2>Riikliku tasandi ohtude tuvastamine</h2>
-      <p>Vali ohud, mis on riigi kriitilise taristu seisukohalt prioriteetsed:</p>
-      <ul className="threat-list">
-        {threats.map(threat => (
+      <h2>Õiguslike nõuete tuvastamine</h2>
+      <p>Vali õiged seadused ja määrused, mis kehtivad küberturbe valdkonnas:</p>
+      <ul className="law-list">
+        {laws.map(law => (
           <li 
-            key={threat}
-            onClick={() => toggleThreat(threat)}
-            className={selectedThreats.includes(threat) ? "selected" : ""}
+            key={law}
+            onClick={() => toggleLaw(law)}
+            className={selectedLaws.includes(law) ? "selected" : ""}
           >
-            <input type="checkbox" checked={selectedThreats.includes(threat)} readOnly />
-            {threat}
+            <input type="checkbox" checked={selectedLaws.includes(law)} readOnly />
+            {law}
           </li>
         ))}
       </ul>
+      {!isChecked && (
+        <button onClick={checkAnswers} className="check-button">Kontrolli</button>
+      )}
       {feedback && <p className="feedback">{feedback}</p>}
-      {/* Kontrolli nuppu ei kuvata – kontroll toimub automaatselt */}
+      {isChecked && (
+        <button onClick={goToNextStage} className="next-button">Jätka järgmisele etapile</button>
+      )}
     </div>
   );
 }
