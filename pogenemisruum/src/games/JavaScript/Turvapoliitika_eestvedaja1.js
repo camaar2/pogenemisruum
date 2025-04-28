@@ -56,7 +56,7 @@ function Turvapoliitika_eestvedaja1() {
 
   return (
     <div className="stage stage1">
-      <h2>1. Etapp: Riikliku tasandi ohtude tuvastamine</h2>
+      <h2>Riikliku tasandi ohtude tuvastamine</h2>
       <p>Vali ohud, mis on riigi kriitilise taristu seisukohalt prioriteetsed:</p>
       <ul className="threat-list">
         {threats.map(threat => (

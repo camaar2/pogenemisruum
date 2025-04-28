@@ -78,7 +78,7 @@ function Turvapoliitika_eestvedaja3() {
 
   return (
     <div className={`stage stage3 ${isLocked ? 'correct-bg' : feedback ? 'incorrect-bg' : ''}`}>
-      <h2>3. Etapp: Rakendamise juhendamine</h2>
+      <h2>Rakendamise juhendamine</h2>
       <p>Milline meede rakendatakse? (Hover üle iga meetodi selgituse jaoks)</p>
       <ul className="task-list">
         {taskOptions.map(task => (

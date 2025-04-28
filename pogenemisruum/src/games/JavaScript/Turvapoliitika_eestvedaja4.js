@@ -33,7 +33,7 @@ function Turvapoliitika_eestvedaja4() {
 
   return (
     <div className="stage stage4">
-      <h2>4. Etapp: Rahvusvaheline koostöö ja kriisi järelvalve</h2>
+      <h2>Rahvusvaheline koostöö ja kriisi järelvalve</h2>
       <p>Vali info, mida jagada rahvusvahelistele partneritele:</p>
       <ul className="option-list">
         {allOptions.map(option => (

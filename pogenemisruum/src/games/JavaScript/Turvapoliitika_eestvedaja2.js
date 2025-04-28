@@ -69,7 +69,7 @@ function Turvapoliitika_eestvedaja2() {
 
   return (
     <div className={`stage stage2 ${isLocked ? 'correct-bg' : feedback ? 'incorrect-bg' : ''}`}>
-      <h2>2. Etapp: Turvapoliitika strateegia</h2>
+      <h2>Turvapoliitika strateegia</h2>
       <p>Vali strateegia, mis on kõige sobivam organisatsiooni turvapoliitikaks:</p>
       <ul className="strategy-list">
         {strategyOptions.map(option => (
