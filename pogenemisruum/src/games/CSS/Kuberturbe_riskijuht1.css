@@ -1,0 +1,57 @@
+.devops-stage1 {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #e8f5e9, #ffffff);
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: background 0.5s;
+}
+
+.options-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.options-table th, .options-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.options-table th {
+  background-color: #f5f5f5;
+}
+
+.options-table tr.selected {
+  background-color: #e0e0e0;
+}
+
+.correct-bg {
+  background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+}
+
+.incorrect-bg {
+  background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.message {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #d32f2f;
+}

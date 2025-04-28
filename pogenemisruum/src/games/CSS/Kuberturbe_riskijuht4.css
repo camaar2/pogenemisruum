@@ -1,0 +1,54 @@
+.devops-stage4 {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.options {
+  margin: 20px 0;
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.option {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.option label {
+  display: flex;
+  align-items: center;
+}
+
+.option input {
+  margin-right: 10px;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.feedback {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #d32f2f;
+}

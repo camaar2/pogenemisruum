@@ -1,0 +1,60 @@
+.caesar-puzzle-container {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #f0f8ff, #e0f7fa);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.encoded-message {
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.input-area {
+  margin: 20px 0;
+}
+
+.input-area input {
+  padding: 8px;
+  font-size: 16px;
+  width: 120px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.input-area button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.decoded-message {
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.decoded-message p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.message {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.reset-btn {
+  margin-top: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;
+}

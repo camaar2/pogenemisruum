@@ -1,0 +1,17 @@
+.meist-container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
+  .meist-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .meist-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+  }

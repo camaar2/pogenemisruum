@@ -1,0 +1,60 @@
+.threat-collection {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #f9f9ff, #eef9fa);
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: background 0.5s;
+}
+
+.sources {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.source {
+  margin: 10px 0;
+  background: #fff;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.source-checkbox {
+  margin-right: 10px;
+}
+
+.desc {
+  font-style: italic;
+  color: #666;
+}
+
+.correct-bg {
+  background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+}
+
+.incorrect-bg {
+  background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.message {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #d32f2f;
+}
+

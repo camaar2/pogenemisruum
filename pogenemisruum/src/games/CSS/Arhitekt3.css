@@ -1,0 +1,80 @@
+.segmentation-game {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #f9f9ff, #eeffff);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: background 0.5s;
+  }
+  
+  .game-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .zone {
+    flex: 1;
+    border: 2px dashed #ccc;
+    min-width: 160px;
+    min-height: 200px;
+    border-radius: 5px;
+    background: #fff;
+    padding: 10px;
+  }
+  
+  .zone h3 {
+    margin-top: 0;
+  }
+  
+  .pool-zone {
+    max-width: 200px;
+  }
+  
+  .component-card {
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid #999;
+    background: #fafafa;
+    border-radius: 5px;
+    cursor: grab;
+    transition: background-color 0.3s;
+  }
+  
+  .component-card:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .correct-bg {
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+  }
+  
+  .incorrect-bg {
+    background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d32f2f;
+  }
+  

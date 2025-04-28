@@ -1,0 +1,59 @@
+.cyadvice-stage2 {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #e0f7fa, #f0f8ff);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: background 0.5s;
+  }
+  
+  .measure-list {
+    list-style: none;
+    padding: 0;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: left;
+  }
+  
+  .measure-list li {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .measure-list li.selected {
+    background-color: #e0e0e0;
+  }
+  
+  .correct-bg {
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+  }
+  
+  .incorrect-bg {
+    background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
+  }
+  
+  .feedback {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d32f2f;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
