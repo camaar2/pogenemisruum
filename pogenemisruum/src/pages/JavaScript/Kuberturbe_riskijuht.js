@@ -5,11 +5,20 @@ import '../CSS/Kuberturbe_riskijuht.css';
 function KuberturbeRiskijuht() {
   return (
     <div className="job-page">
-      <h1>Turvafookusega DevOps lahingväljal</h1>
+      <h1>Küberturbe riskijuht</h1>
       <p>
-        DevOps insenerina on sinu ülesanne kiiresti seadistada ja kaitsta ettevõtte servereid ning infrastruktuuri.
-        Valmista end ette, sest mäng näitab, kuidas turvafookusega DevOps lahingväljal töötab.
+        Selles rollis on sinu ülesanne kiiresti ja õigesti seadistada, uuendada ja kaitsta organisatsiooni servereid ning infrastruktuuri. 
+        Iga etapp viib sind lähemale turvalise süsteemi loomisele.
       </p>
+
+      <h2>Mängud:</h2>
+      <ul>
+        <li><strong>Serveri algseadistus</strong> -umbes 5 minutit</li>
+        <li><strong>Turvauuenduste ja automaatika seadistamine</strong> -umbes 4 minutit</li>
+        <li><strong>Süsteemide monitooring ja logide analüüs</strong> -umbes 5 minutit</li>
+        <li><strong>Operatiivne reageerimine</strong> -umbes 5 minutit</li>
+      </ul>
+
       <Link to="/kuberturbe_riskijuht1">
         <button>Alusta mängu</button>
       </Link>
@@ -18,4 +27,3 @@ function KuberturbeRiskijuht() {
 }
 
 export default KuberturbeRiskijuht;
-

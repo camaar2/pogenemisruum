@@ -40,7 +40,7 @@ function Kuberturbe_riskijuht4() {
 
   return (
     <div className="devops-stage4">
-      <h1>4. Etapp: Operatiivne reageerimine – ründe tõrjumine</h1>
+      <h1>Operatiivne reageerimine – ründe tõrjumine</h1>
       <p>IP 123.45.67.89 üritab pidevalt siseneda serverisse. Mida teed?</p>
       <div className="options">
         {options.map(option => (

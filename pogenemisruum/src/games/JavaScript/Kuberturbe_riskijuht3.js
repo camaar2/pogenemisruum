@@ -47,7 +47,7 @@ function Kuberturbe_riskijuht3() {
 
   return (
     <div className="devops-stage3">
-      <h1>3. Etapp: Süsteemide monitooring ja logide analüüs</h1>
+      <h1>Süsteemide monitooring ja logide analüüs</h1>
       <p>Vormi tabelis märgi logirida, mis viitavad turvariskile:</p>
       <table className="logs-table">
         <thead>

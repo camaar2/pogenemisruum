@@ -30,7 +30,7 @@ function Koolitaja3() {
 
   return (
     <div className="stage stage3">
-      <h2>3. Etapp: Simulatsioon (õngitsuskirjade test)</h2>
+      <h2>Simulatsioon (õngitsuskirjade test)</h2>
       <p>Vali, milline õngitsuskirjade kampaania sobib parimalt:</p>
       <button onClick={() => handleOptionClick('Kõik töötajad saavad ühesuguse kirja')}>
         Kõik töötajad saavad ühesuguse kirja

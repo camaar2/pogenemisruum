@@ -87,7 +87,7 @@ function Arhitekt2() {
 
   return (
     <div className={`security-standards ${isLocked ? "correct-bg" : message && message.includes("valesti") ? "incorrect-bg" : ""}`}>
-      <h1>2. ETAPP: Turvastandardite ja protseduuride seadmine</h1>
+      <h1>Turvastandardite ja protseduuride seadmine</h1>
       <p>Lohista standardid õige veergu: <strong>"Soovitatav/Õige tava"</strong> ja <strong>"Vale või ebapiisav tava"</strong></p>
       <div className="drag-container">
         <div className="pool">

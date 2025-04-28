@@ -32,7 +32,7 @@ function Koolitaja2() {
 
   return (
     <div className="stage stage2">
-      <h2>2. Etapp: Koolitusmaterjalide loomine</h2>
+      <h2>Koolitusmaterjalide loomine</h2>
       <p>Vali materjalid, mis sobivad kõige paremini kontoritöötajatele:</p>
       <ul>
         {materials.map(material => (

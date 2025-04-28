@@ -1,6 +1,6 @@
 import React from 'react';
-import '../CSS/Kuberturvalisuse_rakendaja.css';
 import { Link } from 'react-router-dom';
+import '../CSS/Kuberturvalisuse_rakendaja.css';
 
 function KuberturvalisuseRakendaja() {
   return (
@@ -11,9 +11,12 @@ function KuberturvalisuseRakendaja() {
         et kaitsta organisatsiooni võimalike rünnakute eest.
       </p>
       <h2>Mängude ülevaade</h2>
-      <p>Siin saad selles rollis lahendada järgmise etapi koos ligikaudse kestusega:</p>
+      <p>Siin saad selles rollis lahendada järgmisi mänge:</p>
       <ul>
-        <li><strong>Network Defense Setup</strong> – umbes 10–12 minutit</li>
+        <li><strong>Võrgu kaitse seadistamine</strong> – umbes 7–9 minutit</li>
+        <li><strong>Turvaprofiilide loomine</strong> – umbes 6–8 minutit</li>
+        <li><strong>Ligipääsupoliitikate haldamine</strong> – umbes 8–10 minutit</li>
+        <li><strong>Teenuste turvamine</strong> – umbes 7–9 minutit</li>
       </ul>
       <Link to="/rakendaja1">
         <button>Alusta mängu</button>

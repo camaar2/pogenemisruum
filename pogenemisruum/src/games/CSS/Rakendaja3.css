@@ -1,0 +1,76 @@
+.tool-selection-stage {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #f0f8ff, #e0f7fa);
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    text-align: center;
+  }
+  
+  .tool-selection-stage h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .tool-selection-stage p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .tools-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .tools-list li {
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: left;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+  }
+  
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .feedback {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .correct-bg {
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+  }
+  
+  .incorrect-bg {
+    background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
+  }
+  

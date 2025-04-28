@@ -35,52 +35,78 @@ function generateStrategyOptions() {
 
 function Turvapoliitika_eestvedaja2() {
   const navigate = useNavigate();
-  const [strategyOptions, setStrategyOptions] = useState(generateStrategyOptions());
-  const [selectedStrategy, setSelectedStrategy] = useState(null);
-  const [feedback, setFeedback] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
 
-  const correctStrategy = "Integreeritud ja proaktiivne riskijuhtimine";
+  const correctMeasures = ['Andmete krüpteerimine', 'Töötajate teadlikkuse tõstmine'];
 
-  const handleSelect = (strategy) => {
-    if (isLocked) return;
-    setSelectedStrategy(strategy);
+  const measures = shuffleArray([
+    'Andmete krüpteerimine',
+    'Serveri jahutussüsteemi paigaldamine',
+    'Töötajate teadlikkuse tõstmine',
+    'Kontorimööbli uuendamine'
+  ]);
+
+  const [selectedMeasures, setSelectedMeasures] = useState([]);
+  const [feedback, setFeedback] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+
+  function shuffleArray(array) {
+    const newArr = [...array];
+    for (let i = newArr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    }
+    return newArr;
+  }
+
+  const toggleMeasure = (measure) => {
+    if (isChecked) return;
+    if (selectedMeasures.includes(measure)) {
+      setSelectedMeasures(selectedMeasures.filter(m => m !== measure));
+    } else {
+      setSelectedMeasures([...selectedMeasures, measure]);
+    }
   };
 
-  useEffect(() => {
-    if (!selectedStrategy) return;
-    const timer = setTimeout(() => {
-      if (selectedStrategy === correctStrategy) {
-        setFeedback("Õige strateegia! Turvapoliitika on kindlustatud.");
-        setIsLocked(true);
-        setTimeout(() => {
-          navigate('/turvapoliitika_eestvedaja3');
-        }, 1000);
-      } else {
-        setFeedback("Vale strateegia! Õige strateegia täidetakse automaatselt...");
-        setSelectedStrategy(correctStrategy);
-        setTimeout(() => {
-          navigate('/stage3');
-        }, 1000);
-      }
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [selectedStrategy, navigate]);
+  const checkAnswers = () => {
+    const isCorrect =
+      selectedMeasures.length === correctMeasures.length &&
+      selectedMeasures.every(m => correctMeasures.includes(m));
+    if (isCorrect) {
+      setFeedback("Õige! Vastavusmeetmed määratud õigesti.");
+    } else {
+      setFeedback("Vale! Õiged meetmed on nüüd näidatud.");
+      setSelectedMeasures(correctMeasures);
+    }
+    setIsChecked(true);
+  };
+
+  const goToNextStage = () => {
+    navigate('/turvapoliitika_eestvedaja3');
+  };
 
   return (
-    <div className={`stage stage2 ${isLocked ? 'correct-bg' : feedback ? 'incorrect-bg' : ''}`}>
-      <h2>Turvapoliitika strateegia</h2>
-      <p>Vali strateegia, mis on kõige sobivam organisatsiooni turvapoliitikaks:</p>
-      <ul className="strategy-list">
-        {strategyOptions.map(option => (
-          <li key={option.id} onClick={() => handleSelect(option.text)} className={selectedStrategy === option.text ? "selected" : ""} title={option.explanation}>
-            <input type="radio" checked={selectedStrategy === option.text} readOnly />
-            {option.text}
+    <div className="stage stage2">
+      <h2>Vastavusmeetmete määratlemine</h2>
+      <p>Vali meetmed, mis aitavad täita küberturbe õiguslikke nõudeid:</p>
+      <ul className="measure-list">
+        {measures.map(measure => (
+          <li 
+            key={measure}
+            onClick={() => toggleMeasure(measure)}
+            className={selectedMeasures.includes(measure) ? "selected" : ""}
+          >
+            <input type="checkbox" checked={selectedMeasures.includes(measure)} readOnly />
+            {measure}
           </li>
         ))}
       </ul>
-      {feedback && <div className="feedback">{feedback}</div>}
-      {/* Kontrollinuppu pole – kontroll toimub automaatselt */}
+      {!isChecked && (
+        <button onClick={checkAnswers} className="check-button">Kontrolli</button>
+      )}
+      {feedback && <p className="feedback">{feedback}</p>}
+      {isChecked && (
+        <button onClick={goToNextStage} className="next-button">Edasi</button>
+      )}
     </div>
   );
 }

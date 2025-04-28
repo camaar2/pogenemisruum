@@ -1,48 +1,57 @@
-.stage4 {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: background 0.5s;
-  }
-  
-  .option-list {
-    list-style: none;
-    padding: 0;
-    max-width: 400px;
-    margin: 20px auto;
-    text-align: left;
-  }
-  
-  .option-list li {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    background: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .option-list li.selected {
-    background-color: #e0e0e0;
-  }
-  
-  .feedback {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #d32f2f;
-  }
-  
-  button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
+.stage {
+  margin: 20px auto;
+  max-width: 600px;
+  font-family: sans-serif;
+}
+
+.stage h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.stage p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.action-list {
+  list-style: none;
+  padding: 0;
+}
+
+.action-list li {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.action-list li.selected {
+  background-color: #d0f0c0;
+  border-color: #4caf50;
+}
+
+.check-button, .next-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.check-button {
+  background-color: #2196F3;
+  color: white;
+}
+
+.next-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.feedback {
+  margin-top: 15px;
+  font-weight: bold;
+}

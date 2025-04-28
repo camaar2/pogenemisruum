@@ -74,7 +74,7 @@ function Turvapoliitika_eestvedaja1() {
       )}
       {feedback && <p className="feedback">{feedback}</p>}
       {isChecked && (
-        <button onClick={goToNextStage} className="next-button">Jätka järgmisele etapile</button>
+        <button onClick={goToNextStage} className="next-button">Edasi</button>
       )}
     </div>
   );

@@ -1,0 +1,76 @@
+.rakendaja-stage2 {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #f0f9ff, #d0f0ff);
+    border-radius: 12px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: background 0.4s;
+  }
+  
+  .rakendaja-stage2 h1 {
+    color: #0d47a1;
+    margin-bottom: 10px;
+  }
+  
+  .rakendaja-stage2 p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 25px;
+  }
+  
+  .threats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .threat-card {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .threat-card:hover {
+    background-color: #e3f2fd;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .threat-card.selected {
+    background-color: #c8e6c9;
+    border-color: #66bb6a;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  button {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #1565c0;
+  }
+  
+  .message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d32f2f;
+  }
+  

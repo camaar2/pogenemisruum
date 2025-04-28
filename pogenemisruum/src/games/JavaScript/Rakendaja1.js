@@ -5,11 +5,11 @@ import '../CSS/Rakendaja1.css';
 function Rakendaja1() {
   const navigate = useNavigate();
   const correctOrder = [
-    "Configure Router ACLs",
-    "Deploy Firewall",
-    "Install IDS/IPS",
-    "Implement VPN for Remote Access",
-    "Enforce Endpoint Security"
+    "Seadista ruuteri ACL-id",
+    "Paigalda tulemüür",
+    "Paigalda IDS/IPS süsteem",
+    "Rakenda VPN kaugühenduse jaoks",
+    "Tugevda lõppseadmete turvalisust"
   ];
 
   const [steps, setSteps] = useState(() => {
@@ -38,10 +38,10 @@ function Rakendaja1() {
 
   const handleSubmit = () => {
     if (steps.join() === correctOrder.join()) {
-      setMessage("Correct! Network defense is properly configured.");
+      setMessage("Õige! Võrgu kaitse on õigesti seadistatud.");
       setIsLocked(true);
     } else {
-      setMessage("The order is incorrect. Please try again.");
+      setMessage("Järjekord on vale. Palun proovi uuesti.");
     }
   };
 
@@ -57,8 +57,8 @@ function Rakendaja1() {
 
   return (
     <div className="network-defense">
-      <h1>Network Defense Setup</h1>
-      <p>Arrange the network security steps in the correct order:</p>
+      <h1>Võrgu kaitse seadistamine</h1>
+      <p>Paiguta võrguturbe sammud õigesse järjekorda:</p>
       <ul className="steps-list">
         {steps.map((step, index) => (
           <li key={index}
@@ -73,8 +73,8 @@ function Rakendaja1() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleSubmit}>Check Order</button>
-            <button onClick={handleReset}>Reset</button>
+            <button onClick={handleSubmit}>Kontrolli järjekorda</button>
+            <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
           <button onClick={handleEnd}>Edasi</button>

@@ -78,8 +78,9 @@ function Arhitekt1() {
 
   return (
     <div className={`security-mapping-game ${isLocked ? "correct-bg" : feedback && !isLocked ? "incorrect-bg" : ""}`}>
-      <h1>Turva-Arhitekt: Süsteemide riskide kaardistamine</h1>
-      <p>Määra iga süsteemi jaoks kõige kriitilisem turvarisk:</p>
+      <h1>Riskide tuvastamine süsteemides</h1>
+      <p>Vali igale süsteemile kõige olulisem turvarisk, mis vajab esmast kaitset.</p>
+
       {systems.map(system => (
         <div key={system.id} className="system-block">
           <h3>{system.name}</h3>
@@ -100,17 +101,23 @@ function Arhitekt1() {
           </div>
         </div>
       ))}
+
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleSubmit}>Esita valikud</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
+            <button className="submit-button" onClick={handleSubmit}>Esita valikud</button>
+            <button className="reset-button" onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
-          <button onClick={handleNext}>Edasi</button>
+          <button className="next-button" onClick={handleNext}>Jätka</button>
         )}
       </div>
-      {feedback && <div className="feedback">{feedback}</div>}
+
+      {feedback && (
+        <div className={`feedback ${isLocked ? "success" : "error"}`}>
+          {feedback}
+        </div>
+      )}
     </div>
   );
 }

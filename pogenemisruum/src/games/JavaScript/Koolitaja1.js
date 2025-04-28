@@ -16,78 +16,80 @@ function Koolitaja1() {
       setError('');
       navigate('/koolitaja2');
     } else {
-      setError('Vastused on osaliselt või täielikult valed. Palun proovi uuesti.');
+      setError('Vastused on osaliselt või täielikult valed. Palun kontrolli ja proovi uuesti.');
     }
   };
 
   return (
-    <div className="stage stage1">
-      <h2>Teadmiste hindamine</h2>
-      <p>Vasta järgmistele küsimustele:</p>
-      
-      <div>
+    <div className="knowledge-check">
+      <h1>Teadmiste hindamine</h1>
+      <p>Vasta järgmistele küsimustele, et näidata oma teadlikkust küberturvalisuse ohtudest:</p>
+
+      <div className="question-block">
         <h3>Mis on phishing?</h3>
-        <label>
-          <input
-            type="radio"
-            name="q1"
-            value="a"
-            checked={answers.q1 === 'a'}
-            onChange={handleAnswerChange}
-          />
-          Küberrünnak, kus pettuse teel püütakse kasutajaandmeid saada.
-        </label>
-        <br />
-        <label>
-          <input
-            type="radio"
-            name="q1"
-            value="b"
-            checked={answers.q1 === 'b'}
-            onChange={handleAnswerChange}
-          />
-          Turvaline e-kirjavahetus.
-        </label>
+        <div className="options">
+          <label>
+            <input
+              type="radio"
+              name="q1"
+              value="a"
+              checked={answers.q1 === 'a'}
+              onChange={handleAnswerChange}
+            />
+            Küberrünnak, kus pettuse teel püütakse kasutajaandmeid saada.
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="q1"
+              value="b"
+              checked={answers.q1 === 'b'}
+              onChange={handleAnswerChange}
+            />
+            Turvaline e-kirjavahetus.
+          </label>
+        </div>
       </div>
-      
-      <div>
+
+      <div className="question-block">
         <h3>Miks on paroolide korduvkasutamine ohtlik?</h3>
-        <label>
-          <input
-            type="radio"
-            name="q2"
-            value="a"
-            checked={answers.q2 === 'a'}
-            onChange={handleAnswerChange}
-          />
-          Sest kui üks parool lekib, ohustab see kõiki kontosid.
-        </label>
-        <br />
-        <label>
-          <input
-            type="radio"
-            name="q2"
-            value="b"
-            checked={answers.q2 === 'b'}
-            onChange={handleAnswerChange}
-          />
-          Paroolide korduvkasutamine muudab meelespidamise lihtsaks.
-        </label>
-        <br />
-        <label>
-          <input
-            type="radio"
-            name="q2"
-            value="c"
-            checked={answers.q2 === 'c'}
-            onChange={handleAnswerChange}
-          />
-          See vähendab IT-osakonna töökoormust.
-        </label>
+        <div className="options">
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="a"
+              checked={answers.q2 === 'a'}
+              onChange={handleAnswerChange}
+            />
+            Kui üks parool lekib, ohustab see kõiki kontosid.
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="b"
+              checked={answers.q2 === 'b'}
+              onChange={handleAnswerChange}
+            />
+            Paroolide korduvkasutamine muudab meelespidamise lihtsamaks.
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="c"
+              checked={answers.q2 === 'c'}
+              onChange={handleAnswerChange}
+            />
+            See vähendab IT-osakonna töökoormust.
+          </label>
+        </div>
       </div>
-      
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={nextStage}>Edasi</button>
+
+      {error && <p className="error-message">{error}</p>}
+
+      <button className="next-button" onClick={nextStage}>Kontrolli vastuseid</button>
     </div>
   );
 }

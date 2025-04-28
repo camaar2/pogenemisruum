@@ -1,62 +1,90 @@
-.security-mapping {
+.security-mapping-game {
   max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background: linear-gradient(135deg, #f9f9ff, #e6f7ff);
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
+  margin: 30px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #f0f4f8, #d9e9f7);
+  border-radius: 12px;
+  font-family: 'Arial', sans-serif;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: background 0.5s;
 }
 
-.system-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin: 15px auto;
-  padding: 15px;
-  max-width: 500px;
-  text-align: left;
+h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.system-card h3 {
+p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.system-block {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.system-block h3 {
   margin-top: 0;
+  font-size: 1.3rem;
   color: #333;
 }
 
 .risks {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .risk-option {
   display: block;
-  margin: 8px 0;
-  font-size: 16px;
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  font-size: 16px;
+  margin: 10px 0;
+  font-size: 1rem;
   cursor: pointer;
 }
 
+.buttons {
+  margin-top: 30px;
+}
+
+button {
+  margin: 5px 10px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
 .correct-bg {
-  background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+  background: linear-gradient(135deg, #d0f0c0, #a5d6a7) !important;
 }
 
 .incorrect-bg {
   background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
 }
 
-.message {
+.feedback {
   margin-top: 20px;
   font-weight: bold;
-  font-size: 18px;
-  color: #d32f2f;
+  font-size: 1.2rem;
+}
+
+.feedback.success {
+  color: #2e7d32;
+}
+
+.feedback.error {
+  color: #c62828;
 }
