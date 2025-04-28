@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Audiitor1.css';
 
@@ -23,103 +23,69 @@ function shuffleArray(array) {
 function generateRiskOptions() {
   const correctRisks = allRisks.filter(r => r.isRelevant);
   const distractors = allRisks.filter(r => !r.isRelevant);
-
   const subsetSize = Math.floor(Math.random() * 2) + 4;
   const selected = [...correctRisks];
   shuffleArray(distractors);
-
-  let i = 0;
-  while (selected.length < subsetSize && i < distractors.length) {
+  for (let i = 0; selected.length < subsetSize && i < distractors.length; i++) {
     selected.push(distractors[i]);
-    i++;
   }
   return shuffleArray(selected);
 }
 
-function Audiitor1() {
+export default function Audiitor1() {
   const navigate = useNavigate();
-  const [riskOptions, setRiskOptions] = useState(generateRiskOptions());
+  const [riskOptions] = useState(generateRiskOptions());
   const [selectedRisks, setSelectedRisks] = useState([]);
-  const [feedback, setFeedback] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [result, setResult] = useState({ correct: 0, wrong: 0 });
 
-  const correctRiskIds = allRisks.filter(r => r.isRelevant).map(r => r.id);
+  const correctIds = allRisks.filter(r => r.isRelevant).map(r => r.id);
+  const scenario = "Firma X kasutas viimati vana TLS-versiooni (TLS 1.0), mis suurendab andmeleketega seotud riski.";
 
-  const toggleRisk = (id) => {
-    if (isLocked) return;
-    if (selectedRisks.includes(id)) {
-      setSelectedRisks(selectedRisks.filter(r => r !== id));
-    } else {
-      setSelectedRisks([...selectedRisks, id]);
-    }
+  const toggleRisk = id => {
+    if (checked) return;
+    setSelectedRisks(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
   };
 
-  const isSelectionCorrect = () => {
-    const sortedSelected = [...selectedRisks].sort();
-    const sortedCorrect = [...correctRiskIds].sort();
-    return (
-      sortedSelected.length === sortedCorrect.length &&
-      sortedSelected.every((val, idx) => val === sortedCorrect[idx])
-    );
+  const handleCheck = () => {
+    const correctCount = selectedRisks.filter(id => correctIds.includes(id)).length;
+    const wrongCount = selectedRisks.filter(id => !correctIds.includes(id)).length;
+    setResult({ correct: correctCount, wrong: wrongCount });
+    setChecked(true);
   };
-
-  useEffect(() => {
-    if (selectedRisks.length > 0 && !isSelectionCorrect()) {
-      setFeedback("Vale valik! Õiged riskid valitakse automaatselt...");
-      const timer = setTimeout(() => {
-        setSelectedRisks(correctRiskIds);
-        setFeedback("");
-        setIsLocked(true);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else {
-      setFeedback("");
-    }
-  }, [selectedRisks]);
 
   const handleReset = () => {
-    setRiskOptions(generateRiskOptions());
     setSelectedRisks([]);
-    setFeedback("");
-    setIsLocked(false);
-  };
-
-  const handleNext = () => {
-    if (isSelectionCorrect()) {
-      navigate("/audiitor2");
-    }
+    setChecked(false);
+    setResult({ correct: 0, wrong: 0 });
   };
 
   return (
-    <div className={`cyadvice-stage1 ${isLocked ? "correct-bg" : feedback ? "incorrect-bg" : ""}`}>
+    <div className="cyadvice-stage1">
       <h2>Riskianalüüs</h2>
-      <p>Vali riskid, mida organisatsioonil võib esineda:</p>
+      <p><em>{scenario}</em></p>
+      <p>Vali riskid, mida organisatsioonis võib esineda:</p>
       <ul className="risk-list">
-        {riskOptions.map(risk => (
-          <li 
-            key={risk.id} 
-            onClick={() => toggleRisk(risk.id)}
-            className={selectedRisks.includes(risk.id) ? "selected" : ""}
-          >
-            <input 
-              type="checkbox"
-              checked={selectedRisks.includes(risk.id)}
-              readOnly
-            />
-            {risk.name}
+        {riskOptions.map(r => (
+          <li key={r.id} onClick={() => toggleRisk(r.id)} className={selectedRisks.includes(r.id) ? "selected" : ""}>
+            <input type="checkbox" checked={selectedRisks.includes(r.id)} readOnly /> {r.name}
           </li>
         ))}
       </ul>
-      {feedback && <div className="feedback">{feedback}</div>}
+      {!checked ? (
+        <button onClick={handleCheck} disabled={selectedRisks.length === 0}>Kontrolli vastused</button>
+      ) : (
+        <div className="result">
+          <p>Õigeid valikuid: {result.correct}</p>
+          <p>Väärasid valikuid: {result.wrong}</p>
+        </div>
+      )}
       <div className="buttons">
-        {!isLocked ? (
-          <button onClick={handleReset}>Alusta uuesti</button>
-        ) : (
-          <button onClick={handleNext}>Edasi</button>
+        <button onClick={handleReset}>Uuesti</button>
+        {checked && result.correct === correctIds.length && result.wrong === 0 && (
+          <button onClick={() => navigate('/audiitor2')}>Edasi</button>
         )}
       </div>
     </div>
   );
 }
-
-export default Audiitor1;
