@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Audiitor4.css';
 
@@ -10,7 +10,10 @@ const allRecommendations = [
   "Turvahäirete logi analüüs"
 ];
 
-const correctRecommendations = ["Kvartaalne sissetungitest", "Pidev logimonitooring"];
+const correctRecommendations = [
+  "Kvartaalne sissetungitest",
+  "Pidev logimonitooring"
+];
 
 function shuffleArray(array) {
   const newArr = [...array];
@@ -22,102 +25,78 @@ function shuffleArray(array) {
 }
 
 function generateRecommendationOptions() {
-  const correct = allRecommendations.filter(rec =>
-    correctRecommendations.includes(rec)
-  );
-  const distractors = allRecommendations.filter(rec =>
-    !correctRecommendations.includes(rec)
-  );
+  const distractors = allRecommendations.filter(rec => !correctRecommendations.includes(rec));
   const subsetSize = Math.min(allRecommendations.length, Math.floor(Math.random() * 2) + 3);
-  let selected = [...correct];
   const shuffledDistractors = shuffleArray(distractors);
-  let i = 0;
-  while (selected.length < subsetSize && i < shuffledDistractors.length) {
-    selected.push(shuffledDistractors[i]);
-    i++;
-  }
-  return shuffleArray(selected);
+  return shuffleArray([
+    ...correctRecommendations,
+    ...shuffledDistractors.slice(0, subsetSize - correctRecommendations.length)
+  ]);
 }
 
-function Audiitor4() {
+export default function Audiitor4() {
   const navigate = useNavigate();
   const [recommendationOptions, setRecommendationOptions] = useState(generateRecommendationOptions());
   const [selectedRecommendations, setSelectedRecommendations] = useState([]);
-  const [feedback, setFeedback] = useState('');
-  const [isLocked, setIsLocked] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [result, setResult] = useState({ correct: 0, wrong: 0 });
 
-  const toggleRecommendation = (rec) => {
-    if (isLocked) return;
-    if (selectedRecommendations.includes(rec)) {
-      setSelectedRecommendations(selectedRecommendations.filter(r => r !== rec));
-    } else {
-      setSelectedRecommendations([...selectedRecommendations, rec]);
-    }
-  };
-
-  const isSelectionCorrect = () => {
-    const sortedSelected = [...selectedRecommendations].sort();
-    const sortedCorrect = [...correctRecommendations].sort();
-    return (
-      sortedSelected.length === sortedCorrect.length &&
-      sortedSelected.every((rec, idx) => rec === sortedCorrect[idx])
+  const toggleRecommendation = rec => {
+    if (checked) return;
+    setSelectedRecommendations(prev =>
+      prev.includes(rec) ? prev.filter(r => r !== rec) : [...prev, rec]
     );
   };
 
-  useEffect(() => {
-    if (selectedRecommendations.length > 0 && !isSelectionCorrect()) {
-      setFeedback('Vale soovitus! Õige vastused täidetakse automaatselt.');
-      const timer = setTimeout(() => {
-        setSelectedRecommendations(correctRecommendations);
-        setFeedback('');
-        setIsLocked(true);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else {
-      setFeedback('');
-    }
-  }, [selectedRecommendations]);
-
-  const finishGame = () => {
-    if (isSelectionCorrect()) {
-      alert('Mäng on lõppenud! Kliendi usaldus on võidetud!');
-      navigate('/');
-    }
+  const handleCheck = () => {
+    const correctCount = selectedRecommendations.filter(r => correctRecommendations.includes(r)).length;
+    const wrongCount = selectedRecommendations.filter(r => !correctRecommendations.includes(r)).length;
+    setResult({ correct: correctCount, wrong: wrongCount });
+    setChecked(true);
   };
 
   const handleReset = () => {
     setRecommendationOptions(generateRecommendationOptions());
     setSelectedRecommendations([]);
-    setFeedback('');
-    setIsLocked(false);
+    setResult({ correct: 0, wrong: 0 });
+    setChecked(false);
   };
 
   return (
-    <div className={`cyadvice-stage4 ${isLocked ? "correct-bg" : feedback ? "incorrect-bg" : ""}`}>
+    <div className="cyadvice-stage4">
       <h2>Lõplik audit ja järelevalve</h2>
       <p>Vali järelmeetmed:</p>
       <ul className="recommendation-list">
         {recommendationOptions.map(rec => (
-          <li key={rec} onClick={() => toggleRecommendation(rec)} className={selectedRecommendations.includes(rec) ? "selected" : ""}>
+          <li
+            key={rec}
+            onClick={() => toggleRecommendation(rec)}
+            className={selectedRecommendations.includes(rec) ? "selected" : ""}
+          >
             <input
               type="checkbox"
               checked={selectedRecommendations.includes(rec)}
               readOnly
-            />
-            {rec}
+            /> {rec}
           </li>
         ))}
       </ul>
-      {feedback && <div className="feedback">{feedback}</div>}
+      {!checked ? (
+        <button onClick={handleCheck} disabled={selectedRecommendations.length === 0}>
+          Kontrolli vastused
+        </button>
+      ) : (
+        <div className="result">
+          <p>Õigeid valikuid: {result.correct}</p>
+          <p>Väärasid valikuid: {result.wrong}</p>
+        </div>
+      )}
       <div className="buttons">
-        {!isLocked ? (
-          <button onClick={handleReset}>Alusta uuesti</button>
-        ) : (
-          <button onClick={finishGame}>Lõpeta mäng</button>
+        <button onClick={handleReset}>Alusta uuesti</button>
+        {checked && result.correct === correctRecommendations.length && result.wrong === 0 && (
+          <button onClick={() => navigate('/')}>Lõpeta mäng</button>
         )}
       </div>
     </div>
   );
 }
-
-export default Audiitor4;
