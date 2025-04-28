@@ -5,9 +5,9 @@ import '../CSS/Kuberturbe_ohuanaluutik.css';
 function KuberturbeOhuanaluutik() {
   return (
     <div className="job-page">
-      <h1>Küberohuanalüütik</h1>
+      <h1>Küberturbe Ohuanalüütik</h1>
       <p>
-        Küberohuanalüütik kogub ja analüüsib avalikku ohuteavet, et aidata meeskonnal rünnakuid ennetada ja riske hinnata.
+        Küberturbe ohuanalüütik kogub ja analüüsib avalikku ohuteavet, et aidata meeskonnal rünnakuid ennetada ja riske hinnata.
       </p>
       <h2>Mängude ülevaade</h2>
       <p>Siin saad selles rollis lahendada järgmisi mänge koos eeldatava kestusega:</p>

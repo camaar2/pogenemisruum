@@ -71,6 +71,7 @@ import Arhitekt3 from './games/JavaScript/Arhitekt3';
 import Arhitekt4 from './games/JavaScript/Arhitekt4';
 import Sundmuste_reageerija2 from './games/JavaScript/Sundmuste_reageerija2';
 import Sundmuste_reageerija3 from './games/JavaScript/Sundmuste_reageerija3';
+import Sundmuste_reageerija4 from './games/JavaScript/Sundmuste_reageerija4';
 
 function App() {
   return (
@@ -146,6 +147,7 @@ function App() {
         <Route path="/sundmuste_reageerija1" element={<Sundmuste_reageerija1 />} />
         <Route path="/sundmuste_reageerija2" element={<Sundmuste_reageerija2 />} />
         <Route path="/sundmuste_reageerija3" element={<Sundmuste_reageerija3 />} />
+        <Route path="/sundmuste_reageerija4" element={<Sundmuste_reageerija4 />} />
         <Route path="/arhitekt3" element={<Arhitekt3 />} />
         <Route path="/arhitekt4" element={<Arhitekt4 />} />
       </Routes>

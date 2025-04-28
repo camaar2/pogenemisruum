@@ -58,7 +58,7 @@ function Sundmuste_reageerija3() {
 
   return (
     <div className={`incident-response ${isLocked ? "correct-bg" : feedback ? "incorrect-bg" : ""}`}>
-      <h2>3. Etapp: Intsidendi reageerimise tegevuste järjestamine</h2>
+      <h2>Intsidendi reageerimise tegevuste järjestamine</h2>
       <p>Järjesta tegevused õiges järjekorras:</p>
       <ul className="steps-list">
         {steps.map((step, index) => (
@@ -78,7 +78,7 @@ function Sundmuste_reageerija3() {
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
-          <button onClick={() => navigate('/incident-response-finale')}>Edasi</button>
+          <button onClick={() => navigate('/sundmuste_reageerija4')}>Edasi</button>
         )}
       </div>
       {feedback && <div className="feedback">{feedback}</div>}

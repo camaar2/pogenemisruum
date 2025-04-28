@@ -44,7 +44,7 @@ function Sundmuste_reageerija2() {
 
   return (
     <div className="incident-communication-drill">
-      <h2>4. Etapp: Intsidendi kommunikatsiooni drill</h2>
+      <h2>Intsidendi kommunikatsiooni drill</h2>
       <p>Vali kommunikatsioonistrateegia, mida jagada partneritele intsidendi teavitamiseks:</p>
       <ul className="option-list">
         {options.map(option => (
