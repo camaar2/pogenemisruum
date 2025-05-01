@@ -11,12 +11,12 @@ function KuberturbeAudiitor() {
         Sinu ülesanne on läbi viia riskianalüüs, koostada sobivad turvameetmed ja tagada pidev järelevalve.
       </p>
       <h2>Mängude ülevaade</h2>
-      <p>Siin saad selles rollis lahendada järgmisi mänge koos ligikaudse kestusega:</p>
+      <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>
       <ul>
-        <li><strong>Riskianalüüs</strong> – umbes 5–7 minutit</li>
-        <li><strong>Turvameetmete kava</strong> – umbes 7–10 minutit</li>
-        <li><strong>Lahenduse rakendamise juhendamine</strong> – umbes 8–10 minutit</li>
-        <li><strong>Lõplik audit ja järelevalve</strong> – umbes 10–12 minutit</li>
+        <li><strong>Riskianalüüs</strong></li>
+        <li><strong>Turvameetmete kava</strong></li>
+        <li><strong>Lahenduse rakendamise juhendamine</strong></li>
+        <li><strong>Lõplik audit ja järelevalve</strong></li>
       </ul>
       <Link to="/audiitor1">
         <button>Alusta mängu</button>

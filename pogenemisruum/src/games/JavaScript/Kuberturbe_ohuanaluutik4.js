@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../CSS/Kuberturbe_ohuanaluutik4.css';
 
 const correctChain = [
-  "Reconnaissance",
-  "Weaponization",
-  "Delivery",
-  "Exploitation",
-  "Installation",
-  "Command & Control",
-  "Actions on Objectives"
+  "Järeleluurimine",
+  "Relvastamine",
+  "Levitamine",
+  "Eksploitatsioon",
+  "Paigaldamine",
+  "Käsklus ja Juhtimine",
+  "Eesmärkide täitmine"
 ];
-
 const distractors = [
-  "Cleanup",
-  "Profit Realization",
-  "Persistence on Social Media"
+  "Puhastamine",
+  "Tulu realiseerimine",
+  "Sotsiaalmeedia püsitus"
 ];
 
 function generatePuzzleItems() {
@@ -27,6 +27,7 @@ function generatePuzzleItems() {
 }
 
 function Kuberturbe_ohuanaluutik4() {
+  const navigate = useNavigate();
   const [pool, setPool] = useState(generatePuzzleItems());
   const [slots, setSlots] = useState(Array(7).fill(null));
   const [message, setMessage] = useState("");
@@ -35,71 +36,51 @@ function Kuberturbe_ohuanaluutik4() {
   const handleDragStart = (e, item) => {
     e.dataTransfer.setData("text/plain", item);
   };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  const handleDragOver = e => e.preventDefault();
 
   const handleDropInSlot = (e, index) => {
-    e.preventDefault();
-    if (isLocked) return;
+    e.preventDefault(); if (isLocked) return;
     const item = e.dataTransfer.getData("text/plain");
-
     let newPool = [...pool];
-    let draggedItem = null;
-
-    const poolIndex = newPool.indexOf(item);
-    if (poolIndex >= 0) {
-      draggedItem = item;
-      newPool.splice(poolIndex, 1);
-    } else {
-      let newSlots = [...slots];
-      const foundIndex = newSlots.indexOf(item);
-      if (foundIndex >= 0) {
-        draggedItem = item;
-        newSlots[foundIndex] = null;
-      }
-      setSlots(newSlots);
-    }
-    if (!draggedItem) return;
-
     let newSlots = [...slots];
-    if (newSlots[index]) {
-      newPool.push(newSlots[index]);
-    }
-    newSlots[index] = draggedItem;
 
+    if (newPool.includes(item)) {
+      newPool = newPool.filter(i => i !== item);
+    } else {
+      const prev = newSlots.indexOf(item);
+      if (prev >= 0) newSlots[prev] = null;
+    }
+    if (newSlots[index]) newPool.push(newSlots[index]);
+
+    newSlots[index] = item;
     setPool(newPool);
     setSlots(newSlots);
   };
 
-  const handleDropInPool = (e) => {
-    e.preventDefault();
-    if (isLocked) return;
-
+  const handleDropInPool = e => {
+    e.preventDefault(); if (isLocked) return;
     const item = e.dataTransfer.getData("text/plain");
     let newSlots = [...slots];
-    const foundIndex = newSlots.indexOf(item);
-    if (foundIndex >= 0) {
-      newSlots[foundIndex] = null;
-      setPool(prev => [...prev, item]);
+    const idx = newSlots.indexOf(item);
+    if (idx >= 0) {
+      newSlots[idx] = null;
       setSlots(newSlots);
+      setPool(prev => [...prev, item]);
     }
   };
 
   const handleCheckOrder = () => {
     if (slots.some(s => !s)) {
-      setMessage("Mõni slot on tühi. Paiguta kõik 7 etappi.");
+      setMessage("Mõni koht on tühi. Aseta kõik 7 etappi järjekasti.");
       return;
     }
-    for (let i = 0; i < 7; i++) {
-      if (slots[i] !== correctChain[i]) {
-        setMessage("Vale järjekord! Proovi uuesti.");
-        return;
-      }
+    const allCorrect = slots.every((s, i) => s === correctChain[i]);
+    if (allCorrect) {
+      setMessage("Tubli! Kõik ründe ahela etapid on õiges järjekorras.");
+      setIsLocked(true);
+    } else {
+      setMessage("Vale järjekord! Proovi uuesti.");
     }
-    setMessage("Kõik kill chain etapid on õigesti paigutatud!");
-    setIsLocked(true);
   };
 
   const handleReset = () => {
@@ -109,68 +90,62 @@ function Kuberturbe_ohuanaluutik4() {
     setIsLocked(false);
   };
 
+  const containerClass = isLocked
+    ? message.startsWith('Tubli') ? 'correct-bg' : 'incorrect-bg'
+    : message ? 'incorrect-bg' : '';
+
+  const messageClass = message.startsWith('Tubli') ? 'message-correct' : 'message-incorrect';
+
   return (
-    <div className={`killchain-game ${
-      isLocked 
-        ? (message.includes("Kõik kill") ? "correct-bg" : "") 
-        : (message.includes("Vale") || message.includes("tühi")) 
-        ? "incorrect-bg" : ""
-    }`}>
-      <h2>Kill Chain Assembly Game</h2>
-      <p>Aseta ründe kill chain etapid õiges järjekorras (Distraktoreid võib ignoreerida!):</p>
+    <div className={`killchain-game ${containerClass}`}>
+      <h1>Ründe ahela etappide kokkupanek</h1>
+      <p className="instructions">
+        Sul on 7 põhisammu ründe ahelas ja mõned segajad. Lohista sammud allpool asuvast saadaolevate valikute kastist oma õigetesse kohtadesse vasakusse paneeli. Üleliigsed etapid jäta saadaolevate hulka.
+      </p>
       <div className="game-container">
-        
-        {/* Vasak veerg: slotid */}
-        <div className="slots-panel"
-             onDragOver={handleDragOver}>
-          <h3>Etappide slotid</h3>
+        <div className="slots-panel" onDragOver={handleDragOver} onDrop={e => e.preventDefault()}>
+          <h3>Etappide järjekord</h3>
           <div className="slots">
-            {slots.map((item, index) => (
-              <div key={index}
-                   className="slot"
-                   onDrop={(e) => handleDropInSlot(e, index)}>
+            {slots.map((item, idx) => (
+              <div key={idx} className="slot" onDrop={e => handleDropInSlot(e, idx)} onDragOver={handleDragOver}>
                 {item ? (
-                  <div className="chain-item"
-                       draggable={!isLocked}
-                       onDragStart={(e) => handleDragStart(e, item)}>
-                    {item}
-                  </div>
+                  <div
+                    className="chain-item"
+                    draggable={!isLocked}
+                    onDragStart={e => handleDragStart(e, item)}
+                  >{item}</div>
                 ) : (
-                  <div className="placeholder">Slot #{index+1}</div>
+                  <div className="placeholder">Etapp {idx + 1}</div>
                 )}
               </div>
             ))}
           </div>
         </div>
-        
-        {/* Parem veerg: pool valikuid */}
-        <div className="pool"
-             onDragOver={handleDragOver}
-             onDrop={handleDropInPool}>
+        <div className="pool" onDragOver={handleDragOver} onDrop={handleDropInPool}>
           <h3>Saadaolevad etapid</h3>
-          {pool.map(item => (
-            <div key={item}
-                 className="chain-item"
-                 draggable={!isLocked}
-                 onDragStart={(e) => handleDragStart(e, item)}>
-              {item}
-            </div>
-          ))}
+          <div className="pool-items">
+            {pool.map(item => (
+              <div
+                key={item}
+                className="chain-item"
+                draggable={!isLocked}
+                onDragStart={e => handleDragStart(e, item)}
+              >{item}</div>
+            ))}
+          </div>
         </div>
-      
       </div>
-
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleCheckOrder}>Kontrolli järjekorda</button>
+            <button className="primary" onClick={handleCheckOrder}>Kontrolli järjekorda</button>
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
-          <button onClick={() => alert("Mäng lõpetatud!")}>Lõpeta mäng</button>
+          <button className="primary" onClick={() => navigate('/')}>Lõpeta mänguseeria</button>
         )}
       </div>
-      {message && <div className="message">{message}</div>}
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
     </div>
   );
 }

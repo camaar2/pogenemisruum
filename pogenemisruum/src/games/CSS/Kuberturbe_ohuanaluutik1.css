@@ -1,60 +1,77 @@
 .threat-collection {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 20px;
-  background: linear-gradient(135deg, #f9f9ff, #eef9fa);
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #dde4eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: background 0.5s;
 }
-
+.threat-collection h1 {
+  margin-bottom: 0.5rem;
+}
+.instructions {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
 .sources {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   text-align: left;
 }
-
 .source {
-  margin: 10px 0;
-  background: #fff;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
-
-.source-checkbox {
-  margin-right: 10px;
+.source input[type="checkbox"] {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
 }
-
+.source-text {
+  margin-left: 0.75rem;
+  flex: 1;
+}
 .desc {
   font-style: italic;
-  color: #666;
 }
-
-.correct-bg {
-  background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
-}
-
-.incorrect-bg {
-  background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
-}
-
 .buttons {
-  margin-top: 20px;
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
 }
-
-button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  font-size: 16px;
+.buttons button {
+  background-color:#e4067e;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
   cursor: pointer;
 }
-
-.message {
-  margin-top: 20px;
-  font-weight: bold;
-  font-size: 18px;
-  color: #d32f2f;
+.buttons button:hover {
+  background-color: #aa1352;
 }
-
+.message {
+  font-weight: bold;
+  margin-top: 1rem;
+  color: #000;
+}
+.message.message-correct {
+  color: green;
+}
+.message.message-incorrect {
+  color: #aa1352;
+}
+.correct-bg {
+  background-color: #e6ffea;
+}
+.incorrect-bg {
+  background-color: #ffe6e6;
+}

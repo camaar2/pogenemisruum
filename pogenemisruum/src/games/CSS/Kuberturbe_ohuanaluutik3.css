@@ -1,55 +1,73 @@
 .risk-prioritization {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 20px;
-  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f9fcff, #eef7ff);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #f9f9ff, #eeffff);
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: background 0.5s;
+  text-align: center;
 }
-
+.risk-prioritization h1 {
+  font-size: 2rem;
+  margin: 0;
+  padding: 1.5rem 0;
+  /* Ühendame headeri ja contenti taustad: eemaldame eraldi headeri servad */
+}
+.instructions {
+  text-align: left;
+  margin: 1rem 0 1.5rem;
+  line-height: 1.5;
+}
+.instructions p {
+  margin: 0.5rem 0;
+}
+.high-label { color: #c62828; font-weight: bold; }
+.medium-label { color: #f9a825; font-weight: bold; }
+.low-label { color: #2e7d32; font-weight: bold; }
 .risk-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-bottom: 1.5rem;
+  background: #fff; /* tagame valge kasti tausta pöördumata taustavärvist */
 }
-
 .risk-table th, .risk-table td {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 0.75rem 1rem;
   text-align: left;
+  background: #fff; /* hoia valged kastid */
 }
-
-.risk-table th {
-  background: #f0f0f0;
+.risk-table th { background-color: #e0e0e0; }
+.risk-prioritization select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #999;
+  background: #fff; /* drop-down jääb valge */
 }
-
-.correct-bg {
-  background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
-}
-
-.incorrect-bg {
-  background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
-}
-
 .buttons {
-  margin-top: 20px;
   display: flex;
-  gap: 20px;
   justify-content: center;
+  gap: 1rem;
 }
-
 button {
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
-
-.message {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #d32f2f;
+button.primary {
+  background-color: #e4067e;
+  color: white;
 }
+button.primary:hover { background-color: #e4067e; }
+.message {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.message-correct { color: green; }
+.message-incorrect { color: red; }
+.correct-bg { background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important; }
+.incorrect-bg { background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important; }

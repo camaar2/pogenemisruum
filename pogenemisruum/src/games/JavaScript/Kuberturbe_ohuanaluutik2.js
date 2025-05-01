@@ -19,7 +19,7 @@ const fullWordPool = [
   { id: 14, text: "somefile.pdf", isIndicator: false },
   { id: 15, text: "suspect_credentials", isIndicator: true },
   { id: 16, text: "tavakasutaja", isIndicator: false },
-  { id: 17, text: "backup.zip", isIndicator: false },
+  { id: 17, text: "backup.zip", isIndicator: true },
   { id: 18, text: "10.15.30.111", isIndicator: true },
   { id: 19, text: "evilscript.js", isIndicator: true },
   { id: 20, text: "keegi mainis", isIndicator: false }
@@ -35,35 +35,31 @@ function shuffleArray(array) {
 }
 
 function generateWords() {
-  const shuffled = shuffleArray(fullWordPool);
-  return shuffled.slice(0, 12); 
+  return shuffleArray(fullWordPool).slice(0, 12);
 }
 
 function Kuberturbe_ohuanaluutik2() {
   const navigate = useNavigate();
-
   const [words, setWords] = useState(generateWords());
   const [selectedIndicators, setSelectedIndicators] = useState({});
   const [message, setMessage] = useState("");
   const [isLocked, setIsLocked] = useState(false);
 
+  const indicatorCount = words.filter(w => w.isIndicator).length;
+
   const handleWordClick = (word) => {
     if (isLocked) return;
     setSelectedIndicators(prev => {
-      if (prev[word.id]) {
-        const updated = { ...prev };
-        delete updated[word.id];
-        return updated;
-      } else {
-        return { ...prev, [word.id]: true };
-      }
+      const updated = { ...prev };
+      if (updated[word.id]) delete updated[word.id];
+      else updated[word.id] = true;
+      return updated;
     });
   };
 
   const handleSubmit = () => {
-    const correctIds = words.filter(w => w.isIndicator).map(w => w.id).sort((a, b) => a - b);
-    const userSelected = Object.keys(selectedIndicators).map(id => parseInt(id, 10)).sort((a, b) => a - b);
-    
+    const correctIds = words.filter(w => w.isIndicator).map(w => w.id).sort((a,b) => a-b);
+    const userSelected = Object.keys(selectedIndicators).map(id => +id).sort((a,b) => a-b);
     if (JSON.stringify(correctIds) === JSON.stringify(userSelected)) {
       setMessage("Kõik ohumärgid tuvastatud! Saad edasi liikuda.");
       setIsLocked(true);
@@ -79,42 +75,40 @@ function Kuberturbe_ohuanaluutik2() {
     setIsLocked(false);
   };
 
-  const handleNext = () => {
-    navigate("/kuberturbe_ohuanaluutik3");
-  };
+  const handleNext = () => navigate("/kuberturbe_ohuanaluutik3");
+
+  let messageType = '';
+  if (message.includes('Kõik ohumärgid')) messageType = 'message-correct';
+  else if (message.includes('puudu') || message.includes('valesti')) messageType = 'message-incorrect';
 
   const getWordClass = (word) => {
     if (!isLocked) {
-      return selectedIndicators[word.id] ? "word selected" : "word";
-    } else {
-      const isSelected = !!selectedIndicators[word.id];
-      if (word.isIndicator && isSelected) {
-        return "word correct";
-      } else if (word.isIndicator && !isSelected) {
-        return "word missed";
-      } else if (!word.isIndicator && isSelected) {
-        return "word incorrect";
-      } else {
-        return "word neutral";
-      }
+      return selectedIndicators[word.id] ? 'word selected' : 'word';
     }
+    const isSel = !!selectedIndicators[word.id];
+    if (word.isIndicator && isSel) return 'word correct';
+    if (word.isIndicator && !isSel) return 'word missed';
+    if (!word.isIndicator && isSel) return 'word incorrect';
+    return 'word neutral';
   };
 
   return (
-    <div className={`analyst-game ${isLocked ? (message.includes("Kõik") ? "correct-bg" : "incorrect-bg") : (message.includes("valesti") ? "incorrect-bg" : "")}`}>
+    <div className={`analyst-game ${isLocked ? (messageType==='message-correct'? 'correct-bg':'incorrect-bg') : ''}`}>
       <h1>Andmete analüüs</h1>
-      <p>Klõpsa tekstis sõnadel, mida pead ohumärkideks (failinimed, IP-aadressid, jms). Seejärel vajuta "Kontrolli valikuid".</p>
-      <p className="analysis-text">
+      <p className="instructions">
+        Vali täpselt <strong>{indicatorCount}</strong> ohumärki (failinimed, IP-aadressid jm) allolevast tekstiplokist ja klõpsa vastavaid sõnu.
+      </p>
+
+      <div className="analysis-text">
         {words.map(word => (
-          <span 
-            key={word.id} 
+          <span
+            key={word.id}
             className={getWordClass(word)}
             onClick={() => handleWordClick(word)}
-          >
-            {word.text}{" "}
-          </span>
+          >{word.text}</span>
         ))}
-      </p>
+      </div>
+
       <div className="buttons">
         {!isLocked ? (
           <>
@@ -125,9 +119,9 @@ function Kuberturbe_ohuanaluutik2() {
           <button onClick={handleNext}>Edasi</button>
         )}
       </div>
-      {message && <div className="message">{message}</div>}
+      {message && <div className={`message ${messageType}`}>{message}</div>}
     </div>
   );
 }
 
-export default Kuberturbe_ohuanaluutik2;
+export default Kuberturbe_ohuanaluutik2; 

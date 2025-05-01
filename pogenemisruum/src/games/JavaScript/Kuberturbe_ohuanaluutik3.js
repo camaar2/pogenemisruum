@@ -16,27 +16,30 @@ const allThreats = [
 ];
 
 function shuffleArray(array) {
-  const newArr = [...array];
-  for (let i = newArr.length - 1; i > 0; i--) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-  return newArr;
+  return arr;
 }
 
 function generateThreats() {
-  const shuffled = shuffleArray(allThreats);
-  const size = Math.floor(Math.random() * 2) + 4;
-  return shuffled.slice(0, size);
+  const count = Math.floor(Math.random() * 4) + 6; // 6-9 threats
+  return shuffleArray(allThreats).slice(0, count);
 }
 
 function Kuberturbe_ohuanaluutik3() {
   const navigate = useNavigate();
-
   const [threats, setThreats] = useState(generateThreats());
   const [priorities, setPriorities] = useState({});
   const [message, setMessage] = useState("");
   const [isLocked, setIsLocked] = useState(false);
+
+  const total = threats.length;
+  const highCount = threats.filter(t => t.correctPriority === 'high').length;
+  const medCount = threats.filter(t => t.correctPriority === 'medium').length;
+  const lowCount = threats.filter(t => t.correctPriority === 'low').length;
 
   const handlePriorityChange = (id, value) => {
     if (isLocked) return;
@@ -44,23 +47,16 @@ function Kuberturbe_ohuanaluutik3() {
   };
 
   const handleSubmit = () => {
-    let allCorrect = true;
-    if (Object.keys(priorities).length !== threats.length) {
-      setMessage("Mõned ohud pole prioriteeti saanud. Proovi uuesti.");
+    if (Object.keys(priorities).length !== total) {
+      setMessage(`Palun määra kõigile ${total} ohule prioriteet!`);
       return;
     }
-    for (let i = 0; i < threats.length; i++) {
-      const threat = threats[i];
-      if (priorities[threat.id] !== threat.correctPriority) {
-        allCorrect = false;
-        break;
-      }
-    }
+    const allCorrect = threats.every(t => priorities[t.id] === t.correctPriority);
     if (allCorrect) {
-      setMessage("Oled ohud edukalt prioriseerinud!");
+      setMessage("Tubli! Kõik ohud on õigesti prioriseeritud.");
       setIsLocked(true);
     } else {
-      setMessage("Mõned ohud on valesti prioriseeritud. Proovi uuesti.");
+      setMessage("Mõni prioriteet ei vasta soovituslikule tasemele. Kontrolli üle ja proovi uuesti.");
     }
   };
 
@@ -71,25 +67,22 @@ function Kuberturbe_ohuanaluutik3() {
     setIsLocked(false);
   };
 
-  const handleNext = () => {
-    navigate("/kuberturbe_ohuanaluutik4");
-  };
+  const handleNext = () => navigate('/kuberturbe_ohuanaluutik4');
 
-  let containerClass = "";
-  if (isLocked) {
-    if (message.includes("edukalt")) {
-      containerClass = "correct-bg";
-    } else {
-      containerClass = "incorrect-bg";
-    }
-  } else if (message.includes("valesti") || message.includes("pole prioriteeti")) {
-    containerClass = "incorrect-bg";
-  }
+  const containerClass = isLocked
+    ? message.includes('Tubli') ? 'correct-bg' : 'incorrect-bg'
+    : '';
 
   return (
     <div className={`risk-prioritization ${containerClass}`}>
-      <h1>3. ETAPP: Riskide prioriseerimine</h1>
-      <p>Vali igale ohule sobiv prioriteeditase:</p>
+      <h1>Riskide prioriseerimine</h1>
+      <div className="instructions">
+        <p>Sul on tuvastatud <strong>{total}</strong> ohtu.</p>
+        <p>Vali <strong className="high-label">kõrge</strong> prioriteet ohtudele, mille mõju on võrreldav 0-day lunavara levikuga; neid on {highCount}.</p>
+        <p>Vali <strong className="medium-label">keskmine</strong> prioriteet tavameetmetega tõrjutavatele rünnetele; neid on {medCount}.</p>
+        <p>Vali <strong className="low-label">madal</strong> prioriteet riskidele, mille korral standardsed turvareeglid on piisavad; neid on {lowCount}.</p>
+      </div>
+
       <table className="risk-table">
         <thead>
           <tr>
@@ -103,14 +96,14 @@ function Kuberturbe_ohuanaluutik3() {
               <td>{threat.text}</td>
               <td>
                 <select
-                  value={priorities[threat.id] || ""}
-                  onChange={(e) => handlePriorityChange(threat.id, e.target.value)}
+                  value={priorities[threat.id] || ''}
+                  onChange={e => handlePriorityChange(threat.id, e.target.value)}
                   disabled={isLocked}
                 >
-                  <option value="">Vali prioriteet</option>
-                  <option value="high">kõrge</option>
-                  <option value="medium">keskmine</option>
-                  <option value="low">madal</option>
+                  <option value="">Vali prioriteet...</option>
+                  <option value="high">Kõrge</option>
+                  <option value="medium">Keskmine</option>
+                  <option value="low">Madal</option>
                 </select>
               </td>
             </tr>
@@ -121,15 +114,15 @@ function Kuberturbe_ohuanaluutik3() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleSubmit}>Esita valikud</button>
+            <button className="primary" onClick={handleSubmit}>Esita prioriteedid</button>
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
-          <button onClick={handleNext}>Edasi</button>
+          <button className="primary" onClick={handleNext}>Edasi</button>
         )}
       </div>
 
-      {message && <div className="message">{message}</div>}
+      {message && <div className={`message ${containerClass.includes('cor') ? 'message-correct' : 'message-incorrect'}`}>{message}</div>}
     </div>
   );
 }

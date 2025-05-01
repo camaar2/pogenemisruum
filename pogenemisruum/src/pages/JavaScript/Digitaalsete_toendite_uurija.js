@@ -11,12 +11,12 @@ function DigitaalseteToenditeUurija() {
         et aidata uurijatel mõista küberintsidente ja tagada, et tõendid oleksid kohtus kasutuskõlblikud.
       </p>
       <h2>Mängude ülevaade</h2>
-      <p>Siin saad selles rollis läbida järgmisi etappe koos ligikaudse kestusega:</p>
+      <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>
       <ul>
-        <li><strong>Chain-of-Custody Ordering</strong> – umbes 5–7 minutit</li>
-        <li><strong>Logianomaaliate tuvastamine</strong> – umbes 7–10 minutit</li>
-        <li><strong>Digitaalsete artefaktide sobitamine</strong> – umbes 8–10 minutit</li>
-        <li><strong>Digitaalse tõendi mälumäng</strong> – umbes 10–12 minutit</li>
+        <li><strong>Chain-of-Custody Ordering</strong></li>
+        <li><strong>Logianomaaliate tuvastamine</strong></li>
+        <li><strong>Digitaalsete artefaktide sobitamine</strong></li>
+        <li><strong>Digitaalse tõendi mälumäng</strong></li>
       </ul>
       <Link to="/digi_toendite_uurija1">
         <button>Alusta mängu</button>

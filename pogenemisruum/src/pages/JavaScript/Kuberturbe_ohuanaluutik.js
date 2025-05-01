@@ -10,12 +10,12 @@ function KuberturbeOhuanaluutik() {
         Küberturbe ohuanalüütik kogub ja analüüsib avalikku ohuteavet, et aidata meeskonnal rünnakuid ennetada ja riske hinnata.
       </p>
       <h2>Mängude ülevaade</h2>
-      <p>Siin saad selles rollis lahendada järgmisi mänge koos eeldatava kestusega:</p>
+      <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>
       <ul>
-        <li><strong>Ohuteabe kogumine</strong> – umbes 5-7 minutit</li>
-        <li><strong>Andmete analüüs</strong> – umbes 10 minutit</li>
-        <li><strong>Riskide prioriseerimine</strong> – umbes 8 minutit</li>
-        <li><strong>Kill Chain kokkupanek</strong> – umbes 10 minutit</li>
+        <li><strong>Ohuteabe kogumine</strong></li>
+        <li><strong>Andmete analüüs</strong></li>
+        <li><strong>Riskide prioriseerimine</strong></li>
+        <li><strong>Kill Chain kokkupanek</strong></li>
       </ul>
       <Link to="/kuberturbe_ohuanaluutik1">
         <button>Alusta mängu</button>

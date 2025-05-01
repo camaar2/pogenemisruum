@@ -4,32 +4,41 @@
   font-family: Arial, sans-serif;
   text-align: center;
   padding: 20px;
-  background: linear-gradient(135deg, #f9f9f9, #eef7ff);
+  background: linear-gradient(135deg, #ffffff, #ffffff);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: background 0.5s;
 }
 
 .analyst-game h1 {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+}
+
+.instructions {
+  font-style: italic;
+  margin-bottom: 16px;
 }
 
 .analysis-text {
-  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 8px;
   background: #fff;
-  padding: 15px;
+  padding: 20px;
   border-radius: 6px;
-  min-height: 120px;
   border: 1px solid #ccc;
 }
 
 .word {
   display: inline-block;
-  margin: 4px 2px;
-  padding: 4px 6px;
+  padding: 6px 8px;
+  border: 1px solid #bbb;
   border-radius: 4px;
+  margin: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+  background-color: #fafafa;
 }
 
 .word:hover {
@@ -69,6 +78,14 @@ button {
   font-size: 18px;
   font-weight: bold;
   margin-top: 20px;
+}
+
+.message.message-correct {
+  color: green;
+}
+
+.message.message-incorrect {
+  color: red;
 }
 
 .correct-bg {

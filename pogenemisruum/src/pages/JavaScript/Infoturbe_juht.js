@@ -11,12 +11,12 @@ function InfoturbeJuht() {
         Sa juhid meeskondi, koordineerid turvameetmete rakendamist ning tagad vastavuse regulatsioonidele.
       </p>
       <h2>Mängude ülevaade</h2>
-      <p>Siin saad selles rollis läbida järgmised etapid koos ligikaudse kestusega:</p>
+      <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>
       <ul>
-        <li><strong>Digifortressi ehitamine</strong> – umbes 5–7 minutit</li>
-        <li><strong>Turvatarkvara paigaldamine</strong> – umbes 7–10 minutit</li>
-        <li><strong>Andmepüügi tuvastamine</strong> – umbes 8–10 minutit</li>
-        <li><strong>Pahavara tuvastamine</strong> – umbes 10–12 minutit</li>
+        <li><strong>Digifortressi ehitamine</strong></li>
+        <li><strong>Turvatarkvara paigaldamine</strong></li>
+        <li><strong>Andmepüügi tuvastamine</strong></li>
+        <li><strong>Pahavara tuvastamine</strong></li>
       </ul>
       <Link to="/infoturbe_juht1">
         <button>Alusta mängu</button>
