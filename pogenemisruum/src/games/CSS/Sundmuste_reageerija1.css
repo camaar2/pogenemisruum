@@ -1,99 +1,91 @@
-.incident-prioritization {
-    max-width: 800px;
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-    background-color: #eef;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-  
-  .puzzle-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .slots {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .slot {
-    width: 150px;
-    height: 60px;
-    border: 2px dashed #aaa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 4px;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  
-  .slot.correct {
-    background-color: #c8e6c9;
-    border-color: #388e3c;
-  }
-  
-  .slot.wrong {
-    background-color: #ffcdd2;
-    border-color: #d32f2f;
-  }
-  
-  .placeholder {
-    color: #aaa;
-    font-style: italic;
-    text-align: center;
-  }
-  
-  .choices {
-    width: 100%;
-    background-color: #fff;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .choices p {
-    margin: 0;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .choices-container {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .choice {
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    cursor: move;
-    border-radius: 4px;
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .message {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-  
+.risk-prioritization {
+  max-width: 720px;
+  margin: 0rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f9fcff, #eef7ff);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+.risk-prioritization h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.instructions {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.puzzle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.slots {
+  display: flex;
+  gap: 0.5rem;
+}
+.slot {
+  width: 140px;
+  height: 60px;
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.slot.correct { background: #c8e6c9; border-color: #4caf50; }
+.slot.wrong   { background: #ffcdd2; border-color: #e57373; }
+.placeholder { color: #aaa; font-style: italic; }
+.choices {
+  width: 100%;
+  background: #fff;
+  padding: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 0.5rem;
+}
+.choices p { margin: 0 0 0.75rem; font-weight: bold; text-align: left; }
+.choices-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.choice {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #f9f9f9;
+  cursor: move;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+button.primary { background-color: #e4067e; color: #fff; }
+button.primary:hover { background-color: #d0046f; }
+.message {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.message-correct { color: green; }
+.message-incorrect { color: red; }
+.correct-bg {
+  background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+}
+.incorrect-bg {
+  background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
+}

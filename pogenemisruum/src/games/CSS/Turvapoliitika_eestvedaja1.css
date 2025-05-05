@@ -1,57 +1,84 @@
-.stage {
-  margin: 20px auto;
-  max-width: 600px;
-  font-family: sans-serif;
+.risk-prioritization {
+  max-width: 720px;
+  margin: 0rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f9fcff, #eef7ff);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
-
-.stage h2 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+.risk-prioritization h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
-
-.stage p {
-  font-size: 1rem;
-  margin-bottom: 10px;
+.instructions {
+  text-align: left;
+  margin: 1rem 0;
 }
-
 .law-list {
   list-style: none;
   padding: 0;
+  margin-bottom: 1.5rem;
 }
-
 .law-list li {
-  padding: 10px;
-  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
   border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #fff;
   cursor: pointer;
-  border-radius: 5px;
 }
-
 .law-list li.selected {
-  background-color: #d0f0c0;
-  border-color: #4caf50;
+  background: #e0f7fa;
+  border-color: #26c6da;
 }
-
-.check-button, .next-button {
-  margin-top: 15px;
-  padding: 10px 20px;
+.law-list li.correct {
+  background: #c8e6c9 !important;
+  border-color: #4caf50 !important;
+}
+.law-list li.incorrect {
+  background: #ffcdd2 !important;
+  border-color: #e57373 !important;
+}
+.law-list input {
+  margin-right: 0.75rem;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+button {
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  cursor: pointer;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
-
-.check-button {
-  background-color: #2196F3;
+button.primary {
+  background-color: #e4067e;
   color: white;
 }
-
-.next-button {
-  background-color: #4CAF50;
-  color: white;
+button.primary:hover {
+  background-color: #d0046f;
 }
-
-.feedback {
-  margin-top: 15px;
+.message {
+  margin-top: 1rem;
+  font-size: 1.25rem;
   font-weight: bold;
+}
+.message-correct {
+  color: green;
+}
+.message-incorrect {
+  color: red;
+}
+.correct-bg {
+  background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+}
+.incorrect-bg {
+  background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
 }

@@ -2,80 +2,91 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Turvapoliitika_eestvedaja3.css';
 
+const allItems = [
+  { id: 1, text: 'Turvapoliitika dokumentatsioon', correct: true },
+  { id: 2, text: 'Töötajate isiklikud e-kirjad', correct: false },
+  { id: 3, text: 'Juurdepääsukontrollide logid', correct: true },
+  { id: 4, text: 'Kohvikumenüü', correct: false }
+];
+
 function Turvapoliitika_eestvedaja3() {
   const navigate = useNavigate();
-
-  const correctItems = ['Turvapoliitika dokumentatsioon', 'Juurdepääsukontrollide logid'];
-
-  const items = shuffleArray([
-    'Turvapoliitika dokumentatsioon',
-    'Töötajate isiklikud e-kirjad',
-    'Juurdepääsukontrollide logid',
-    'Kohvikumenüü'
-  ]);
-
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
+  const [locked, setLocked] = useState(false);
 
-  function shuffleArray(array) {
-    const newArr = [...array];
-    for (let i = newArr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-    }
-    return newArr;
-  }
-
-  const toggleItem = (item) => {
-    if (isChecked) return;
-    if (selectedItems.includes(item)) {
-      setSelectedItems(selectedItems.filter(i => i !== item));
-    } else {
-      setSelectedItems([...selectedItems, item]);
-    }
+  const toggle = (id) => {
+    if (locked) return;
+    setSelected(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
   };
 
-  const checkAnswers = () => {
-    const isCorrect =
-      selectedItems.length === correctItems.length &&
-      selectedItems.every(i => correctItems.includes(i));
-    if (isCorrect) {
-      setFeedback("Õige! Auditiks vajalikud materjalid on olemas.");
-    } else {
-      setFeedback("Vale! Õiged materjalid on nüüd valitud.");
-      setSelectedItems(correctItems);
+  const handleSubmit = () => {
+    const chosen = allItems.filter(i => selected.includes(i.id));
+    const correctCount = allItems.filter(i => i.correct).length;
+    if (chosen.length !== correctCount) {
+      setFeedback(`Palun vali kõik ${correctCount} auditiks vajalikku materjali.`);
+      return;
     }
-    setIsChecked(true);
+    const allCorrect = chosen.every(i => i.correct);
+    if (allCorrect) {
+      setFeedback('Õige! Auditiks vajalikud materjalid on olemas.');
+    } else {
+      setFeedback('Mõni valik on vale. Õiged materjalid on nüüd valitud.');
+    }
+    setLocked(true);
   };
 
-  const goToNextStage = () => {
-    navigate('/turvapoliitika_eestvedaja4');
+  const handleReset = () => {
+    setSelected([]);
+    setFeedback('');
+    setLocked(false);
   };
 
   return (
-    <div className="stage stage3">
-      <h2>Auditiks valmistumine</h2>
-      <p>Vali andmed ja dokumendid, mis peavad auditiks valmis olema:</p>
+    <div className={`risk-prioritization ${locked ? (feedback.startsWith('Õige') ? 'correct-bg' : 'incorrect-bg') : ''}`}>
+      <h1>Auditiks valmistumine</h1>
+      <div className="instructions">
+        <p>Vali andmed ja dokumendid, mis peavad auditiks valmis olema. Kokku on <strong>{allItems.filter(i => i.correct).length}</strong>:</p>
+      </div>
       <ul className="item-list">
-        {items.map(item => (
-          <li 
-            key={item}
-            onClick={() => toggleItem(item)}
-            className={selectedItems.includes(item) ? "selected" : ""}
+        {allItems.map(item => (
+          <li
+            key={item.id}
+            onClick={() => toggle(item.id)}
+            className={
+              locked
+                ? item.correct
+                  ? 'selected correct'
+                  : selected.includes(item.id)
+                  ? 'selected incorrect'
+                  : ''
+                : selected.includes(item.id)
+                ? 'selected'
+                : ''
+            }
           >
-            <input type="checkbox" checked={selectedItems.includes(item)} readOnly />
-            {item}
+            <input
+              type="checkbox"
+              checked={selected.includes(item.id)}
+              readOnly
+            />
+            {item.text}
           </li>
         ))}
       </ul>
-      {!isChecked && (
-        <button onClick={checkAnswers} className="check-button">Kontrolli</button>
-      )}
-      {feedback && <p className="feedback">{feedback}</p>}
-      {isChecked && (
-        <button onClick={goToNextStage} className="next-button">Edasi</button>
-      )}
+      <div className="buttons">
+        {!locked ? (
+          <>
+            <button className="primary" onClick={handleSubmit}>Kontrolli</button>
+            <button onClick={handleReset}>Alusta uuesti</button>
+          </>
+        ) : (
+          <button className="primary" onClick={() => navigate('/turvapoliitika_eestvedaja4')}>Edasi</button>
+        )}
+      </div>
+      {feedback && <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>{feedback}</div>}
     </div>
   );
 }

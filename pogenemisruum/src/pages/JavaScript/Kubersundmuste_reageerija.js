@@ -11,12 +11,12 @@ function SundmusteReageerija() {
         Sa koordineerid meeskonda, suhtled sidusgruppidega ning võtad tarvitusele tegevused intsidentide lahendamiseks.
       </p>
       <h2>Mängude ülevaade</h2>
-      <p>Siin saad selles rollis läbida järgmised etapid koos ligikaudse kestusega:</p>
+      <p>Siin saad selles rollis läbida järgmised etapid, mille eeldatav kestus on 12 minutit:</p>
       <ul>
-        <li><strong>Intsidendi prioriseerimise pusle</strong> – umbes 5–7 minutit</li>
-        <li><strong>Intsidendi kommunikatsiooni drill</strong> – umbes 5–7 minutit</li>
-        <li><strong>Intsidendi reageerimise tegevuste järjestamine</strong> – umbes 7–10 minutit</li>
-        <li><strong>Containment &amp; Eradication strateegia</strong> – umbes 8–10 minutit</li>
+        <li><strong>Intsidendi prioritiseerimise pusle</strong></li>
+        <li><strong>Intsidendi kommunikatsiooni harjutus</strong></li>
+        <li><strong>Intsidendi reageerimismeetmete järjestamine</strong></li>
+        <li><strong>Piiramine ja likvideerimine</strong></li>
       </ul>
       <Link to="/sundmuste_reageerija1">
         <button>Alusta mängu</button>

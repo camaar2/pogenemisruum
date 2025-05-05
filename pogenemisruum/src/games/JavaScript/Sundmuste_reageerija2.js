@@ -2,82 +2,76 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Sundmuste_reageerija2.css';
 
+const options = [
+  { id: 'A', text: 'Operatsiooniline info', correct: false, explanation: 'Igapäevane teave rutiinsete operatsioonide haldamiseks.' },
+  { id: 'B', text: 'Strateegiline info', correct: true, explanation: 'Pikaajaline teave organisatsiooni suundade ja prioriteetide kohta.' },
+  { id: 'C', text: 'Taktikaline info', correct: false, explanation: 'Lühiajaline info intsidendi reageerimiseks.' },
+  { id: 'D', text: 'Juhtimisinfo', correct: false, explanation: 'Ülevaade juhtimisprotsessidest, mis ei keskendu intsidendile.' }
+];
+
 function Sundmuste_reageerija2() {
-  const options = [
-    { id: 'A', text: "Operatsiooniline info", explanation: "Igapäevane teave, mida kasutatakse rutiinsete operatsioonide haldamiseks." },
-    { id: 'B', text: "Strateegiline info", explanation: "Pikaajaline teave organisatsiooni suundade ja prioriteetide kohta." },
-    { id: 'C', text: "Taktikaline info", explanation: "Konkreetne, lühiajaline teave intsidendi reageerimiseks." },
-    { id: 'D', text: "Juhtimisinfo", explanation: "Ülevaade juhtimisprotsessidest, mis ei keskendu intsidendile." }
-  ];
-
-  const correctOption = "Strateegiline info";
-
-  const [selectedOption, setSelectedOption] = useState("");
-  const [feedback, setFeedback] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
   const navigate = useNavigate();
+  const [selected, setSelected] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const [locked, setLocked] = useState(false);
 
-  const handleOptionSelect = (option) => {
-    if (isLocked) return;
-    setSelectedOption(option.text);
+  const handleSelect = (opt) => {
+    if (locked) return;
+    setSelected(opt.id);
   };
 
   const handleSubmit = () => {
-    const chosen = options.find(option => option.text === selectedOption);
-    if (chosen && chosen.text === correctOption) {
-      setFeedback(`Õige vastus! ${chosen.text} – ${chosen.explanation}`);
-      setIsLocked(true);
+    const chosen = options.find(o => o.id === selected);
+    if (chosen && chosen.correct) {
+      setFeedback(`Õige! ${chosen.text} – ${chosen.explanation}`);
+      setLocked(true);
     } else {
-      setFeedback(`Vale vastus! Õige vastus on "Strateegiline info".`);
+      const correct = options.find(o => o.correct);
+      setFeedback(`Vale! Õige vastus on "${correct.text}".`);
     }
   };
 
   const handleReset = () => {
-    if (isLocked) return;
-    setSelectedOption("");
-    setFeedback("");
-  };
-
-  const finishGame = () => {
-    navigate('/');
+    if (locked) return;
+    setSelected('');
+    setFeedback('');
   };
 
   return (
-    <div className="incident-communication-drill">
-      <h2>Intsidendi kommunikatsiooni drill</h2>
-      <p>Vali kommunikatsioonistrateegia, mida jagada partneritele intsidendi teavitamiseks:</p>
+    <div className={`risk-prioritization ${locked ? (feedback.startsWith('Õige') ? 'correct-bg' : 'incorrect-bg') : ''}`}>
+      <h1>Intsidendi kommunikatsiooni harjutus</h1>
+      <div className="instructions">
+        <p>Vali kommunikatsioonistrateegia, mida jagada partneritele intsidendi teavitamiseks:</p>
+      </div>
       <ul className="option-list">
-        {options.map(option => (
+        {options.map(o => (
           <li
-            key={option.id}
-            onClick={() => handleOptionSelect(option)}
-            className={selectedOption === option.text ? "selected" : ""}
-            title={option.explanation}
+            key={o.id}
+            className={selected === o.id ? 'selected' : ''}
+            onClick={() => handleSelect(o)}
+            title={o.explanation}
           >
-            <input 
-              type="radio" 
-              name="comm" 
-              value={option.text} 
-              checked={selectedOption === option.text}
-              readOnly
-            />
-            {option.text}
+            <input type="radio" checked={selected === o.id} readOnly />
+            {o.text}
           </li>
         ))}
       </ul>
       <div className="buttons">
-        {!isLocked ? (
+        {!locked ? (
           <>
-            <button onClick={handleSubmit}>Kontrolli valikut</button>
+            <button className="primary" onClick={handleSubmit}>Kontrolli valikut</button>
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
-          <button onClick={finishGame}>Lõpeta mäng</button>
+          <button className="primary" onClick={() => navigate('/')}>Lõpeta mäng</button>
         )}
       </div>
-      {feedback && <div className="feedback">{feedback}</div>}
+      {feedback && (
+        <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>{feedback}</div>
+      )}
     </div>
   );
 }
+
 
 export default Sundmuste_reageerija2;

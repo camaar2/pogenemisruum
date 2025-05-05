@@ -2,82 +2,94 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Turvapoliitika_eestvedaja1.css';
 
+const allLaws = [
+  { id: 1, label: 'GDPR', correct: true },
+  { id: 2, label: 'ISO 27001 standard', correct: false },
+  { id: 3, label: 'NIS2 direktiiv', correct: true },
+  { id: 4, label: 'Põllumajanduse toetuste seadus', correct: false }
+];
+
 function Turvapoliitika_eestvedaja1() {
   const navigate = useNavigate();
-
-  const correctLaws = ['GDPR', 'NIS2 direktiiv'];
-
-  const laws = shuffleArray([
-    'GDPR',
-    'ISO 27001 standard',
-    'NIS2 direktiiv',
-    'Põllumajanduse toetuste seadus'
-  ]);
-
-  const [selectedLaws, setSelectedLaws] = useState([]);
+  const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
+  const [locked, setLocked] = useState(false);
 
-  function shuffleArray(array) {
-    const newArr = [...array];
-    for (let i = newArr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-    }
-    return newArr;
-  }
-
-  const toggleLaw = (law) => {
-    if (isChecked) return;
-    if (selectedLaws.includes(law)) {
-      setSelectedLaws(selectedLaws.filter(t => t !== law));
-    } else {
-      setSelectedLaws([...selectedLaws, law]);
-    }
+  const toggle = (id) => {
+    if (locked) return;
+    setSelected(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
   };
 
-  const checkAnswers = () => {
-    const isCorrect =
-      selectedLaws.length === correctLaws.length &&
-      selectedLaws.every(law => correctLaws.includes(law));
-    if (isCorrect) {
-      setFeedback("Õige! Ülesanne täidetud.");
-    } else {
-      setFeedback("Vale! Õiged vastused on nüüd näidatud.");
-      setSelectedLaws(correctLaws);
+  const handleSubmit = () => {
+    const chosen = allLaws.filter(l => selected.includes(l.id));
+    const correctCount = allLaws.filter(l => l.correct).length;
+    if (chosen.length !== correctCount) {
+      setFeedback(`Palun vali kõik ${correctCount} kehtivat nõuet.`);
+      return;
     }
-    setIsChecked(true);
+    const allCorrect = chosen.every(l => l.correct);
+    if (allCorrect) {
+      setFeedback('Õige! Turvapoliitika nõuded on õigesti tuvastatud.');
+    } else {
+      setFeedback('Mõni valik on vale. Õiged nõuded on nüüd esile tõstetud.');
+    }
+    setLocked(true);
   };
 
-  const goToNextStage = () => {
-    navigate('/turvapoliitika_eestvedaja2');
+  const handleReset = () => {
+    setSelected([]);
+    setFeedback('');
+    setLocked(false);
   };
 
   return (
-    <div className="stage stage1">
-      <h2>Õiguslike nõuete tuvastamine</h2>
-      <p>Vali õiged seadused ja määrused, mis kehtivad küberturbe valdkonnas:</p>
+    <div className={`risk-prioritization ${locked ? (feedback.startsWith('Õige') ? 'correct-bg' : 'incorrect-bg') : ''}`}>
+      <h1>Õiguslike nõuete tuvastamine</h1>
+      <div className="instructions">
+        <p>Vali seadused ja direktiivid, mis kehtivad küberturbe valdkonnas. Kokku on <strong>{allLaws.filter(l => l.correct).length}</strong> nõuet:</p>
+      </div>
       <ul className="law-list">
-        {laws.map(law => (
-          <li 
-            key={law}
-            onClick={() => toggleLaw(law)}
-            className={selectedLaws.includes(law) ? "selected" : ""}
+        {allLaws.map(law => (
+          <li
+            key={law.id}
+            onClick={() => toggle(law.id)}
+            className={
+              locked
+                ? law.correct
+                  ? 'selected correct'
+                  : selected.includes(law.id)
+                  ? 'selected incorrect'
+                  : ''
+                : selected.includes(law.id)
+                ? 'selected'
+                : ''
+            }
           >
-            <input type="checkbox" checked={selectedLaws.includes(law)} readOnly />
-            {law}
+            <input
+              type="checkbox"
+              checked={selected.includes(law.id)}
+              readOnly
+            />
+            {law.label}
           </li>
         ))}
       </ul>
-      {!isChecked && (
-        <button onClick={checkAnswers} className="check-button">Kontrolli</button>
-      )}
-      {feedback && <p className="feedback">{feedback}</p>}
-      {isChecked && (
-        <button onClick={goToNextStage} className="next-button">Edasi</button>
-      )}
+      <div className="buttons">
+        {!locked ? (
+          <>
+            <button className="primary" onClick={handleSubmit}>Kontrolli</button>
+            <button onClick={handleReset}>Alusta uuesti</button>
+          </>
+        ) : (
+          <button className="primary" onClick={() => navigate('/turvapoliitika_eestvedaja2')}>Edasi</button>
+        )}
+      </div>
+      {feedback && <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>{feedback}</div>}
     </div>
   );
 }
+
 
 export default Turvapoliitika_eestvedaja1;
