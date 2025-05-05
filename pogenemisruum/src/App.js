@@ -24,8 +24,8 @@ import KuberturbeRiskijuht from './pages/JavaScript/Kuberturbe_riskijuht';
 
 import Infoturbe_juht1 from './games/JavaScript/Infoturbe_juht1';
 import Infoturbe_juht2 from './games/JavaScript/Infoturbe_juht2';
-import Infoturbe_juht3 from './games/JavaScript/Infoturbe_juht4';
-import Infoturbe_juht4 from './games/JavaScript/Infoturbe_juht3';
+import Infoturbe_juht3 from './games/JavaScript/Infoturbe_juht3';
+import Infoturbe_juht4 from './games/JavaScript/Infoturbe_juht4';
 import Arhitekt1 from './games/JavaScript/Arhitekt1';
 import Arhitekt2 from './games/JavaScript/Arhitekt2';
 import Kuberturbe_ohuanaluutik1 from './games/JavaScript/Kuberturbe_ohuanaluutik1';
@@ -64,6 +64,9 @@ import Digi_toendite_uurija2 from './games/JavaScript/Digi_toendite_uurija2';
 import Digi_toendite_uurija3 from './games/JavaScript/Digi_toendite_uurija3';
 import Digi_toendite_uurija4 from './games/JavaScript/Digi_toendite_uurija4';
 import Rakendaja1 from './games/JavaScript/Rakendaja1';
+import Rakendaja2 from './games/JavaScript/Rakendaja2';
+import Rakendaja3 from './games/JavaScript/Rakendaja3';
+import Rakendaja4 from './games/JavaScript/Rakendaja4';
 import PatchPrioritization from './games/PatchPrioritization';
 import SecurityControlMatching from './games/SecurityControlMatching';
 import Sundmuste_reageerija1 from './games/JavaScript/Sundmuste_reageerija1';
@@ -142,6 +145,9 @@ function App() {
         <Route path="/digi_toendite_uurija3" element={<Digi_toendite_uurija3 />} />
         <Route path="/digi_toendite_uurija4" element={<Digi_toendite_uurija4 />} />
         <Route path="/rakendaja1" element={<Rakendaja1 />} />
+        <Route path="/rakendaja2" element={<Rakendaja2 />} />
+        <Route path="/rakendaja3" element={<Rakendaja3 />} />
+        <Route path="/rakendaja4" element={<Rakendaja4 />} />
         <Route path="/patchprioritization" element={<PatchPrioritization />} />
         <Route path="/securitycontrolmatching" element={<SecurityControlMatching />} />
         <Route path="/sundmuste_reageerija1" element={<Sundmuste_reageerija1 />} />

@@ -2,89 +2,122 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Norkustestija3.css';
 
-function Norkustestija3() {
+export default function Norkustestija3() {
+  const navigate = useNavigate();
+
+  const scenario =
+    "Vali õige näide rünnakust, mis sihtsüsteemis tõenäoliselt töötab, arvestades sisendi valideerimata mittekasutamist. " +
+    "Süsteem lubab sisendi HTMLi, mistõttu script-alarm on võimalik XSS-i demonstreerimiseks.";
+
   const options = [
     { id: 'A', payload: "'; DROP TABLE users;--", description: "SQL Injection" },
-    { id: 'B', payload: "<script>alert('XSS')</script>", description: "XSS" },
+    { id: 'B', payload: "<script>alert('XSS')</script>", description: "XSS (Cross-Site Scripting)" },
     { id: 'C', payload: "../../etc/passwd", description: "Path Traversal" },
     { id: 'D', payload: "", description: "Tühine sisend" }
   ];
 
   const correctId = 'B';
-  const [selectedOption, setSelectedOption] = useState("");
-  const [message, setMessage] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
-  const navigate = useNavigate();
+  const [selected, setSelected] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const handleOptionSelect = (id) => {
-    setSelectedOption(id);
+  const handleSelect = id => {
+    if (checked) return;
+    setSelected(id);
   };
 
   const handleSubmit = () => {
-    if (selectedOption === correctId) {
-      setMessage("Oled edukalt demonstreerinud haavatavuse ärakasutamist!");
-      setIsLocked(true);
+    setChecked(true);
+    if (selected === correctId) {
+      setMessage("🎉 Õige! XSS payload demonstreerib haavatavust edukalt.");
     } else {
-      setMessage("Valik ei anna tulemusi. Proovi uuesti.");
+      setMessage("❌ Vale valik. Proovi uuesti sobiva XSS näitega.");
     }
   };
 
   const handleReset = () => {
-    setSelectedOption("");
-    setMessage("");
+    setSelected('');
+    setChecked(false);
+    setMessage('');
   };
 
-  const handleNext = () => {
-    navigate("/norkustestija4");
-  };
+  const handleNext = () => navigate('/norkustestija4');
+
+  const containerClass =
+    checked && message.startsWith('🎉')
+      ? 'correct-bg'
+      : checked
+      ? 'incorrect-bg'
+      : '';
+  const messageClass = checked
+    ? message.startsWith('🎉')
+      ? 'message-correct'
+      : 'message-incorrect'
+    : '';
 
   return (
-    <div className="exploitation">
-      <h1>Süsteemi “murdmine”</h1>
-      <p>Vali payload, mis antud sihtsüsteemis on edukalt ärakasutatav:</p>
+    <div className={`cyadvice-stage3 ${containerClass}`}>
+      <h1>Ründe ärakasutamise demonstratsioon</h1>
+      <p className="scenario"><em>{scenario}</em></p>
       <table className="options-table">
         <thead>
           <tr>
             <th>Vali</th>
-            <th>Kirjeldus</th>
+            <th>Ründe tüüp</th>
             <th>Payload</th>
           </tr>
         </thead>
         <tbody>
-          {options.map(option => (
-            <tr key={option.id} 
-                className={`option-row ${selectedOption === option.id ? "selected" : ""}`}
-                onClick={() => handleOptionSelect(option.id)}>
-              <td>
-                <input 
-                  type="radio" 
-                  name="exploit" 
-                  value={option.id} 
-                  checked={selectedOption === option.id}
-                  onChange={() => handleOptionSelect(option.id)}
-                  disabled={isLocked}
-                />
-              </td>
-              <td>{option.description}</td>
-              <td>{option.payload || "-"}</td>
-            </tr>
-          ))}
+          {options.map(opt => {
+            const isSelected = selected === opt.id;
+            let rowClass = 'option-row';
+            if (checked) {
+              if (opt.id === correctId) rowClass += isSelected ? ' selected-correct' : 'missed';
+              else if (isSelected) rowClass += ' selected-incorrect';
+            } else if (isSelected) {
+              rowClass += ' selected';
+            }
+            return (
+              <tr
+                key={opt.id}
+                className={rowClass}
+                onClick={() => handleSelect(opt.id)}
+              >
+                <td>
+                  <input
+                    type="radio"
+                    name="exploit"
+                    value={opt.id}
+                    checked={isSelected}
+                    onChange={() => handleSelect(opt.id)}
+                    disabled={checked}
+                  />
+                </td>
+                <td>{opt.description}</td>
+                <td>{opt.payload || '-'}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <div className="buttons">
-        {!isLocked && (
-          <>
-            <button onClick={handleSubmit}>Esita valik</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
-          </>
-        )}
-        {isLocked && (
-          <button onClick={handleNext}>Edasi</button>
+        {!checked ? (
+          <button
+            className="primary"
+            onClick={handleSubmit}
+            disabled={!selected}
+          >
+            Esita valik
+          </button>
+        ) : message.startsWith('🎉') ? (
+          <button className="primary" onClick={handleNext}>
+            Edasi
+          </button>
+        ) : (
+          <button onClick={handleReset}>Proovi uuesti</button>
         )}
       </div>
-      {message && <div className="message">{message}</div>}
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
     </div>
   );
 }
-
-export default Norkustestija3;

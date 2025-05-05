@@ -1,128 +1,159 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  margin: 0;
+  padding: 0;
+}
+
 .malware-game {
   max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 0 auto;
+  margin-top: 0;
+  padding: 1.5rem;
+  background: #f9fcff;
+  border: 1px solid #dde4eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   font-family: Arial, sans-serif;
-  background: #fff0f5;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  transition: background 0.5s;
+}
+
+.malware-game.correct-bg {
+  background: #e6ffea !important;
+}
+
+.malware-game.incorrect-bg {
+  background: #ffe6e6 !important;
+}
+
+.malware-game h1 {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .storyline {
-  margin-top: 10px;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
   color: #333;
-  font-size: 16px;
+}
+
+.instruction {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
 }
 
 .file-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .file-card {
-  border: 2px solid #ccc;
-  padding: 15px;
-  border-radius: 5px;
-  text-align: left;
-  background-color: #fafafa;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  padding: 1rem;
   transition: background-color 0.3s, border-color 0.3s;
 }
 
 .file-card.correct {
-  background-color: #d0f0c0;
-  border-color: #388e3c;
+  background-color: #e6ffea;
+  border-color: #4caf50;
 }
 
 .file-card.incorrect {
-  background-color: #f8d7da;
-  border-color: #d32f2f;
+  background-color: #ffe6e6;
+  border-color: #f44336;
 }
 
 .file-card h3 {
-  margin: 0;
-  font-size: 18px;
+  margin: 0 0 0.5rem;
 }
 
 .location {
-  font-size: 14px;
   font-style: italic;
-  color: #555;
-  margin: 5px 0;
+  margin-bottom: 0.5rem;
 }
 
 .description {
-  font-size: 16px;
-  margin: 10px 0;
+  margin-bottom: 0.75rem;
 }
 
 .options {
   display: flex;
-  gap: 20px;
-  margin-top: 10px;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .options label {
-  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
 }
 
-.hint-button {
-  margin-top: 10px;
-  background: none;
-  border: 1px solid #1565c0;
-  color: #1565c0;
-  padding: 6px 12px;
-  border-radius: 4px;
+.options label.selected {
+  font-weight: bold;
+}
+
+.malware-game .hint-button {
+  padding: 0.5rem 1rem;
+  background: #aa1352 !important;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
   cursor: pointer;
 }
 
 .hint-box {
-  margin-top: 8px;
-  padding: 10px;
-  border: 1px solid #1565c0;
-  background-color: #e3f2fd;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #1565c0;
+  background: #fff8e1;
+  border: 1px solid #ffd54f;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
 }
 
 .buttons {
-  margin-top: 20px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
   cursor: pointer;
-  border: 1px solid #999;
-  background-color: #f0f0f0;
-  border-radius: 4px;
+  margin: 0 0.5rem;
 }
 
-button:hover {
-  background-color: #e0e0e0;
-}
-
-.next-button {
-  background-color: #1565c0;
+button.primary {
+  background: #e4067e;
   color: #fff;
 }
 
+button.primary:disabled {
+  background: #aa1352;
+  cursor: not-allowed;
+}
+
 .message {
-  margin-top: 20px;
-  font-size: 18px;
+  text-align: center;
   font-weight: bold;
+  margin-top: 1rem;
 }
 
-.message.success {
-  color: #2e7d32;
+.message-correct {
+  color: green;
 }
 
-.message.error {
-  color: #d32f2f;
+.message-incorrect {
+  color: red;
 }

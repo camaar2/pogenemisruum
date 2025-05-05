@@ -1,59 +1,72 @@
 .cyadvice-stage1 {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #e0f7fa, #f0f8ff);
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: background 0.5s;
-  }
-  
-  .risk-list {
-    list-style: none;
-    padding: 0;
-    max-width: 400px;
-    margin: 20px auto;
-    text-align: left;
-  }
-  
-  .risk-list li {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    background: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .risk-list li.selected {
-    background-color: #e0e0e0;
-  }
-  
-  .correct-bg {
-    background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
-  }
-  
-  .incorrect-bg {
-    background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
-  }
-  
-  .feedback {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #d32f2f;
-  }
-  
-  .buttons {
-    margin-top: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
+  max-width: 600px;
+  margin: 0rem auto;
+  padding: 1.5rem;
+  background: #f9fcff;
+  border: 1px solid #dde4eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  transition: background 0.5s;
+}
+.cyadvice-stage1 h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.scenario {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.risk-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+.risk-list li {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.risk-list li.selected {
+  background: #fff;
+  border-color: #4caf50;
+}
+.risk-list li:hover {
+  background: #f0f0f0;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+button.primary {
+  background: #e4067e;
+  color: #fff;
+}
+button.primary:disabled {
+  background: #aa1352;
+  cursor: not-allowed;
+}
+.message {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.message-correct { color: green; }
+.message-incorrect { color: red; }
+.correct-bg { background: #e6ffea !important; }
+.incorrect-bg { background: #ffe6e6 !important; }

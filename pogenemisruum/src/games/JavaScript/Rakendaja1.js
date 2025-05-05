@@ -2,87 +2,109 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Rakendaja1.css';
 
-function Rakendaja1() {
+const correctOrder = [
+  "Seadista ruuteri ACL-id",
+  "Paigalda tulemüür",
+  "Paigalda IDS/IPS",
+  "Rakenda VPN-ühendus",
+  "Tugevda lõppseadmed"
+];
+
+export default function Rakendaja1() {
   const navigate = useNavigate();
-  const correctOrder = [
-    "Seadista ruuteri ACL-id",
-    "Paigalda tulemüür",
-    "Paigalda IDS/IPS süsteem",
-    "Rakenda VPN kaugühenduse jaoks",
-    "Tugevda lõppseadmete turvalisust"
-  ];
-
-  const [steps, setSteps] = useState(() => {
-    return [...correctOrder].sort(() => Math.random() - 0.5);
-  });
+  const [steps, setSteps] = useState(() => [...correctOrder].sort(() => Math.random() - 0.5));
+  const [locked, setLocked] = useState(false);
   const [message, setMessage] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
 
-  const handleDragStart = (e, index) => {
-    e.dataTransfer.setData("text/plain", index);
+  const handleDragStart = (e, idx) => {
+    e.dataTransfer.setData("text/plain", idx);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  const handleDragOver = e => e.preventDefault();
 
-  const handleDrop = (e, dropIndex) => {
+  const handleDrop = (e, idx) => {
     e.preventDefault();
-    const dragIndex = Number(e.dataTransfer.getData("text/plain"));
-    if (dragIndex === dropIndex) return;
-    const newSteps = [...steps];
-    const dragged = newSteps.splice(dragIndex, 1)[0];
-    newSteps.splice(dropIndex, 0, dragged);
-    setSteps(newSteps);
+    if (locked) return;
+    const dragIdx = +e.dataTransfer.getData("text/plain");
+    if (dragIdx === idx) return;
+    const a = [...steps];
+    const [moved] = a.splice(dragIdx, 1);
+    a.splice(idx, 0, moved);
+    setSteps(a);
   };
 
   const handleSubmit = () => {
-    if (steps.join() === correctOrder.join()) {
-      setMessage("Õige! Võrgu kaitse on õigesti seadistatud.");
-      setIsLocked(true);
-    } else {
-      setMessage("Järjekord on vale. Palun proovi uuesti.");
-    }
+    setLocked(true);
+    const allCorrect = steps.every((s, i) => s === correctOrder[i]);
+    setMessage(allCorrect
+      ? "🎉 Õige järjestus! Võrgu kaitse valmis."
+      : "❌ Vale järjestus. Proovi uuesti.");
   };
 
   const handleReset = () => {
     setSteps([...correctOrder].sort(() => Math.random() - 0.5));
+    setLocked(false);
     setMessage("");
-    setIsLocked(false);
   };
 
-  const handleEnd = () => {
-    navigate("/");
-  };
+  const handleNext = () => navigate("/rakendaja2");
+
+  const containerClass = locked
+    ? message.startsWith("🎉") ? "correct-bg" : "incorrect-bg"
+    : "";
+
+  const messageClass = locked
+    ? message.startsWith("🎉") ? "message-correct" : "message-incorrect"
+    : "";
 
   return (
-    <div className="network-defense">
+    <div className={`network-defense ${containerClass}`}>
       <h1>Võrgu kaitse seadistamine</h1>
-      <p>Paiguta võrguturbe sammud õigesse järjekorda:</p>
+      <p className="scenario">
+        <em>
+          Turvealane ründevektor nõuab korrektset konfiguratsiooni etapiti: 
+          esmalt piirangud ACL-idega, seejärel tulemüür, IDS/IPS, kaugühendus VPN-iga ja lõppseadmete tugevdamine.
+        </em>
+      </p>
+      <ol className="logic-list">
+        <li><strong>Seadista ruuteri ACL-id</strong>: piiritle, kes ja mis aadressid saavad võrku pääseda.</li>
+        <li><strong>Paigalda tulemüür</strong>: filtreeri sissetulev ja väljaminev liiklus keskeltläbi.</li>
+        <li><strong>Paigalda IDS/IPS</strong>: tuvastab ja blokeerib kahtlast tegevust reaalajas.</li>
+        <li><strong>Rakenda VPN-ühendus</strong>: võimalda turvaline kaugtöötlus krüpteeritud tunneli kaudu.</li>
+        <li><strong>Tugevda lõppseadmed</strong>: uuenda paroolid, lülita sisse viirusetõrje ja luba ainult lubatud teenused.</li>
+      </ol>
+      <p className="instruction">
+        Paiguta <strong>{correctOrder.length}</strong> sammu korrektse loogika järgi.
+      </p>
       <ul className="steps-list">
-        {steps.map((step, index) => (
-          <li key={index}
-              draggable={!isLocked}
-              onDragStart={(e) => handleDragStart(e, index)}
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, index)}>
+        {steps.map((step, idx) => (
+          <li
+            key={idx}
+            draggable={!locked}
+            onDragStart={e => handleDragStart(e, idx)}
+            onDragOver={handleDragOver}
+            onDrop={e => handleDrop(e, idx)}
+            className={locked
+              ? step === correctOrder[idx] ? "correct" : "incorrect"
+              : ""}
+          >
             {step}
           </li>
         ))}
       </ul>
       <div className="buttons">
-        {!isLocked ? (
+        {!locked ? (
           <>
-            <button onClick={handleSubmit}>Kontrolli järjekorda</button>
+            <button className="primary" onClick={handleSubmit}>Kontrolli järjekorda</button>
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
+        ) : message.startsWith("🎉") ? (
+          <button className="primary" onClick={handleNext}>Edasi</button>
         ) : (
-          <button onClick={handleEnd}>Edasi</button>
+          <button onClick={handleReset}>Proovi uuesti</button>
         )}
       </div>
-      {message && <div className="message">{message}</div>}
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
     </div>
   );
 }
-
-export default Rakendaja1;

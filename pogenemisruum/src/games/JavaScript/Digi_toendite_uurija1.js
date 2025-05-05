@@ -12,76 +12,122 @@ export default function Digi_toendite_uurija1() {
     "Analüüs laboris"
   ];
 
-  const [items, setItems] = useState(() =>
-    [...correctOrder].sort(() => Math.random() - 0.5)
+  const [items, setItems] = useState(
+    () => [...correctOrder].sort(() => Math.random() - 0.5)
   );
-  const [message, setMessage] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const handleDragStart = (e, index) => {
-    e.dataTransfer.setData("text/plain", index);
+  const handleDragStart = (e, idx) => {
+    e.dataTransfer.setData('text/plain', idx);
   };
 
-  const handleDragOver = e => {
-    e.preventDefault();
-  };
+  const handleDragOver = e => e.preventDefault();
 
-  const handleDrop = (e, dropIndex) => {
+  const handleDrop = (e, dropIdx) => {
     e.preventDefault();
-    const dragIndex = Number(e.dataTransfer.getData("text/plain"));
-    if (dragIndex === dropIndex) return;
-    const newItems = [...items];
-    const [dragged] = newItems.splice(dragIndex, 1);
-    newItems.splice(dropIndex, 0, dragged);
-    setItems(newItems);
+    if (checked) return;
+    const dragIdx = Number(e.dataTransfer.getData('text/plain'));
+    if (dragIdx === dropIdx) return;
+    const arr = [...items];
+    const [moved] = arr.splice(dragIdx, 1);
+    arr.splice(dropIdx, 0, moved);
+    setItems(arr);
   };
 
   const handleSubmit = () => {
-    if (items.join() === correctOrder.join()) {
-      setMessage("Järelduse ahela järjekord on õige!");
-      setIsLocked(true);
+    setChecked(true);
+    if (items.every((it, i) => it === correctOrder[i])) {
+      setMessage('🎉 Ahela sammud on korrektset järjekorda asetatud. Jätka järgmise etapi juurde.');
     } else {
-      setMessage("Järjestus on vale. Proovi uuesti.");
+      setMessage(
+        '❌ Mõned sammud ei vasta nõutud loogikale. Vaata üle, miks iga samm peab toimuma antud järjekorras, ja proovi uuesti.'
+      );
     }
   };
 
   const handleReset = () => {
     setItems([...correctOrder].sort(() => Math.random() - 0.5));
-    setMessage("");
-    setIsLocked(false);
+    setChecked(false);
+    setMessage('');
   };
 
-  const handleNext = () => {
-    navigate("/digi_toendite_uurija2");
-  };
+  const handleNext = () => navigate('/digi_toendite_uurija2');
+
+  const containerClass =
+    checked && message.startsWith('🎉')
+      ? 'correct-bg'
+      : checked
+      ? 'incorrect-bg'
+      : '';
+  const messageClass = checked
+    ? message.startsWith('🎉')
+      ? 'message-correct'
+      : 'message-incorrect'
+    : '';
 
   return (
-    <div className="evidence-chain">
-      <h1>Tõendite ahela järjekord</h1>
-      <p>Paiguta üksused õige järelduse ahela järjekorda:</p>
+    <div className={`evidence-chain ${containerClass}`}>
+      <h1>Tõendite ahela sammude järjestamine</h1>
+
+      <p className="scenario">
+        Digitaalse forensika protsess eeldab rangeid, dokumenteeritud samme, mis tagavad
+        andmete puutumatus­tõe ja kohtus kasutatavuse. Ahela sammud tuleb asetada
+        õigesse järjekorda:
+      </p>
+      <ol className="logic-list">
+        <li>
+          <strong>Tõendite konfiskeerimine:</strong> eemalda esmalt kasutuselt seadmed,
+          et peatada igasugune täiendav andmete muutmine.
+        </li>
+        <li>
+          <strong>Järelduse ahela vorm täidetud:</strong> dokumenteeri kõik konfiskeerimistoimingud
+          (aeg, koht, isikud), et luua auditi jälg.
+        </li>
+        <li>
+          <strong>Digitaalse salvestusseadme arestimine:</strong> aresti konkreetsed kettad,
+          mälupulgad jms, et vältida sekkumist.
+        </li>
+        <li>
+          <strong>Forenseeriline kujutis tehtud:</strong> loo bititasandiline kloon,
+          et analüüsida koopiat, mitte originaali.
+        </li>
+        <li>
+          <strong>Analüüs laboris:</strong> vii läbi detailne uurimine (failisüsteemid, logid,
+          registrid), tuvastamaks pahatahtlik tegevus.
+        </li>
+      </ol>
+
       <ul className="chain-list">
-        {items.map((item, index) => (
+        {items.map((item, idx) => (
           <li
-            key={index}
-            draggable={!isLocked}
-            onDragStart={e => handleDragStart(e, index)}
+            key={idx}
+            draggable={!checked}
+            onDragStart={e => handleDragStart(e, idx)}
             onDragOver={handleDragOver}
-            onDrop={e => handleDrop(e, index)}
+            onDrop={e => handleDrop(e, idx)}
+            className={!checked ? '' : item === correctOrder[idx] ? 'correct' : 'incorrect'}
           >
             {item}
           </li>
         ))}
       </ul>
+
       <div className="buttons">
-        {!isLocked && (
-          <>
-            <button onClick={handleSubmit}>Kontrolli järjestust</button>
-            <button onClick={handleReset}>Lähtesta</button>
-          </>
+        {!checked ? (
+          <button className="primary" onClick={handleSubmit}>
+            Kontrolli järjekord
+          </button>
+        ) : message.startsWith('🎉') ? (
+          <button className="primary" onClick={handleNext}>
+            Edasi
+          </button>
+        ) : (
+          <button onClick={handleReset}>Proovi uuesti</button>
         )}
-        {isLocked && <button onClick={handleNext}>Edasi</button>}
       </div>
-      {message && <div className="message">{message}</div>}
+
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
     </div>
   );
 }

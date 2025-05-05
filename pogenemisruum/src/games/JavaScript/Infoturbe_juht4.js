@@ -6,158 +6,187 @@ const initialFiles = [
   {
     id: 1,
     fileName: "trojan_payment.exe",
-    location: "C:\Users\Public\Downloads",
-    description: "Failinimi ja asukoht võivad viidata pahatahtlikule programmile, mis võib süsteemiga ootamatuid ühendusi luua.",
-    hint: "Fail asub allalaadimiste kaustas ja selle käivitamisel kontrolli alati allkirja ja tootjat.",
+    location: "C:\\Users\\Public\\Downloads",
+    description:
+      "Failinimi ja asukoht võivad viidata pahatahtlikule programmile, " +
+      "mis võib süsteemiga ootamatuid ühendusi luua.",
+    hint:
+      "Fail asub allalaadimiste kaustas – kontrolli alati allkirja ja tootjat enne käivitamist.",
     isMalware: true,
   },
   {
     id: 2,
     fileName: "svchost.exe",
-    location: "C:\Windows\System32",
-    description: "Programm töötab süsteemikaustas ja nimetuse järgi sarnaneb see tavalisele Windowsi teenusele.",
-    hint: "Windowsi süsteemiprotsessid paiknevad System32 kaustas ja neid ei tasu kergekäeliselt eemaldada.",
+    location: "C:\\Windows\\System32",
+    description:
+      "Programm töötab süsteemikaustas ja nime järgi sarnaneb Windowsi teenusega.",
+    hint:
+      "Windowsi protsessid paiknevad System32 kaustas – neid ei tasu kergekäeliselt eemaldada.",
     isMalware: false,
   },
   {
     id: 3,
     fileName: "miner-tool.sh",
     location: "/usr/local/bin",
-    description: "Shell-skript nimega 'miner' võib viidata ressursikasutusele, eriti kui see käivitub taustal.",
-    hint: "Kontrolli skripti sisu – kas seal on viiteid krüptovaluuta kaevandamisele või muule ebaharilikule.",
+    description:
+      "Shell-skript nimega “miner” võib taustal käivitudes krüptovaluuta kaevandada.",
+    hint:
+      "Vaata skripti sisu – kas seal on viiteid kaevandamisele või muule ebatavalisele?",
     isMalware: true,
   },
   {
     id: 4,
     fileName: "texteditor.exe",
     location: "C:/Program Files/TextEditor/",
-    description: "Tavaline rakendus Program Files kaustas, mille nimi viitab tekstiredaktorile.",
-    hint: "Rakendused paigaldatakse tavapäraselt Program Files kausta autoritatatiivsete allikate poolt.",
+    description:
+      "Tavaline tekstiredaktor Program Files kaustas.",
+    hint:
+      "Legitiimsed rakendused installitakse autoritatiseeritud tootjate poolt.",
     isMalware: false,
   },
 ];
 
-const Infoturbe_juht4 = () => {
+export default function Infoturbe_juht4() {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [selections, setSelections] = useState({});
-  const [fileStatus, setFileStatus] = useState({});
+  const [status, setStatus] = useState({});
   const [showHints, setShowHints] = useState({});
-  const [message, setMessage] = useState({ text: '', type: '' });
-  const [isLocked, setIsLocked] = useState(false);
+  const [locked, setLocked] = useState(false);
+  const [message, setMessage] = useState({ text: "", type: "" });
 
   useEffect(() => {
     setFiles([...initialFiles].sort(() => Math.random() - 0.5));
   }, []);
 
-  const handleChange = (id, value) => {
-    if (!isLocked) {
-      setSelections(prev => ({ ...prev, [id]: value }));
-    }
+  const malwareCount = initialFiles.filter(f => f.isMalware).length;
+  const safeCount = initialFiles.length - malwareCount;
+
+  const handleSelect = (id, val) => {
+    if (locked) return;
+    setSelections(prev => ({ ...prev, [id]: val }));
+  };
+
+  const handleHint = id => {
+    setShowHints(prev => ({ ...prev, [id]: true }));
   };
 
   const handleSubmit = () => {
-    const status = {};
-    let allCorrect = true;
+    if (Object.keys(selections).length < files.length) {
+      setMessage({ 
+        text: `Vali täpselt ${malwareCount} faili “Pahavara” ja ${safeCount} faili “Ohutu”.`, 
+        type: "error" 
+      });
+      return;
+    }
 
-    files.forEach(file => {
-      const correct = file.isMalware ? 'pahavara' : 'ohutu';
-      if (selections[file.id] === correct) {
-        status[file.id] = 'correct';
+    let allCorrect = true;
+    const newStatus = {};
+
+    files.forEach(f => {
+      const correct = f.isMalware ? "pahavara" : "ohutu";
+      if (selections[f.id] === correct) {
+        newStatus[f.id] = "correct";
       } else {
-        status[file.id] = 'incorrect';
+        newStatus[f.id] = "incorrect";
         allCorrect = false;
       }
     });
 
-    setFileStatus(status);
+    setStatus(newStatus);
 
     if (allCorrect) {
-      setMessage({ text: 'Tubli! Kõik ohtlikud failid on täpselt eristatud.', type: 'success' });
-      setIsLocked(true);
+      setMessage({ 
+        text: `🎉 Tubli! Leidsite ${malwareCount} pahatahtlikku ja ${safeCount} ohutut faili.`, 
+        type: "success" 
+      });
+      setLocked(true);
     } else {
-      setMessage({ text: 'Mõni valik jäi ebatäpseks. Kasuta vihjet ja katseta uuesti!', type: 'error' });
+      setMessage({ 
+        text: "❌ Mõned valikud olid valed. Vaadake vihjet ja proovige uuesti.", 
+        type: "error" 
+      });
     }
   };
 
   const handleReset = () => {
     setFiles([...initialFiles].sort(() => Math.random() - 0.5));
     setSelections({});
-    setFileStatus({});
+    setStatus({});
     setShowHints({});
-    setMessage({ text: '', type: '' });
-    setIsLocked(false);
+    setLocked(false);
+    setMessage({ text: "", type: "" });
   };
 
   return (
-    <div className="malware-game">
+    <div className={`malware-game ${locked ? "correct-bg" : message.type === "error" && !locked ? "incorrect-bg" : ""}`}>
       <h1>Pahavara tuvastamine</h1>
       <p className="storyline">
-        Oma analüütiku rollis pead otsustama, milliseid programme on teie süsteemis ohutu käivitada ja millised võivad sisaldavad pahaloomulist koodi.
+        Oled digitaalse forensiku rollis: sinu ülesanne on eristada süsteemis {malwareCount} pahatahtlikku faili.
+      </p>
+      <p className="instruction">
+        Märgi täpselt <strong>{malwareCount}</strong> faili <em>pahavaraks</em> ja ülejäänud <strong>{safeCount}</strong> faili <em>ohutuks</em>.<br/>
+        Vajadusel kasuta iga faili juures nuppu “Vihje”.
       </p>
 
       <div className="file-list">
-        {files.map(file => {
-          const cardClass = `file-card ${fileStatus[file.id] || ''}`;
-          return (
-            <div key={file.id} className={cardClass}>
-              <h3>{file.fileName}</h3>
-              <p className="location">Asukoht: {file.location}</p>
-              <p className="description">{file.description}</p>
+        {files.map(f => (
+          <div key={f.id} className={`file-card ${status[f.id] || ""}`}>
+            <h3>{f.fileName}</h3>
+            <p className="location">Asukoht: {f.location}</p>
+            <p className="description">{f.description}</p>
 
-              <div className="options">
-                <label>
-                  <input
-                    type="radio"
-                    name={`file-${file.id}`}
-                    value="pahavara"
-                    checked={selections[file.id] === 'pahavara'}
-                    onChange={() => handleChange(file.id, 'pahavara')}
-                    disabled={isLocked}
-                  /> Pahavara
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name={`file-${file.id}`}
-                    value="ohutu"
-                    checked={selections[file.id] === 'ohutu'}
-                    onChange={() => handleChange(file.id, 'ohutu')}
-                    disabled={isLocked}
-                  /> Ohutu
-                </label>
-              </div>
-
-              <button
-                className="hint-button"
-                onClick={() => setShowHints(prev => ({ ...prev, [file.id]: true }))}
-              >
-                Vihje
-              </button>
-              {showHints[file.id] && (
-                <div className="hint-box">{file.hint}</div>
-              )}
+            <div className="options">
+              <label className={selections[f.id] === "pahavara" ? "selected" : ""}>
+                <input
+                  type="radio"
+                  name={`file-${f.id}`}
+                  value="pahavara"
+                  checked={selections[f.id] === "pahavara"}
+                  onChange={() => handleSelect(f.id, "pahavara")}
+                  disabled={locked}
+                /> Pahavara
+              </label>
+              <label className={selections[f.id] === "ohutu" ? "selected" : ""}>
+                <input
+                  type="radio"
+                  name={`file-${f.id}`}
+                  value="ohutu"
+                  checked={selections[f.id] === "ohutu"}
+                  onChange={() => handleSelect(f.id, "ohutu")}
+                  disabled={locked}
+                /> Ohutu
+              </label>
             </div>
-          );
-        })}
+
+            <button
+              className="hint-button"
+              onClick={() => handleHint(f.id)}
+              disabled={locked || showHints[f.id]}
+            >
+              Vihje
+            </button>
+            {showHints[f.id] && <div className="hint-box">{f.hint}</div>}
+          </div>
+        ))}
       </div>
 
       <div className="buttons">
-        {!isLocked ? (
+        {!locked ? (
           <>
-            <button onClick={handleSubmit}>Esita hinnangud</button>
+            <button className="primary" onClick={handleSubmit}>Esita hinnangud</button>
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
-          <button className="next-button" onClick={() => navigate('/')}>Lõpeta mäng</button>
+          <button className="primary" onClick={() => navigate("/")}>Lõpeta mäng</button>
         )}
       </div>
 
       {message.text && (
-        <div className={`message ${message.type}`}>{message.text}</div>
+        <div className={`message ${message.type === "success" ? "message-correct" : "message-incorrect"}`}>
+          {message.text}
+        </div>
       )}
     </div>
   );
-};
-
-export default Infoturbe_juht4;
+}

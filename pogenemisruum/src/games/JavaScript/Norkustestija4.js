@@ -2,104 +2,109 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Norkustestija4.css';
 
+// Caesari šifri lahtimurdmise funktsioon
 function caesarDecode(text, shift) {
-  let result = '';
-  for (let i = 0; i < text.length; i++) {
-    let char = text[i];
-    if (char >= 'a' && char <= 'z') {
-      let code = char.charCodeAt(0) - 'a'.charCodeAt(0);
-      code = (code - shift + 26) % 26; 
-      result += String.fromCharCode(code + 'a'.charCodeAt(0));
-    } else if (char >= 'A' && char <= 'Z') {
-      let code = char.charCodeAt(0) - 'A'.charCodeAt(0);
-      code = (code - shift + 26) % 26;
-      result += String.fromCharCode(code + 'A'.charCodeAt(0));
-    } else {
-      result += char;
+  return text.split('').map(char => {
+    if (/[a-z]/.test(char)) {
+      const base = 'a'.charCodeAt(0);
+      return String.fromCharCode(((char.charCodeAt(0) - base - shift + 26) % 26) + base);
     }
-  }
-  return result;
+    if (/[A-Z]/.test(char)) {
+      const base = 'A'.charCodeAt(0);
+      return String.fromCharCode(((char.charCodeAt(0) - base - shift + 26) % 26) + base);
+    }
+    return char;
+  }).join('');
 }
 
 const ENCODED_MESSAGE = "Ymnx nx f hfjxywj gt4~";
+const CORRECT_SHIFT = 5;
 
-function Norkustestija4() {
+export default function Norkustestija4() {
   const navigate = useNavigate();
-  const [shift, setShift] = useState("");
-  const [decoded, setDecoded] = useState("");
-  const [message, setMessage] = useState("");
-  const [isSolved, setIsSolved] = useState(false);
+  const [shift, setShift] = useState('');
+  const [decoded, setDecoded] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const CORRECT_SHIFT = 5;
+  // Ülesande kirjeldus: miks ja kuidas dekodeerida
+  const scenario =
+    "Caesari šifri demomstraatori ülesanne on näidata, kuidas lihtsalt nihkega krüpteerimine töötab. " +
+    "Antud süsteem kasutab lihtsat tähenihkesüsteemi, kus iga täht nihkub ASCII järjekorras. " +
+    "Sisesta nihke väärtus, et taastada originaalne tekst. Õige nihke puhul ilmub puhas sõnum!";
 
   const handleDecode = () => {
     const shiftNum = parseInt(shift, 10);
     if (isNaN(shiftNum)) {
-      setMessage("Sisestatud nihe ei ole arv. Proovi uuesti.");
-      setDecoded("");
+      setMessage('❗ Sisesta palun täisarvuline nihe.');
+      setDecoded('');
       return;
     }
     const result = caesarDecode(ENCODED_MESSAGE, shiftNum);
     setDecoded(result);
+    setChecked(true);
     if (shiftNum === CORRECT_SHIFT) {
-      setMessage("Õige nihe! Oled edukalt dekodeerinud sõnumi.");
-      setIsSolved(true);
+      setMessage('🎉 Õige nihe! Sõnum lahtimurdetud edukalt.');
     } else {
-      setMessage("Pole päris õige... Proovi teist nihet.");
+      setMessage('❌ Pole õige nihke väärtus. Proovi uuesti.');
     }
   };
 
   const handleReset = () => {
-    setShift("");
-    setDecoded("");
-    setMessage("");
-    setIsSolved(false);
+    setShift('');
+    setDecoded('');
+    setMessage('');
+    setChecked(false);
   };
 
-  const handleEnd = () => {
-    navigate("/");
-  };
+  const handleEnd = () => navigate('/');
+
+  const containerClass =
+    checked && message.startsWith('🎉')
+      ? 'correct-bg'
+      : checked
+      ? 'incorrect-bg'
+      : '';
+  const messageClass = checked
+    ? message.startsWith('🎉')
+      ? 'message-correct'
+      : 'message-incorrect'
+    : '';
 
   return (
-    <div className="caesar-puzzle-container">
-      <h1>Caesari šifri pusle</h1>
-      <p>Antud on järgmine šifreeritud tekst:</p>
-      <div className="encoded-message">
-        <p>{ENCODED_MESSAGE}</p>
-      </div>
-      <p>
-        Sisesta arv, mis võiks olla kasutatud nihke väärtus (shift), 
-        et dekodeerida see sõnum:
-      </p>
+    <div className={`caesar-puzzle-container ${containerClass}`}>
+      <h1>Caesari šifri lahtimurdmine</h1>
+      <p className="scenario"><em>{scenario}</em></p>
+      <p>Antud on järgmine krüpteeritud sõnum:</p>
+      <div className="encoded-message"><code>{ENCODED_MESSAGE}</code></div>
+      <p>Sisestage nihke väärtus (täisarv), millega krüpteerimine viidi läbi:</p>
       <div className="input-area">
-        <input 
-          type="number" 
+        <input
+          type="number"
           value={shift}
-          onChange={(e) => setShift(e.target.value)}
-          placeholder="Näiteks 5" 
-          disabled={isSolved}
+          onChange={e => setShift(e.target.value)}
+          placeholder="Näiteks 5"
+          disabled={checked}
         />
-        {!isSolved && (
-          <button onClick={handleDecode}>Dekodeeri</button>
-        )}
-        {isSolved && (
-          <button onClick={handleEnd}>Lõpeta mäng</button>
+        {!checked ? (
+          <button className="primary" onClick={handleDecode} disabled={!shift}>
+            Dekodeeri
+          </button>
+        ) : message.startsWith('🎉') ? (
+          <button className="primary" onClick={handleEnd}>
+            Lõpeta mäng
+          </button>
+        ) : (
+          <button onClick={handleReset}>Proovi uuesti</button>
         )}
       </div>
       {decoded && (
         <div className="decoded-message">
-          <h3>Dekodeeritud tekst:</h3>
-          <p>{decoded}</p>
+          <h3>Lahtimurdetud tekst:</h3>
+          <p><code>{decoded}</code></p>
         </div>
       )}
-      {message && <div className="message">{message}</div>}
-      {!isSolved && (
-        <button className="reset-btn" onClick={handleReset}>
-          Alusta uuesti
-        </button>
-      )}
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
     </div>
   );
 }
-
-export default Norkustestija4;

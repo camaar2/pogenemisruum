@@ -1,61 +1,91 @@
-.recon {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
+.cyadvice-stage1 {
+  max-width: 700px;
+  margin: 0rem auto;
+  padding: 1.5rem;
+  background: #f9fcff;
+  border: 1px solid #dde4eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #eef9ff, #e0f7fa);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: background 0.5s;
 }
-
+.cyadvice-stage1 h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.scenario {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.description {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  text-align: left;
+}
 .sources {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
-
 .source-item {
-  padding: 10px 20px;
-  margin: 5px 0;
+  flex: 1 1 calc(33% - 0.5rem);
+  padding: 0.75rem;
   border: 1px solid #ccc;
-  width: 80%;
+  border-radius: 0.25rem;
+  background: #fff;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: border-color 0.2s, background 0.2s;
 }
-
 .source-item.selected {
-  background-color: #e0e0e0;
+  border-color: #3498db;
 }
-
-.source-item.correct {
-  background-color: #c8e6c9;
-  border-color: #388e3c;
+.source-item.selected-correct {
+  border-color: #4caf50;
 }
-
-.source-item.incorrect {
-  background-color: #ffcdd2;
-  border-color: #d32f2f;
+.source-item.selected-incorrect {
+  border-color: #f44336;
 }
-
 .source-item.missed {
-  background-color: #ffcdd2;
-  border-color: #d32f2f;
+  border-color: #4caf50;
+  background: #e6ffe6;
 }
-
 .buttons {
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
-
 button {
-  margin: 0 10px;
-  padding: 10px 20px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 16px;
 }
-
+button.primary {
+  background: #e4067e;
+  color: #fff;
+}
+button.primary:disabled {
+  background: #aa1352;
+  cursor: not-allowed;
+}
 .message {
-  margin-top: 20px;
+  text-align: center;
   font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
+.message-correct { color: green; }
+.message-incorrect { color: red; }
+.report {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+}
+.correct-bg { background: #e6ffea !important; }
+.incorrect-bg { background: #ffe6e6 !important; }

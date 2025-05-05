@@ -2,15 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Norkustestija1.css';
 
-function shuffleArray(array) {
-  const newArr = [...array];
-  for (let i = newArr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-  }
-  return newArr;
-}
-
 const allSources = [
   { id: 1, title: "Avalik serverite info", isRelevant: true },
   { id: 2, title: "WHOIS info", isRelevant: true },
@@ -23,92 +14,107 @@ const allSources = [
   { id: 9, title: "Tehniline audit", isRelevant: true }
 ];
 
-function Norkustestija1() {
+function shuffleArray(array) {
+  const newArr = [...array];
+  for (let i = newArr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+  }
+  return newArr;
+}
+
+export default function Norkustestija1() {
   const navigate = useNavigate();
   const [sources, setSources] = useState(() => shuffleArray(allSources).slice(0, 6));
   const [selected, setSelected] = useState([]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLocked, setIsLocked] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [locked, setLocked] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleItemClick = (id) => {
-    if (isSubmitted) return;
-    if (selected.includes(id)) {
-      setSelected(selected.filter(item => item !== id));
-    } else {
-      setSelected([...selected, id]);
-    }
+  const scenario = "Sihtsüsteemi kaardistamine eeltööks, et hankida avalikke andmeid turvanõrkuste analüüsiks.";
+  const correctCount = sources.filter(s => s.isRelevant).length;
+
+  const toggleItem = id => {
+    if (checked) return;
+    setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
   };
 
-  const handleSubmit = () => {
-    setIsSubmitted(true);
-    const correctIds = sources.filter(s => s.isRelevant).map(s => s.id).sort((a, b) => a - b);
-    const userIds = [...selected].sort((a, b) => a - b);
+  const handleCheck = () => {
+    setChecked(true);
+    const correctIds = sources.filter(s => s.isRelevant).map(s => s.id).sort();
+    const userIds = [...selected].sort();
     if (JSON.stringify(correctIds) === JSON.stringify(userIds)) {
-      setMessage("Kogusid kõik olulised andmed! Liigu järgmisse etappi.");
-      setIsLocked(true);
+      setMessage("Kogusid kõik olulised allikad! Liigu järgmisse etappi.");
+      setLocked(true);
     } else {
-      setMessage("Mõned olulised andmed puudu või lisatud müra. Proovi uuesti.");
+      setMessage(
+        `Õigeid allikaid: ${selected.filter(id => correctIds.includes(id)).length}, ` +
+        `valesid valikuid: ${selected.filter(id => !correctIds.includes(id)).length}. Proovi uuesti.`
+      );
     }
   };
 
   const handleReset = () => {
+    setSources(shuffleArray(allSources).slice(0,6));
     setSelected([]);
-    setIsSubmitted(false);
-    setIsLocked(false);
+    setChecked(false);
+    setLocked(false);
     setMessage("");
-    setSources(shuffleArray(allSources).slice(0, 6));
   };
 
-  const handleNext = () => {
-    navigate("/norkustestija2");
-  };
+  const handleNext = () => navigate('/norkustestija2');
+
+  const containerClass = checked
+    ? message.startsWith('Kogusid') ? 'correct-bg' : 'incorrect-bg'
+    : '';
+  const messageClass = checked
+    ? message.startsWith('Kogusid') ? 'message-correct' : 'message-incorrect'
+    : '';
 
   return (
-    <div className="recon">
+    <div className={`cyadvice-stage1 ${containerClass}`}>
       <h1>Sihikeskkonna kaardistamine</h1>
-      <p>Klõpsa allolevatel allikatel, et koguda kasulikku infot sihtsüsteemi kohta:</p>
+      <p className="scenario"><em>{scenario}</em></p>
+      <p className="description">
+        Siin on {sources.length} avalikku allikat, millest {correctCount} aitavad 
+        täpsete turvaandmete kogumisel (nt WHOIS, subdomeenid, avalikud auditid). 
+        Vali need {correctCount} allikat, mis annavad usaldusväärse aluse haavatavuste analüüsiks.
+      </p>
       <div className="sources">
         {sources.map(source => {
-          let itemClass = "source-item";
-          if (isSubmitted) {
+          let cls = 'source-item';
+          if (checked) {
             if (source.isRelevant) {
-              itemClass += selected.includes(source.id) ? " correct" : " missed";
-            } else {
-              if (selected.includes(source.id)) {
-                itemClass += " incorrect";
-              }
+              cls += selected.includes(source.id) ? ' selected-correct' : ' missed';
+            } else if (selected.includes(source.id)) {
+              cls += ' selected-incorrect';
             }
-          } else {
-            if (selected.includes(source.id)) {
-              itemClass += " selected";
-            }
+          } else if (selected.includes(source.id)) {
+            cls += ' selected';
           }
           return (
-            <div 
-              key={source.id} 
-              className={itemClass}
-              onClick={() => handleItemClick(source.id)}
-            >
+            <div key={source.id} className={cls} onClick={() => toggleItem(source.id)}>
               {source.title}
             </div>
           );
         })}
       </div>
       <div className="buttons">
-        {!isSubmitted && (
-          <>
-            <button onClick={handleSubmit}>Kontrolli valikuid</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
-          </>
-        )}
-        {isSubmitted && isLocked && (
-          <button onClick={handleNext}>Edasi</button>
+        {!checked ? (
+          <button className="primary" onClick={handleCheck} disabled={selected.length===0}>
+            Kontrolli valikuid
+          </button>
+        ) : locked ? (
+          <button className="primary" onClick={handleNext}>
+            Edasi
+          </button>
+        ) : (
+          <button onClick={handleReset}>
+            Proovi uuesti
+          </button>
         )}
       </div>
-      {message && <div className="message">{message}</div>}
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
     </div>
   );
 }
-
-export default Norkustestija1;

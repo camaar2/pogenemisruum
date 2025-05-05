@@ -1,45 +1,102 @@
 .evidence-chain {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: linear-gradient(135deg, #f0f8ff, #e0f7fa);
-    border-radius: 10px;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .chain-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px auto;
-    max-width: 600px;
-  }
-  
-  .chain-list li {
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    cursor: move;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .buttons {
-    margin-top: 20px;
-  }
-  
-  button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .message {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
+  max-width: 700px;
+  margin: 0rem auto;
+  padding: 1.5rem;
+  background: #f9fcff;
+  border: 1px solid #dde4eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  transition: background 0.5s;
+}
+
+.evidence-chain.correct-bg {
+  background: #e6ffea !important;
+}
+
+.evidence-chain.incorrect-bg {
+  background: #ffe6e6 !important;
+}
+
+.evidence-chain h1 {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.scenario {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.logic-list {
+  margin: 0 0 1.5rem 1.25rem;
+  padding: 0;
+}
+
+.logic-list li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.chain-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.chain-list li {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+  cursor: grab;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.chain-list li.correct {
+  border-color: #4caf50;
+}
+
+.chain-list li.incorrect {
+  border-color: #f44336;
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #e4067e;
+  color: #fff;
+}
+button.primary:disabled {
+  background: #aa1352;
+  cursor: not-allowed;
+}
+
+.message {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.message-correct {
+  color: green;
+}
+
+.message-incorrect {
+  color: red;
+}

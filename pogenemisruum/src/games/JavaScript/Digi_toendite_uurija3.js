@@ -3,105 +3,113 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Digi_toendite_uurija3.css';
 
 const pairs = [
-  { pairId: 1, artifact: "JPEG fail", description: "Sisaldab EXIF-metainfot; tihendab pildidata" },
-  { pairId: 2, artifact: "PDF dokument", description: "Võib sisaldada peidetud teksti ja metainfot" },
-  { pairId: 3, artifact: "Logifail", description: "Salvestab süsteemisündmusi ja ajatempleid" },
-  { pairId: 4, artifact: "Meilifail", description: "Sisaldab päiseid ja manuseid" }
+  { pairId: 1, artifact: "JPEG fail", description: "Sisaldab EXIF-metainfot ja tihendab pildidata" },
+  { pairId: 2, artifact: "PDF dokument", description: "Võib peita teksti, manuseid ja metainfot" },
+  { pairId: 3, artifact: "Logifail", description: "Salvestab süsteemi sündmusi ja ajatempleid" },
+  { pairId: 4, artifact: "Meilifail", description: "Sisaldab päiseid, manuseid ja korrespondentsi" }
 ];
 
 export default function Digi_toendite_uurija3() {
   const navigate = useNavigate();
-
-  const [artifacts, setArtifacts] = useState(() =>
-    pairs.map(p => ({ pairId: p.pairId, artifact: p.artifact })).sort(() => Math.random() - 0.5)
+  const [artifacts, setArtifacts] = useState(
+    () => pairs.map(p => ({ pairId: p.pairId, artifact: p.artifact })).sort(() => Math.random() - 0.5)
   );
-  const [slots, setSlots] = useState(() => {
-    const s = {};
-    pairs.forEach(p => { s[p.pairId] = null; });
-    return s;
-  });
-  const [message, setMessage] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
+  const [slots, setSlots] = useState(
+    () => pairs.reduce((acc, p) => ({ ...acc, [p.pairId]: null }), {})
+  );
+  const [checked, setChecked] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const handleDragStart = (e, pairId) => {
-    e.dataTransfer.setData("pairId", pairId);
+  // Ülesande detailne kirjeldus nähtavale mängus
+  const scenario =
+    "Digitaalse uurimise protsessis leidub erinevaid andmekandjaid ja faile. " +
+    "Iga artifakt võib pakkuda erinevat tüüpi tõendeid (meta, tegevuslogid, manused jne). " +
+    "Sinu ülesanne on siduda iga fail õigete omaduste või metainfoga, et selgitada, " +
+    "kus ja kuidas võib avastada olulist teavet.";
+
+  const handleDragStart = (e, id) => {
+    e.dataTransfer.setData('pairId', id);
   };
+  const handleDragOver = e => e.preventDefault();
 
-  const handleDragOver = e => {
+  const handleDrop = (e, slotId) => {
     e.preventDefault();
+    if (checked) return;
+    const pairId = Number(e.dataTransfer.getData('pairId'));
+    setSlots(prev => ({ ...prev, [slotId]: pairId }));
+    setArtifacts(prev => prev.filter(a => a.pairId !== pairId));
   };
 
-  const handleDropOnSlot = (e, slotId) => {
-    e.preventDefault();
-    const artifactPairId = parseInt(e.dataTransfer.getData("pairId"), 10);
-    setSlots(prev => ({ ...prev, [slotId]: artifactPairId }));
-    setArtifacts(prev => prev.filter(item => item.pairId !== artifactPairId));
-  };
-
-  const handleSubmit = () => {
-    let allCorrect = true;
-    pairs.forEach(p => {
-      if (slots[p.pairId] !== p.pairId) allCorrect = false;
-    });
-    if (allCorrect) {
-      setMessage("Kõik sobitused on õiged!");
-      setIsLocked(true);
+  const handleCheck = () => {
+    setChecked(true);
+    const correctCount = pairs.filter(p => slots[p.pairId] === p.pairId).length;
+    if (correctCount === pairs.length) {
+      setMessage('🎉 Kõik sobitused õiged! Jätka järgmise etapi juurde.');
     } else {
-      setMessage("Mõned sobitused on valed. Proovi uuesti.");
+      setMessage(`❌ Õigesti: ${correctCount}/${pairs.length}. Mõned sobitused valed või puuduvad. Proovi uuesti.`);
     }
   };
 
   const handleReset = () => {
     setArtifacts(pairs.map(p => ({ pairId: p.pairId, artifact: p.artifact })).sort(() => Math.random() - 0.5));
-    const resetSlots = {};
-    pairs.forEach(p => { resetSlots[p.pairId] = null; });
-    setSlots(resetSlots);
-    setMessage("");
-    setIsLocked(false);
+    setSlots(pairs.reduce((acc, p) => ({ ...acc, [p.pairId]: null }), {}));
+    setChecked(false);
+    setMessage('');
   };
 
-  const handleNext = () => {
-    navigate("/digi_toendite_uurija4");
-  };
+  const handleNext = () => navigate('/digi_toendite_uurija4');
+
+  const containerClass =
+    checked && message.startsWith('🎉')
+      ? 'correct-bg'
+      : checked
+      ? 'incorrect-bg'
+      : '';
+  const messageClass = checked && message.startsWith('🎉') ? 'message-correct' : 'message-incorrect';
 
   return (
-    <div className="artifact-matching">
+    <div className={`artifact-matching ${containerClass}`}>
       <h1>Digitaalse tõendi sobitamine</h1>
-      <p>Lohista tõendite nimed õige kirjelduse juurde:</p>
+      <p className="scenario"><em>{scenario}</em></p>
+      <p className="instruction">
+        Sobita <strong>{pairs.length}</strong> faili oma kirjeldustega loogiliselt kokku.
+      </p>
+
       <div className="matching-container">
-        <div className="artifact-pool">
-          <h2>Tõendid</h2>
-          {artifacts.map(item => (
+        <div className="artifact-pool" onDragOver={handleDragOver}>
+          <h2>Failid</h2>
+          {artifacts.map(a => (
             <div
-              key={item.pairId}
+              key={a.pairId}
               className="artifact-item"
-              draggable={!isLocked}
-              onDragStart={e => handleDragStart(e, item.pairId)}
+              draggable={!checked}
+              onDragStart={e => handleDragStart(e, a.pairId)}
             >
-              {item.artifact}
+              {a.artifact}
             </div>
           ))}
         </div>
+
         <div className="description-slots">
           <h2>Kirjeldused</h2>
           {pairs.map(p => {
-            const slotClass =
-              "description-slot" +
-              (isLocked
-                ? slots[p.pairId] === p.pairId
-                  ? " correct"
-                  : " incorrect"
-                : "");
+            const assigned = slots[p.pairId];
+            let slotClass = 'description-slot';
+            if (checked) {
+              slotClass += assigned === p.pairId ? ' correct' : ' incorrect';
+            }
             return (
               <div
                 key={p.pairId}
                 className={slotClass}
                 onDragOver={handleDragOver}
-                onDrop={e => handleDropOnSlot(e, p.pairId)}
+                onDrop={e => handleDrop(e, p.pairId)}
               >
                 <p className="description-text">{p.description}</p>
-                {slots[p.pairId] ? (
-                  <div className="matched-artifact">{p.artifact}</div>
+                {assigned ? (
+                  <div className="matched-artifact">
+                    {pairs.find(x => x.pairId === assigned).artifact}
+                  </div>
                 ) : (
                   <div className="placeholder">Lohista siia</div>
                 )}
@@ -110,16 +118,27 @@ export default function Digi_toendite_uurija3() {
           })}
         </div>
       </div>
+
       <div className="buttons">
-        {!isLocked && (
+        {!checked ? (
           <>
-            <button onClick={handleSubmit}>Kontrolli sobitusi</button>
-            <button onClick={handleReset}>Lähtesta</button>
+            <button className="primary" onClick={handleCheck}>
+              Kontrolli sobitusi
+            </button>
+            <button onClick={handleReset}>Alusta uuesti</button>
           </>
+        ) : message.startsWith('🎉') ? (
+          <button className="primary" onClick={handleNext}>
+            Edasi
+          </button>
+        ) : (
+          <button className="primary" onClick={handleReset}>
+            Proovi uuesti
+          </button>
         )}
-        {isLocked && <button onClick={handleNext}>Edasi</button>}
       </div>
-      {message && <div className="message">{message}</div>}
+
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
     </div>
   );
 }

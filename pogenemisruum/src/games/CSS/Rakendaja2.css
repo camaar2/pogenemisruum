@@ -1,76 +1,107 @@
-.rakendaja-stage2 {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 20px;
-    background: linear-gradient(135deg, #f0f9ff, #d0f0ff);
-    border-radius: 12px;
-    font-family: 'Arial', sans-serif;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    transition: background 0.4s;
-  }
-  
-  .rakendaja-stage2 h1 {
-    color: #0d47a1;
-    margin-bottom: 10px;
-  }
-  
-  .rakendaja-stage2 p {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 25px;
-  }
-  
-  .threats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-    margin-bottom: 25px;
-  }
-  
-  .threat-card {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-  }
-  
-  .threat-card:hover {
-    background-color: #e3f2fd;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .threat-card.selected {
-    background-color: #c8e6c9;
-    border-color: #66bb6a;
-  }
-  
-  .buttons {
-    margin-top: 20px;
-  }
-  
-  button {
-    background-color: #1976d2;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #1565c0;
-  }
-  
-  .message {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #d32f2f;
-  }
-  
+.stage {
+  max-width: 700px;
+  margin: 0rem auto;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  transition: background 0.5s;
+}
+
+.stage.correct-bg {
+  background: #e6ffea !important;
+}
+
+.stage.incorrect-bg {
+  background: #ffe6e6 !important;
+}
+
+.stage h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.scenario {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.instruction {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.rule-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.rule-list li {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.rule-list li.selected {
+  border-color: #3498db;
+}
+
+.rule-list li.correct {
+  border-color: #4caf50;
+}
+
+.rule-list li.incorrect {
+  border-color: #f44336;
+}
+
+.rule-list li.missed {
+  border-color: #ffc107;
+  border-style: dashed;
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #e4067e;
+  color: #fff;
+}
+
+button.primary:disabled {
+  background: #aa1352;
+  cursor: not-allowed;
+}
+
+.message {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.message-correct {
+  color: green;
+}
+
+.message-incorrect {
+  color: red;
+}

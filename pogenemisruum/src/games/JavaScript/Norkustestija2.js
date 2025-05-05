@@ -10,140 +10,139 @@ const tools = [
 ];
 
 const targets = [
-  { id: "network", label: "Network" },
-  { id: "web", label: "Web Server" },
-  { id: "database", label: "Database Server" },
-  { id: "mail", label: "Mail Server" }
+  { id: "network", label: "Võrguskaneerimine" },
+  { id: "web", label: "Veebiserver" },
+  { id: "database", label: "Andmebaasiserver" },
+  { id: "mail", label: "Meilisüsteem" }
 ];
 
-function shuffleArray(array) {
-  const newArr = [...array];
-  for (let i = newArr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-  }
-  return newArr;
-}
-
-function Norkustestija2() {
+export default function Norkustestija2() {
   const navigate = useNavigate();
   const [placements, setPlacements] = useState({});
   const [pool, setPool] = useState([...tools]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [locked, setLocked] = useState(false);
   const [feedback, setFeedback] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
+
+  const scenario =
+    "Sihtsüsteemide kaardistamisel on oluline kasutada õigeid skannimis- ja testimistööriistu, " +
+    "et tuvastada võimalikud haavatavused igal tasandil. " +
+    "Lohista iga tööriist vastavale sihtsüsteemile, mis sobib antud tööriista põhifunktsiooni jaoks. " +
+    "Eesmärk on asetada kõik neli tööriista õigetesse kohtadesse, et tagada täielik ülevaade. ";
 
   const handleDragStart = (e, toolId) => {
     e.dataTransfer.setData("toolId", toolId);
   };
+  const handleDragOver = e => e.preventDefault();
 
-  const handleDragOver = (e) => {
+  const handleDrop = (e, targetId) => {
     e.preventDefault();
+    if (locked) return;
+    const id = parseInt(e.dataTransfer.getData("toolId"), 10);
+    setPlacements(prev => ({ ...prev, [id]: targetId }));
+    setPool(prev => prev.filter(t => t.id !== id));
   };
 
-  const handleDropOnTarget = (e, targetId) => {
-    e.preventDefault();
-    const toolIdStr = e.dataTransfer.getData("toolId");
-    if (!toolIdStr) return;
-    const toolId = parseInt(toolIdStr);
-    setPlacements(prev => ({ ...prev, [toolId]: targetId }));
-    setPool(prev => prev.filter(tool => tool.id !== toolId));
+  const handleCheck = () => {
+    setChecked(true);
+    const allCorrect = tools.every(t => placements[t.id] === t.correctTarget);
+    if (allCorrect && Object.keys(placements).length === tools.length) {
+      setFeedback("🎉 Kõik tööriistad asetatud õigesti! Võid jätkata järgmise etapi juurde.");
+      setLocked(true);
+    } else {
+      const correctCount = tools.filter(t => placements[t.id] === t.correctTarget).length;
+      setFeedback(
+        `❌ ${correctCount}/${tools.length} tööriista asetatud õigesse kohta. ` +
+        `Paranda valesid asetusi ja proovi uuesti.`
+      );
+    }
   };
 
   const handleReset = () => {
     setPlacements({});
     setPool([...tools]);
-    setIsSubmitted(false);
+    setChecked(false);
+    setLocked(false);
     setFeedback("");
-    setIsLocked(false);
   };
 
-  const handleSubmit = () => {
-    setIsSubmitted(true);
-    let allCorrect = true;
-    tools.forEach(tool => {
-      if (placements[tool.id] !== tool.correctTarget) {
-        allCorrect = false;
-      }
-    });
-    if (allCorrect && Object.keys(placements).length === tools.length) {
-      setFeedback("Kõik tööriistad asetatud õigesti! Kriitilised leiud tuvastatud.");
-      setIsLocked(true);
-    } else {
-      setFeedback("Mõni tööriist on asetatud valesti. Proovi uuesti.");
-    }
-  };
+  const handleNext = () => navigate('/norkustestija3');
 
-  const handleNext = () => {
-    navigate("/norkustestija3");
-  };
+  const containerClass =
+    checked && feedback.startsWith('🎉')
+      ? 'correct-bg'
+      : checked
+      ? 'incorrect-bg'
+      : '';
+  const feedbackClass = checked
+    ? feedback.startsWith('🎉')
+      ? 'message-correct'
+      : 'message-incorrect'
+    : '';
 
   return (
-    <div className="scanning-game">
-      <h1>Tööriistade paigutamine</h1>
-      <p>Lohista õigeid skanneri tööriistu vastavatele sihtsüsteemidele.</p>
+    <div className={`cyadvice-stage2 ${containerClass}`}>
+      <h1>Tööriistade sobitamine sihtsüsteemidega</h1>
+      <p className="scenario"><em>{scenario}</em></p>
       <div className="game-container">
         <div className="pool">
-          <h2>Tööriistad</h2>
-          <div className="tool-cards">
-            {pool.map(tool => (
-              <div 
-                key={tool.id} 
-                className="tool-card" 
-                draggable={!isLocked}
-                onDragStart={(e) => handleDragStart(e, tool.id)}
-              >
-                {tool.name}
-              </div>
-            ))}
-          </div>
+          <h2>Tööriistade komplekt</h2>
+          {pool.map(tool => (
+            <div
+              key={tool.id}
+              className="tool-card"
+              draggable={!locked}
+              onDragStart={e => handleDragStart(e, tool.id)}
+            >
+              {tool.name}
+            </div>
+          ))}
         </div>
         <div className="targets">
           <h2>Sihtsüsteemid</h2>
-          <div className="target-zones">
-            {targets.map(target => {
-              const placedTool = tools.find(tool => placements[tool.id] === target.id);
-              let zoneClass = "target-zone";
-              if (isSubmitted) {
-                if (placedTool) {
-                  zoneClass += placedTool.correctTarget === target.id ? " correct" : " incorrect";
-                } else {
-                  zoneClass += " empty";
-                }
-              }
-              return (
-                <div 
-                  key={target.id} 
-                  className={zoneClass}
-                  onDragOver={handleDragOver}
-                  onDrop={(e) => handleDropOnTarget(e, target.id)}
-                >
-                  <h3>{target.label}</h3>
-                  {placedTool ? (
-                    <div className="placed-tool">{placedTool.name}</div>
-                  ) : (
-                    <div className="placeholder">Lohista siia</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          {targets.map(t => {
+            const tool = tools.find(tl => placements[tl.id] === t.id);
+            let cls = 'target-zone';
+            if (checked) {
+              if (tool) cls += tool.correctTarget === t.id ? ' correct' : ' incorrect';
+              else cls += ' empty';
+            }
+            return (
+              <div
+                key={t.id}
+                className={cls}
+                onDragOver={handleDragOver}
+                onDrop={e => handleDrop(e, t.id)}
+              >
+                <h3>{t.label}</h3>
+                {tool ? (
+                  <div className="placed-tool">{tool.name}</div>
+                ) : (
+                  <div className="placeholder">Lohista tööriist siia</div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
       <div className="buttons">
-        {!isSubmitted && (
-          <>
-            <button onClick={handleSubmit}>Kontrolli paigutust</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
-          </>
-        )}
-        {isSubmitted && isLocked && (
-          <button onClick={handleNext}>Edasi</button>
+        {!checked ? (
+          <button
+            className="primary"
+            onClick={handleCheck}
+            disabled={Object.keys(placements).length !== tools.length}
+          >
+            Kontrolli paigutust
+          </button>
+        ) : locked ? (
+          <button className="primary" onClick={handleNext}>
+            Edasi
+          </button>
+        ) : (
+          <button onClick={handleReset}>Proovi uuesti</button>
         )}
       </div>
-      {feedback && <div className="feedback">{feedback}</div>}
+      {feedback && <div className={`feedback ${feedbackClass}`}>{feedback}</div>}
     </div>
   );
 }
-
-export default Norkustestija2;

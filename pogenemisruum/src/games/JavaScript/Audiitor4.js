@@ -9,7 +9,6 @@ const allRecommendations = [
   "Andmete varundamine",
   "Turvahäirete logi analüüs"
 ];
-
 const correctRecommendations = [
   "Kvartaalne sissetungitest",
   "Pidev logimonitooring"
@@ -26,77 +25,101 @@ function shuffleArray(array) {
 
 function generateRecommendationOptions() {
   const distractors = allRecommendations.filter(rec => !correctRecommendations.includes(rec));
-  const subsetSize = Math.min(allRecommendations.length, Math.floor(Math.random() * 2) + 3);
-  const shuffledDistractors = shuffleArray(distractors);
+  const subsetSize = Math.floor(Math.random() * 2) + 3; // 3-4 options
+  const needed = subsetSize - correctRecommendations.length;
   return shuffleArray([
     ...correctRecommendations,
-    ...shuffledDistractors.slice(0, subsetSize - correctRecommendations.length)
+    ...shuffleArray(distractors).slice(0, needed)
   ]);
 }
 
 export default function Audiitor4() {
   const navigate = useNavigate();
-  const [recommendationOptions, setRecommendationOptions] = useState(generateRecommendationOptions());
-  const [selectedRecommendations, setSelectedRecommendations] = useState([]);
+  const [options, setOptions] = useState(generateRecommendationOptions());
+  const [selected, setSelected] = useState([]);
   const [checked, setChecked] = useState(false);
-  const [result, setResult] = useState({ correct: 0, wrong: 0 });
+  const [feedback, setFeedback] = useState("");
+  const [report, setReport] = useState("");
+
+  const scenario = "Pärast juurutust tuleb pidevalt jälgida turvasündmusi ja hinnata süsteemi töötõhusust.";
 
   const toggleRecommendation = rec => {
     if (checked) return;
-    setSelectedRecommendations(prev =>
+    setSelected(prev =>
       prev.includes(rec) ? prev.filter(r => r !== rec) : [...prev, rec]
     );
   };
 
   const handleCheck = () => {
-    const correctCount = selectedRecommendations.filter(r => correctRecommendations.includes(r)).length;
-    const wrongCount = selectedRecommendations.filter(r => !correctRecommendations.includes(r)).length;
-    setResult({ correct: correctCount, wrong: wrongCount });
+    const correctCount = selected.filter(r => correctRecommendations.includes(r)).length;
+    const wrongCount = selected.filter(r => !correctRecommendations.includes(r)).length;
     setChecked(true);
+    if (correctCount === correctRecommendations.length && wrongCount === 0) {
+      setFeedback("Õige! Kõik soovitatud järelmeetmed valitud.");
+      setReport(`Audit kokkuvõte: ${scenario} Valitud järelmeetmed: ${selected.join(', ')}.`);
+    } else {
+      setFeedback(`Õigeid valikuid: ${correctCount}, vigu: ${wrongCount}. Proovi uuesti.`);
+    }
   };
 
   const handleReset = () => {
-    setRecommendationOptions(generateRecommendationOptions());
-    setSelectedRecommendations([]);
-    setResult({ correct: 0, wrong: 0 });
+    setOptions(generateRecommendationOptions());
+    setSelected([]);
     setChecked(false);
+    setFeedback("");
+    setReport("");
   };
 
+  const containerClass = checked
+    ? feedback.startsWith('Õige') ? 'correct-bg' : 'incorrect-bg'
+    : '';
+  const messageClass = checked
+    ? feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'
+    : '';
+
   return (
-    <div className="cyadvice-stage4">
-      <h2>Lõplik audit ja järelevalve</h2>
-      <p>Vali järelmeetmed:</p>
+    <div className={`cyadvice-stage4 ${containerClass}`}>
+      <h2>Järelevalve ja audit</h2>
+      <p className="instructions"><em>{scenario}</em></p>
+      <p className="description">
+        Valitud järelmeetmed aitavad tuvastada ja reageerida turvaohtudele regulaarse monitooringu kaudu.
+        Vali <strong>{correctRecommendations.length}</strong> peamist meetet, mis tagavad infoajastuse ja rünnakute varajase avastamise.
+      </p>
       <ul className="recommendation-list">
-        {recommendationOptions.map(rec => (
+        {options.map(rec => (
           <li
             key={rec}
             onClick={() => toggleRecommendation(rec)}
-            className={selectedRecommendations.includes(rec) ? "selected" : ""}
+            className={
+              selected.includes(rec)
+                ? checked
+                  ? correctRecommendations.includes(rec)
+                    ? 'selected-correct'
+                    : 'selected-incorrect'
+                  : 'selected'
+                : ''
+            }
           >
-            <input
-              type="checkbox"
-              checked={selectedRecommendations.includes(rec)}
-              readOnly
-            /> {rec}
+            <input type="checkbox" checked={selected.includes(rec)} readOnly /> {rec}
           </li>
         ))}
       </ul>
-      {!checked ? (
-        <button onClick={handleCheck} disabled={selectedRecommendations.length === 0}>
-          Kontrolli vastused
-        </button>
-      ) : (
-        <div className="result">
-          <p>Õigeid valikuid: {result.correct}</p>
-          <p>Väärasid valikuid: {result.wrong}</p>
-        </div>
-      )}
       <div className="buttons">
-        <button onClick={handleReset}>Alusta uuesti</button>
-        {checked && result.correct === correctRecommendations.length && result.wrong === 0 && (
-          <button onClick={() => navigate('/')}>Lõpeta mäng</button>
+        {!checked ? (
+          <button className="primary" onClick={handleCheck} disabled={selected.length === 0}>
+            Kontrolli vastused
+          </button>
+        ) : (
+          <button className="primary" onClick={handleReset}>
+            Alusta uuesti
+          </button>
+        )}
+        {checked && feedback.startsWith('Õige') && (
+          <button onClick={() => navigate('/')}>Lõpeta mänguseeria</button>
         )}
       </div>
+      {feedback && <div className={`feedback ${messageClass}`}>{feedback}</div>}
+      {report && <div className="report">{report}</div>}
     </div>
   );
 }

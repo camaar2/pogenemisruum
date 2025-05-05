@@ -37,8 +37,8 @@ export default function Audiitor1() {
   const [riskOptions] = useState(generateRiskOptions());
   const [selectedRisks, setSelectedRisks] = useState([]);
   const [checked, setChecked] = useState(false);
-  const [result, setResult] = useState({ correct: 0, wrong: 0 });
-
+  const [message, setMessage] = useState("");
+  const [report, setReport] = useState("");
   const correctIds = allRisks.filter(r => r.isRelevant).map(r => r.id);
   const scenario = "Firma X kasutas viimati vana TLS-versiooni (TLS 1.0), mis suurendab andmeleketega seotud riski.";
 
@@ -50,42 +50,53 @@ export default function Audiitor1() {
   const handleCheck = () => {
     const correctCount = selectedRisks.filter(id => correctIds.includes(id)).length;
     const wrongCount = selectedRisks.filter(id => !correctIds.includes(id)).length;
-    setResult({ correct: correctCount, wrong: wrongCount });
+    if (correctCount === correctIds.length && wrongCount === 0) {
+      setMessage("Tubli! Kõik riskid valitud õigesti.");
+      setReport(`Audit kokkuvõte: ${scenario} Tuvastatud riskid: ${riskOptions.filter(r => correctIds.includes(r.id)).map(r => r.name).join(', ')}.`);
+    } else {
+      setMessage(`Õigeid valikuid: ${correctCount}, vigu: ${wrongCount}. Proovi uuesti.`);
+    }
     setChecked(true);
   };
 
   const handleReset = () => {
     setSelectedRisks([]);
     setChecked(false);
-    setResult({ correct: 0, wrong: 0 });
+    setMessage("");
+    setReport("");
   };
 
+  const containerClass = checked
+    ? message.startsWith('Tubli') ? 'correct-bg' : 'incorrect-bg'
+    : '';
+  const messageClass = checked
+    ? message.startsWith('Tubli') ? 'message-correct' : 'message-incorrect'
+    : '';
+
   return (
-    <div className="cyadvice-stage1">
+    <div className={`cyadvice-stage1 ${containerClass}`}>
       <h2>Riskianalüüs</h2>
-      <p><em>{scenario}</em></p>
-      <p>Vali riskid, mida organisatsioonis võib esineda:</p>
+      <p className="scenario"><em>{scenario}</em></p>
+      <p>Vali riskid, mida organisatsioonis võib esineda (valida tuleb {correctIds.length} riski):</p>
       <ul className="risk-list">
         {riskOptions.map(r => (
-          <li key={r.id} onClick={() => toggleRisk(r.id)} className={selectedRisks.includes(r.id) ? "selected" : ""}>
+          <li key={r.id} className={selectedRisks.includes(r.id) ? 'selected' : ''} onClick={() => toggleRisk(r.id)}>
             <input type="checkbox" checked={selectedRisks.includes(r.id)} readOnly /> {r.name}
           </li>
         ))}
       </ul>
-      {!checked ? (
-        <button onClick={handleCheck} disabled={selectedRisks.length === 0}>Kontrolli vastused</button>
-      ) : (
-        <div className="result">
-          <p>Õigeid valikuid: {result.correct}</p>
-          <p>Väärasid valikuid: {result.wrong}</p>
-        </div>
-      )}
       <div className="buttons">
-        <button onClick={handleReset}>Uuesti</button>
-        {checked && result.correct === correctIds.length && result.wrong === 0 && (
+        {!checked ? (
+          <button className="primary" onClick={handleCheck} disabled={selectedRisks.length === 0}>Kontrolli vastused</button>
+        ) : (
+          <button className="primary" onClick={handleReset}>Alusta uuesti</button>
+        )}
+        {checked && message.startsWith('Tubli') && (
           <button onClick={() => navigate('/audiitor2')}>Edasi</button>
         )}
       </div>
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
+      {report && <div className="report">{report}</div>}
     </div>
   );
 }

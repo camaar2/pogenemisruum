@@ -5,48 +5,66 @@ import '../CSS/Digi_toendite_uurija2.css';
 export default function Digi_toendite_uurija2() {
   const navigate = useNavigate();
   const logid = [
-    { id: 1, line: "2023-05-01 08:15:23 - INFO - Süsteem käivitus edukalt", anomaly: false },
-    { id: 2, line: "2023-05-01 08:16:10 - WARNING - Ebatavaline sisselogimine aadressilt 192.168.1.100", anomaly: true },
-    { id: 3, line: "2023-05-01 08:17:55 - INFO - Planeeritud varukoopia lõpetatud", anomaly: false },
-    { id: 4, line: "2023-05-01 08:18:45 - ERROR - Mitu ebaõnnestunud sisselogimist tuvastatud", anomaly: true },
-    { id: 5, line: "2023-05-01 08:20:00 - INFO - Admin-kasutaja sisse logitud", anomaly: false }
+    { id: 1, line: '2023-05-01 08:15:23 - INFO - Süsteem käivitus edukalt', anomaly: false },
+    { id: 2, line: '2023-05-01 08:16:10 - WARNING - Ebatavaline sisselogimine aadressilt 192.168.1.100', anomaly: true },
+    { id: 3, line: '2023-05-01 08:17:55 - INFO - Planeeritud varukoopia lõpetatud', anomaly: false },
+    { id: 4, line: '2023-05-01 08:18:45 - ERROR - Mitu ebaõnnestunud sisselogimist tuvastatud', anomaly: true },
+    { id: 5, line: '2023-05-01 08:20:00 - INFO - Admin-kasutaja sisse logitud', anomaly: false }
   ];
 
   const [selected, setSelected] = useState({});
-  const [message, setMessage] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const handleCheckboxChange = id => {
+  const handleSelect = id => {
+    if (checked) return;
     setSelected(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
   const handleSubmit = () => {
-    let correct = true;
-    logid.forEach(log => {
-      if (log.anomaly !== !!selected[log.id]) correct = false;
-    });
-    if (correct) {
-      setMessage("Kõik anomaaliad tuvastatud!");
-      setIsLocked(true);
+    setChecked(true);
+    const totalAnomalies = logid.filter(l => l.anomaly).length;
+    const correctCount = logid.filter(l => l.anomaly && selected[l.id]).length;
+    const falsePositives = logid.filter(l => !l.anomaly && selected[l.id]).length;
+
+    if (correctCount === totalAnomalies && falsePositives === 0) {
+      setMessage(`🎉 Tubli! Tuvastatud kõik ${totalAnomalies} anomaaliat.`);
     } else {
-      setMessage("Mõned anomaaliad jäid märkimata või valepositiivsed valitud. Proovi uuesti.");
+      setMessage(
+        `❌ Tuvastatud õigesti ${correctCount}/${totalAnomalies}, valepositiivseid: ${falsePositives}. ` +
+        'Kontrolli loogikat ja proovi uuesti.'
+      );
     }
   };
 
-  const handleReset = () => {
-    setSelected({});
-    setMessage("");
-    setIsLocked(false);
-  };
+  const handleNext = () => navigate('/digi_toendite_uurija3');
 
-  const handleNext = () => {
-    navigate("/digi_toendite_uurija3");
-  };
+  const containerClass =
+    checked && message.startsWith('🎉')
+      ? 'correct-bg'
+      : checked
+      ? 'incorrect-bg'
+      : '';
+  const messageClass = checked
+    ? message.startsWith('🎉')
+      ? 'message-correct'
+      : 'message-incorrect'
+    : '';
 
   return (
-    <div className="log-anomaly">
+    <div className={`log-anomaly ${containerClass}`}>
       <h1>Logianomaaliate tuvastamine</h1>
-      <p>Vali logikirjed, mis viitavad anomaaliatele:</p>
+      <p className="scenario">
+        <em>
+          Logianalüüs on kriitiline samm turvaintsidentide avastamisel. Vali ainult need
+          WARNING ja ERROR tasemel read, mis viitavad turvariskidele.
+        </em>
+      </p>
+
+      <p className="instruction">
+        Valida tuleb <strong>{logid.filter(l => l.anomaly).length}</strong> anomaalilist rida.
+      </p>
+
       <table className="log-table">
         <thead>
           <tr>
@@ -55,40 +73,52 @@ export default function Digi_toendite_uurija2() {
           </tr>
         </thead>
         <tbody>
-          {logid.map(log => (
-            <tr
-              key={log.id}
-              className={
-                isLocked
-                  ? log.anomaly === !!selected[log.id]
-                    ? "correct"
-                    : "incorrect"
-                  : ""
-              }
-            >
-              <td>
-                <input
-                  type="checkbox"
-                  checked={!!selected[log.id]}
-                  onChange={() => handleCheckboxChange(log.id)}
-                  disabled={isLocked}
-                />
-              </td>
-              <td>{log.line}</td>
-            </tr>
-          ))}
+          {logid.map(log => {
+            const isSel = !!selected[log.id];
+            let rowClass = '';
+            if (checked) {
+              if (log.anomaly && isSel) rowClass = 'correct';
+              else if (!log.anomaly && isSel) rowClass = 'incorrect';
+              else if (log.anomaly && !isSel) rowClass = 'missed';
+            }
+            return (
+              <tr
+                key={log.id}
+                className={rowClass}
+                onClick={() => handleSelect(log.id)}
+              >
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={isSel}
+                    onChange={() => handleSelect(log.id)}
+                    disabled={checked}
+                  />
+                </td>
+                <td>{log.line}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
+
       <div className="buttons">
-        {!isLocked && (
-          <> 
-            <button onClick={handleSubmit}>Kontrolli valikuid</button>
-            <button onClick={handleReset}>Lähtesta</button>
-          </>
+        {!checked ? (
+          <button className="primary" onClick={handleSubmit}>
+            Kontrolli valikuid
+          </button>
+        ) : message.startsWith('🎉') ? (
+          <button className="primary" onClick={handleNext}>
+            Edasi
+          </button>
+        ) : (
+          <button className="primary" onClick={handleSubmit}>
+            Proovi uuesti
+          </button>
         )}
-        {isLocked && <button onClick={handleNext}>Edasi</button>}
       </div>
-      {message && <div className="message">{message}</div>}
+
+      {message && <div className={`message ${messageClass}`}>{message}</div>}
     </div>
   );
 }

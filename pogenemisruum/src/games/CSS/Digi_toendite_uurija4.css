@@ -1,6 +1,6 @@
 .digital-memory {
     max-width: 900px;
-    margin: 20px auto;
+    margin: 0px auto;
     padding: 20px;
     font-family: Arial, sans-serif;
     text-align: center;
@@ -59,7 +59,7 @@
   }
   
   .card.matched {
-    border: 2px solid #388e3c;
+    border: 3px solid #4caf50 !important;
   }
   
   .buttons {

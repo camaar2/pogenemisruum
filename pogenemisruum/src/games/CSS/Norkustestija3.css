@@ -1,51 +1,74 @@
-.exploitation {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
+.cyadvice-stage3 {
+  max-width: 700px;
+  margin: 0rem auto;
+  padding: 1.5rem;
+  background: #f9fcff;
+  border: 1px solid #dde4eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #f0f8ff, #e0f7fa);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.5s;
 }
-
+.cyadvice-stage3 h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.scenario {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
 .options-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin-bottom: 1rem;
 }
-
 .options-table th,
 .options-table td {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 0.5rem;
   text-align: left;
 }
-
-.options-table th {
-  background-color: #f5f5f5;
-}
-
-.option-row:hover {
-  background-color: #e8f5e9;
-}
-
 .option-row.selected {
-  background-color: #c8e6c9;
+  background: #e0f7fa;
+  border-color: #3498db;
 }
-
+.option-row.selected-correct {
+  background: #fff; /* jätta valgeks õige valiku korral */
+  border-color: #4caf50;
+}
+.option-row.selected-incorrect {
+  background: #ffe6e6;
+}
+.option-row.missed {
+  opacity: 0.6;
+}
 .buttons {
-  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 1rem;
 }
-
 button {
-  margin: 0 10px;
-  padding: 10px 20px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 16px;
 }
-
+button.primary {
+  background: #e4067e;
+  color: #fff;
+}
+button.primary:disabled {
+  background: #aa1352;
+  cursor: not-allowed;
+}
 .message {
-  margin-top: 20px;
+  text-align: center;
   font-weight: bold;
+  margin-top: 1rem;
 }
+.message-correct { color: green; }
+.message-incorrect { color: red; }
+.correct-bg { background: #e6ffea !important; }
+.incorrect-bg { background: #ffe6e6 !important; }
