@@ -18,7 +18,7 @@ function InfoturbeJuht() {
         <li><strong>Andmepüügi tuvastamine</strong></li>
         <li><strong>Pahavara tuvastamine</strong></li>
       </ul>
-      <Link to="/infoturbe_juht1">
+      <Link to="/infoturbe_juht1_leht">
         <button>Alusta mängu</button>
       </Link>
     </div>

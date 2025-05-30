@@ -63,7 +63,7 @@ function Kuberturvalisuse_uurija1() {
 
   return (
     <div className={containerClass}>
-      <h1>1. ETAPP: Skaneerimise algus</h1>
+      <h1>Skaneerimise algus</h1>
       <p>Vali tööriistad, mis sobivad turvaaugude skaneerimiseks (portide ja veebirakenduse test).</p>
 
       <div className="tools">

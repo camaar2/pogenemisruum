@@ -19,7 +19,7 @@ function KuberturbeRiskijuht() {
         <li><strong>Operatiivne reageerimine</strong> -umbes 5 minutit</li>
       </ul>
 
-      <Link to="/kuberturbe_riskijuht1">
+      <Link to="/kuberturbe_riskijuht1_leht">
         <button>Alusta mängu</button>
       </Link>
     </div>

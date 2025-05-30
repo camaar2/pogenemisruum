@@ -6,7 +6,7 @@ function KuberturvalisuseKoolitaja() {
   const navigate = useNavigate();
 
   const startGame = () => {
-    navigate('/koolitaja1');
+    navigate('/koolitaja1_leht');
   };
 
   return (

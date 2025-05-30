@@ -1,0 +1,48 @@
+.tutorial-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tutorial-section {
+    margin-bottom: 2rem;
+  }
+  
+  .tutorial-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
+  }
+  
+  .tutorial-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0.5rem 0;
+    color: #444;
+  }
+  
+  .tutorial-content ul,
+  .tutorial-content ol {
+    margin: 0.5rem 0 0.5rem 1.5rem;
+  }
+  
+  .tutorial-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (max-width: 600px) {
+    .tutorial-page {
+      padding: 1rem;
+    }
+    .tutorial-section h2 {
+      font-size: 1.5rem;
+    }
+    .tutorial-content p {
+      font-size: 0.95rem;
+    }
+  }

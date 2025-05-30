@@ -18,7 +18,7 @@ function KuberturbeAudiitor() {
         <li><strong>Lahenduse rakendamise juhendamine</strong></li>
         <li><strong>Lõplik audit ja järelevalve</strong></li>
       </ul>
-      <Link to="/audiitor1">
+      <Link to="/audiitor1_leht">
         <button>Alusta mängu</button>
       </Link>
     </div>

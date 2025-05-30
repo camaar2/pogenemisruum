@@ -2,22 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './FlipCard.css';
 
-function FlipCard({ frontImg, backText, navigateTo }) {
+export default function FlipCard({ frontImg, backText, navigateTo }) {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(navigateTo);
-  };
+  const frontSrc = process.env.PUBLIC_URL + `/${frontImg}`;
 
   return (
-    <div className="flip-card" onClick={handleClick}>
+    <div className="flip-card" onClick={() => navigate(navigateTo)}>
       <div className="flip-card-inner">
-        {/* Front side (image) */}
         <div className="flip-card-front">
-          <img src={frontImg} alt="front" />
+          <img src={frontSrc} alt={backText} />
         </div>
-
-        {/* Back side (text) */}
         <div className="flip-card-back">
           <p>{backText}</p>
         </div>
@@ -25,5 +20,3 @@ function FlipCard({ frontImg, backText, navigateTo }) {
     </div>
   );
 }
-
-export default FlipCard;

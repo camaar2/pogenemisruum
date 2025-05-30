@@ -20,7 +20,7 @@ function KuberturvalisuseArhitekt() {
         <li><strong>Krüptopoliitikate ja stsenaariumite sobitamine</strong> – umbes 6-8 minutit</li>
       </ul>
 
-      <Link to="/arhitekt1">
+      <Link to="/arhitekt1_leht">
         <button>Alusta mängu</button>
       </Link>
     </div>

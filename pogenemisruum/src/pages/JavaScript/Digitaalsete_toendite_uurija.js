@@ -18,7 +18,7 @@ function DigitaalseteToenditeUurija() {
         <li><strong>Digitaalsete artefaktide sobitamine</strong></li>
         <li><strong>Digitaalse tõendi mälumäng</strong></li>
       </ul>
-      <Link to="/digi_toendite_uurija1">
+      <Link to="/digi_toendite_uurija1_leht">
         <button>Alusta mängu</button>
       </Link>
     </div>
