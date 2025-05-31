@@ -172,8 +172,8 @@ function Arhitekt4() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleCheck}>Kontrolli seoseid</button>
             <button onClick={handleReset}>Alusta uuesti</button>
+            <button onClick={handleCheck}>Esita valikud</button>
           </>
         ) : (
           <button onClick={() => alert("Mäng lõpetatud!")}>Lõpeta mäng</button>

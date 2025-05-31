@@ -24,7 +24,7 @@ function Koolitaja3() {
 
   const nextStage = () => {
     if (selectedOption === correctOption) {
-      navigate('/koolitaja4');
+      navigate('/koolitaja4_leht');
     }
   };
 

@@ -4,12 +4,31 @@ import '../CSS/Kuberturvalisuse_uurija1.css';
 
 function Kuberturvalisuse_uurija1() {
   const tools = [
-    { id: 'nmap', text: "Nmap", tooltip: "Portide avastamise ja võrgu kaardistamise tööriist" },
-    { id: 'openvas', text: "OpenVAS", tooltip: "Avatud lähtekoodiga turvaskänner" },
-    { id: 'nessus', text: "Nessus-lite", tooltip: "Populaarne turvaskänner" },
-    { id: 'manual', text: "Käsitsi testimine", tooltip: "Manuaalne haavatavuste kontroll" },
-    { id: 'zap', text: "OWASP ZAP", tooltip: "Automatiseeritud veebirakenduste turvatestija" },
-    { id: 'burp', text: "Burp Suite", tooltip: "Veebirakenduste turvalisuse testimise platvorm" },
+    {
+      id: "fileinfo",
+      text: "Failiinfo",
+      tooltip: "Näitab failis peituvaid tekste ja infot ilma seda käivitamata"
+    },
+    {
+      id: "sandbox",
+      text: "Liivakast",
+      tooltip: "Käivita fail turvalises testkeskkonnas, mis ei ohusta su arvutit"
+    },
+    {
+      id: "network",
+      text: "Võrguliikluse jälgija",
+      tooltip: "Vaata, kuhu fail üritab internetis ühenduda"
+    },
+    {
+      id: "run",
+      text: "Käivita oma arvutis",
+      tooltip: "Ohtlik – ei kasuta praegu"
+    },
+    {
+      id: "delete",
+      text: "Kustuta kohe",
+      tooltip: "Eemaldab faili enne, kui midagi õppida jõuaksime"
+    }
   ];
 
   const [selected, setSelected] = useState([]);
@@ -19,27 +38,25 @@ function Kuberturvalisuse_uurija1() {
   const navigate = useNavigate();
 
   const handleCheckboxChange = (id) => {
-    if (selected.includes(id)) {
-      setSelected(selected.filter(item => item !== id));
-    } else {
-      setSelected([...selected, id]);
-    }
+    setSelected((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
   };
 
   const handleSubmit = () => {
-    // Õige lahendus: peab sisaldama "nmap" (portide avastamine)
-    // ja vähemalt ühte neist: "openvas" või "nessus"
-    // ja ei tohi sisaldada "manual"
-    const hasNmap = selected.includes("nmap");
-    const hasWebScanner = selected.includes("openvas") || selected.includes("nessus");
-    const hasManual = selected.includes("manual");
+    const hasFileInfo = selected.includes("fileinfo");
+    const hasSandbox = selected.includes("sandbox");
+    const hasNetwork = selected.includes("network");
+    const hasDanger = selected.includes("run") || selected.includes("delete");
 
-    if (hasNmap && hasWebScanner && !hasManual) {
-      setMessage("Skaneerimine käivitatud! Liigu järgmisse etappi.");
+    if (hasFileInfo && hasSandbox && hasNetwork && !hasDanger) {
+      setMessage("Hea töö! Oled valinud turvalised tööriistad. Jätka järgmises etapis.");
       setIsLocked(true);
       setIsCorrectChoice(true);
     } else {
-      setMessage("Vale valik! Vihje: kasutame Nmapi portide avastamiseks ja kas OpenVASi või Nessust veebirakenduse testimiseks. 'Käsitsi testimine' praegu ei sobi.");
+      setMessage(
+        "⚠️ Proovi uuesti. Vali vähemalt 'Failiinfo', 'Liivakast' ja 'Võrguliikluse jälgija'. Ohtlikke valikuid praegu ei kasuta."
+      );
       setIsCorrectChoice(false);
     }
   };
@@ -51,23 +68,22 @@ function Kuberturvalisuse_uurija1() {
     setIsCorrectChoice(null);
   };
 
-  const handleNext = () => {
-    navigate("/kuberturvalisuse_uurija2");
-  };
+  const handleNext = () => navigate("/kuberturvalisuse_uurija2");
 
-  const containerClass = isCorrectChoice === true 
-    ? "vuln-scan-start correct-choice"
-    : isCorrectChoice === false
-      ? "vuln-scan-start incorrect-choice"
-      : "vuln-scan-start";
+  const containerClass =
+    isCorrectChoice === true
+      ? "malware-analysis-start correct-choice"
+      : isCorrectChoice === false
+      ? "malware-analysis-start incorrect-choice"
+      : "malware-analysis-start";
 
   return (
     <div className={containerClass}>
-      <h1>Skaneerimise algus</h1>
-      <p>Vali tööriistad, mis sobivad turvaaugude skaneerimiseks (portide ja veebirakenduse test).</p>
+      <h1>Esialgne failiuuring</h1>
+      <p>Vali tööriistad, millega uurida kahtlast faili turvaliselt.</p>
 
       <div className="tools">
-        {tools.map(tool => (
+        {tools.map((tool) => (
           <div key={tool.id} className="tool-option">
             <label title={tool.tooltip}>
               <input
@@ -83,13 +99,12 @@ function Kuberturvalisuse_uurija1() {
       </div>
 
       <div className="buttons">
-        {!isLocked && (
+        {!isLocked ? (
           <>
             <button onClick={handleSubmit}>Esita valikud</button>
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
-        )}
-        {isLocked && (
+        ) : (
           <button onClick={handleNext}>Edasi</button>
         )}
       </div>

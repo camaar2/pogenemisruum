@@ -47,7 +47,7 @@ export default function Rakendaja1() {
     setMessage("");
   };
 
-  const handleNext = () => navigate("/rakendaja2");
+  const handleNext = () => navigate("/rakendaja2_leht");
 
   const containerClass = locked
     ? message.startsWith("🎉") ? "correct-bg" : "incorrect-bg"

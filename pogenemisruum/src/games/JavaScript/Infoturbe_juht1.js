@@ -71,7 +71,7 @@ export default function Infoturbe_juht1() {
   };
 
   const handleNext = () => {
-    navigate('/infoturbe_juht2');
+    navigate('/infoturbe_juht2_leht');
   };
 
   const containerClass = locked

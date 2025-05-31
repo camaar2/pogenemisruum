@@ -46,7 +46,7 @@ export default function Rakendaja3() {
     setMessage('');
   };
 
-  const handleNext = () => navigate('/rakendaja4');
+  const handleNext = () => navigate('/rakendaja4_leht');
 
   return (
     <div className={`tool-selection-game ${

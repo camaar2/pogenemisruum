@@ -139,7 +139,7 @@ export default function Infoturbe_juht2() {
             <button onClick={resetPuzzle}>Alusta uuesti</button>
           </>
         ):(
-          <button className="primary" onClick={()=>navigate('/infoturbe_juht3')}>Edasi</button>
+          <button className="primary" onClick={()=>navigate('/infoturbe_juht3_leht')}>Edasi</button>
         )}
       </div>
       {message.text&&<div className={`message ${message.type==='success'?'message-correct':'message-incorrect'}`}>{message.text}</div>}

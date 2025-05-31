@@ -45,7 +45,7 @@ function Sundmuste_reageerija3() {
       setSteps(correctOrder);
       setIsLocked(true);
       setTimeout(() => {
-        navigate('/incident-response-finale');
+        navigate('/sundmuste_reageerija4_leht');
       }, 1000);
     }
   };

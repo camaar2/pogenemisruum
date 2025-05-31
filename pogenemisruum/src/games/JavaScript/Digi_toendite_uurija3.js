@@ -57,7 +57,7 @@ export default function Digi_toendite_uurija3() {
     setMessage('');
   };
 
-  const handleNext = () => navigate('/digi_toendite_uurija4');
+  const handleNext = () => navigate('/digi_toendite_uurija4_leht');
 
   const containerClass =
     checked && message.startsWith('🎉')

@@ -69,7 +69,7 @@ function Kuberturbe_ohuanaluutik1() {
     setIsLocked(false);
   };
 
-  const handleNext = () => navigate("/kuberturbe_ohuanaluutik2");
+  const handleNext = () => navigate("/kuberturbe_ohuanaluutik2_leht");
 
   let messageType = '';
   if (message.includes('Hea töö')) {
@@ -103,8 +103,8 @@ function Kuberturbe_ohuanaluutik1() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleSubmit}>Kontrolli valikuid</button>
             <button onClick={handleReset}>Alusta uuesti</button>
+            <button onClick={handleSubmit}>Esita valikud</button>
           </>
         ) : (
           <button onClick={handleNext}>Edasi</button>

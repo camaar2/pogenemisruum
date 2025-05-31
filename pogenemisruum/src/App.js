@@ -22,34 +22,50 @@ import Norkustestija from './pages/JavaScript/Norkustestija';
 import DigitaalseteToenditeUurija from './pages/JavaScript/Digitaalsete_toendite_uurija';
 import KuberturbeRiskijuht from './pages/JavaScript/Kuberturbe_riskijuht';
 
-import Kuberturbe_ohuanaluutik1_leht from './vaheleht/JS/Kuberturbe_ohuanaluutik1_leht';
-import Kuberturbe_ohuanaluutik2_leht from './vaheleht/JS/Kuberturbe_ohuanaluutik2_leht';
-import Kuberturbe_ohuanaluutik3_leht from './vaheleht/JS/Kuberturbe_ohuanaluutik3_leht';
-import Kuberturbe_ohuanaluutik4_leht from './vaheleht/JS/Kuberturbe_ohuanaluutik4_leht';
-import Arhitekt1_leht from './vaheleht/JS/Arhitekt1_leht';
-import Arhitekt2_leht from './vaheleht/JS/Arhitekt2_leht';
-import Arhitekt3_leht from './vaheleht/JS/Arhitekt3_leht';
-import Arhitekt4_leht from './vaheleht/JS/Arhitekt4_leht';
-import Audiitor1_leht from './vaheleht/JS/Audiitor1_leht';
-import Audiitor2_leht from './vaheleht/JS/Audiitor2_leht';
-import Audiitor3_leht from './vaheleht/JS/Audiitor3_leht';
-import Audiitor4_leht from './vaheleht/JS/Audiitor4_leht';
-import Digi_toendite_uurija1_leht from './vaheleht/JS/Digi_toendite_uurija1_leht';
-import Digi_toendite_uurija2_leht from './vaheleht/JS/Digi_toendite_uurija2_leht';
-import Digi_toendite_uurija3_leht from './vaheleht/JS/Digi_toendite_uurija3_leht';
-import Digi_toendite_uurija4_leht from './vaheleht/JS/Digi_toendite_uurija4_leht';
-import Infoturbe_juht1_leht from './vaheleht/JS/Infoturbe_juht1_leht';
-import Infoturbe_juht2_leht from './vaheleht/JS/Infoturbe_juht2_leht';
-import Infoturbe_juht3_leht from './vaheleht/JS/Infoturbe_juht3_leht';
-import Infoturbe_juht4_leht from './vaheleht/JS/Infoturbe_juht4_leht';
-import Koolitaja1_leht from './vaheleht/JS/Koolitaja1_leht';
-import Koolitaja2_leht from './vaheleht/JS/Koolitaja2_leht';
-import Koolitaja3_leht from './vaheleht/JS/Koolitaja3_leht';
-import Koolitaja4_leht from './vaheleht/JS/Koolitaja4_leht';
-import Kuberturbe_riskijuht1_leht from './vaheleht/JS/Kuberturbe_riskijuht1_leht';
-import Kuberturbe_riskijuht2_leht from './vaheleht/JS/Kuberturbe_riskijuht2_leht';
-import Kuberturbe_riskijuht3_leht from './vaheleht/JS/Kuberturbe_riskijuht3_leht';
-import Kuberturbe_riskijuht4_leht from './vaheleht/JS/Kuberturbe_riskijuht4_leht';
+import KuberturbeOhuanaluutik1Leht from './vaheleht/JS/Kuberturbe_ohuanaluutik1_leht';
+import KuberturbeOhuanaluutik2Leht from './vaheleht/JS/Kuberturbe_ohuanaluutik2_leht';
+import KuberturbeOhuanaluutik3Leht from './vaheleht/JS/Kuberturbe_ohuanaluutik3_leht';
+import KuberturbeOhuanaluutik4Leht from './vaheleht/JS/Kuberturbe_ohuanaluutik4_leht';
+import Arhitekt1Leht from './vaheleht/JS/Arhitekt1_leht';
+import Arhitekt2Leht from './vaheleht/JS/Arhitekt2_leht';
+import Arhitekt3Leht from './vaheleht/JS/Arhitekt3_leht';
+import Arhitekt4Leht from './vaheleht/JS/Arhitekt4_leht';
+import Audiitor1Leht from './vaheleht/JS/Audiitor1_leht';
+import Audiitor2Leht from './vaheleht/JS/Audiitor2_leht';
+import Audiitor3Leht from './vaheleht/JS/Audiitor3_leht';
+import Audiitor4Leht from './vaheleht/JS/Audiitor4_leht';
+import DigiToenditeUurija1Leht from './vaheleht/JS/Digi_toendite_uurija1_leht';
+import DigiToenditeUurija2Leht from './vaheleht/JS/Digi_toendite_uurija2_leht';
+import DigiToenditeUurija3Leht from './vaheleht/JS/Digi_toendite_uurija3_leht';
+import DigiToenditeUurija4Leht from './vaheleht/JS/Digi_toendite_uurija4_leht';
+import InfoturbeJuht1Leht from './vaheleht/JS/Infoturbe_juht1_leht';
+import InfoturbeJuht2Leht from './vaheleht/JS/Infoturbe_juht2_leht';
+import InfoturbeJuht3Leht from './vaheleht/JS/Infoturbe_juht3_leht';
+import InfoturbeJuht4Leht from './vaheleht/JS/Infoturbe_juht4_leht';
+import Koolitaja1Leht from './vaheleht/JS/Koolitaja1_leht';
+import Koolitaja2Leht from './vaheleht/JS/Koolitaja2_leht';
+import Koolitaja3Leht from './vaheleht/JS/Koolitaja3_leht';
+import Koolitaja4Leht from './vaheleht/JS/Koolitaja4_leht';
+import KuberturbeRiskijuht1Leht from './vaheleht/JS/Kuberturbe_riskijuht1_leht';
+import KuberturbeRiskijuht2Leht from './vaheleht/JS/Kuberturbe_riskijuht2_leht';
+import KuberturbeRiskijuht3Leht from './vaheleht/JS/Kuberturbe_riskijuht3_leht';
+import KuberturbeRiskijuht4Leht from './vaheleht/JS/Kuberturbe_riskijuht4_leht';
+import Norkustestija1Leht from './vaheleht/JS/Norkustestija1_leht';
+import Norkustestija2Leht from './vaheleht/JS/Norkustestija2_leht';
+import Norkustestija3Leht from './vaheleht/JS/Norkustestija3_leht';
+import Norkustestija4Leht from './vaheleht/JS/Norkustestija4_leht';
+import Rakendaja1Leht from './vaheleht/JS/Rakendaja1_leht';
+import Rakendaja2Leht from './vaheleht/JS/Rakendaja2_leht';
+import Rakendaja3Leht from './vaheleht/JS/Rakendaja3_leht';
+import Rakendaja4Leht from './vaheleht/JS/Rakendaja4_leht';
+import SundmusteReageerija1Leht from './vaheleht/JS/Sundmuste_reageerija1_leht';
+import SundmusteReageerija2Leht from './vaheleht/JS/Sundmuste_reageerija2_leht';
+import SundmusteReageerija3Leht from './vaheleht/JS/Sundmuste_reageerija3_leht';
+import SundmusteReageerija4Leht from './vaheleht/JS/Sundmuste_reageerija4_leht';
+import TurvapoliitikaEestvedaja1Leht from './vaheleht/JS/Turvapoliitika_eestvedaja1_leht';
+import TurvapoliitikaEestvedaja2Leht from './vaheleht/JS/Turvapoliitika_eestvedaja2_leht';
+import TurvapoliitikaEestvedaja3Leht from './vaheleht/JS/Turvapoliitika_eestvedaja3_leht';
+import TurvapoliitikaEestvedaja4Leht from './vaheleht/JS/Turvapoliitika_eestvedaja4_leht';
 
 import Infoturbe_juht1 from './games/JavaScript/Infoturbe_juht1';
 import Infoturbe_juht2 from './games/JavaScript/Infoturbe_juht2';
@@ -128,34 +144,50 @@ function App() {
         <Route path="/Kuberturbe_ohuanaluutik" element={<KuberturbeOhuanaluutik />} />
 
         {/* vahelehed */}
-        <Route path="/Kuberturbe_ohuanaluutik1_leht" element={<Kuberturbe_ohuanaluutik1_leht />} />
-        <Route path="/Kuberturbe_ohuanaluutik2_leht" element={<Kuberturbe_ohuanaluutik2_leht />} />
-        <Route path="/Kuberturbe_ohuanaluutik3_leht" element={<Kuberturbe_ohuanaluutik3_leht />} />
-        <Route path="/Kuberturbe_ohuanaluutik4_leht" element={<Kuberturbe_ohuanaluutik4_leht />} />
-        <Route path="/arhitekt1_leht" element={<Arhitekt1_leht />} />
-        <Route path="/arhitekt2_leht" element={<Arhitekt2_leht />} />
-        <Route path="/arhitekt3_leht" element={<Arhitekt3_leht />} />
-        <Route path="/arhitekt4_leht" element={<Arhitekt4_leht />} />
-        <Route path="/audiitor1_leht" element={<Audiitor1_leht />} />
-        <Route path="/audiitor2_leht" element={<Audiitor2_leht />} />
-        <Route path="/audiitor3_leht" element={<Audiitor3_leht />} />
-        <Route path="/audiitor4_leht" element={<Audiitor4_leht />} />
-        <Route path="/digi_toendite_uurija1_leht" element={<Digi_toendite_uurija1_leht />} />
-        <Route path="/digi_toendite_uurija2_leht" element={<Digi_toendite_uurija2_leht />} />
-        <Route path="/digi_toendite_uurija3_leht" element={<Digi_toendite_uurija3_leht />} />
-        <Route path="/digi_toendite_uurija4_leht" element={<Digi_toendite_uurija4_leht />} />
-        <Route path="/infoturbe_juht1_leht" element={<Infoturbe_juht1_leht />} />
-        <Route path="/infoturbe_juht2_leht" element={<Infoturbe_juht2_leht />} />
-        <Route path="/infoturbe_juht3_leht" element={<Infoturbe_juht3_leht />} />
-        <Route path="/infoturbe_juht4_leht" element={<Infoturbe_juht4_leht />} />
-        <Route path="/koolitaja1_leht" element={<Koolitaja1_leht />} />
-        <Route path="/koolitaja2_leht" element={<Koolitaja2_leht />} />
-        <Route path="/koolitaja3_leht" element={<Koolitaja3_leht />} />
-        <Route path="/koolitaja4_leht" element={<Koolitaja4_leht />} />
-        <Route path="/kuberturbe_riskijuht1_leht" element={<Kuberturbe_riskijuht1_leht />} />
-        <Route path="/kuberturbe_riskijuht2_leht" element={<Kuberturbe_riskijuht2_leht />} />
-        <Route path="/kuberturbe_riskijuht3_leht" element={<Kuberturbe_riskijuht3_leht />} />
-        <Route path="/kuberturbe_riskijuht4_leht" element={<Kuberturbe_riskijuht4_leht />} />
+        <Route path="/Kuberturbe_ohuanaluutik1_leht" element={<KuberturbeOhuanaluutik1Leht />} />
+        <Route path="/Kuberturbe_ohuanaluutik2_leht" element={<KuberturbeOhuanaluutik2Leht />} />
+        <Route path="/Kuberturbe_ohuanaluutik3_leht" element={<KuberturbeOhuanaluutik3Leht />} />
+        <Route path="/Kuberturbe_ohuanaluutik4_leht" element={<KuberturbeOhuanaluutik4Leht />} />
+        <Route path="/arhitekt1_leht" element={<Arhitekt1Leht />} />
+        <Route path="/arhitekt2_leht" element={<Arhitekt2Leht />} />
+        <Route path="/arhitekt3_leht" element={<Arhitekt3Leht />} />
+        <Route path="/arhitekt4_leht" element={<Arhitekt4Leht />} />
+        <Route path="/audiitor1_leht" element={<Audiitor1Leht />} />
+        <Route path="/audiitor2_leht" element={<Audiitor2Leht />} />
+        <Route path="/audiitor3_leht" element={<Audiitor3Leht />} />
+        <Route path="/audiitor4_leht" element={<Audiitor4Leht />} />
+        <Route path="/digi_toendite_uurija1_leht" element={<DigiToenditeUurija1Leht />} />
+        <Route path="/digi_toendite_uurija2_leht" element={<DigiToenditeUurija2Leht />} />
+        <Route path="/digi_toendite_uurija3_leht" element={<DigiToenditeUurija3Leht />} />
+        <Route path="/digi_toendite_uurija4_leht" element={<DigiToenditeUurija4Leht />} />
+        <Route path="/infoturbe_juht1_leht" element={<InfoturbeJuht1Leht />} />
+        <Route path="/infoturbe_juht2_leht" element={<InfoturbeJuht2Leht />} />
+        <Route path="/infoturbe_juht3_leht" element={<InfoturbeJuht3Leht />} />
+        <Route path="/infoturbe_juht4_leht" element={<InfoturbeJuht4Leht />} />
+        <Route path="/koolitaja1_leht" element={<Koolitaja1Leht />} />
+        <Route path="/koolitaja2_leht" element={<Koolitaja2Leht />} />
+        <Route path="/koolitaja3_leht" element={<Koolitaja3Leht />} />
+        <Route path="/koolitaja4_leht" element={<Koolitaja4Leht />} />
+        <Route path="/kuberturbe_riskijuht1_leht" element={<KuberturbeRiskijuht1Leht />} />
+        <Route path="/kuberturbe_riskijuht2_leht" element={<KuberturbeRiskijuht2Leht />} />
+        <Route path="/kuberturbe_riskijuht3_leht" element={<KuberturbeRiskijuht3Leht />} />
+        <Route path="/kuberturbe_riskijuht4_leht" element={<KuberturbeRiskijuht4Leht />} />
+        <Route path="/norkustestija1_leht" element={<Norkustestija1Leht />} />
+        <Route path="/norkustestija2_leht" element={<Norkustestija2Leht />} />
+        <Route path="/norkustestija3_leht" element={<Norkustestija3Leht />} />
+        <Route path="/norkustestija4_leht" element={<Norkustestija4Leht />} />
+        <Route path="/rakendaja1_leht" element={<Rakendaja1Leht />} />
+        <Route path="/rakendaja2_leht" element={<Rakendaja2Leht />} />
+        <Route path="/rakendaja3_leht" element={<Rakendaja3Leht />} />
+        <Route path="/rakendaja4_leht" element={<Rakendaja4Leht />} />
+        <Route path="/sundmuste_reageerija1_leht" element={<SundmusteReageerija1Leht />} />
+        <Route path="/sundmuste_reageerija2_leht" element={<SundmusteReageerija2Leht />} />
+        <Route path="/sundmuste_reageerija3_leht" element={<SundmusteReageerija3Leht />} />
+        <Route path="/sundmuste_reageerija4_leht" element={<SundmusteReageerija4Leht />} />
+        <Route path="/turvapoliitika_eestvedaja1_leht" element={<TurvapoliitikaEestvedaja1Leht />} />
+        <Route path="/turvapoliitika_eestvedaja2_leht" element={<TurvapoliitikaEestvedaja2Leht />} />
+        <Route path="/turvapoliitika_eestvedaja3_leht" element={<TurvapoliitikaEestvedaja3Leht />} />
+        <Route path="/turvapoliitika_eestvedaja4_leht" element={<TurvapoliitikaEestvedaja4Leht />} />
 
         {/* Mängude marsruudid */}
         <Route path="/infoturbe_juht1" element={<Infoturbe_juht1 />} />

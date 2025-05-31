@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/Koolitaja1_leht.css';
+import ReactMarkdown from 'react-markdown';
+import '../CSS/common.css';
 
 const tutorialSections = [
   {
@@ -8,7 +9,7 @@ const tutorialSections = [
     title: "Mis on phishing?",
     content: `
 Phishing on küberrünnakute vorm, kus ründaja saadab petliku sõnumi (nt e-kiri),
-ettevõtes või platvormil, et meelitada kasutajat avaldama isikuandmeid, paroole 
+ettevõtes või platvormil, et meelitada kasutajat avaldama **isikuandmeid**, **paroole** 
 või installima pahavara.
 `
   },
@@ -17,13 +18,13 @@ või installima pahavara.
     title: "Miks on paroolide korduvkasutamine ohtlik?",
     content: `
 Kui sama parooliga on kaitstud mitu kontot, võib ühe konto kompromiteerimine 
-anda ründajale ligipääsu kõigile kontodele. Soovitatav on kasutada unikaalseid 
-ja tugevaid paroole iga teenuse jaoks.
+anda ründajale ligipääsu kõigile kontodele. Soovitatav on kasutada **unikaalseid** 
+ja **tugevaid** paroole iga teenuse jaoks.
 `
   }
 ];
 
-export default function Koolitaja1_leht() {
+export default function Koolitaja1Leht() {
   const navigate = useNavigate();
   return (
     <div className="tutorial-page">
@@ -31,9 +32,9 @@ export default function Koolitaja1_leht() {
         <section key={sec.id} className="tutorial-section">
           <h2>{sec.title}</h2>
           <div className="tutorial-content">
-            {sec.content.trim().split('\n').map((line, i) => (
-              line.trim() ? <p key={i}>{line.trim()}</p> : <br key={i} />
-            ))}
+            <ReactMarkdown>
+              {sec.content.trim()}
+            </ReactMarkdown>
           </div>
         </section>
       ))}

@@ -18,8 +18,8 @@ function KuberturvalisuseRakendaja() {
         <li><strong>Ligipääsupoliitikate haldamine</strong></li>
         <li><strong>Teenuste turvamine</strong></li>
       </ul>
-      <Link to="/rakendaja1">
-        <button>Alusta mängu</button>
+      <Link to="/rakendaja1_leht">
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

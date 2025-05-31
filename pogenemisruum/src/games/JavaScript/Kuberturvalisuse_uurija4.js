@@ -2,140 +2,131 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Kuberturvalisuse_uurija4.css';
 
-const pairs = [
-  { pairId: 1, vulnerability: "SQL Injection", remediation: "Use Parameterized Queries" },
-  { pairId: 2, vulnerability: "Cross-Site Scripting", remediation: "Implement Output Encoding" },
-  { pairId: 3, vulnerability: "Weak Password Policy", remediation: "Enforce Strong Passwords" },
-  { pairId: 4, vulnerability: "Outdated Software", remediation: "Apply Patches Regularly" },
-  { pairId: 5, vulnerability: "Misconfigured Firewall", remediation: "Review and Update Rules" }
+const PAIRS = [
+  { id: 1, vuln: "Nõrk parool",        fix: "Lisa numbreid ja sümboleid" },
+  { id: 2, vuln: "Tarkvara uuendamata", fix: "Paigalda uuendused" },
+  { id: 3, vuln: "HTTPS puudub",       fix: "Luba HTTPS" },
+  { id: 4, vuln: "Varukoopia puudub",  fix: "Tee varukoopia" },
+  { id: 5, vuln: "Liiga palju õigusi", fix: "Piira kasutaja õigusi" }
 ];
 
-const shuffleArray = (array) => {
-  const newArr = [...array];
-  for (let i = newArr.length - 1; i > 0; i--) {
+/* Fisher–Yates segamine */
+const shuffle = (arr) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  return newArr;
+  return a;
 };
 
-const createCards = () => {
-  const cards = [];
-  pairs.forEach(pair => {
-    cards.push({
-      id: `${pair.pairId}-vuln`,
-      pairId: pair.pairId,
-      type: "vulnerability",
-      content: pair.vulnerability,
-      flipped: false,
-      matched: false
-    });
-    cards.push({
-      id: `${pair.pairId}-rem`,
-      pairId: pair.pairId,
-      type: "remediation",
-      content: pair.remediation,
-      flipped: false,
-      matched: false
-    });
+/* Uus segatud kaardipakk */
+const newDeck = () => {
+  const deck = [];
+  PAIRS.forEach(({ id, vuln, fix }) => {
+    deck.push({ uid: `${id}-v`, pair: id, text: vuln, flipped: false, matched: false });
+    deck.push({ uid: `${id}-f`, pair: id, text: fix,  flipped: false, matched: false });
   });
-  return shuffleArray(cards);
+  return shuffle(deck);
 };
 
-const Kuberturvalisuse_uurija4 = () => {
+/* -------- Komponent (ilma export-sõnata) -------- */
+function Kuberturvalisuse_uurija4() {
   const navigate = useNavigate();
-  const [cards, setCards] = useState(createCards());
-  const [flippedIndices, setFlippedIndices] = useState([]);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [matchesFound, setMatchesFound] = useState(0);
-  const [message, setMessage] = useState("");
 
-  const handleCardClick = (index) => {
-    if (isProcessing) return;
-    const card = cards[index];
+  const [cards, setCards]   = useState(newDeck());
+  const [picked, setPicked] = useState([]);   // valitud kaardi indeksid
+  const [locking, setLocking] = useState(false);
+  const [msg, setMsg]         = useState("");
+  const [done, setDone]       = useState(0);  // mitu paari leitud
+
+  /* Kaardiklõps */
+  const clickCard = (idx) => {
+    if (locking) return;
+    const card = cards[idx];
     if (card.flipped || card.matched) return;
 
-    const newCards = [...cards];
-    newCards[index].flipped = true;
-    const newFlipped = [...flippedIndices, index];
-    setCards(newCards);
-    setFlippedIndices(newFlipped);
+    const next = [...cards];
+    next[idx].flipped = true;
+    const newPicked = [...picked, idx];
 
-    if (newFlipped.length === 2) {
-      setIsProcessing(true);
-      const [firstIndex, secondIndex] = newFlipped;
-      const card1 = newCards[firstIndex];
-      const card2 = newCards[secondIndex];
-      
-      if (card1.pairId === card2.pairId && card1.type !== card2.type) {
-        newCards[firstIndex].matched = true;
-        newCards[secondIndex].matched = true;
-        setCards(newCards);
-        setMatchesFound(matchesFound + 1);
+    setCards(next);
+    setPicked(newPicked);
+
+    if (newPicked.length === 2) {
+      setLocking(true);
+      const [a, b] = newPicked;
+      const cardA = next[a];
+      const cardB = next[b];
+
+      if (cardA.pair === cardB.pair && cardA.uid !== cardB.uid) {
+        // Õige paar
+        next[a].matched = true;
+        next[b].matched = true;
+        setCards(next);
+        setDone((d) => d + 1);
         setTimeout(() => {
-          setFlippedIndices([]);
-          setIsProcessing(false);
-          if (matchesFound + 1 === pairs.length) {
-            setMessage("Tubli töö! Kõik paarid leitud.");
-          }
-        }, 800);
+          setPicked([]);
+          setLocking(false);
+          setMsg("✅ Õige paar!");
+        }, 600);
       } else {
+        // Vale paar
         setTimeout(() => {
-          newCards[firstIndex].flipped = false;
-          newCards[secondIndex].flipped = false;
-          setCards(newCards);
-          setFlippedIndices([]);
-          setIsProcessing(false);
-          setMessage("Vale paar! Proovi uuesti.");
+          next[a].flipped = false;
+          next[b].flipped = false;
+          setCards(next);
+          setPicked([]);
+          setLocking(false);
+          setMsg("⚠️ Vale paar, proovi uuesti.");
         }, 1000);
       }
+    } else {
+      setMsg(""); // esimene valik – puhasta teade
     }
   };
 
-  const handleReset = () => {
-    setCards(createCards());
-    setFlippedIndices([]);
-    setMatchesFound(0);
-    setMessage("");
-    setIsProcessing(false);
+  /* Alusta uuesti */
+  const resetGame = () => {
+    setCards(newDeck());
+    setPicked([]);
+    setLocking(false);
+    setMsg("");
+    setDone(0);
   };
 
-  const handleEnd = () => {
-    navigate("/");
-  };
-
+  /* JSX */
   return (
-    <div className="vuln-memory-game">
-      <h1>4. ETAPP: Haavatavuse mälu­mäng</h1>
-      <p>Leia iga haavatavuse kaart ja selle õige remediatsiooni kaart.</p>
-      <div className="cards-grid">
-        {cards.map((card, index) => (
+    <div className="memory-card">
+      <h1>4. ETAPP: Oht ↔ Lahendus</h1>
+      <p>Leia igale ohule sobiv lahendus.</p>
+
+      <div className="grid">
+        {cards.map((c, i) => (
           <div
-            key={card.id}
-            className={`card ${card.flipped || card.matched ? "flipped" : ""} ${card.matched ? "matched" : ""}`}
-            onClick={() => handleCardClick(index)}
+            key={c.uid}
+            className={`flip-card ${c.flipped || c.matched ? "show" : ""} ${c.matched ? "done" : ""}`}
+            onClick={() => clickCard(i)}
           >
-            <div className="card-inner">
-              <div className="card-front">
-                {/* Kaardid esitatakse disainitud kujunduse kujul */}
-              </div>
-              <div className="card-back">
-                {card.content}
-              </div>
+            <div className="flip-inner">
+              <div className="flip-front" />
+              <div className="flip-back">{c.text}</div>
             </div>
           </div>
         ))}
       </div>
+
       <div className="buttons">
-        {matchesFound === pairs.length ? (
-          <button onClick={handleEnd}>Lõpeta mäng</button>
+        {done === PAIRS.length ? (
+          <button onClick={() => navigate("/")}>Lõpeta</button>
         ) : (
-          <button onClick={handleReset}>Alusta uuesti</button>
+          <button onClick={resetGame}>Alusta uuesti</button>
         )}
       </div>
-      {message && <div className="message">{message}</div>}
+
+      {msg && <div className="message">{msg}</div>}
     </div>
   );
-};
+}
 
 export default Kuberturvalisuse_uurija4;

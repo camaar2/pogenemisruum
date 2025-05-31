@@ -19,7 +19,7 @@ function InfoturbeJuht() {
         <li><strong>Pahavara tuvastamine</strong></li>
       </ul>
       <Link to="/infoturbe_juht1_leht">
-        <button>Alusta mängu</button>
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

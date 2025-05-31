@@ -20,13 +20,13 @@ function KuberturvalisuseKoolitaja() {
       <h2>Mängude ülevaade</h2>
       <p>Siin saad selles rollis lahendada järgmisi mänge:</p>
       <ul>
-        <li><strong>Teadmiste hindamine</strong> – umbes 5 minutit</li>
-        <li><strong>Koolitusmaterjalide loomine</strong> – umbes 5 minutit</li>
-        <li><strong>Simulatsioon: õngitsuskirjade testimine</strong> – umbes 6 minutit</li>
-        <li><strong>Phishing-indikaatorite tuvastamine</strong> – umbes 6–8 minutit</li>
+        <li><strong>Teadmiste hindamine</strong> </li>
+        <li><strong>Koolitusmaterjalide loomine</strong> </li>
+        <li><strong>Simulatsioon: õngitsuskirjade testimine</strong></li>
+        <li><strong>Phishing-indikaatorite tuvastamine</strong> </li>
       </ul>
 
-      <button onClick={startGame}>Alusta mängu</button>
+      <button onClick={startGame}>Liigu edasi</button>
     </div>
   );
 }

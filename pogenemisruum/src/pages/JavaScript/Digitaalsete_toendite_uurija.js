@@ -19,7 +19,7 @@ function DigitaalseteToenditeUurija() {
         <li><strong>Digitaalse tõendi mälumäng</strong></li>
       </ul>
       <Link to="/digi_toendite_uurija1_leht">
-        <button>Alusta mängu</button>
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

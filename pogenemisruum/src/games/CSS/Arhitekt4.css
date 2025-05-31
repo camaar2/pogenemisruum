@@ -1,10 +1,10 @@
 .encryption-match-game {
     max-width: 900px;
-    margin: 20px auto;
+    margin: 0px auto;
     padding: 20px;
     font-family: Arial, sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #fffbe7, #e8f5e9);
+    background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: background 0.5s;

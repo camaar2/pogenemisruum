@@ -11,114 +11,91 @@ function shuffleArray(array) {
   return newArr;
 }
 
-const reportLinesData = [
-  { id: 1, text: "Port 22 avatud (SSH) – konfiguratsioon kontrollitud", isVulnerable: false },
-  { id: 2, text: "Port 80 avatud (HTTP)", isVulnerable: true },
-  { id: 3, text: "Veebirakenduse input-valideerimise viga", isVulnerable: true },
-  { id: 4, text: "Port 443 avatud (HTTPS)", isVulnerable: false },
-  { id: 5, text: "Valehäire: 'potentsiaalne haavatavus X'", isVulnerable: false },
-  { id: 6, text: "SQL Injection avastatud andmebaasis", isVulnerable: true },
-  { id: 7, text: "MFA on paigaldatud – turvameetmed rakendatud", isVulnerable: false },
-  { id: 8, text: "SSL sertifikaat aegunud", isVulnerable: true },
-  { id: 9, text: "Võrguliikluse krüpteerimine puudub", isVulnerable: true },
-  { id: 10, text: "Turvaline autentimine – paroolipoliitika kehtestatud", isVulnerable: false },
+const logLines = [
+  { id: 1, text: 'Fail üritas ühenduda kahtlasele veebiaadressile', isSuspicious: true },
+  { id: 2, text: 'Tavaline kasutaja logis sisse sisevõrku', isSuspicious: false },
+  { id: 3, text: 'PowerShell laadis internetist faili', isSuspicious: true },
+  { id: 4, text: 'Antiviirus uuendas ennast edukalt', isSuspicious: false },
+  { id: 5, text: 'Kaugjuhtimispääs (RDP) välisest IP‑aadressist', isSuspicious: true },
+  { id: 6, text: 'DNS päring google.com‑ile', isSuspicious: false },
+  { id: 7, text: 'Ajastatud ülesanne lisas uue skripti', isSuspicious: true },
+  { id: 8, text: 'Explorer käivitati Program Files kaustast', isSuspicious: false },
+  { id: 9, text: 'Programm käivitati Temp kaustast', isSuspicious: true },
+  { id: 10, text: 'Windows Update teenus käivitati', isSuspicious: false }
 ];
 
-const Kuberturvalisuse_uurija2 = () => {
+function Kuberturvalisuse_uurija2() {
   const navigate = useNavigate();
-  const [reports, setReports] = useState(() => shuffleArray(reportLinesData));
-  const [selected, setSelected] = useState({});
-  const [message, setMessage] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
 
-  const handleLineClick = (line) => {
-    if (isLocked) return;
-    setSelected(prev => ({ ...prev, [line.id]: !prev[line.id] }));
+  const [events, setEvents] = useState(() => shuffleArray(logLines));
+  const [selected, setSelected] = useState({});
+  const [message, setMessage] = useState('');
+  const [locked, setLocked] = useState(false);
+
+  const toggleSelect = (evt) => {
+    if (locked) return;
+    setSelected((prev) => ({ ...prev, [evt.id]: !prev[evt.id] }));
   };
 
-  const handleSubmit = () => {
-    let allCorrect = true;
-    reports.forEach(line => {
-      if (line.isVulnerable) {
-        if (!selected[line.id]) {
-          allCorrect = false;
-        }
-      } else {
-        if (selected[line.id]) {
-          allCorrect = false;
-        }
-      }
-    });
+  const checkAnswers = () => {
+    const allCorrect = events.every((evt) => evt.isSuspicious === !!selected[evt.id]);
+
     if (allCorrect) {
-      setMessage("Tuvastasid kriitilised haavatavused! Järgmine etapp: haavatavuste tõsiduse hindamine.");
-      setIsLocked(true);
+      setMessage('Tubli! Leidsid kõik kahtlased sündmused. Järgmisena koostad raporti.');
+      setLocked(true);
     } else {
-      setMessage("Mõned tulemused on valepositiivsed või jäävad märkamata. Proovi uuesti.");
+      setMessage('Mõni sündmus jäi märkamata või valisid vale. Proovi uuesti.');
     }
   };
 
-  const handleReset = () => {
+  const reset = () => {
     setSelected({});
-    setMessage("");
-    setIsLocked(false);
-    setReports(shuffleArray(reportLinesData));
+    setMessage('');
+    setLocked(false);
+    setEvents(shuffleArray(logLines));
   };
 
-  const handleNext = () => {
-    navigate("/kuberturvalisuse_uurija3");
-  };
+  const nextStage = () => navigate('/kuberturvalisuse_uurija3');
 
   return (
-    <div className="vuln-result-analysis">
-      <h1>2. ETAPP: Tulemuste analüüs</h1>
-      <p>Klõpsa ridadel, mis viitavad haavatavustele:</p>
-      <div className="report">
-        {reports.map(line => {
-          let lineClass = "report-line";
-          if (isLocked) {
-            if (line.isVulnerable) {
-              if (selected[line.id]) {
-                lineClass += " correct";
-              } else {
-                lineClass += " incorrect";
-              }
+    <div className="event-triage">
+      <h1>Logisündmuste triaaž</h1>
+      <p>Klõpsa ridadel, mis näivad kahtlased.</p>
+
+      <div className="log-list">
+        {events.map((evt) => {
+          let cls = 'log-line';
+          if (locked) {
+            if (evt.isSuspicious) {
+              cls += selected[evt.id] ? ' correct' : ' missed';
             } else {
-              if (selected[line.id]) {
-                lineClass += " incorrect";
-              } else {
-                lineClass += " neutral";
-              }
+              cls += selected[evt.id] ? ' wrong' : ' neutral';
             }
-          } else {
-            if (selected[line.id]) {
-              lineClass += " selected";
-            }
+          } else if (selected[evt.id]) {
+            cls += ' chosen';
           }
           return (
-            <div
-              key={line.id}
-              className={lineClass}
-              onClick={() => handleLineClick(line)}
-            >
-              {line.text}
+            <div key={evt.id} className={cls} onClick={() => toggleSelect(evt)}>
+              {evt.text}
             </div>
           );
         })}
       </div>
+
       <div className="buttons">
-        {!isLocked && (
+        {!locked ? (
           <>
-            <button onClick={handleSubmit}>Kontrolli valikuid</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
+            <button onClick={checkAnswers}>Kontrolli valikuid</button>
+            <button onClick={reset}>Alusta uuesti</button>
           </>
-        )}
-        {isLocked && (
-          <button onClick={handleNext}>Edasi</button>
+        ) : (
+          <button onClick={nextStage}>Edasi</button>
         )}
       </div>
+
       {message && <div className="message">{message}</div>}
     </div>
   );
-};
+}
 
 export default Kuberturvalisuse_uurija2;

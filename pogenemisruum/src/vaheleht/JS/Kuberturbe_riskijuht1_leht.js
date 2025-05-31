@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/Kuberturbe_riskijuht1_leht.css';
+import ReactMarkdown from 'react-markdown';
+import '../CSS/common.css';
 
 const tutorialSections = [
   {
@@ -15,7 +16,7 @@ parameetrite valimine aitab vältida loata juurdepääsu ja vähendab ründevekt
     id: 2,
     title: "Miks mitte luua root-kasutajat ilma paroolita?",
     content: `
-Root-kasutaja on kõrgeim privileegidega konto. Paroolita juurdepääs lubab kergesti
+Root-kasutaja on kõrgeim privileegidega konto. **Paroolita juurdepääs** lubab kergesti
 administreerimist ja ründamise riski.
 `
   },
@@ -23,8 +24,9 @@ administreerimist ja ründamise riski.
     id: 3,
     title: "Administraatorikonto tugeva parooliga",
     content: `
- tugev parool vähendab brute-force rünnakute tõenäosust. Parool peaks olema pikk,
-mittemustuv ja sisaldama eri märgitüüpe.
+**Tugev parool** vähendab brute-force rünnakute tõenäosust. Parool peaks olema:
+- piisavalt pikk (≥12 märki)
+- sisaldama suurtähti, väiketähti, numbreid ja erimärke
 `
   },
   {
@@ -32,7 +34,7 @@ mittemustuv ja sisaldama eri märgitüüpe.
     title: "SSH võtmetega autentimine",
     content: `
 SSH võtmetega autentimine on turvalisem kui paroolipõhine, sest võtmed on raskemini
-kompromiteeritavad ja pakuvad krüptograafilist kaitset.
+kompromiteeritavad ja pakuvad **krüptograafilist kaitset**.
 `
   },
   {
@@ -40,12 +42,15 @@ kompromiteeritavad ja pakuvad krüptograafilist kaitset.
     title: "Miks mitte jätta port 22 avatud ilma piiranguteta?",
     content: `
 Port 22 on SSH standardport. Kui lubada ligipääs kõikjalt, suureneb brute-force
-tõenäosus. Kasuta IP piiranguid ja monitoori logisid.
+tõenäosus. Kasuta:
+1. IP-põhiseid piiranguid  
+2. Kahefaktorilist autentimist  
+3. Logide monitooringut  
 `
   }
 ];
 
-export default function Kuberturbe_riskijuht1_leht() {
+export default function KuberturbeRiskijuht1Leht() {
   const navigate = useNavigate();
 
   return (
@@ -54,9 +59,9 @@ export default function Kuberturbe_riskijuht1_leht() {
         <section key={sec.id} className="tutorial-section">
           <h2>{sec.title}</h2>
           <div className="tutorial-content">
-            {sec.content.trim().split('\n').map((line, i) =>
-              line.trim() ? <p key={i}>{line.trim()}</p> : <br key={i} />
-            )}
+            <ReactMarkdown>
+              {sec.content}
+            </ReactMarkdown>
           </div>
         </section>
       ))}

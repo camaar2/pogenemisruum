@@ -62,7 +62,7 @@ export default function Norkustestija1() {
     setMessage("");
   };
 
-  const handleNext = () => navigate('/norkustestija1_leht');
+  const handleNext = () => navigate('/norkustestija2_leht');
 
   const containerClass = checked
     ? message.startsWith('Kogusid') ? 'correct-bg' : 'incorrect-bg'

@@ -62,6 +62,7 @@ function Arhitekt3() {
     const compId = e.dataTransfer.getData("compId");
     let item = null;
 
+    // Eemalda komponendipool (pool) või teisest tsoonist
     const newPool = [...pool];
     const idxPool = newPool.findIndex(c => c.id === compId);
     if (idxPool >= 0) {
@@ -74,6 +75,7 @@ function Arhitekt3() {
     }
     if (!item) return;
 
+    // Pane valitud tsooni või tagasi pooli
     if (zone === "pool") {
       newPool.push(item);
     } else if (zone === "perimeter") {
@@ -88,10 +90,10 @@ function Arhitekt3() {
 
   const handleCheck = () => {
     let allCorrect = true;
-
     const checkZone = (arr, zoneName) => {
       for (let comp of arr) {
-        if (comp.correctZone !== zoneName && comp.correctZone !== null) {
+        // Kui comp.correctZone on null, tähendab, et see on distractor – siis ei kontrolli
+        if (comp.correctZone !== null && comp.correctZone !== zoneName) {
           allCorrect = false;
         }
       }
@@ -118,7 +120,7 @@ function Arhitekt3() {
   };
 
   const handleNext = () => {
-    navigate("/arhitekt4");
+    navigate("/arhitekt4_leht");
   };
 
   return (
@@ -191,11 +193,12 @@ function Arhitekt3() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleCheck}>Kontrolli paigutust</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
+            <button className="reset-button" onClick={handleReset}>Alusta uuesti</button>
+
+            <button className="check-button" onClick={handleCheck}>Esita valikud</button>
           </>
         ) : (
-          <button onClick={handleNext}>Edasi</button>
+          <button className="next-button" onClick={handleNext}>Edasi</button>
         )}
       </div>
       
@@ -205,3 +208,4 @@ function Arhitekt3() {
 }
 
 export default Arhitekt3;
+

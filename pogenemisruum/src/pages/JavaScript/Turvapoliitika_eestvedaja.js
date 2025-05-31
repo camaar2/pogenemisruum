@@ -18,8 +18,8 @@ function TurvapoliitikaEestvedaja() {
         <li><strong>Rakendamise juhendamine</strong></li>
         <li><strong>Rahvusvaheline koostöö ja kriisi järelvalve</strong></li>
       </ul>
-      <Link to="/turvapoliitika_eestvedaja1">
-        <button>Alusta mängu</button>
+      <Link to="/turvapoliitika_eestvedaja1_leht">
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

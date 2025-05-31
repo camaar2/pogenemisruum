@@ -83,7 +83,7 @@ function Turvapoliitika_eestvedaja1() {
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
-          <button className="primary" onClick={() => navigate('/turvapoliitika_eestvedaja2')}>Edasi</button>
+          <button className="primary" onClick={() => navigate('/turvapoliitika_eestvedaja2_leht')}>Edasi</button>
         )}
       </div>
       {feedback && <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>{feedback}</div>}

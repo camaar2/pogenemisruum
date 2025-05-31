@@ -9,7 +9,7 @@ const options = [
   { id: 'D', text: 'Juhtimisinfo', correct: false, explanation: 'Ülevaade juhtimisprotsessidest, mis ei keskendu intsidendile.' }
 ];
 
-function Sundmuste_reageerija2() {
+export default function Sundmuste_reageerija2() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState('');
   const [feedback, setFeedback] = useState('');
@@ -38,11 +38,17 @@ function Sundmuste_reageerija2() {
   };
 
   return (
-    <div className={`risk-prioritization ${locked ? (feedback.startsWith('Õige') ? 'correct-bg' : 'incorrect-bg') : ''}`}>
+    <div className={`risk-prioritization ${locked
+        ? feedback.startsWith('Õige')
+          ? 'correct-bg'
+          : 'incorrect-bg'
+        : ''}`}>
       <h1>Intsidendi kommunikatsiooni harjutus</h1>
+
       <div className="instructions">
         <p>Vali kommunikatsioonistrateegia, mida jagada partneritele intsidendi teavitamiseks:</p>
       </div>
+
       <ul className="option-list">
         {options.map(o => (
           <li
@@ -51,11 +57,11 @@ function Sundmuste_reageerija2() {
             onClick={() => handleSelect(o)}
             title={o.explanation}
           >
-            <input type="radio" checked={selected === o.id} readOnly />
-            {o.text}
+            <input type="radio" checked={selected === o.id} readOnly /> {o.text}
           </li>
         ))}
       </ul>
+
       <div className="buttons">
         {!locked ? (
           <>
@@ -63,15 +69,17 @@ function Sundmuste_reageerija2() {
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : (
-          <button className="primary" onClick={() => navigate('/')}>Lõpeta mäng</button>
+          <button className="primary" onClick={() => navigate('/sundmuste_reageerija3_leht')}>
+            Edasi
+          </button>
         )}
       </div>
+
       {feedback && (
-        <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>{feedback}</div>
+        <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>
+          {feedback}
+        </div>
       )}
     </div>
   );
 }
-
-
-export default Sundmuste_reageerija2;

@@ -18,8 +18,8 @@ function SundmusteReageerija() {
         <li><strong>Intsidendi reageerimismeetmete järjestamine</strong></li>
         <li><strong>Piiramine ja likvideerimine</strong></li>
       </ul>
-      <Link to="/sundmuste_reageerija1">
-        <button>Alusta mängu</button>
+      <Link to="/sundmuste_reageerija1_leht">
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

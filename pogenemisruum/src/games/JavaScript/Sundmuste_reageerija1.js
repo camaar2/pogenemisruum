@@ -167,7 +167,7 @@ function Sundmuste_reageerija1() {
             <button onClick={reset}>Alusta uuesti</button>
           </>
         ) : (
-          <button className="primary" onClick={() => navigate('/sundmuste_reageerija2')}>
+          <button className="primary" onClick={() => navigate('/sundmuste_reageerija2_leht')}>
             Edasi
           </button>
         )}

@@ -92,7 +92,7 @@ export default function Audiitor1() {
           <button className="primary" onClick={handleReset}>Alusta uuesti</button>
         )}
         {checked && message.startsWith('Tubli') && (
-          <button onClick={() => navigate('/audiitor2')}>Edasi</button>
+          <button onClick={() => navigate('/audiitor2_leht')}>Edasi</button>
         )}
       </div>
       {message && <div className={`message ${messageClass}`}>{message}</div>}

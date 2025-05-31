@@ -18,7 +18,7 @@ function KuberturbeOhuanaluutik() {
         <li><strong>Kill Chain kokkupanek</strong></li>
       </ul>
       <Link to="/kuberturbe_ohuanaluutik1_leht">
-        <button>Alusta mängu</button>
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

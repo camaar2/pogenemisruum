@@ -75,7 +75,7 @@ function Kuberturbe_ohuanaluutik2() {
     setIsLocked(false);
   };
 
-  const handleNext = () => navigate("/kuberturbe_ohuanaluutik3");
+  const handleNext = () => navigate("/kuberturbe_ohuanaluutik3_leht");
 
   let messageType = '';
   if (message.includes('Kõik ohumärgid')) messageType = 'message-correct';

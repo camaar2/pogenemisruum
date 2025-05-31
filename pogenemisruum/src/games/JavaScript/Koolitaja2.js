@@ -24,7 +24,7 @@ function Koolitaja2() {
       selectedMaterials.every(material => correctMaterials.includes(material))
     ) {
       setError('');
-      navigate('/koolitaja3');
+      navigate('/koolitaja3_leht');
     } else {
       setError('Vale valik! Kontoritöötajatele sobivad kõige paremini Video ja Interaktiivne test.');
     }

@@ -19,7 +19,7 @@ function KuberturbeAudiitor() {
         <li><strong>Lõplik audit ja järelevalve</strong></li>
       </ul>
       <Link to="/audiitor1_leht">
-        <button>Alusta mängu</button>
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

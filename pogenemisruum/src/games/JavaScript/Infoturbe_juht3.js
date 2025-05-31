@@ -177,7 +177,7 @@ export default function Infoturbe_juht3() {
             <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : locked ? (
-          <button className="primary" onClick={() => navigate('/infoturbe_juht4')}>
+          <button className="primary" onClick={() => navigate('/infoturbe_juht4_leht')}>
             Edasi
           </button>
         ) : (

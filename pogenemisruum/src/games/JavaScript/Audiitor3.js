@@ -118,7 +118,7 @@ export default function Audiitor3() {
           </button>
         )}
         {checked && feedback.startsWith('Õige') && (
-          <button onClick={() => navigate('/audiitor4')}>
+          <button onClick={() => navigate('/audiitor4_leht')}>
             Edasi
           </button>
         )}

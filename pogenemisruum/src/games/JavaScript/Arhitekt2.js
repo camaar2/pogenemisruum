@@ -82,7 +82,7 @@ function Arhitekt2() {
   };
 
   const handleNext = () => {
-    navigate("/arhitekt3");
+    navigate("/arhitekt3_leht");
   };
 
   return (
@@ -127,11 +127,12 @@ function Arhitekt2() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={checkColumns}>Kontrolli jaotus</button>
-            <button onClick={resetColumns}>Alusta uuesti</button>
+            <button className="reset-button" onClick={resetColumns}>Alusta uuesti</button>
+
+            <button className="check-button" onClick={checkColumns}>Esita valikud</button>
           </>
         ) : (
-          <button onClick={handleNext}>Edasi</button>
+          <button className="next-button" onClick={handleNext}>Edasi</button>
         )}
       </div>
       {message && <div className="message">{message}</div>}

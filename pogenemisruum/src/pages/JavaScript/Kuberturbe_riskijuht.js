@@ -13,14 +13,14 @@ function KuberturbeRiskijuht() {
 
       <h2>Mängud:</h2>
       <ul>
-        <li><strong>Serveri algseadistus</strong> -umbes 5 minutit</li>
-        <li><strong>Turvauuenduste ja automaatika seadistamine</strong> -umbes 4 minutit</li>
-        <li><strong>Süsteemide monitooring ja logide analüüs</strong> -umbes 5 minutit</li>
-        <li><strong>Operatiivne reageerimine</strong> -umbes 5 minutit</li>
+        <li><strong>Serveri algseadistus</strong></li>
+        <li><strong>Turvauuenduste ja automaatika seadistamine</strong></li>
+        <li><strong>Süsteemide monitooring ja logide analüüs</strong></li>
+        <li><strong>Operatiivne reageerimine</strong></li>
       </ul>
 
       <Link to="/kuberturbe_riskijuht1_leht">
-        <button>Alusta mängu</button>
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

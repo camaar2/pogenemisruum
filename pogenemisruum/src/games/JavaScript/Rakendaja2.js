@@ -35,7 +35,7 @@ export default function Rakendaja2() {
     );
   };
 
-  const handleNext = () => navigate('/rakendaja3');
+  const handleNext = () => navigate('/rakendaja3_leht');
 
   const containerClass = locked
     ? message.startsWith('🎉') ? 'correct-bg' : 'incorrect-bg'

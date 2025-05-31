@@ -73,7 +73,7 @@ function Arhitekt1() {
   };
 
   const handleNext = () => {
-    navigate('/arhitekt2'); 
+    navigate('/arhitekt2_leht'); 
   };
 
   return (
@@ -105,8 +105,8 @@ function Arhitekt1() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button className="submit-button" onClick={handleSubmit}>Esita valikud</button>
             <button className="reset-button" onClick={handleReset}>Alusta uuesti</button>
+            <button className="submit-button" onClick={handleSubmit}>Esita valikud</button>
           </>
         ) : (
           <button className="next-button" onClick={handleNext}>Jätka</button>
@@ -123,3 +123,4 @@ function Arhitekt1() {
 }
 
 export default Arhitekt1;
+

@@ -67,7 +67,7 @@ function Kuberturbe_ohuanaluutik3() {
     setIsLocked(false);
   };
 
-  const handleNext = () => navigate('/kuberturbe_ohuanaluutik4');
+  const handleNext = () => navigate('/kuberturbe_ohuanaluutik4_leht');
 
   const containerClass = isLocked
     ? message.includes('Tubli') ? 'correct-bg' : 'incorrect-bg'

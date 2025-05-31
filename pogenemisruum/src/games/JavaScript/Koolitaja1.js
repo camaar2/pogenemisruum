@@ -14,7 +14,7 @@ function Koolitaja1() {
   const nextStage = () => {
     if (answers.q1 === 'a' && answers.q2 === 'a') {
       setError('');
-      navigate('/koolitaja2');
+      navigate('/koolitaja2_leht');
     } else {
       setError('Vastused on osaliselt või täielikult valed. Palun kontrolli ja proovi uuesti.');
     }

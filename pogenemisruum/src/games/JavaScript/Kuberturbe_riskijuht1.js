@@ -62,7 +62,7 @@ function Kuberturbe_riskijuht1() {
   };
 
   const handleNext = () => {
-    navigate("/kuberturbe_riskijuht2");
+    navigate("/kuberturbe_riskijuht2_leht");
   };
 
   return (
@@ -95,8 +95,8 @@ function Kuberturbe_riskijuht1() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleSubmit}>Esita valikud</button>
             <button onClick={handleReset}>Alusta uuesti</button>
+            <button onClick={handleSubmit}>Esita valikud</button>
           </>
         ) : (
           <button onClick={handleNext}>Edasi</button>

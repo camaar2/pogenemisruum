@@ -18,8 +18,8 @@ function Norkustestija() {
         <li><strong>Süsteemi ärakasutamine</strong></li>
         <li><strong>Lõplik raport</strong></li>
       </ul>
-      <Link to="/norkustestija1">
-        <button>Alusta mängu</button>
+      <Link to="/norkustestija1_leht">
+        <button>Liigu edasi</button>
       </Link>
     </div>
   );

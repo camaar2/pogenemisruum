@@ -2,94 +2,83 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Kuberturvalisuse_uurija3.css';
 
-function shuffleArray(array) {
-  const newArray = [...array];
-  for (let i = newArray.length - 1; i > 0; i--) {
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    [copy[i], copy[j]] = [copy[j], copy[i]];
   }
-  return newArray;
+  return copy;
 }
 
-const vulnerabilitiesData = [
-  { id: 1, name: "SQL Injection", correctLevel: "high" },
-  { id: 2, name: "Aegunud SSH-versioon", correctLevel: "medium" },
-  { id: 3, name: "Administraatori paneelil puudub parool", correctLevel: "high" },
-  { id: 4, name: "XSS haavatavus", correctLevel: "medium" },
-  { id: 5, name: "Vale konfiguratsioon andmebaasis", correctLevel: "low" },
-  { id: 6, name: "Poliitikate puudumine", correctLevel: "medium" }
+const issues = [
+  { id: 1, name: "Parool puudub administraatori paneelil", level: "high" },
+  { id: 2, name: "Aegunud tarkvara versioon",               level: "medium" },
+  { id: 3, name: "Kahtlane PowerShelli skript",              level: "high" },
+  { id: 4, name: "HTTPS puudub veebilehel",                  level: "medium" },
+  { id: 5, name: "Varukoopiad tegemata",                     level: "low" },
+  { id: 6, name: "Logifailid pole kaitstud",                 level: "low" }
 ];
 
 function Kuberturvalisuse_uurija3() {
-  const [vulns, setVulns] = useState(() => shuffleArray(vulnerabilitiesData));
-  const [levels, setLevels] = useState({});
-  const [message, setMessage] = useState("");
-  const [isLocked, setIsLocked] = useState(false);
   const navigate = useNavigate();
 
-  const handleLevelChange = (id, value) => {
-    setLevels(prev => ({ ...prev, [id]: value }));
-  };
+  const [rows, setRows] = useState(() => shuffleArray(issues));
+  const [answers, setAnswers] = useState({});
+  const [msg, setMsg] = useState("");
+  const [locked, setLocked] = useState(false);
 
-  const handleSubmit = () => {
-    let allCorrect = true;
-    vulns.forEach(vuln => {
-      if (levels[vuln.id] !== vuln.correctLevel) {
-        allCorrect = false;
-      }
-    });
-    if (allCorrect && Object.keys(levels).length === vulns.length) {
-      setMessage("Tõid välja täpse kriitilisuse! Liigume lõpp-etappi.");
-      setIsLocked(true);
+  const change = (id, val) => setAnswers((p) => ({ ...p, [id]: val }));
+
+  const check = () => {
+    const allFilled = rows.every((r) => answers[r.id]);
+    const allRight = rows.every((r) => answers[r.id] === r.level);
+
+    if (allFilled && allRight) {
+      setMsg("✅ Täpne töö! Oled õigesti hinnanud tõsiduse. Jätkame järgmisena.");
+      setLocked(true);
     } else {
-      setMessage("Mõni kriitilisuse tase on vale. Proovi uuesti.");
+      setMsg("⚠️ Mõni tase ei klapi. Kontrolli ja proovi uuesti.");
     }
   };
 
-  const handleReset = () => {
-    setLevels({});
-    setMessage("");
-    setIsLocked(false);
-    setVulns(shuffleArray(vulnerabilitiesData));
+  const reset = () => {
+    setRows(shuffleArray(issues));
+    setAnswers({});
+    setMsg("");
+    setLocked(false);
   };
 
-  const handleNext = () => {
-    navigate("/kuberturvalisuse_uurija4");
-  };
+  const next = () => navigate("/kuberturvalisuse_uurija4");
 
   return (
-    <div className="vuln-criticality">
-      <h1>3. ETAPP: Kriitilisuse määramine</h1>
-      <p>Määra iga avastatud haavatavuse kriitilisuse tase:</p>
-      <table>
+    <div className="criticality-card">
+      <h1>3. ETAPP: Probleemide tõsidus</h1>
+      <p>Vali iga probleemi jaoks sobiv tase:</p>
+
+      <table className="crit-table">
         <thead>
           <tr>
-            <th>Haavatavus</th>
-            <th>Kriitilisuse tase</th>
+            <th>Probleem</th>
+            <th>Tase</th>
           </tr>
         </thead>
         <tbody>
-          {vulns.map(vuln => {
-            let rowClass = "";
-            if (isLocked) {
-              if (!levels[vuln.id]) {
-                rowClass = "neutral";
-              } else if (levels[vuln.id] === vuln.correctLevel) {
-                rowClass = "correct";
-              } else {
-                rowClass = "incorrect";
-              }
+          {rows.map((row) => {
+            let cls = "";
+            if (locked) {
+              cls = answers[row.id] === row.level ? "correct" : "incorrect";
             }
             return (
-              <tr key={vuln.id} className={rowClass}>
-                <td>{vuln.name}</td>
+              <tr key={row.id} className={cls}>
+                <td>{row.name}</td>
                 <td>
                   <select
-                    value={levels[vuln.id] || ""}
-                    onChange={(e) => handleLevelChange(vuln.id, e.target.value)}
-                    disabled={isLocked}
+                    value={answers[row.id] || ""}
+                    onChange={(e) => change(row.id, e.target.value)}
+                    disabled={locked}
                   >
-                    <option value="">Vali tase</option>
+                    <option value="">Vali…</option>
                     <option value="high">Kõrge</option>
                     <option value="medium">Keskmine</option>
                     <option value="low">Madal</option>
@@ -100,18 +89,19 @@ function Kuberturvalisuse_uurija3() {
           })}
         </tbody>
       </table>
+
       <div className="buttons">
-        {!isLocked && (
+        {!locked ? (
           <>
-            <button onClick={handleSubmit}>Esita valikud</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
+            <button onClick={check}>Esita</button>
+            <button onClick={reset}>Alusta uuesti</button>
           </>
-        )}
-        {isLocked && (
-          <button onClick={handleNext}>Edasi</button>
+        ) : (
+          <button onClick={next}>Edasi</button>
         )}
       </div>
-      {message && <div className="message">{message}</div>}
+
+      {msg && <div className="message">{msg}</div>}
     </div>
   );
 }

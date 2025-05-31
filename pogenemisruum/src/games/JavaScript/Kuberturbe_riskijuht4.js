@@ -62,8 +62,8 @@ function Kuberturbe_riskijuht4() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleSubmit}>Esita vastus</button>
             <button onClick={handleReset}>Alusta uuesti</button>
+            <button onClick={handleSubmit}>Esita vastus</button>
           </>
         ) : (
           <button onClick={finishGame}>Lõpeta mäng</button>

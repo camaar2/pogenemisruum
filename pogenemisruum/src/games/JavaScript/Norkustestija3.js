@@ -41,7 +41,7 @@ export default function Norkustestija3() {
     setMessage('');
   };
 
-  const handleNext = () => navigate('/norkustestija4');
+  const handleNext = () => navigate('/norkustestija4_leht');
 
   const containerClass =
     checked && message.startsWith('🎉')

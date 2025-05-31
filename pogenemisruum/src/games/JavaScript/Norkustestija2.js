@@ -66,7 +66,7 @@ export default function Norkustestija2() {
     setFeedback("");
   };
 
-  const handleNext = () => navigate('/norkustestija3');
+  const handleNext = () => navigate('/norkustestija3_leht');
 
   const containerClass =
     checked && feedback.startsWith('🎉')

@@ -1,49 +1,49 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/Audiitor1_leht.css';
+import ReactMarkdown from 'react-markdown';
+import '../CSS/common.css';
 
 const tutorialSections = [
   {
     id: 1,
     title: "Mis on riskianalüüs auditeerimisel?",
     content: `
-Riskianalüüs auditeerimisel on protsess, kus hinnatakse organisatsiooni
-infosüsteemide ja protsesside haavatavusi ja võimalikku kahju.
-See aitab kindlaks teha, kus on kõige kriitilisemad ohukohad.
-`
+  • Riskianalüüs auditeerimisel on protsess, kus hinnatakse organisatsiooni infosüsteemide ja protsesside **haavatavusi** ja võimalikku **kahju**.  
+  • See aitab kindlaks teha, kus on kõige kriitilisemad ohukohad.`
   },
   {
     id: 2,
     title: "Miks valida asjakohased riskid?",
     content: `
-• Asjakohased riskid mõjutavad otseselt äritegevust ja infoturvet.
-• Ebavajalike riskide välja jätta aitab keskenduda õigetele meetmetele.
-• Õigeid riske tuvastades saab koostada tõhusama auditiaruande.
-`
+  - • **Asjakohased riskid** mõjutavad otseselt äritegevust ja infoturvet.  
+  - • **Ebavajalike riskide** välja jätmine aitab keskenduda õigetele meetmetele.  
+  - • **Õigeid riske** tuvastades saab koostada tõhusama auditiaruande.`
   },
   {
     id: 3,
     title: "Kuidas leida organisatsiooni riskid?",
     content: `
-1. Kaardista süsteemid ja protsessid (serverid, võrgud, kasutajad).
-2. Analüüsi haavatavused (nt TLS versioonid, tarkvarauuendused).
-3. Koguge infot varasematest intsidentidest ja normidest.
-4. Määrake riskide asjakohasus (tõenäosus vs mõju).
-`
+1. **Kaardista süsteemid ja protsessid**: kirjelda kõik serverid, võrgud ja kasutajad.  
+2. **Analüüsi haavatavused**: vaata üle kasutatav tarkvara (näiteks TLS-versioonid ja uuenduste staatus).  
+3. **Koguge infot**: uurige varasemaid turvaintsidente ja kohaldatavaid standardeid.  
+4. **Määrake riskide asjakohasus**: hinnake iga riski tõenäosust ja võimalikku kahju.`
   },
   {
     id: 4,
     title: "Auditiaruande kokkuvõte",
     content: `
-Aruandes sisalduvad tuvastatud riskid ja soovitused:
-- Riskide kirjeldusega peatükid
-- Soovitused kaitsemeetmete rakendamiseks
-- Järgmised sammud ja jälgimine
-`
+  Aruandes sisalduvad tuvastatud riskid ja soovitused:
+  - • **Aruande metoodika** – lühike ülevaade kasutatud hindamisviisidest ja allikatest  
+  - • **Piirangud ja erandid** – asjaolud, mis võisid auditi tulemusi mõjutada  
+  - • **Riskide kirjeldusega peatükid**  
+  - • **Soovitused kaitsemeetmete rakendamiseks**  
+  - • **Prioriteetsed tegevused ja ajakava** – millised sammud on kõige kiiremad ja kes nende eest vastutab  
+  - • **Järgmised sammud ja jälgimine**`
   }
+  
 ];
 
-export default function Audiitor1_leht() {
+export default function Audiitor1Leht() {
   const navigate = useNavigate();
 
   return (
@@ -52,9 +52,7 @@ export default function Audiitor1_leht() {
         <section key={sec.id} className="tutorial-section">
           <h2>{sec.title}</h2>
           <div className="tutorial-content">
-            {sec.content.trim().split('\n').map((line, i) =>
-              line.trim() ? <p key={i}>{line.trim()}</p> : <br key={i} />
-            )}
+            <ReactMarkdown>{sec.content}</ReactMarkdown>
           </div>
         </section>
       ))}
