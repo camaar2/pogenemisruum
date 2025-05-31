@@ -40,7 +40,7 @@ const tutorialSections = [
     content: `
 - **Digitaalse salvestusseadme arestimine** tähendab, et uurimiseks võetud kõvakettad, USB-mälupulgad või muud mäluseadmed pannakse turvalisse hoiukohta.  
 - **Märgised ja kinnitusmehhanismid** – seadmele kleebitakse spetsiaalne kleebis või etikett, mis näitab, et seda ei tohi muul viisil avada; vajadusel lukustatakse see spetsiaalsesse karpi.  
-- **Pakendamine ja keti hoidmine** – seade suletakse spetsiaalsesse mahutisse ja igast liigutusest kirjutatakse üles, kes selle lahti võttis ja kuhu viis. Nii näeme, et keegi ei saanud vahepeal seadet muuta.  
+- **Seadme hoiustamine** – seade suletakse spetsiaalsesse mahutisse ja igast liigutusest kirjutatakse üles, kes selle lahti võttis ja kuhu viis. Nii näeme, et keegi ei saanud vahepeal seadet muuta.  
 - • Kui võtad uurimiseks kõvaketta, siis paned selle alati kindlasse kaitstud kotikesse ja kirjutad üles iga liigutuse, et keegi ei saaks hiljem öelda “mina puutusin seda esimest korda, mitte sina”.`
   },
   {
@@ -49,7 +49,7 @@ const tutorialSections = [
     content: `
 - **Forenseeriline kujutis** on täpne bititasandiline koopia (kloon) uuritavast salvestusseadmest (näiteks kõvakettast).  
 - **Miks bititasandiline?** – see tähendab, et kopeeritakse iga bitt ja bait täpselt samas järjekorras, nii et kogu info (ka kustutatud failid) salvestatakse.  
-- **Kujuta seadmest täpne koopia, mitte originaali** – originaalseadet ei tohi muuta, selle asemel tehakse selle täpne kloon ning analüüsitakse klooni.  
+- **Kujuta seadmest täpne koopia** – originaalseadet ei tohi muuta, selle asemel tehakse selle täpne kloon ning analüüsitakse klooni.  
 - **Kasuta write-blocker’it, et vältida muutusi** – write-blocker on seade, mis lubab andmete lugemist, aga keelab kirjutamise, nii et kloonimise ajal originaalile ei kirjutata mingeid andmeid.  
 - **Kontrollsumma (hash)** – loodud kloonile arvutatakse krüptograafiline kood (hash), mis näitab, et kloon ja originaal on identsed. Kui hiljem hash ei vasta, teame, et kloon on muutunud.`
   },
@@ -58,10 +58,10 @@ const tutorialSections = [
     title: "Analüüs laboris",
     content: `
 - **Analüüs laboris** tähendab kloonitud salvestusseadme (kõvaketta) uurimist spetsiaalses keskkonnas, mitte originaalis.  
-- **Failisüsteemi läbivaatamine** – vaadatakse ketta kaustastruktuure, et leida salvestatud faile, kaustasid ja varjatud sisusid (näiteks peidetud failid).  
+- **Failisüsteemi läbivaatamine** – vaadatakse ketta kaustastruktuure, et leida salvestatud faile, kaustasid ja varjatud sisu (näiteks peidetud failid).  
 - **Logide analüüs** – uuritakse süsteemi logisid, kus on salvestatud tegevused (nt millal ja kuidas faile kasutati), et aru saada, mis juhtus.  
 - **Vigade, pahavara või pettuste tuvastamine** – otsitakse märke, mis viitavad pahavarale (nt varjatud programmiliinid) või seotud pettustega (nt makseandmete vargus).  
-- **Dokumenteeritud tulemused ja järeldused** – kogu leitud info kajastatakse forensilises raportis, mis sisaldab selgitust, kuidas andmed avastati ja mida need näitavad.  
+- **Dokumenteeritud tulemused ja järeldused** – kogu leitud info kajastatakse raportis, mis sisaldab selgitust, kuidas andmed avastati ja mida need näitavad.  
 - • Labor on koht, kus spetsialist analüüsib kloonitud kõvaketast ja kirjeldab kirjalikult, mida avastas, et kohtunik või teine uurija saaks hiljem aru, kuidas järeldusele jõuti.`
   }
 ];

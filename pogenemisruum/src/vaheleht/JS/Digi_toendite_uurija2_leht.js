@@ -8,7 +8,7 @@ const tutorialSections = [
     id: 1,
     title: "Mis on logianomaaliate tuvastamine?",
     content: `
-- **Logid** on nagu ajakirjaplaadid, kuhu arvutisüsteem salvestab kõik tegevused (näiteks kasutaja sisselogimine või failide avamine).  
+- **Logid** on nagu ajakirja lehed, kuhu arvutisüsteem salvestab kõik tegevused (näiteks kasutaja sisselogimine või failide avamine).  
 - • **Logianomaaliate tuvastamine** tähendab, et käime neid logisid läbi, et leida ebatavalisi või kahtlasi kirjeid (näiteks mitu ebaõnnestunud sisselogimist järjest või ootamatult suur andmeedastus).  
 - • Kujuta ette, et loed päevikut ja otsid sealt märke, et midagi imelikku juhtus (nt keegi proovis mitu korda vale parooliga sisse logida).`
 },
@@ -26,7 +26,7 @@ const tutorialSections = [
     content: `
 - **INFO** kirjeldab lihtsalt tavapäraseid tegevusi (näiteks “süsteem käivitus kell 08:00” või “andmebaas salvestas kirje edukalt”).  
 - • **INFO** ei pruugi sisaldada tähiseid, mis viitavad turvaohtudele, sest need on normaalsed ja oodatud toimingud.  
-- • Kujuta ette, et INFO on nagu “täna jõin kohvi” – see ei ütle, et midagi ohtlikku juhtub; WARNING ja ERROR on nagu “kohv oli halva maitsega” või “Mul hakkas vakus peale kohvi tarbimist” – need märgid vajavad tähelepanu.`
+- • Kujuta ette, et INFO on nagu “täna jõin kohvi” – see ei ütle, et midagi ohtlikku juhtub; WARNING ja ERROR on nagu “kohv oli halva maitsega” või “Mul hakkas kõht valutama peale kohvi tarbimist” – need märgid vajavad tähelepanu.`
 },
 {
     id: 4,
@@ -34,7 +34,7 @@ const tutorialSections = [
     content: `
 - **Valepositiivsed** read on hetked, kus süsteem teeb murekõne (“anaomaalia”), aga tegelikult on kõik korras (nt kasutaja proovis suvaliselt vale parooliga mitu korda järjest, kuid ei ole ründaja).  
 - **Puuduvad anomaaliad** (missed) on olukorrad, kus oluline hoiatus jäi logidest märkamata (nt keegi sisselukustas palju juhtumeid, aga süsteem ei andnud mingit hoiatust).  
-- • Pärast iga kontrolli tuleb üle vaadata, miks tuli valepositiiv või miks mõni oluline teade jäi märkamata, ning täiendada reegleid (nt tõsta hoiatustaseme künnist või lisada uusi mustreid).  
+- • Pärast igat kontrolli tuleb üle vaadata, miks tuli valepositiiv või miks mõni oluline teade jäi märkamata, ning täiendada reegleid (nt tõsta hoiatustaseme künnist või lisada uusi mustreid).  
 - • Kui kood ütleb “hoiatuse viga” liiga sageli (valepositiiv), siis inimesed ei võta seda tõsiselt; kui ei ütle “hoiatuse viga” kohe, kui midagi ohtlikku juhtus (missed), siis turvalisus ei tööta õigesti.`
 }
 ];

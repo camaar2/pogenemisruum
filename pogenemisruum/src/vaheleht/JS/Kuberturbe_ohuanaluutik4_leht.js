@@ -8,7 +8,7 @@ const tutorialSections = [
     id: 1,
     title: "Mis on ründe ahel (Kill Chain)?",
     content: `
-- • **Kill Chain** ehk ründe ahel on nagu samm-sammult juhend, mida häkkerid kasutavad rünnaku tegemiseks.  
+- • **Kill Chain** ehk ründe ahel on nagu samm-sammuline juhend, mida häkkerid kasutavad rünnaku tegemiseks.  
 - • See algab eeltööst: häkker kogub infot sihtmärgi kohta (nt ettevõtte kohta veebis).  
 - • Seejärel luuakse ligipääs, näiteks saadetakse e-kiri, mis paigaldab pahavara.  
 - • Pärast seda levib pahavara laiemalt süsteemis (nt edasine failide nakatamine).  

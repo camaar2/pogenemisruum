@@ -23,10 +23,10 @@ const tutorialSections = [
     id: 3,
     title: "Kuidas leida organisatsiooni riskid?",
     content: `
-1. **Kaardista süsteemid ja protsessid**: kirjelda kõik serverid, võrgud ja kasutajad.  
-2. **Analüüsi haavatavused**: vaata üle kasutatav tarkvara (näiteks TLS-versioonid ja uuenduste staatus).  
-3. **Koguge infot**: uurige varasemaid turvaintsidente ja kohaldatavaid standardeid.  
-4. **Määrake riskide asjakohasus**: hinnake iga riski tõenäosust ja võimalikku kahju.`
+1. **Kaardista süsteemid ja protsessid**: kirjelda kõiki servereid, võrke ja kasutajaid.  
+2. **Analüüsi haavatavusi**: vaata üle kasutatav tarkvara (näiteks TLS-versioonid ja uuenduste staatus).  
+3. **Kogu infot**: uurige varasemaid turvaintsidente ja kohaldatavaid standardeid.  
+4. **Määra riskide asjakohasus**: hinnake iga riski tõenäosust ja võimalikku kahju.`
   },
   {
     id: 4,

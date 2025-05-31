@@ -10,7 +10,7 @@ const tutorialSections = [
     content: `
 - **XSS** on haavatavus, kus ründaja sisestab pahatahtliku JavaScripti koodi veebirakenduse sisendväljade kaudu, mis seejärel täidetakse ohvri brauseris.  
 - • Kui veebisaidil lubatakse kasutajal sisestada teksti ja seda teksti kuvatakse teistele kasutajatele ilma puhastamata, võib ründaja sinna panna koodi, mis käivitub kellegi teise arvutis.  
-- • Näiteks kui kommentaarivälja kirjutatud kood näidatakse teistele kasutajatele, võib see varastada sinu küpsiseid või kuvada võltssisu.`  
+- • Näiteks kui kommentaarivälja kirjutatud kood näidatakse teistele kasutajatele, võib see varastada sinu küpsiseid (väike andmefail, mis lubab veebilehtedel kasutaja ja tema seaded „meelde jätta“) või kuvada võltssisu.`  
 },
 {
     id: 2,

@@ -13,7 +13,7 @@ const tutorialSections = [
     - • **Reaalajas jälgimist** – pilv kogub andmeid ja annab kohe teada kahtlasest tegevusest.  
     - • **Sissetungituvastust** – tuvastatakse katsed ebaseaduslikult süsteemi siseneda.  
     - • **Kaitset teenusena (SaaS)** – turvalahendus on kättesaadav veebis, pole vaja ise tarkvara installida.  
-    - • **Auto-skaleerimist** – kaitse suudab vajadusel käsitleda suuremat koormust ilma täiendava seadistamiseta.`
+    - • **Automaatset skaleerimist** – kaitse suudab vajadusel käsitleda suuremat koormust ilma täiendava seadistamiseta.`
 },
 {
     id: 2,

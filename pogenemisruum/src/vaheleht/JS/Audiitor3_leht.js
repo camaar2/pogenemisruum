@@ -34,7 +34,7 @@ const tutorialSections = [
     content: `
 - **Koormustest** ehk stressitest mõõdab, kuidas server või teenus töötab pingelistes tingimustes (nt kui palju kasutajaid korraga ligi pääseb).  
 - • Seda tehakse tavaliselt spetsiaalse tööriistaga, mis tekitab kunstlikku liiklust (nt sadu või tuhandeid samaaegseid päringuid).  
-- • Eesmärk on näha, kas server jaksab koormust või läheb kokku (nt muutub äärmiselt aeglaseks või läheb täiesti maas).  
+- • Eesmärk on näha, kas server kannatab koormust või jookseb kokku (nt muutub äärmiselt aeglaseks või läheb täiesti maha).  
 - • Turvameetmete elluviimiseks ei ole koormustest esmane, sest see ei tuvasta haavatavusi ega rünnakuid, vaid pigem jõudlusküsimusi.`
   },
   {
@@ -50,7 +50,7 @@ const tutorialSections = [
     title: "Mis on rakenduse funktsionaaltest?",
     content: `
 - **Funktsionaaltest** kontrollib, et tarkvararakendus teeb seda, mida kasutaja ootab (nt nupuvajutused, andmete sisestamine).  
-- • Tavaliselt pannakse paika teststsenaariumid, kus vaadatakse, kas lehekülg avaneb, vormi täitmine saadab andmed õigesti jne.  
+- • Tavaliselt pannakse paika test stsenaariumid, kus vaadatakse, kas lehekülg avaneb, vormi täitmine saadab andmed õigesti jne.  
 - • Funktsionaaltest ei tegele turvalisusega ega haavatavustega, vaid keskendub sellele, et rakendus töötaks korrektselt.`
   },
   

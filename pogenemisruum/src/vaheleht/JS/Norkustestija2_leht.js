@@ -28,7 +28,7 @@ const tutorialSections = [
     id: 3,
     title: "SQL Injector - Andmebaasi turvatestimine",
     content: `
-- **Andmebaas** on tarkvara, kus hoitakse ja haldatakse suurel hulgal andmeid (näiteks kasutajate kontod, tootekataloogid või kliendiinfo).  
+- **Andmebaas** on tarkvara, kus hoitakse ja hallatakse suurel hulgal andmeid (näiteks kasutajate kontod, tootekataloogid või kliendi info).  
 - **SQL** on keel (Structured Query Language), mida kasutatakse andmebaasist info pärimiseks ja haldamiseks (näiteks “vali kõik kasutajad”).  
 - **SQL Injection** on rünnakumeetod, kus ründaja sisestab veebivormi või URL-i kaudu andmebaasile mõeldud SQL-käsud, et pääseda ligi või muuta andmebaasis olevat infot (nt salvestada paroole või varastada kasutajate andmeid).  
 - **SQL Injector** on tööriist, mis simuleerib sellist rünnakut – see üritab erinevaid pahatahtlikke SQL-käske sisestada, et näha, kas teie veebirakendus või andmebaas laseb seda teha.  
@@ -42,7 +42,7 @@ const tutorialSections = [
 - **SMTP Checker** kontrollib teie e-posti serveri (server, mis saadab ja võtab vastu e-kirju) turvaseadeid ja seda, kuidas teie server suhtleb teiste e-posti serveritega.  
 - See tööriist testib järgmisi asju:  
 - • **Autentimine**: kas kasutaja peab enne e-kirja saatmist sisestama õige kasutajanime ja salasõna, et keegi ei saaks teie serverit ilma loata kasutada.  
-- • **Rämpsuvastane tõrje (spam filter)**: kas server suudab blokeerida kahtlased või rämpskirjad, mis võivad sisaldada pahavara või petusüsteeme.  
+- • **Rämpsuvastane tõrje (spam filter)**: kas server suudab blokeerida kahtlaseid või rämpskirju, mis võivad sisaldada pahavara või petusüsteeme.  
 - • **Konfiguratsioon**: kas serveri seaded (nt turvalised ühendused, õige pordi kasutamine) vastavad parimatele praktikatele.  
 - Kui SMTP Checker leiab, et teie serveril on valeparameetrid või see lubab saata kirju ilma autentimiseta, võib see tähendada, et häkkerid saavad teie serverit ära kasutada e-kirjade edastamiseks või pahavara levitamiseks.  
 - E-posti turvalisus on oluline, sest ründajad võivad kasutada teie serverit rämpskirjade saatmiseks või proovida petukirju inimestele saata.`  

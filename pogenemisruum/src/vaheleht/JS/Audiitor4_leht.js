@@ -10,7 +10,7 @@ const tutorialSections = [
     content: `
 - **Kvartaalne sissetungitestimine (pentest)** tähendab, et iga kolme kuu tagant kutsutakse turvaspetsialistid prooviks süsteemi „rünnata“.  
 - • Nemad proovivad leida haavatavusi ja turvaauke, enne kui pahatahtlikud häkkerid suudavad.  
-- • See aitab tagada, et teie süsteemid on iga väike periood kontrollitud ja turvalisus püsib ajakohane.`
+- • See aitab tagada, et teie süsteemid on kontrollitud ja turvalisus püsib ajakohane.`
 },
 {
     id: 2,
@@ -26,7 +26,7 @@ const tutorialSections = [
     title: "Miks andmete varundamine ja audit pole siin esmane?",
     content: `
 - **Andmete varundamine** tähendab, et tehakse koopiad failidest ja infohulgast juhuks, kui midagi katki läheb või rikutakse.  
-- • **Audit** on üldine ülevaatus, kus vaadatakse lahti protsessid ja süsteemid, et tuvastada laiemad riskid ja nõrkused.  
+- • **Audit** on üldine ülevaatus, kus vaadatakse lahti protsessid ja süsteemid, et tuvastada laiemaid riske ja nõrkusi.  
 - • Kuigi mõlemad on pikaajaliselt väga tähtsad (tagavad, et kaotatakse võimalikult vähe andmeid ja üldine turvasituatsioon paraneb), ei aita nad kohe tuvastada ja ennetada aktiivseid rünnakuid või häireid.  `
 },
 {
@@ -42,7 +42,7 @@ const tutorialSections = [
     title: "Miks andmete varundamine pole siin esmane?",
     content: `
 - **Andmete varundamine** tähendab, et tehakse koopiad olulistest failidest ja andmebaasidest juhuks, kui originaalid rikutakse või kustutatakse.  
-- • Varukoopiad võimaldavad süsteemi taastada, kui andmed on kaotsi läinud (nt riistvara rikke või pahavara tõttu).  
+- • Varukoopiad võimaldavad süsteemi taastada, kui andmed on kaduma läinud (nt riistvara rikke või pahavara tõttu).  
 - • Kuigi varundamine on tähtis andmete säilitamiseks, ei aita see reaalajas tuvastada turvaohtusid ega peatada aktiivseid rünnakuid. `  
   },
   {

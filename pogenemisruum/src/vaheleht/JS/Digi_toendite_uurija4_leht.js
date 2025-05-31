@@ -11,7 +11,7 @@ const tutorialSections = [
     - **Krüpteeritud USB-mälupulk** on väike mäluseade (nagu väline kõvaketas, aga mahub taskusse), mis muudab sinu failid loetamatuks ilma õige parooli või võtmeta.  
     - **Miks see oluline on?** Kujuta ette, et kaotad USB-mälupulga. Kui see pole krüpteeritud, võib leidja faile avada. Krüpteeritud mälupulgaga on sisu kaitstud nii, et keegi ei saa ilma paroolita faile lugeda.  
     - **Forenseerimisel** kasutatakse seda nii, et uurija saab sellega transportida või hoida olulisi tõendeid (nt logifaile, dokumente), olles kindel, et keegi ei saa neid enne analüüsi muuta või lugeda.  
-    - • Kui USB on krüpteeritud ja uksed turvaliselt suletud, on kõik failid krüptitud kujul – ainult uurija, kellel on õige võti, saab need lahti pakkida ja näha algandmeid.`
+    - • Kui USB on krüpteeritud, on kõik failid krüptitud kujul. Ainult uurija, kellel on õige võti, saab need lahti pakkida ja näha algandmeid.`
       },
       {
         id: 2,
@@ -33,12 +33,12 @@ const tutorialSections = [
         title: "Miks on süsteemilogifailid kriitilised?",
         content: `
     - **Süsteemilogid** on nagu arvuti päevik, kuhu salvestatakse kõik olulised sündmused:  
-      - Millal keegi sisselogib.  
+      - Millal keegi sisse logib.  
       - Millal programm jookseb kokku või tekib viga.  
       - Millal faile kopeeritakse või kustutatakse.  
     - **Logifailide ajatemplitest** (kuupäev ja kellaaeg) saab uurija teada, täpselt millal ja mis järjestuses sündmused aset leidsid.  
     - **Miks see oluline on?** Kujuta ette, et arvutil on turvarike ja keegi varastas andmeid. Uurija vaatab logisid, et näha:  
-            - Millal keegi selle arvutisse sisenes.  
+            - Millal keegi arvutisse sisenes.  
             - Millal põletati faile või üritati andmebaasi muuta.  
             - Kas logides paistab, et keegi üritas mitu korda vale parooliga sisse logida.  
     - • **Logifailid ei muutu** ajaloo jooksul – need jäävad alles nagu ajalugu. Seetõttu saab uurija otsustada, mis päeval mis juhtus, ja koostada täpse sündmustevoo.`
@@ -48,7 +48,7 @@ const tutorialSections = [
         title: "Võrgupaketijäädvustus (PCAP)?",
         content: `
     - **Võrgupaketijäädvustus (PCAP)** tähistab ühendatud võrguliikluse salvestamist bititasandil ehk kõige madalamal vormil.  
-    - **Mis on pakett?** Iga kord, kui sa veebi lehte laed, jaguneb sinu info väikesteks tükkideks (pakettideks). PCAP salvestab need täpsed tükkide andmed:  
+    - **Mis on pakett?** Iga kord, kui sa veebilehte laed, jaguneb sinu info väikesteks tükkideks (pakettideks). PCAP salvestab need täpsed tükkide andmed:  
             - Mis IP-aadressilt pakett tuli.  
             - Mis IP-aadressile see läks.  
             - Mis andmed paketi sees on (nt veebisaidi sisu või failiosa).  
