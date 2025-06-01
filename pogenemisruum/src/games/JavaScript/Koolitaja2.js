@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../CSS/Koolitaja2.css';
 
 function Koolitaja2() {
-  const navigate = useNavigate();
-  const [selectedMaterials, setSelectedMaterials] = useState([]);
-  const [error, setError] = useState('');
-
   const materials = ["Video", "Interaktiivne test", "Pikk tehniline tekst"];
   const correctMaterials = ["Video", "Interaktiivne test"];
+  const [selectedMaterials, setSelectedMaterials] = useState([]);
+  const [answers, setAnswers] = useState({ q2: '', q3: '' });
+  const [error, setError] = useState('');
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const toggleMaterial = (material) => {
+    setError('');
+    setIsCorrect(false);
     if (selectedMaterials.includes(material)) {
       setSelectedMaterials(selectedMaterials.filter(m => m !== material));
     } else {
@@ -18,25 +19,46 @@ function Koolitaja2() {
     }
   };
 
-  const nextStage = () => {
-    if (
+  const handleAnswerChange = (e) => {
+    setError('');
+    setIsCorrect(false);
+    setAnswers({ ...answers, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    const materialsOk = 
       selectedMaterials.length === correctMaterials.length &&
-      selectedMaterials.every(material => correctMaterials.includes(material))
-    ) {
+      selectedMaterials.every(m => correctMaterials.includes(m));
+
+    const q2Ok = answers.q2 === '12';
+    const q3Ok = answers.q3 === '2';
+
+    if (materialsOk && q2Ok && q3Ok) {
       setError('');
-      navigate('/koolitaja3_leht');
+      setIsCorrect(true);
     } else {
-      setError('Vale valik! Kontoritöötajatele sobivad kõige paremini Video ja Interaktiivne test.');
+      setError('Vale valik! Kontrolli materjale ja vastuseid ning proovi uuesti.');
+      setIsCorrect(false);
     }
+  };
+
+  const handleReset = () => {
+    setSelectedMaterials([]);
+    setAnswers({ q2: '', q3: '' });
+    setError('');
+    setIsCorrect(false);
   };
 
   return (
     <div className="stage stage2">
       <h2>Koolitusmaterjalide loomine</h2>
       <p>Vali materjalid, mis sobivad kõige paremini kontoritöötajatele:</p>
-      <ul>
+      <ul className="options">
         {materials.map(material => (
-          <li key={material}>
+          <li key={material}
+              className={selectedMaterials.includes(material) ? 'selected' : ''}
+              onClick={() => toggleMaterial(material)}
+          >
             <label>
               <input
                 type="checkbox"
@@ -48,10 +70,107 @@ function Koolitaja2() {
           </li>
         ))}
       </ul>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={nextStage}>Edasi</button>
+
+      <div className="question-block">
+        <h3>2. Milline on paroolide minimaalne pikkus tugevuse tagamiseks?</h3>
+        <div className="options">
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="6"
+              checked={answers.q2 === '6'}
+              onChange={handleAnswerChange}
+            />
+            6 tähemärki
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="8"
+              checked={answers.q2 === '8'}
+              onChange={handleAnswerChange}
+            />
+            8 tähemärki
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="12"
+              checked={answers.q2 === '12'}
+              onChange={handleAnswerChange}
+            />
+            12 tähemärki
+          </label>
+        </div>
+      </div>
+
+      <div className="question-block">
+        <h3>3. Mida tähendab kahefaktoriline autentimine (2FA)?</h3>
+        <div className="options">
+          <label>
+            <input
+              type="radio"
+              name="q3"
+              value="1"
+              checked={answers.q3 === '1'}
+              onChange={handleAnswerChange}
+            />
+            Kasutaja peab sisestama parooli ja vastama turvaküsimusele.
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="q3"
+              value="2"
+              checked={answers.q3 === '2'}
+              onChange={handleAnswerChange}
+            />
+            Kasutaja peab kasutama parooli ja täiendavat kinnitust (nt SMS-kood või äpp).
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="q3"
+              value="3"
+              checked={answers.q3 === '3'}
+              onChange={handleAnswerChange}
+            />
+            Kasutaja peab kasutama ainult biomeetrilist skannimist.
+          </label>
+        </div>
+      </div>
+
+      {error && <p className="error-message">{error}</p>}
+
+      {isCorrect && (
+        <div className="explanation">
+          <h3>Õige valik! Selgitus:</h3>
+          <p>
+            <strong>Video</strong> ja <strong>Interaktiivne test</strong> on kontoritöötajatele sobivaimad materjalid, kuna need on lühikesed, visuaalsed ja võimaldavad praktilist osalust. “Pikk tehniline tekst” võib olla liiga aeganõudev ja keeruline igapäevaselt kontoris töötavatele inimestele.
+          </p>
+          <p>
+            Paroolide minimaalne pikkus <strong>12 tähemärki</strong> tagab piisava keerukuse ja raskendab ründajate elu, kes püüavad parooli ära arvata või murda. Lühiksemad paroolid (nt 6 või 8 tähemärki) on sageli kergemini murretavad.
+          </p>
+          <p>
+            <strong>Kahefaktoriline autentimine (2FA)</strong> tähendab, et peale parooli nõutakse veel täiendavat kinnitust (näiteks SMS-kood või autentimisäpp). See annab olulise täiendava kihi turvalisust, sest kui keegi saab su parooli kätte, ei piisa sellest siiski sisselogimiseks.
+          </p>
+        </div>
+      )}
+
+      <div className="buttons">
+        <button className="reset-button" onClick={handleReset}>
+          Alusta uuesti
+        </button>
+        <button className="submit-button" onClick={handleSubmit}>
+          Esita valikud
+        </button>
+      </div>
     </div>
   );
 }
 
 export default Koolitaja2;
+

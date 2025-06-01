@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../CSS/Arhitekt4.css';
 
 const policies = [
@@ -34,6 +35,7 @@ function generateScenarios() {
 }
 
 function Arhitekt4() {
+  const navigate = useNavigate();
   const [scenarios, setScenarios] = useState(generateScenarios());
   const [policySlots, setPolicySlots] = useState(() => {
     const initial = {};
@@ -176,7 +178,9 @@ function Arhitekt4() {
             <button onClick={handleCheck}>Esita valikud</button>
           </>
         ) : (
-          <button onClick={() => alert("Mäng lõpetatud!")}>Lõpeta mäng</button>
+          <button className="primary next" onClick={() => navigate('/')}>
+              Lõpeta mänguseeria
+            </button>
         )}
       </div>
       {feedback && <div className="message">{feedback}</div>}

@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Audiitor4.css';
 
 const allRecommendations = [
-  "Kvartaalne sissetungitest",
-  "Pidev logimonitooring",
-  "Üldine auditi läbiviimine",
-  "Andmete varundamine",
-  "Turvahäirete logi analüüs"
+  { text: "Kvartaalne sissetungitest", explanation: "Regulaarne sissetungitestimine aitab leida ja parandada haavatavusi enne, kui ründaja neid kasutab." },
+  { text: "Pidev logimonitooring", explanation: "Järelevalve logide üle võimaldab tuvastada kahtlast tegevust ja reageerida kiiresti." },
+  { text: "Üldine auditi läbiviimine", explanation: "Üldaudit annab ülevaate protsessidest, kuid ei taga reaalajas tuvastust." },
+  { text: "Andmete varundamine", explanation: "Varundamine on oluline, kuid ei too reaalajas turvahäirete avastamist." },
+  { text: "Turvahäirete logi analüüs", explanation: "Logianalüüs aitab tuvastada mustreid, kuid pidev monitooring on siiski prioriteetsem." }
 ];
 const correctRecommendations = [
   "Kvartaalne sissetungitest",
@@ -24,11 +24,11 @@ function shuffleArray(array) {
 }
 
 function generateRecommendationOptions() {
-  const distractors = allRecommendations.filter(rec => !correctRecommendations.includes(rec));
-  const subsetSize = Math.floor(Math.random() * 2) + 3; // 3-4 options
+  const distractors = allRecommendations.filter(rec => !correctRecommendations.includes(rec.text));
+  const subsetSize = Math.floor(Math.random() * 2) + 3;
   const needed = subsetSize - correctRecommendations.length;
   return shuffleArray([
-    ...correctRecommendations,
+    ...correctRecommendations.map(text => allRecommendations.find(r => r.text === text)),
     ...shuffleArray(distractors).slice(0, needed)
   ]);
 }
@@ -86,40 +86,54 @@ export default function Audiitor4() {
         Vali <strong>{correctRecommendations.length}</strong> peamist meetet, mis tagavad infoajastuse ja rünnakute varajase avastamise.
       </p>
       <ul className="recommendation-list">
-        {options.map(rec => (
+        {options.map(item => (
           <li
-            key={rec}
-            onClick={() => toggleRecommendation(rec)}
+            key={item.text}
+            onClick={() => toggleRecommendation(item.text)}
             className={
-              selected.includes(rec)
+              selected.includes(item.text)
                 ? checked
-                  ? correctRecommendations.includes(rec)
+                  ? correctRecommendations.includes(item.text)
                     ? 'selected-correct'
                     : 'selected-incorrect'
                   : 'selected'
                 : ''
             }
           >
-            <input type="checkbox" checked={selected.includes(rec)} readOnly /> {rec}
+            <input type="checkbox" checked={selected.includes(item.text)} readOnly /> {item.text}
           </li>
         ))}
       </ul>
       <div className="buttons">
+        <button className="reset" onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!checked ? (
-          <button className="primary" onClick={handleCheck} disabled={selected.length === 0}>
-            Kontrolli vastused
+          <button className="primary submit" onClick={handleCheck} disabled={selected.length === 0}>
+            Esita valikud
           </button>
         ) : (
-          <button className="primary" onClick={handleReset}>
-            Alusta uuesti
-          </button>
-        )}
-        {checked && feedback.startsWith('Õige') && (
-          <button onClick={() => navigate('/')}>Lõpeta mänguseeria</button>
+          feedback.startsWith('Õige') && (
+            <button className="primary next" onClick={() => navigate('/')}>
+              Lõpeta mänguseeria
+            </button>
+          )
         )}
       </div>
       {feedback && <div className={`feedback ${messageClass}`}>{feedback}</div>}
       {report && <div className="report">{report}</div>}
+      {checked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {options.map(item => (
+              <li key={item.text}>
+                <strong>{item.text}:</strong> {item.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

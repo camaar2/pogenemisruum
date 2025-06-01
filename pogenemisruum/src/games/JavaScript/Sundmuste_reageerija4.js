@@ -1,15 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Sundmuste_reageerija4.css';
 
 const allActions = [
-  { id: 1, name: 'Isoleeri nakatunud host', isCorrect: true },
-  { id: 2, name: 'Blokeeri pahatahtlik IP-aadress', isCorrect: true },
-  { id: 3, name: 'Lukusta kompromiteeritud kasutajakontod', isCorrect: true },
-  { id: 4, name: 'Uuenda haavatavate süsteemide paroolid', isCorrect: true },
-  { id: 5, name: 'Kustuta kõvakettal olevad logid', isCorrect: false },
-  { id: 6, name: 'Taaskäivita süsteemid kohe', isCorrect: false },
-  { id: 7, name: 'Luba lõplik juurdepääs kõigile töötajatele', isCorrect: false }
+  {
+    id: 1,
+    name: 'Isoleeri nakatunud host',
+    isCorrect: true,
+    explanation: 'Nakkinud host eraldamine peatab ründe leviku võrku, mis on kriitiline containment-strateegia osa.'
+  },
+  {
+    id: 2,
+    name: 'Blokeeri pahatahtlik IP-aadress',
+    isCorrect: true,
+    explanation: 'Pahatahtliku IP-blokeerimine takistab ründaja ligipääsu ja peatab halva liikluse ettevõtte võrgus.'
+  },
+  {
+    id: 3,
+    name: 'Lukusta kompromiteeritud kasutajakontod',
+    isCorrect: true,
+    explanation: 'Kasutajakontode lukustamine peatab ründaja juurdepääsu, vähendades edasist kompromisse.'
+  },
+  {
+    id: 4,
+    name: 'Uuenda haavatavate süsteemide paroolid',
+    isCorrect: true,
+    explanation: 'Paroolide uuendamine taastab turva ja takistab ründajal taasligipääsu, mis on osa eradikatsioonist.'
+  },
+  {
+    id: 5,
+    name: 'Kustuta kõvakettal olevad logid',
+    isCorrect: false,
+    explanation: 'Logide kustutamine hävitab tõendusmaterjali ja takistab forensilist uurimist.'
+  },
+  {
+    id: 6,
+    name: 'Taaskäivita süsteemid kohe',
+    isCorrect: false,
+    explanation: 'Süsteemide kiire taaskäivitamine võib ründe jätkumisel andmeid kaotada ja ei pruugi containment’i aidata.'
+  },
+  {
+    id: 7,
+    name: 'Luba lõplik juurdepääs kõigile töötajatele',
+    isCorrect: false,
+    explanation: 'Kõigile töötajatele ligipääsu lubamine laiendab riskipinda ja rikub security-isoleerimise põhimõtteid.'
+  }
 ];
 
 function shuffleArray(array) {
@@ -27,6 +62,7 @@ function generateOptions() {
   shuffleArray(distractors);
   const selected = [...correct];
   let i = 0;
+  // lisame kaks eksitavat valikut
   while (selected.length < correct.length + 2 && i < distractors.length) {
     selected.push(distractors[i]);
     i++;
@@ -36,10 +72,11 @@ function generateOptions() {
 
 function Sundmuste_reageerija4() {
   const navigate = useNavigate();
-  const [options, setOptions] = useState(generateOptions());
+  const [options] = useState(generateOptions());
   const [selectedActions, setSelectedActions] = useState([]);
   const [feedback, setFeedback] = useState('');
   const [isLocked, setIsLocked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const correctNames = allActions
     .filter(a => a.isCorrect)
@@ -53,38 +90,31 @@ function Sundmuste_reageerija4() {
         ? prev.filter(n => n !== name)
         : [...prev, name]
     );
-  };
-
-  const isSelectionCorrect = () => {
-    const sel = [...selectedActions].sort();
-    return sel.length === correctNames.length && sel.every((v, i) => v === correctNames[i]);
-  };
-
-  useEffect(() => {
-    if (!isLocked && selectedActions.length > 0 && !isSelectionCorrect()) {
-      setFeedback('Vale valik! Õiged meetmed valitakse automaatselt...');
-      const timer = setTimeout(() => {
-        setSelectedActions(correctNames);
-        setFeedback('Õige! Kõik vajalikud containment-meetmed on valitud.');
-        setIsLocked(true);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-    if (isSelectionCorrect()) {
-      setFeedback('Tubli! Kõik vajalikud containment-meetmed on valitud.');
-      setIsLocked(true);
-    }
-  }, [selectedActions]);
-
-  const handleReset = () => {
-    if (isLocked) return;
-    setOptions(generateOptions());
-    setSelectedActions([]);
     setFeedback('');
   };
 
-  const handleFinish = () => {
-    navigate('/');
+  const handleSubmit = () => {
+    const sel = [...selectedActions].sort();
+    const ok =
+      sel.length === correctNames.length &&
+      sel.every((v, i) => v === correctNames[i]);
+
+    if (ok) {
+      setFeedback('Tubli! Kõik vajalikud containment-meetmed on valitud.');
+      setIsCorrect(true);
+      setIsLocked(true);
+    } else {
+      setFeedback('Vale valik! Palun proovi uuesti või lähtesta valikud.');
+      setIsCorrect(false);
+      setIsLocked(true);
+    }
+  };
+
+  const handleReset = () => {
+    setSelectedActions([]);
+    setFeedback('');
+    setIsLocked(false);
+    setIsCorrect(false);
   };
 
   return (
@@ -108,15 +138,41 @@ function Sundmuste_reageerija4() {
         ))}
       </ul>
       <div className="buttons">
+        <button onClick={handleReset}>Alusta uuesti</button>
         {!isLocked ? (
-          <button onClick={handleReset}>Alusta uuesti</button>
+          <button className="primary" onClick={handleSubmit}>
+            Esita valikud
+          </button>
         ) : (
-          <button onClick={handleFinish}>Lõpeta mäng</button>
+          isCorrect && (
+            <button className="primary" onClick={() => navigate('/')}>
+              Lõpeta mäng
+            </button>
+          )
         )}
       </div>
-      {feedback && <div className="feedback">{feedback}</div>}
+      {feedback && (
+        <div className={`feedback ${isCorrect ? 'message-correct' : 'message-incorrect'}`}>
+          {feedback}
+        </div>
+      )}
+      {isLocked && isCorrect && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {allActions
+              .filter(a => selectedActions.includes(a.name))
+              .map(a => (
+                <li key={a.id}>
+                  <strong>{a.name}:</strong> {a.explanation}
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
 
 export default Sundmuste_reageerija4;
+

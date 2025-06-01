@@ -2,22 +2,25 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Rakendaja4.css';
 
+const questions = [
+  {
+    id: 1,
+    text: "Milline turvameede aitab takistada pahavara levikut võrgu sees?",
+    options: ["Tulemüür", "VPN", "Antiviirus", "Võrgu segmentimine"],
+    correct: "Võrgu segmentimine",
+    explanation: "Võrgu segmentimine piiritleb erinevad alamvõrgud ja takistab pahavaral levikut ühest segmendist teise."
+  },
+  {
+    id: 2,
+    text: "Milline on tugeva autentimise peamine omadus?",
+    options: ["Lihtne salasõna", "Kahefaktoriline autentimine", "Ainult PIN-kood", "Sõrmejäljelugeja keelamine"],
+    correct: "Kahefaktoriline autentimine",
+    explanation: "Kahefaktoriline autentimine nõuab kasutajalt kahte eraldi tõendusvormi (nt parool + mobiilne kinnitus), mis tugevdab turvalisust."
+  }
+];
+
 export default function Rakendaja4() {
   const navigate = useNavigate();
-  const questions = [
-    {
-      id: 1,
-      text: "Milline turvameede aitab takistada pahavara levikut võrgu sees?",
-      options: ["Tulemüür", "VPN", "Antiviirus", "Võrgu segmentimine"],
-      correct: "Võrgu segmentimine"
-    },
-    {
-      id: 2,
-      text: "Milline on tugeva autentimise peamine omadus?",
-      options: ["Lihtne salasõna", "Kahefaktoriline autentimine", "Ainult PIN-kood", "Sõrmejäljelugeja keelamine"],
-      correct: "Kahefaktoriline autentimine"
-    }
-  ];
   const total = questions.length;
 
   const [answers, setAnswers] = useState({});
@@ -98,26 +101,36 @@ export default function Rakendaja4() {
                   </label>
                 );
               })}
+              {checked && (
+                <div className="explanation">
+                  <strong>Selgitus:</strong> {q.explanation}
+                </div>
+              )}
             </div>
           );
         })}
       </div>
 
-      <div className="buttons">
+      <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <button className="reset" onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!checked ? (
           <button
             className="primary"
             onClick={handleCheck}
             disabled={Object.keys(answers).length !== total}
           >
-            Kontrolli vastuseid
+            Esita valikud
           </button>
         ) : locked ? (
           <button className="primary" onClick={handleFinish}>
             Lõpeta mäng
           </button>
         ) : (
-          <button onClick={handleReset}>Proovi uuesti</button>
+          <button className="retry" onClick={handleReset}>
+            Proovi uuesti
+          </button>
         )}
       </div>
 

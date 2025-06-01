@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Norkustestija2.css';
 
 const tools = [
-  { id: 1, name: "Nmap", correctTarget: "network" },
-  { id: 2, name: "Nikto", correctTarget: "web" },
-  { id: 3, name: "SQL Injector", correctTarget: "database" },
-  { id: 4, name: "SMTP Checker", correctTarget: "mail" }
+  { id: 1, name: "Nmap", correctTarget: "network", explanation: "Nmap on võrguskanner, mis avastab avatud pordid ja teenused võrgu tasandil." },
+  { id: 2, name: "Nikto", correctTarget: "web", explanation: "Nikto on veebiserveri skanner, mis tuvastab HTTP-teenuse haavatavusi." },
+  { id: 3, name: "SQL Injector", correctTarget: "database", explanation: "SQL Injector testib andmebaasiserveri haavatavust SQL-süstide suhtes." },
+  { id: 4, name: "SMTP Checker", correctTarget: "mail", explanation: "SMTP Checker kontrollib meilisüsteemi konfiguratsiooni ja turvalisust." }
 ];
 
 const targets = [
@@ -28,7 +28,7 @@ export default function Norkustestija2() {
     "Sihtsüsteemide kaardistamisel on oluline kasutada õigeid skannimis- ja testimistööriistu, " +
     "et tuvastada võimalikud haavatavused igal tasandil. " +
     "Lohista iga tööriist vastavale sihtsüsteemile, mis sobib antud tööriista põhifunktsiooni jaoks. " +
-    "Eesmärk on asetada kõik neli tööriista õigetesse kohtadesse, et tagada täielik ülevaade. ";
+    "Eesmärk on asetada kõik neli tööriista õigetesse kohtadesse, et tagada täielik ülevaade.";
 
   const handleDragStart = (e, toolId) => {
     e.dataTransfer.setData("toolId", toolId);
@@ -126,23 +126,40 @@ export default function Norkustestija2() {
         </div>
       </div>
       <div className="buttons">
+        <button onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!checked ? (
           <button
             className="primary"
             onClick={handleCheck}
             disabled={Object.keys(placements).length !== tools.length}
           >
-            Kontrolli paigutust
+            Esita valikud
           </button>
         ) : locked ? (
           <button className="primary" onClick={handleNext}>
             Edasi
           </button>
         ) : (
-          <button onClick={handleReset}>Proovi uuesti</button>
+          <button onClick={handleReset}>
+            Proovi uuesti
+          </button>
         )}
       </div>
       {feedback && <div className={`feedback ${feedbackClass}`}>{feedback}</div>}
+      {checked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {tools.map(item => (
+              <li key={item.id}>
+                <strong>{item.name}:</strong> {item.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

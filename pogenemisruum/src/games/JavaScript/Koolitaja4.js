@@ -33,10 +33,13 @@ function Koolitaja4() {
   const [selected, setSelected] = useState({});
   const [feedback, setFeedback] = useState("");
   const [isLocked, setIsLocked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const handleChange = (id, value) => {
     if (isLocked) return;
     setSelected(prev => ({ ...prev, [id]: value }));
+    setFeedback("");
+    setIsCorrect(false);
   };
 
   const handleSubmit = () => {
@@ -49,8 +52,10 @@ function Koolitaja4() {
     if (allCorrect && Object.keys(selected).length === indicators.length) {
       setFeedback("Õige! Kõik elemendid on õigesti märgitud.");
       setIsLocked(true);
+      setIsCorrect(true);
     } else {
       setFeedback("Mõned elemendid on valesti märgitud või jäi märkimata. Proovi uuesti!");
+      setIsCorrect(false);
     }
   };
 
@@ -59,6 +64,7 @@ function Koolitaja4() {
     setSelected({});
     setFeedback("");
     setIsLocked(false);
+    setIsCorrect(false);
   };
 
   const handleFinish = () => {
@@ -66,9 +72,10 @@ function Koolitaja4() {
   };
 
   return (
-    <div className={`phishnomore-stage4 ${isLocked ? "correct-bg" : feedback.includes("valesti") ? "incorrect-bg" : ""}`}>
+    <div className={`stage stage4 ${isLocked ? "correct-bg" : feedback.includes("valesti") ? "incorrect-bg" : ""}`}>
       <h2>Viimane phishing-indikaatorite tuvastamine</h2>
       <p>Märgi iga üksus kui <strong>„Phish”</strong> või <strong>„Safe”</strong>:</p>
+
       <table className="indicators-table">
         <thead>
           <tr>
@@ -105,18 +112,40 @@ function Koolitaja4() {
           ))}
         </tbody>
       </table>
+
+      {isCorrect && (
+        <div className="explanation">
+          <h3>Selgitus phishing-indikaatorite kohta:</h3>
+          <ul>
+            <li><strong>„Kinnita oma kontod andes andmed”</strong> – tüüpiline phishi-päis, püüab kasutajat kiirelt hirmutada ja sundida tegutsema.</li>
+            <li><strong>@officialbank.com</strong> – turvaline saatja, domään vastab tegelikule ettevõttele.</li>
+            <li><strong>Kahtlane link: https://verify-you.zz/…</strong> – phishi domeen ja petlik aadress, suunab vääritud veebilehele.</li>
+            <li><strong>Manus „pdf” arve pärineb teadaolevalt kliendilt</strong> – turvaline, pärineb usaldusväärselt allikalt.</li>
+            <li><strong>Laiend piltideks maskeeritud .exe failid</strong> – phish, pahatahtlik käivitatav fail peidetud pildina.</li>
+            <li><strong>Tavaline tervitus „Tere, John!”</strong> – turvaline, isikupärane ja usaldusväärne algus.</li>
+            <li><strong>Saatja profiil: mittekattuv nimi vs. e-posti aadress</strong> – phish, profiil ei vasta saatja aadressile, vihjab petuskeemile.</li>
+          </ul>
+        </div>
+      )}
+
       <div className="buttons">
-        {!isLocked && (
+        {!isLocked ? (
           <>
-            <button onClick={handleSubmit}>Kontrolli valikuid</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
+            <button className="submit-button" onClick={handleSubmit}>
+              Esita valikud
+            </button>
+            <button className="reset-button" onClick={handleReset}>
+              Alusta uuesti
+            </button>
           </>
-        )}
-        {isLocked && (
-          <button onClick={handleFinish}>Lõpeta mäng</button>
+        ) : (
+          <button className="finish-button" onClick={handleFinish}>
+            Lõpeta mäng
+          </button>
         )}
       </div>
-      {feedback && <div className="feedback">{feedback}</div>}
+
+      {feedback && <div className={`feedback ${isCorrect ? "message-correct" : "message-incorrect"}`}>{feedback}</div>}
     </div>
   );
 }

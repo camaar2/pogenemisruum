@@ -9,7 +9,6 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
-/* Edu ja vea taustad pärast vastuse lukku */
 .correct-choice,
 .event-triage.correct-bg {
   background: #e8f8e8;
@@ -20,7 +19,6 @@
   background: #ffeaea;
 }
 
-/* Pealkiri ja juhised */
 .event-triage h1 {
   text-align: center;
   margin-bottom: 12px;
@@ -32,7 +30,6 @@
   color: #455a64;
 }
 
-/* Logiridade loetelu */
 .log-list {
   display: flex;
   flex-direction: column;
@@ -40,21 +37,17 @@
   margin-bottom: 24px;
 }
 
-/* Üks logirida */
 .log-line {
-  /* … muud reeglid … */
 
   transition-property: background-color;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
 }
 
-/* Valitud enne lukustamist */
 .log-line.chosen {
   background: #e3f2fd;
 }
 
-/* Pärast lukustamist – tulemuse põhjal */
 .log-line.correct {
   background: #e8f8e8;
 }
@@ -68,7 +61,6 @@
   background: #fafafa;
 }
 
-/* Nupud */
 .buttons {
   display: flex;
   gap: 12px;
@@ -91,7 +83,6 @@ button:active {
   transform: scale(0.97);
 }
 
-/* Tagasisõnum */
 .message {
   margin-top: 22px;
   font-weight: bold;

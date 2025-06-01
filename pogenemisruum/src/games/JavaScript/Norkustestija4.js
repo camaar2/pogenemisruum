@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Norkustestija4.css';
 
-// Caesari šifri lahtimurdmise funktsioon
 function caesarDecode(text, shift) {
   return text.split('').map(char => {
     if (/[a-z]/.test(char)) {
@@ -27,7 +26,6 @@ export default function Norkustestija4() {
   const [checked, setChecked] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Ülesande kirjeldus: miks ja kuidas dekodeerida
   const scenario =
     "Caesari šifri demomstraatori ülesanne on näidata, kuidas lihtsalt nihkega krüpteerimine töötab. " +
     "Antud süsteem kasutab lihtsat tähenihkesüsteemi, kus iga täht nihkub ASCII järjekorras. " +

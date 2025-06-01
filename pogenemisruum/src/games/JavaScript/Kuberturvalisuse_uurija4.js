@@ -10,7 +10,6 @@ const PAIRS = [
   { id: 5, vuln: "Liiga palju õigusi", fix: "Piira kasutaja õigusi" }
 ];
 
-/* Fisher–Yates segamine */
 const shuffle = (arr) => {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -20,7 +19,6 @@ const shuffle = (arr) => {
   return a;
 };
 
-/* Uus segatud kaardipakk */
 const newDeck = () => {
   const deck = [];
   PAIRS.forEach(({ id, vuln, fix }) => {
@@ -30,17 +28,15 @@ const newDeck = () => {
   return shuffle(deck);
 };
 
-/* -------- Komponent (ilma export-sõnata) -------- */
 function Kuberturvalisuse_uurija4() {
   const navigate = useNavigate();
 
   const [cards, setCards]   = useState(newDeck());
-  const [picked, setPicked] = useState([]);   // valitud kaardi indeksid
+  const [picked, setPicked] = useState([]);
   const [locking, setLocking] = useState(false);
   const [msg, setMsg]         = useState("");
-  const [done, setDone]       = useState(0);  // mitu paari leitud
+  const [done, setDone]       = useState(0);
 
-  /* Kaardiklõps */
   const clickCard = (idx) => {
     if (locking) return;
     const card = cards[idx];
@@ -60,7 +56,6 @@ function Kuberturvalisuse_uurija4() {
       const cardB = next[b];
 
       if (cardA.pair === cardB.pair && cardA.uid !== cardB.uid) {
-        // Õige paar
         next[a].matched = true;
         next[b].matched = true;
         setCards(next);
@@ -71,7 +66,6 @@ function Kuberturvalisuse_uurija4() {
           setMsg("✅ Õige paar!");
         }, 600);
       } else {
-        // Vale paar
         setTimeout(() => {
           next[a].flipped = false;
           next[b].flipped = false;
@@ -82,11 +76,10 @@ function Kuberturvalisuse_uurija4() {
         }, 1000);
       }
     } else {
-      setMsg(""); // esimene valik – puhasta teade
+      setMsg("");
     }
   };
 
-  /* Alusta uuesti */
   const resetGame = () => {
     setCards(newDeck());
     setPicked([]);
@@ -95,7 +88,6 @@ function Kuberturvalisuse_uurija4() {
     setDone(0);
   };
 
-  /* JSX */
   return (
     <div className="memory-card">
       <h1>4. ETAPP: Oht ↔ Lahendus</h1>

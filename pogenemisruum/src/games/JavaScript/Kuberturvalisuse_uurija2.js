@@ -85,7 +85,7 @@ function Kuberturvalisuse_uurija2() {
       <div className="buttons">
         {!locked ? (
           <>
-            <button onClick={checkAnswers}>Kontrolli valikuid</button>
+            <button onClick={checkAnswers}>Esita valikud</button>
             <button onClick={reset}>Alusta uuesti</button>
           </>
         ) : (

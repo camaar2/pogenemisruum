@@ -55,9 +55,11 @@
   border-radius: 0.25rem;
   cursor: pointer;
 }
-.buttons button:hover {
-  background-color: #aa1352;
+button.primary {
+  background-color: #e4067e;
+  color: white;
 }
+button.primary:hover { background-color: #e4067e; }
 .message {
   font-weight: bold;
   margin-top: 1rem;
@@ -74,4 +76,26 @@
 }
 .incorrect-bg {
   background-color: #ffe6e6;
+}
+
+.explanations {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0f8ff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: left;
+}
+.explanations h2 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+.explanations ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  padding-left: 0;
+}
+.explanations ul li {
+  margin-bottom: 6px;
+  line-height: 1.4;
 }

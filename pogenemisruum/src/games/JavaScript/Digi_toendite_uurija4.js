@@ -6,27 +6,32 @@ const evidencePairs = [
   {
     id: 1,
     toend: "Krüpteeritud USB-mälupulk",
-    kirjeldus: "Turvaliselt kaitstud andmekandja, kust saab taastada faile ja metaandmeid"
+    kirjeldus: "Turvaliselt kaitstud andmekandja, kust saab taastada faile ja metaandmeid",
+    explanation: "Krüpteeritud USB-mälupulk laseb taastada originaalandmed puutumata kujul ja näitab, kuidas andmed olid kaitstud."
   },
   {
     id: 2,
     toend: "Kahjuriprogrammi näidis",
-    kirjeldus: "Pahatahtliku koodi prooviversioon, mida analüüsitakse eraldi testkeskkonnas"
+    kirjeldus: "Pahatahtliku koodi prooviversioon, mida analüüsitakse eraldi testkeskkonnas",
+    explanation: "Kahjuriprogrammi näidis võimaldab analüüsida, kuidas kood töötab ja milliseid jälgi ta on süsteemi jätnud."
   },
   {
     id: 3,
     toend: "Süsteemilogifail",
-    kirjeldus: "Sündmuste ja veateadete ajalugu, mis aitab tuvastada kahtlasi tegevusi"
+    kirjeldus: "Sündmuste ja veateadete ajalugu, mis aitab tuvastada kahtlasi tegevusi",
+    explanation: "Süsteemilogifailist saab kontrollida eri hetkedel toimunud tegevusi ja veateateid, mis viitavad võimalikule ründeaktiivsusele."
   },
   {
     id: 4,
     toend: "Võrgupaketi-jäädvustus",
-    kirjeldus: "Reaalajas püütud paketid, mis annavad ülevaate võrguliiklusest ja ründemustritest"
+    kirjeldus: "Reaalajas püütud paketid, mis annavad ülevaate võrguliiklusest ja ründemustritest",
+    explanation: "Võrgupaketi jäädvustus näitab detailset liiklust, mis aitab tuvastada kahtlasi andmepäringuid ja rünnakuid."
   },
   {
     id: 5,
     toend: "Forenseeriline kettakujutis",
-    kirjeldus: "Bititasandiline kloon algsest mäluseadmest kohtuekspertiisi ja taastamise jaoks"
+    kirjeldus: "Bititasandiline kloon algsest mäluseadmest kohtuekspertiisi ja taastamise jaoks",
+    explanation: "Forenseeriline kettakujutis võimaldab uurida kogu failisüsteemi puutumata kujul ja taastada kustutatud faile."
   }
 ];
 
@@ -154,15 +159,34 @@ export default function Digi_toendite_uurija4() {
         ))}
       </div>
       <div className="buttons">
+        <button className="reset" onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {matchesFound === evidencePairs.length ? (
-          <button className="primary" onClick={handleEnd}>Lõpeta mäng</button>
+          <button className="primary next" onClick={handleEnd}>
+            Lõpeta mäng
+          </button>
         ) : (
-          <button className="primary" onClick={handleReset}>Alusta uuesti</button>
+          <button className="primary submit" onClick={handleReset}>
+            Proovi uuesti
+          </button>
         )}
       </div>
       {message && (
         <div className={`message ${message.startsWith('🎉') ? 'message-correct' : 'message-incorrect'}`}>
           {message}
+        </div>
+      )}
+      {matchesFound === evidencePairs.length && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {evidencePairs.map(p => (
+              <li key={p.id}>
+                <strong>{p.toend}:</strong> {p.explanation}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

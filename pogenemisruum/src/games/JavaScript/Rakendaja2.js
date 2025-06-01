@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Rakendaja2.css';
 
 const rules = [
-  { id: 1, text: 'Luba ainult HTTPS liiklus', correct: true },
-  { id: 2, text: 'Luba kogu liiklus ilma piiranguteta', correct: false },
-  { id: 3, text: 'Keela tundmatud sissetulevad ühendused', correct: true },
-  { id: 4, text: 'Luba FTP liiklus igast allikast', correct: false }
+  { id: 1, text: 'Luba ainult HTTPS liiklus', correct: true, explanation: "HTTPS tagab andmete krüpteerimise ja turvalisuse." },
+  { id: 2, text: 'Luba kogu liiklus ilma piiranguteta', correct: false, explanation: "See reegel avab võrgu turvariskidele, kuna kõik liiklus lubatud." },
+  { id: 3, text: 'Keela tundmatud sissetulevad ühendused', correct: true, explanation: "Tundmatute ühenduste blokeerimine vähendab volitamata juurdepääsu riski." },
+  { id: 4, text: 'Luba FTP liiklus igast allikast', correct: false, explanation: "FTP pole turvaline ja ei tohiks olla lubatud ilma piiranguteta." }
 ];
 
 export default function Rakendaja2() {
@@ -29,16 +29,25 @@ export default function Rakendaja2() {
     const sel = [...selected].sort((a, b) => a - b);
     const ok = JSON.stringify(correctIds) === JSON.stringify(sel);
     setLocked(true);
-    setMessage(ok
-      ? '🎉 Õige! Õiged tulemüüri reeglid on valitud.'
-      : '❌ Mõni reegel on vale või puudu. Proovi uuesti.'
+    setMessage(
+      ok
+        ? '🎉 Õige! Õiged tulemüüri reeglid on valitud.'
+        : '❌ Mõni reegel on vale või puudu. Proovi uuesti.'
     );
+  };
+
+  const handleReset = () => {
+    setLocked(false);
+    setMessage('');
+    setSelected([]);
   };
 
   const handleNext = () => navigate('/rakendaja3_leht');
 
   const containerClass = locked
-    ? message.startsWith('🎉') ? 'correct-bg' : 'incorrect-bg'
+    ? message.startsWith('🎉')
+      ? 'correct-bg'
+      : 'incorrect-bg'
     : '';
 
   return (
@@ -80,19 +89,26 @@ export default function Rakendaja2() {
           );
         })}
       </ul>
-      <div className="buttons">
+      <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <button className="reset" onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!locked ? (
           <button
-            className="primary"
+            className="primary submit"
             onClick={handleSubmit}
             disabled={selected.length !== correctCount}
           >
-            Kontrolli valikuid
+            Esita valikud
           </button>
         ) : message.startsWith('🎉') ? (
-          <button className="primary" onClick={handleNext}>Edasi</button>
+          <button className="primary next" onClick={handleNext}>
+            Edasi
+          </button>
         ) : (
-          <button onClick={() => { setLocked(false); setMessage(''); }}>Proovi uuesti</button>
+          <button className="primary submit" onClick={handleReset}>
+            Proovi uuesti
+          </button>
         )}
       </div>
       {message && (
@@ -100,6 +116,18 @@ export default function Rakendaja2() {
           ? (message.startsWith('🎉') ? 'message-correct' : 'message-incorrect')
           : ''}`}>
           {message}
+        </div>
+      )}
+      {locked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {rules.map(r => (
+              <li key={r.id}>
+                <strong>{r.text}:</strong> {r.explanation}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

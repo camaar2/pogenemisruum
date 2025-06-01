@@ -1,12 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Turvapoliitika_eestvedaja3.css';
 
 const allItems = [
-  { id: 1, text: 'Turvapoliitika dokumentatsioon', correct: true },
-  { id: 2, text: 'Töötajate isiklikud e-kirjad', correct: false },
-  { id: 3, text: 'Juurdepääsukontrollide logid', correct: true },
-  { id: 4, text: 'Kohvikumenüü', correct: false }
+  {
+    id: 1,
+    text: 'Turvapoliitika dokumentatsioon',
+    correct: true,
+    explanation: 'Turvapoliitika dokumentatsioon on auditis oluline, sest see tõendab, et organisatsioon järgib kehtivaid turbe- ja andmekaitseprotseduure.'
+  },
+  {
+    id: 2,
+    text: 'Töötajate isiklikud e-kirjad',
+    correct: false,
+    explanation: 'Töötajate isiklikud e-kirjad ei ole auditi jaoks asjakohane materjal – neid ei ole vaja turvapoliitika kontrollimisel.'
+  },
+  {
+    id: 3,
+    text: 'Juurdepääsukontrollide logid',
+    correct: true,
+    explanation: 'Juurdepääsukontrollide logid näitavad, kes ja millal süsteemidesse sisse logis, mis on auditi seisukohalt oluline tõend.'
+  },
+  {
+    id: 4,
+    text: 'Kohvikumenüü',
+    correct: false,
+    explanation: 'Kohvikumenüü ei ole seotud auditiprotsessiga ega aita turvapoliitika hindamisel.'
+  }
 ];
 
 function Turvapoliitika_eestvedaja3() {
@@ -14,6 +34,7 @@ function Turvapoliitika_eestvedaja3() {
   const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
   const [locked, setLocked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const toggle = (id) => {
     if (locked) return;
@@ -30,6 +51,7 @@ function Turvapoliitika_eestvedaja3() {
       return;
     }
     const allCorrect = chosen.every(i => i.correct);
+    setIsCorrect(allCorrect);
     if (allCorrect) {
       setFeedback('Õige! Auditiks vajalikud materjalid on olemas.');
     } else {
@@ -42,13 +64,17 @@ function Turvapoliitika_eestvedaja3() {
     setSelected([]);
     setFeedback('');
     setLocked(false);
+    setIsCorrect(false);
   };
 
   return (
-    <div className={`risk-prioritization ${locked ? (feedback.startsWith('Õige') ? 'correct-bg' : 'incorrect-bg') : ''}`}>
+    <div className={`risk-prioritization ${locked ? (isCorrect ? 'correct-bg' : 'incorrect-bg') : ''}`}>
       <h1>Auditiks valmistumine</h1>
       <div className="instructions">
-        <p>Vali andmed ja dokumendid, mis peavad auditiks valmis olema. Kokku on <strong>{allItems.filter(i => i.correct).length}</strong>:</p>
+        <p>
+          Vali andmed ja dokumendid, mis peavad auditiks valmis olema. Kokku on&nbsp;
+          <strong>{allItems.filter(i => i.correct).length}</strong>:
+        </p>
       </div>
       <ul className="item-list">
         {allItems.map(item => (
@@ -60,11 +86,11 @@ function Turvapoliitika_eestvedaja3() {
                 ? item.correct
                   ? 'selected correct'
                   : selected.includes(item.id)
-                  ? 'selected incorrect'
-                  : ''
+                    ? 'selected incorrect'
+                    : ''
                 : selected.includes(item.id)
-                ? 'selected'
-                : ''
+                  ? 'selected'
+                  : ''
             }
           >
             <input
@@ -77,18 +103,33 @@ function Turvapoliitika_eestvedaja3() {
         ))}
       </ul>
       <div className="buttons">
+        <button onClick={handleReset}>Alusta uuesti</button>
         {!locked ? (
-          <>
-            <button className="primary" onClick={handleSubmit}>Kontrolli</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
-          </>
+          <button className="primary" onClick={handleSubmit}>Esita valikud</button>
         ) : (
           <button className="primary" onClick={() => navigate('/turvapoliitika_eestvedaja4_leht')}>Edasi</button>
         )}
       </div>
-      {feedback && <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>{feedback}</div>}
+      {feedback && (
+        <div className={`message ${isCorrect ? 'message-correct' : 'message-incorrect'}`}>
+          {feedback}
+        </div>
+      )}
+      {locked && (
+        <div className="explanations">
+          <h2>Selgitused valikute kohta:</h2>
+          <ul>
+            {allItems.map(item => (
+              <li key={item.id}>
+                <strong>{item.text}:</strong> {item.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
 
 export default Turvapoliitika_eestvedaja3;
+

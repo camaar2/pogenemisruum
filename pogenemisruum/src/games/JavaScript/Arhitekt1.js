@@ -2,36 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Arhitekt1.css';
 
-const systems = [
-  {
-    id: 1,
-    name: "Veebiserver",
-    risks: shuffleArray([
-      { id: 'r1', label: "Veebirünnakute võimalus" },
-      { id: 'r2', label: "Andmeleke" }
-    ]),
-    correctRiskId: 'r1'
-  },
-  {
-    id: 2,
-    name: "Andmebaas",
-    risks: shuffleArray([
-      { id: 'r3', label: "Andmeleke" },
-      { id: 'r4', label: "Pahavara levik" }
-    ]),
-    correctRiskId: 'r3'
-  },
-  {
-    id: 3,
-    name: "E-posti server",
-    risks: shuffleArray([
-      { id: 'r5', label: "Phishing rünnakute võimalus" },
-      { id: 'r6', label: "Pahavara levik" }
-    ]),
-    correctRiskId: 'r5'
-  }
-];
-
 function shuffleArray(array) {
   const newArr = [...array];
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -41,13 +11,75 @@ function shuffleArray(array) {
   return newArr;
 }
 
-function Arhitekt1() {
+const systems = [
+  {
+    id: 1,
+    name: "Veebiserver",
+    risks: shuffleArray([
+      {
+        id: 'r1',
+        label: "Veebirünnakute võimalus",
+        explanation:
+          "Veebiserver puutub pidevalt internetiliiklusesse ja on seetõttu haavatav SQL-i, XSS-i ja DDoS-rünnakutele."
+      },
+      {
+        id: 'r2',
+        label: "Andmeleke",
+        explanation:
+          "Kuigi andmeleke on tõsine, põhjustavad veebiründed enne seda tavaliselt tõsisemaid katkestusi ja teenuse kättesaadavuse probleeme."
+      }
+    ]),
+    correctRiskId: 'r1'
+  },
+  {
+    id: 2,
+    name: "Andmebaas",
+    risks: shuffleArray([
+      {
+        id: 'r3',
+        label: "Andmeleke",
+        explanation:
+          "Andmebaas sisaldab tundlikku teavet ja selle leke võib avalikustada salasõnu, isikuandmeid ja ärisaladusi."
+      },
+      {
+        id: 'r4',
+        label: "Pahavara levik",
+        explanation:
+          "Pahavara levik tähendab, et ründaja võib kasutada muid vektoriteenuseid, kuid andmeleke on otsene ja prioriteetsem risk."
+      }
+    ]),
+    correctRiskId: 'r3'
+  },
+  {
+    id: 3,
+    name: "E-posti server",
+    risks: shuffleArray([
+      {
+        id: 'r5',
+        label: "Phishing rünnakute võimalus",
+        explanation:
+          "E-posti serveri kaudu levivad phishing-kirjad võivad nakatada kasutajad ja varastada paroole."
+      },
+      {
+        id: 'r6',
+        label: "Pahavara levik",
+        explanation:
+          "Kuigi pahavara on probleem, saab enamik pahavara just phishing’u kaudu ükskõik millise serveri kaudu levitada."
+      }
+    ]),
+    correctRiskId: 'r5'
+  }
+];
+
+export default function Arhitekt1() {
   const navigate = useNavigate();
   const [selections, setSelections] = useState({});
   const [feedback, setFeedback] = useState("");
   const [isLocked, setIsLocked] = useState(false);
+  const [showExplanations, setShowExplanations] = useState(false);
 
   const handleChange = (systemId, riskId) => {
+    if (isLocked) return;
     setSelections(prev => ({ ...prev, [systemId]: riskId }));
   };
 
@@ -61,8 +93,11 @@ function Arhitekt1() {
     if (allCorrect) {
       setFeedback("Kõik süsteemide riskid on õigesti määratud!");
       setIsLocked(true);
+      setShowExplanations(true);
     } else {
       setFeedback("Mõni valik on vale. Proovi uuesti.");
+      setIsLocked(false);
+      setShowExplanations(false);
     }
   };
 
@@ -70,16 +105,27 @@ function Arhitekt1() {
     setSelections({});
     setFeedback("");
     setIsLocked(false);
+    setShowExplanations(false);
   };
 
   const handleNext = () => {
-    navigate('/arhitekt2_leht'); 
+    navigate('/arhitekt2_leht');
   };
 
   return (
-    <div className={`security-mapping-game ${isLocked ? "correct-bg" : feedback && !isLocked ? "incorrect-bg" : ""}`}>
+    <div
+      className={`security-mapping-game ${
+        isLocked
+          ? "correct-bg"
+          : feedback && !isLocked
+          ? "incorrect-bg"
+          : ""
+      }`}
+    >
       <h1>Riskide tuvastamine süsteemides</h1>
-      <p>Vali igale süsteemile kõige olulisem turvarisk, mis vajab esmast kaitset.</p>
+      <p>
+        Vali igale süsteemile kõige olulisem turvarisk, mis vajab esmast kaitset.
+      </p>
 
       {systems.map(system => (
         <div key={system.id} className="system-block">
@@ -103,13 +149,13 @@ function Arhitekt1() {
       ))}
 
       <div className="buttons">
+        <button onClick={handleReset}>Alusta uuesti</button>
         {!isLocked ? (
-          <>
-            <button className="reset-button" onClick={handleReset}>Alusta uuesti</button>
-            <button className="submit-button" onClick={handleSubmit}>Esita valikud</button>
-          </>
+          <button onClick={handleSubmit}>Esita valikud</button>
         ) : (
-          <button className="next-button" onClick={handleNext}>Jätka</button>
+          <button className="next-button" onClick={handleNext}>
+            Jätka
+          </button>
         )}
       </div>
 
@@ -118,9 +164,28 @@ function Arhitekt1() {
           {feedback}
         </div>
       )}
+
+      {showExplanations && (
+        <div className="explanations">
+          <h2>Selgitused valikute kohta:</h2>
+          <ul>
+            {systems.map(system => {
+              const chosenId = selections[system.id];
+              const chosenRisk = system.risks.find(r => r.id === chosenId);
+              return (
+                <li key={system.id}>
+                  <strong>{system.name}:</strong>{" "}
+                  {chosenRisk
+                    ? chosenRisk.explanation
+                    : "Puudub valik."}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
 
-export default Arhitekt1;
 

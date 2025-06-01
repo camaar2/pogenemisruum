@@ -112,12 +112,31 @@ button.primary:disabled {
   color: red;
 }
 .hint-box {
-  background: #fff8e1;
-  border: 1px solid #ffd54f;
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
   padding: 0.75rem;
   border-radius: 0.25rem;
-  font-size: 0.9rem;
   margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.explanations {
+  margin-top: 1rem;
+  background: #f0f8ff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+.explanations h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+.explanations ul {
+  list-style-type: disc;
+  margin: 0.5rem 0 0 1.5rem;
+}
+.explanations li {
+  margin-bottom: 0.5rem;
 }
 
 .software-puzzle h1 {

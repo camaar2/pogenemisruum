@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Digi_toendite_uurija3.css';
 
 const pairs = [
-  { pairId: 1, artifact: "JPEG fail", description: "Sisaldab EXIF-metainfot ja tihendab pildidata" },
-  { pairId: 2, artifact: "PDF dokument", description: "Võib peita teksti, manuseid ja metainfot" },
-  { pairId: 3, artifact: "Logifail", description: "Salvestab süsteemi sündmusi ja ajatempleid" },
-  { pairId: 4, artifact: "Meilifail", description: "Sisaldab päiseid, manuseid ja korrespondentsi" }
+  { pairId: 1, artifact: "JPEG fail", description: "Sisaldab EXIF-metainfot ja tihendab pildidata", explanation: "JPEG-fail sisaldab tavaliselt pildiga seotud metainfot, mida saab uurida." },
+  { pairId: 2, artifact: "PDF dokument", description: "Võib peita teksti, manuseid ja metainfot", explanation: "PDF-failides võib olla varjatud dokumente ja metaandmeid." },
+  { pairId: 3, artifact: "Logifail", description: "Salvestab süsteemi sündmusi ja ajatempleid", explanation: "Logifailidest leiab täpse ajajoone süsteemi sündmustest." },
+  { pairId: 4, artifact: "Meilifail", description: "Sisaldab päiseid, manuseid ja korrespondentsi", explanation: "Meilifailist saab teavet saatjate, saajate ja manuste kohta." }
 ];
 
 export default function Digi_toendite_uurija3() {
@@ -20,12 +20,10 @@ export default function Digi_toendite_uurija3() {
   const [checked, setChecked] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Ülesande detailne kirjeldus nähtavale mängus
   const scenario =
     "Digitaalse uurimise protsessis leidub erinevaid andmekandjaid ja faile. " +
     "Iga artifakt võib pakkuda erinevat tüüpi tõendeid (meta, tegevuslogid, manused jne). " +
-    "Sinu ülesanne on siduda iga fail õigete omaduste või metainfoga, et selgitada, " +
-    "kus ja kuidas võib avastada olulist teavet.";
+    "Siduge iga fail õigete omaduste või metainfoga, et selgitada, kus ja kuidas võib avastada olulist teavet.";
 
   const handleDragStart = (e, id) => {
     e.dataTransfer.setData('pairId', id);
@@ -72,7 +70,7 @@ export default function Digi_toendite_uurija3() {
       <h1>Digitaalse tõendi sobitamine</h1>
       <p className="scenario"><em>{scenario}</em></p>
       <p className="instruction">
-        Sobita <strong>{pairs.length}</strong> faili oma kirjeldustega loogiliselt kokku.
+        Sobitage <strong>{pairs.length}</strong> faili oma kirjeldustega loogiliselt kokku.
       </p>
 
       <div className="matching-container">
@@ -107,11 +105,14 @@ export default function Digi_toendite_uurija3() {
               >
                 <p className="description-text">{p.description}</p>
                 {assigned ? (
-                  <div className="matched-artifact">
-                    {pairs.find(x => x.pairId === assigned).artifact}
-                  </div>
+                  <div className="matched-artifact">{pairs.find(x => x.pairId === assigned).artifact}</div>
                 ) : (
                   <div className="placeholder">Lohista siia</div>
+                )}
+                {checked && assigned && (
+                  <div className="explanation">
+                    {pairs.find(x => x.pairId === assigned).explanation}
+                  </div>
                 )}
               </div>
             );
@@ -120,21 +121,13 @@ export default function Digi_toendite_uurija3() {
       </div>
 
       <div className="buttons">
+        <button className="reset" onClick={handleReset}>Alusta uuesti</button>
         {!checked ? (
-          <>
-            <button className="primary" onClick={handleCheck}>
-              Kontrolli sobitusi
-            </button>
-            <button onClick={handleReset}>Alusta uuesti</button>
-          </>
+          <button className="primary submit" onClick={handleCheck}>Esita valikud</button>
         ) : message.startsWith('🎉') ? (
-          <button className="primary" onClick={handleNext}>
-            Edasi
-          </button>
+          <button className="primary next" onClick={handleNext}>Edasi</button>
         ) : (
-          <button className="primary" onClick={handleReset}>
-            Proovi uuesti
-          </button>
+          <button className="primary submit" onClick={handleReset}>Proovi uuesti</button>
         )}
       </div>
 

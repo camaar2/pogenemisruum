@@ -1,12 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Turvapoliitika_eestvedaja1.css';
 
 const allLaws = [
-  { id: 1, label: 'GDPR', correct: true },
-  { id: 2, label: 'ISO 27001 standard', correct: false },
-  { id: 3, label: 'NIS2 direktiiv', correct: true },
-  { id: 4, label: 'Põllumajanduse toetuste seadus', correct: false }
+  { 
+    id: 1, 
+    label: 'GDPR', 
+    correct: true, 
+    explanation: 'GDPR on andmekaitse määrus, mis mõjutab ka küberturbe nõudeid, kuna nõuab isikuandmete turvalist töötlemist.' 
+  },
+  { 
+    id: 2, 
+    label: 'ISO 27001 standard', 
+    correct: false, 
+    explanation: 'ISO 27001 on ülemaailmne info­turbe haldussüsteemi standard, kuid see ei ole seadus ega direktiiv.' 
+  },
+  { 
+    id: 3, 
+    label: 'NIS2 direktiiv', 
+    correct: true, 
+    explanation: 'NIS2 direktiiv on EL tasemel küberturbe raamistik, mis on otseselt seotud kriitilise infrastruktuuri turvalisusega.' 
+  },
+  { 
+    id: 4, 
+    label: 'Põllumajanduse toetuste seadus', 
+    correct: false, 
+    explanation: 'See seadus reguleerib põllumajanduse toetusi ega puuduta küberturbe valdkonda.' 
+  }
 ];
 
 function Turvapoliitika_eestvedaja1() {
@@ -14,6 +34,7 @@ function Turvapoliitika_eestvedaja1() {
   const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
   const [locked, setLocked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const toggle = (id) => {
     if (locked) return;
@@ -30,6 +51,7 @@ function Turvapoliitika_eestvedaja1() {
       return;
     }
     const allCorrect = chosen.every(l => l.correct);
+    setIsCorrect(allCorrect);
     if (allCorrect) {
       setFeedback('Õige! Turvapoliitika nõuded on õigesti tuvastatud.');
     } else {
@@ -42,13 +64,16 @@ function Turvapoliitika_eestvedaja1() {
     setSelected([]);
     setFeedback('');
     setLocked(false);
+    setIsCorrect(false);
   };
 
   return (
-    <div className={`risk-prioritization ${locked ? (feedback.startsWith('Õige') ? 'correct-bg' : 'incorrect-bg') : ''}`}>
+    <div className={`risk-prioritization ${locked ? (isCorrect ? 'correct-bg' : 'incorrect-bg') : ''}`}>
       <h1>Õiguslike nõuete tuvastamine</h1>
       <div className="instructions">
-        <p>Vali seadused ja direktiivid, mis kehtivad küberturbe valdkonnas. Kokku on <strong>{allLaws.filter(l => l.correct).length}</strong> nõuet:</p>
+        <p>
+          Vali seadused ja direktiivid, mis kehtivad küberturbe valdkonnas. Kokku on <strong>{allLaws.filter(l => l.correct).length}</strong> nõuet:
+        </p>
       </div>
       <ul className="law-list">
         {allLaws.map(law => (
@@ -60,11 +85,11 @@ function Turvapoliitika_eestvedaja1() {
                 ? law.correct
                   ? 'selected correct'
                   : selected.includes(law.id)
-                  ? 'selected incorrect'
-                  : ''
+                    ? 'selected incorrect'
+                    : ''
                 : selected.includes(law.id)
-                ? 'selected'
-                : ''
+                  ? 'selected'
+                  : ''
             }
           >
             <input
@@ -77,19 +102,33 @@ function Turvapoliitika_eestvedaja1() {
         ))}
       </ul>
       <div className="buttons">
+        <button onClick={handleReset}>Alusta uuesti</button>
         {!locked ? (
-          <>
-            <button className="primary" onClick={handleSubmit}>Kontrolli</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
-          </>
+          <button className="primary" onClick={handleSubmit}>Esita valikud</button>
         ) : (
           <button className="primary" onClick={() => navigate('/turvapoliitika_eestvedaja2_leht')}>Edasi</button>
         )}
       </div>
-      {feedback && <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>{feedback}</div>}
+      {feedback && (
+        <div className={`message ${isCorrect ? 'message-correct' : 'message-incorrect'}`}>
+          {feedback}
+        </div>
+      )}
+      {locked && (
+        <div className="explanations">
+          <h2>Selgitused:</h2>
+          <ul>
+            {allLaws.map(law => (
+              <li key={law.id}>
+                <strong>{law.label}:</strong> {law.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
 
-
 export default Turvapoliitika_eestvedaja1;
+

@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Audiitor3.css';
 
 const allTasks3 = [
-  "Tehniline paigaldus",
-  "Töötajate koolitus",
-  "Sissetungitesti läbiviimine",
-  "Koormustest serveril",
-  "Lihtne hooldusleping",
-  "Rakenduse funktsionaaltest"
+  { text: "Tehniline paigaldus", explanation: "Paigaldatakse vajalik tarkvara ja seadistatakse turvamehhanismid." },
+  { text: "Töötajate koolitus", explanation: "Kaasatakse personal, et nad teaksid, kuidas turvameetmeid järgida." },
+  { text: "Sissetungitesti läbiviimine", explanation: "Testitakse süsteemi haavatavusi reaalse ründemudeli abil." },
+  { text: "Koormustest serveril", explanation: "Kontrollitakse, kuidas süsteem töötab suure koormuse all, kuid ei ole otseselt turvameede." },
+  { text: "Lihtne hooldusleping", explanation: "Leping ei pruugi sisaldada tehnilisi või testimismeetmeid." },
+  { text: "Rakenduse funktsionaaltest", explanation: "Testitakse rakenduse funktsionaalsust, kuid see ei pruugi tuvastada turvariske." }
 ];
 const correctTasks = [
   "Tehniline paigaldus",
@@ -26,11 +26,15 @@ function shuffleArray(array) {
 }
 
 function generateTaskOptions3() {
-  const distract = allTasks3.filter(n => !correctTasks.includes(n));
+  const distract = allTasks3.filter(n => !correctTasks.includes(n.text));
   const shuffled = shuffleArray(distract);
   const subsetSize = Math.floor(Math.random() * 3) + 4;
   const numDistractors = subsetSize - correctTasks.length;
-  return shuffleArray([...correctTasks, ...shuffled.slice(0, numDistractors)]);
+  const options = [
+    ...allTasks3.filter(n => correctTasks.includes(n.text)),
+    ...shuffled.slice(0, numDistractors)
+  ];
+  return shuffleArray(options);
 }
 
 export default function Audiitor3() {
@@ -56,7 +60,7 @@ export default function Audiitor3() {
     if (correctCount === correctTasks.length && wrongCount === 0) {
       setFeedback("Õige! Kõik vajalikud sammud valitud.");
       setReport(
-        `Audit kokkuvõte: ${scenario} \nValitud sammud: ${selectedTasks.join(', ')}.`
+        `Audit kokkuvõte: ${scenario} Valitud sammud: ${selectedTasks.join(', ')}.`
       );
     } else {
       setFeedback(`Õigeid valikuid: ${correctCount}, vigu: ${wrongCount}. Proovi uuesti.`);
@@ -84,47 +88,57 @@ export default function Audiitor3() {
       <p className="description"><em>{scenario}</em></p>
       <p className="instructions">
         Selle etapi eesmärk on tagada, et valitud turvameetmed viiakse praktikas ellu järjekindlalt ja tõhusalt.
-        <ul>
-        </ul>
         Vali need sammud, mis katavad nii tehnilised, protseduurilised kui ka testimismeetmed. Kokku tuleb valida <strong>{correctTasks.length}</strong> meetet.
       </p>
       <ul className="task-list">
-        {taskOptions.map(name => (
+        {taskOptions.map(item => (
           <li
-            key={name}
-            onClick={() => toggleTask(name)}
+            key={item.text}
+            onClick={() => toggleTask(item.text)}
             className={
-              selectedTasks.includes(name)
+              selectedTasks.includes(item.text)
                 ? checked
-                  ? correctTasks.includes(name)
+                  ? correctTasks.includes(item.text)
                     ? 'selected-correct'
                     : 'selected-incorrect'
                   : 'selected'
                 : ''
             }
           >
-            <input type="checkbox" checked={selectedTasks.includes(name)} readOnly /> {name}
+            <input type="checkbox" checked={selectedTasks.includes(item.text)} readOnly /> {item.text}
           </li>
         ))}
       </ul>
       <div className="buttons">
+        <button className="primary" onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!checked ? (
           <button className="primary" onClick={handleCheck} disabled={selectedTasks.length === 0}>
-            Kontrolli vastused
+            Esita valikud
           </button>
         ) : (
-          <button className="primary" onClick={handleReset}>
-            Alusta uuesti
-          </button>
-        )}
-        {checked && feedback.startsWith('Õige') && (
-          <button onClick={() => navigate('/audiitor4_leht')}>
-            Edasi
-          </button>
+          feedback.startsWith('Õige') && (
+            <button className="primary" onClick={() => navigate('/audiitor4_leht')}>
+              Edasi
+            </button>
+          )
         )}
       </div>
       {feedback && <div className={`feedback ${feedbackClass}`}>{feedback}</div>}
       {report && <div className="report">{report}</div>}
+      {checked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {taskOptions.map(item => (
+              <li key={item.text}>
+                <strong>{item.text}:</strong> {item.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

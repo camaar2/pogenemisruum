@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Rakendaja3.css';
 
 const tools = [
-  { id: 1, name: "Virusetõrje tarkvara", correct: true },
-  { id: 2, name: "Tulemüür", correct: true },
-  { id: 3, name: "USB autorun lubatud", correct: false },
-  { id: 4, name: "Andmete varundussüsteem", correct: true },
-  { id: 5, name: "Avalik Wi-Fi ilma VPN-ita", correct: false },
-  { id: 6, name: "Sissetungituvastussüsteem (IDS)", correct: true }
+  { id: 1, name: "Virusetõrje tarkvara", correct: true, explanation: "Tuletõrje tarkvara skaneerib ja eemaldab pahavara enne süsteemi kahjustamist." },
+  { id: 2, name: "Tulemüür", correct: true, explanation: "Tulemüür filtreerib võrguühendused, blokeerides pahatahtliku liikluse." },
+  { id: 3, name: "USB autorun lubatud", correct: false, explanation: "USB autorun’i lubamine võib viia automaatsete pahavarainstallatsioonideni." },
+  { id: 4, name: "Andmete varundussüsteem", correct: true, explanation: "Varundussüsteem tagab kriitiliste andmete taastamise rikke või ründe korral." },
+  { id: 5, name: "Avalik Wi-Fi ilma VPN-ita", correct: false, explanation: "Avalik Wi-Fi ilma VPN-ita on ebaturvaline ja võib andmevahetust pealt kuulata." },
+  { id: 6, name: "Sissetungituvastussüsteem (IDS)", correct: true, explanation: "IDS tuvastab kahtlased tegevused ja annab reaalajas hoiatusi potentsiaalsete rünnakute kohta." }
 ];
 
 export default function Rakendaja3() {
@@ -57,7 +57,6 @@ export default function Rakendaja3() {
             : ''
       }`}>
       <h1>Turvatööriistade valik</h1>
-
       <p className="scenario">
         <em>
           Eesmärk on paigaldada vaid need tööriistad, mis tõeliselt tugevdavad
@@ -65,7 +64,6 @@ export default function Rakendaja3() {
           tekitada keerukust või isegi turvaauke.
         </em>
       </p>
-
       <p className="instruction">
         Märgi <strong>{correctCount}</strong> tööriista, mis aitavad:
         <ul>
@@ -103,29 +101,47 @@ export default function Rakendaja3() {
         })}
       </div>
 
-      <div className="buttons">
+      <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <button className="reset" onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!checked ? (
           <button
-            className="primary"
+            className="primary submit"
             onClick={handleSubmit}
             disabled={selectedTools.length !== correctCount}
           >
-            Kontrolli valikuid
+            Esita valikud
           </button>
         ) : locked ? (
-          <button className="primary" onClick={handleNext}>Edasi</button>
+          <button className="primary next" onClick={handleNext}>
+            Edasi
+          </button>
         ) : (
-          <button onClick={handleReset}>Alusta uuesti</button>
+          <button className="primary submit" onClick={handleReset}>
+            Proovi uuesti
+          </button>
         )}
       </div>
 
       {message && (
         <div className={`message ${
-          locked
-            ? 'message-correct'
-            : 'message-incorrect'
+          locked ? 'message-correct' : 'message-incorrect'
         }`}>
           {message}
+        </div>
+      )}
+
+      {checked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {tools.map(tool => (
+              <li key={tool.id}>
+                <strong>{tool.name}:</strong> {tool.explanation}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

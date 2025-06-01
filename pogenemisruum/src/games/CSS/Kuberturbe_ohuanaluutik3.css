@@ -2,7 +2,7 @@
   max-width: 720px;
   margin: 0 auto;
   padding: 2rem;
-  background: linear-gradient(135deg, #f9fcff, #eef7ff);
+  background: #ffffff;
   border-radius: 0.75rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   font-family: Arial, sans-serif;
@@ -70,3 +70,25 @@ button.primary:hover { background-color: #e4067e; }
 .message-incorrect { color: red; }
 .correct-bg { background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important; }
 .incorrect-bg { background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important; }
+
+.explanations {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0f8ff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: left;
+}
+.explanations h2 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+.explanations ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  padding-left: 0;
+}
+.explanations ul li {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}

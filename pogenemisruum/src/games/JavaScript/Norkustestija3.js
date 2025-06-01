@@ -10,10 +10,10 @@ export default function Norkustestija3() {
     "Süsteem lubab sisendi HTMLi, mistõttu script-alarm on võimalik XSS-i demonstreerimiseks.";
 
   const options = [
-    { id: 'A', payload: "'; DROP TABLE users;--", description: "SQL Injection" },
-    { id: 'B', payload: "<script>alert('XSS')</script>", description: "XSS (Cross-Site Scripting)" },
-    { id: 'C', payload: "../../etc/passwd", description: "Path Traversal" },
-    { id: 'D', payload: "", description: "Tühine sisend" }
+    { id: 'A', payload: "'; DROP TABLE users;--", description: "SQL Injection", explanation: "SQL-injection ei tööta, kuna sihtsüsteem lubab HTML-i, mitte SQL-päringuid." },
+    { id: 'B', payload: "<script>alert('XSS')</script>", description: "XSS (Cross-Site Scripting)", explanation: "XSS-payload demonstreerib haavatavust, sest sisend pole HTML-ist puhastatud." },
+    { id: 'C', payload: "../../etc/passwd", description: "Path Traversal", explanation: "Path Traversal ei tööta, kuna süsteem lubab ainult HTML-i sisendit, mitte faili süsteemi juurdepääsu." },
+    { id: 'D', payload: "", description: "Tühine sisend", explanation: "Tühine sisend ei näita mingit haavatavust." }
   ];
 
   const correctId = 'B';
@@ -72,7 +72,7 @@ export default function Norkustestija3() {
             const isSelected = selected === opt.id;
             let rowClass = 'option-row';
             if (checked) {
-              if (opt.id === correctId) rowClass += isSelected ? ' selected-correct' : 'missed';
+              if (opt.id === correctId) rowClass += isSelected ? ' selected-correct' : ' missed';
               else if (isSelected) rowClass += ' selected-incorrect';
             } else if (isSelected) {
               rowClass += ' selected';
@@ -101,6 +101,9 @@ export default function Norkustestija3() {
         </tbody>
       </table>
       <div className="buttons">
+        <button onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!checked ? (
           <button
             className="primary"
@@ -118,6 +121,18 @@ export default function Norkustestija3() {
         )}
       </div>
       {message && <div className={`message ${messageClass}`}>{message}</div>}
+      {checked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {options.map(opt => (
+              <li key={opt.id}>
+                <strong>{opt.description}:</strong> {opt.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

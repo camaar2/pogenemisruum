@@ -15,10 +15,13 @@ function Kuberturbe_riskijuht3() {
   const [selected, setSelected] = useState({});
   const [message, setMessage] = useState("");
   const [isLocked, setIsLocked] = useState(false);
+  const [showExplanation, setShowExplanation] = useState(false);
   const navigate = useNavigate();
 
   const handleCheckboxChange = (id) => {
     if (isLocked) return;
+    setMessage("");
+    setShowExplanation(false);
     setSelected(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
@@ -28,17 +31,21 @@ function Kuberturbe_riskijuht3() {
       .filter(id => selected[id])
       .map(Number)
       .sort((a, b) => a - b);
+
     if (JSON.stringify(correctRiskIds) === JSON.stringify(selectedIds)) {
       setMessage("Hea töö, kõik riskid on õigesti märgitud.");
       setIsLocked(true);
+      setShowExplanation(true);
     } else {
       setMessage("Mõned riskid on vale; kontrolli oma valikuid.");
+      setShowExplanation(false);
     }
   };
 
   const handleReset = () => {
     setSelected({});
     setMessage("");
+    setShowExplanation(false);
   };
 
   const handleNext = () => {
@@ -46,9 +53,10 @@ function Kuberturbe_riskijuht3() {
   };
 
   return (
-    <div className="devops-stage3">
+    <div className={`devops-stage3 ${isLocked ? 'correct-bg' : (message && !isLocked ? 'incorrect-bg' : '')}`}>
       <h1>Süsteemide monitooring ja logide analüüs</h1>
       <p>Vormi tabelis märgi logirida, mis viitavad turvariskile:</p>
+
       <table className="logs-table">
         <thead>
           <tr>
@@ -58,7 +66,13 @@ function Kuberturbe_riskijuht3() {
         </thead>
         <tbody>
           {logs.map(log => (
-            <tr key={log.id} className={isLocked ? (log.risk === !!selected[log.id] ? "correct" : "incorrect") : ""}>
+            <tr key={log.id} className={
+              isLocked
+                ? log.risk
+                  ? "correct" 
+                  : (selected[log.id] ? "incorrect" : "")
+                : (selected[log.id] ? "selected" : "")
+            }>
               <td>
                 <input 
                   type="checkbox" 
@@ -72,19 +86,52 @@ function Kuberturbe_riskijuht3() {
           ))}
         </tbody>
       </table>
+
+      {showExplanation && (
+        <div className="explanation">
+          <h3>Selgitus logiridade turvariskidest:</h3>
+          <ul>
+            <li>
+              <strong>“WARNING: Unusual login attempt from IP 203.0.113.45”</strong> – kahtlane sisselogimise katse võib viidata ründajale, kes testib paroole või püüab jõuga sisselogida.
+            </li>
+            <li>
+              <strong>“ERROR: 30 failed SSH login attempts detected”</strong> – suur hulk ebaõnnestunud SSH-login’uid näitab ilmselt bruteforce-rünnakut.
+            </li>
+            <li>
+              <strong>“WARNING: Unexpected file change in /etc/passwd”</strong> – faili /etc/passwd muutmine võib tähendada, et ründaja on pääsenud juurdepääsu või üritab luua varjatud süsteemirolle.
+            </li>
+            <li>
+              <em>“INFO: Server started successfully”, “INFO: Scheduled backup completed” ja “INFO: Routine system check passed”</em> on tavalised teavitused ega näita turvariske.
+            </li>
+          </ul>
+        </div>
+      )}
+
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleReset}>Alusta uuesti</button>
-            <button onClick={handleSubmit}>Kontrolli valikuid</button>
+            <button className="reset-button" onClick={handleReset}>
+              Alusta uuesti
+            </button>
+            <button className="submit-button" onClick={handleSubmit}>
+              Esita valikud
+            </button>
           </>
         ) : (
-          <button onClick={handleNext}>Edasi</button>
+          <button className="next-button" onClick={handleNext}>
+            Edasi
+          </button>
         )}
       </div>
-      {message && <div className="message">{message}</div>}
+
+      {message && (
+        <div className={`message ${isLocked ? "message-correct" : "message-incorrect"}`}>
+          {message}
+        </div>
+      )}
     </div>
   );
 }
 
 export default Kuberturbe_riskijuht3;
+

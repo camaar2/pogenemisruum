@@ -12,6 +12,8 @@ const initialEmails = [
       "Palun logige 24 tunni jooksul sisse ja kinnitage oma andmed, et vältida juurdepääsu peatamist.",
     hint:
       "Saatja domeen on swedbank.ee – ametlik Swedbanki domeen. Kiri ei sisalda kahtlaseid linke.",
+    explanation:
+      "Selle e-kirja saatja on ametlik ja sõnum ei sunni sind tegema kiireid turvariske tähendavaid toiminguid, seega ei ole see andmepüügisõnum.",
     isPhishing: false
   },
   {
@@ -23,6 +25,8 @@ const initialEmails = [
       "Logige sisse siseportaali ja valige sobivad kindlustus- ning pensionivalikud.",
     hint:
       "Saatja on usaldusväärne ning sõnum ei sunni tegema midagi turvariskset.",
+    explanation:
+      "Sõnum tuleb usaldusväärselt domeenilt ning ei paku kahtlaseid linke; tegemist on legitiimse infoga töötajatele.",
     isPhishing: false
   },
   {
@@ -34,6 +38,8 @@ const initialEmails = [
       "Jälgimiseks klõpsake ametlikku linki Posti portaalis.",
     hint:
       "Posti domeen on õige ja link viib ametlikule saidile.",
+    explanation:
+      "Kirja domeen ja lingid on korrektsed ega sunni sisestama isikuandmeid – turvaline kiri.",
     isPhishing: false
   },
   {
@@ -45,6 +51,8 @@ const initialEmails = [
       "Muidu võidakse teie ostmisvõimalus peatada.",
     hint:
       "Domeen on valetatud (“amazzon.com”), õige on amazon.com.",
+    explanation:
+      "Saatja domeen on vale (“amazzon.com” asemel “amazon.com”) ning link suunab pahatahtlikule saidile – tegu on andmepüügi e-kirjaga.",
     isPhishing: true
   }
 ];
@@ -164,6 +172,17 @@ export default function Infoturbe_juht3() {
             {showHints[email.id] && (
               <div className="hint-box">{email.hint}</div>
             )}
+
+            {locked && status[email.id] === 'correct' && (
+              <div className="explanation exp-correct">
+                {email.explanation}
+              </div>
+            )}
+            {locked && status[email.id] === 'wrong' && (
+              <div className="explanation exp-wrong">
+                {email.explanation}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -172,7 +191,7 @@ export default function Infoturbe_juht3() {
         {!checked ? (
           <>
             <button className="primary" onClick={handleSubmit}>
-              Esita hinnangud
+              Esita valikud
             </button>
             <button onClick={handleReset}>Alusta uuesti</button>
           </>

@@ -3,10 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Turvapoliitika_eestvedaja4.css';
 
 const allActions = [
-  { id: 1, text: 'Teavitamine andmekaitseametile', correct: true },
-  { id: 2, text: 'Kahju eitamine', correct: false },
-  { id: 3, text: 'Mõjutatud isikute informeerimine', correct: true },
-  { id: 4, text: 'Juhtunu varjamine', correct: false }
+  {
+    id: 1,
+    text: 'Teavitamine andmekaitseametile',
+    correct: true,
+    explanation: 'Andmekaitseametile teadustamine on GDPR‐i nõue, et tagada õiguslik läbipaistvus ja võimalikud sanktsioonid rikke korral.'
+  },
+  {
+    id: 2,
+    text: 'Kahju eitamine',
+    correct: false,
+    explanation: 'Rikkumise eitamine on ebaeetiline ega vasta õiguslikele nõuetele – see tekitab täiendavat riski ja usalduse kaotust.'
+  },
+  {
+    id: 3,
+    text: 'Mõjutatud isikute informeerimine',
+    correct: true,
+    explanation: 'GDPR nõuab, et isikuid, kelle andmed on lekkinud, teavitatakse viivitamatult, et nad saaksid riskide eest kaitsta enda andmed.'
+  },
+  {
+    id: 4,
+    text: 'Juhtunu varjamine',
+    correct: false,
+    explanation: 'Rikkumise varjamine rikub usaldust ja õiguslikke nõudeid ning võib viia tõsiste sanktsioonideni.'
+  }
 ];
 
 function Turvapoliitika_eestvedaja4() {
@@ -14,6 +34,7 @@ function Turvapoliitika_eestvedaja4() {
   const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
   const [locked, setLocked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const toggle = (id) => {
     if (locked) return;
@@ -30,6 +51,7 @@ function Turvapoliitika_eestvedaja4() {
       return;
     }
     const allCorrect = chosen.every(a => a.correct);
+    setIsCorrect(allCorrect);
     if (allCorrect) {
       setFeedback('Õige! Rikkumisele reageerimise sammud on õigesti valitud.');
     } else {
@@ -38,16 +60,26 @@ function Turvapoliitika_eestvedaja4() {
     setLocked(true);
   };
 
+  const handleReset = () => {
+    setSelected([]);
+    setFeedback('');
+    setLocked(false);
+    setIsCorrect(false);
+  };
+
   const handleFinish = () => {
     alert('Tubli! Oled edukalt lõpetanud Küberõiguse ja Vastavuse spetsialisti koolituse!');
     navigate('/');
   };
 
   return (
-    <div className={`risk-prioritization ${locked ? (feedback.startsWith('Õige') ? 'correct-bg' : 'incorrect-bg') : ''}`}>
+    <div className={`risk-prioritization ${locked ? (isCorrect ? 'correct-bg' : 'incorrect-bg') : ''}`}>
       <h1>Reageerimine rikkumistele</h1>
       <div className="instructions">
-        <p>Vali õiged tegevused andmerikkumise korral. Kokku on <strong>{allActions.filter(a => a.correct).length}</strong>:</p>
+        <p>
+          Vali õiged tegevused andmerikkumise korral. Kokku on&nbsp;
+          <strong>{allActions.filter(a => a.correct).length}</strong>:
+        </p>
       </div>
       <ul className="action-list">
         {allActions.map(action => (
@@ -59,11 +91,11 @@ function Turvapoliitika_eestvedaja4() {
                 ? action.correct
                   ? 'selected correct'
                   : selected.includes(action.id)
-                  ? 'selected incorrect'
-                  : ''
+                    ? 'selected incorrect'
+                    : ''
                 : selected.includes(action.id)
-                ? 'selected'
-                : ''
+                  ? 'selected'
+                  : ''
             }
           >
             <input
@@ -76,22 +108,33 @@ function Turvapoliitika_eestvedaja4() {
         ))}
       </ul>
       <div className="buttons">
+        <button onClick={handleReset}>Alusta uuesti</button>
         {!locked ? (
-          <>
-            <button className="primary" onClick={handleSubmit}>Kontrolli</button>
-            <button onClick={() => {
-              setSelected([]);
-              setFeedback('');
-              setLocked(false);
-            }}>Alusta uuesti</button>
-          </>
+          <button className="primary" onClick={handleSubmit}>Esita valikud</button>
         ) : (
           <button className="primary" onClick={handleFinish}>Lõpeta mäng</button>
         )}
       </div>
-      {feedback && <div className={`message ${feedback.startsWith('Õige') ? 'message-correct' : 'message-incorrect'}`}>{feedback}</div>}
+      {feedback && (
+        <div className={`message ${isCorrect ? 'message-correct' : 'message-incorrect'}`}>
+          {feedback}
+        </div>
+      )}
+      {locked && (
+        <div className="explanations">
+          <h2>Selgitused valikute kohta:</h2>
+          <ul>
+            {allActions.map(action => (
+              <li key={action.id}>
+                <strong>{action.text}:</strong> {action.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
 
 export default Turvapoliitika_eestvedaja4;
+

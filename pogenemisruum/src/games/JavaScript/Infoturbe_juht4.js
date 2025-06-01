@@ -8,11 +8,12 @@ const initialFiles = [
     fileName: "trojan_payment.exe",
     location: "C:\\Users\\Public\\Downloads",
     description:
-      "Failinimi ja asukoht võivad viidata pahatahtlikule programmile, " +
-      "mis võib süsteemiga ootamatuid ühendusi luua.",
+      "Failinimi ja asukoht võivad viidata pahatahtlikule programmile, mis võib süsteemiga ootamatuid ühendusi luua.",
     hint:
       "Fail asub allalaadimiste kaustas – kontrolli alati allkirja ja tootjat enne käivitamist.",
-    isMalware: true,
+    explanation:
+      "See on pahavara: trojan_payment.exe asub allalaadimiste kaustas ja võib ohustada süsteemi, seega tuleb see eemaldada.",
+    isMalware: true
   },
   {
     id: 2,
@@ -22,7 +23,9 @@ const initialFiles = [
       "Programm töötab süsteemikaustas ja nime järgi sarnaneb Windowsi teenusega.",
     hint:
       "Windowsi protsessid paiknevad System32 kaustas – neid ei tasu kergekäeliselt eemaldada.",
-    isMalware: false,
+    explanation:
+      "See on legitiimne Windowsi protsess: svchost.exe töötab System32 kaustas ja kuulub OS-i normaalsele tegevusele.",
+    isMalware: false
   },
   {
     id: 3,
@@ -32,7 +35,9 @@ const initialFiles = [
       "Shell-skript nimega “miner” võib taustal käivitudes krüptovaluuta kaevandada.",
     hint:
       "Vaata skripti sisu – kas seal on viiteid kaevandamisele või muule ebatavalisele?",
-    isMalware: true,
+    explanation:
+      "See skript on pahavara: miner-tool.sh asub süsteemi crontab-kausta lähedal ja sisaldab krüptominingu koodi.",
+    isMalware: true
   },
   {
     id: 4,
@@ -42,8 +47,10 @@ const initialFiles = [
       "Tavaline tekstiredaktor Program Files kaustas.",
     hint:
       "Legitiimsed rakendused installitakse autoritatiseeritud tootjate poolt.",
-    isMalware: false,
-  },
+    explanation:
+      "See on turvaline rakendus: texteditor.exe paikneb Program Files kaustas ja on usaldusväärsest allikast.",
+    isMalware: false
+  }
 ];
 
 export default function Infoturbe_juht4() {
@@ -119,7 +126,7 @@ export default function Infoturbe_juht4() {
   };
 
   return (
-    <div className={`malware-game ${locked ? "correct-bg" : message.type === "error" && !locked ? "incorrect-bg" : ""}`}>
+    <div className={`malware-game ${locked ? "correct-bg" : (message.type === "error" && !locked) ? "incorrect-bg" : ""}`}>
       <h1>Pahavara tuvastamine</h1>
       <p className="storyline">
         Oled digitaalse forensiku rollis: sinu ülesanne on eristada süsteemis {malwareCount} pahatahtlikku faili.
@@ -167,16 +174,21 @@ export default function Infoturbe_juht4() {
               Vihje
             </button>
             {showHints[f.id] && <div className="hint-box">{f.hint}</div>}
+
+            {locked && status[f.id] === "correct" && (
+              <div className="explanation exp-correct">{f.explanation}</div>
+            )}
+            {locked && status[f.id] === "incorrect" && (
+              <div className="explanation exp-wrong">{f.explanation}</div>
+            )}
           </div>
         ))}
       </div>
 
       <div className="buttons">
+        <button onClick={handleReset}>Alusta uuesti</button>
         {!locked ? (
-          <>
-            <button className="primary" onClick={handleSubmit}>Esita hinnangud</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
-          </>
+          <button className="primary" onClick={handleSubmit}>Esita valikud</button>
         ) : (
           <button className="primary" onClick={() => navigate("/")}>Lõpeta mäng</button>
         )}

@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Norkustestija1.css';
 
 const allSources = [
-  { id: 1, title: "Avalik serverite info", isRelevant: true },
-  { id: 2, title: "WHOIS info", isRelevant: true },
-  { id: 3, title: "Subdomeeni otsing", isRelevant: true },
-  { id: 4, title: "Võltsitud reklaamid", isRelevant: false },
-  { id: 5, title: "Sotsiaalmeedia jälgimine", isRelevant: false },
-  { id: 6, title: "Turvaraportid", isRelevant: true },
-  { id: 7, title: "Blogi ja foorumid", isRelevant: false },
-  { id: 8, title: "Avalikud turvaanalüüsid", isRelevant: true },
-  { id: 9, title: "Tehniline audit", isRelevant: true }
+  { id: 1, title: "Avalik serverite info", isRelevant: true, explanation: "Avalik serverite info annab ülevaate hostinimedest ja IP-aadressidest." },
+  { id: 2, title: "WHOIS info", isRelevant: true, explanation: "WHOIS info sisaldab registreerija andmeid ja domeeni vanust, mis aitab kaardistada sihtmärki." },
+  { id: 3, title: "Subdomeeni otsing", isRelevant: true, explanation: "Subdomeeni otsing paljastab alamnimesid, mida ründija võib kasutada." },
+  { id: 4, title: "Võltsitud reklaamid", isRelevant: false, explanation: "Võltsitud reklaamid ei anna tehnilist informatsiooni sihtsüsteemi kohta." },
+  { id: 5, title: "Sotsiaalmeedia jälgimine", isRelevant: false, explanation: "Sotsiaalmeedia jälgimine võib leida teadet, kuid ei anna täpset tehnilist kaardistust." },
+  { id: 6, title: "Turvaraportid", isRelevant: true, explanation: "Turvaraportid sisaldavad teadaolevaid haavatavusi ja testitulemusi." },
+  { id: 7, title: "Blogi ja foorumid", isRelevant: false, explanation: "Blogi ja foorumid pakuvad üldist infot, kuid pole alati usaldusväärsed tehnilised allikad." },
+  { id: 8, title: "Avalikud turvaanalüüsid", isRelevant: true, explanation: "Avalikud turvaanalüüsid annavad süvaülevaate ohustest ja nõrkustest." },
+  { id: 9, title: "Tehniline audit", isRelevant: true, explanation: "Tehniline audit hõlmab süsteemi detailset kontrolli ja annab kinnitatud tulemused." }
 ];
 
 function shuffleArray(array) {
@@ -55,7 +55,7 @@ export default function Norkustestija1() {
   };
 
   const handleReset = () => {
-    setSources(shuffleArray(allSources).slice(0,6));
+    setSources(shuffleArray(allSources).slice(0, 6));
     setSelected([]);
     setChecked(false);
     setLocked(false);
@@ -100,21 +100,36 @@ export default function Norkustestija1() {
         })}
       </div>
       <div className="buttons">
+        <button onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!checked ? (
-          <button className="primary" onClick={handleCheck} disabled={selected.length===0}>
-            Kontrolli valikuid
+          <button className="primary" onClick={handleCheck} disabled={selected.length === 0}>
+            Esita valikud
           </button>
         ) : locked ? (
           <button className="primary" onClick={handleNext}>
             Edasi
           </button>
         ) : (
-          <button onClick={handleReset}>
+          <button className="primary" onClick={handleReset}>
             Proovi uuesti
           </button>
         )}
       </div>
       {message && <div className={`message ${messageClass}`}>{message}</div>}
+      {checked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {sources.map(source => (
+              <li key={source.id}>
+                <strong>{source.title}:</strong> {source.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

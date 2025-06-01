@@ -14,6 +14,15 @@ const distractors = [
   "Väike sisemine rike"
 ];
 
+const explanations = {
+  "Massiline andmeleke": "Massiline andmeleke mõjutab suurt hulka kasutajaid ja tekitab tõsised õiguslikud tagajärjed.",
+  "Ründegrupi tegevus rahvusvahelisel tasandil": "Rahvusvaheline ründegrupp võib koordineeritult rünnata mitut organisatsiooni, suurendades kriitilisust.",
+  "Tsentraliseeritud serveri rünnak": "Tsentraliseeritud serveri rünnak võib ohustada kogu infrastruktuuri, kuna paljud teenused sõltuvad ühest serverist.",
+  "Siseministeeriumi infosüsteemi rünnak": "Siseministeeriumi infosüsteemi rünnak mõjutab riigi julgeolekut ja seega on kõrgeim kriitilisus.",
+  "Eksitav turvahoiatus": "Turvahoiatus, mis osutub valehäireks, ei vaja kõrget priiseerimist.",
+  "Väike sisemine rike": "Väike sisemine rike, mis ei mõjuta kriitilisi teenuseid, on madala tähtsusega sündmus."
+};
+
 function generateInitialChoices() {
   return [...correctEvents, ...distractors].sort(() => Math.random() - 0.5);
 }
@@ -34,10 +43,8 @@ function Sundmuste_reageerija1() {
   const handleDragOver = e => e.preventDefault();
 
   const extractDragData = e => {
-    let payload = e.dataTransfer.getData('application/json');
-    if (!payload) {
-      return null;
-    }
+    const payload = e.dataTransfer.getData('application/json');
+    if (!payload) return null;
     try {
       return JSON.parse(payload);
     } catch {
@@ -50,7 +57,7 @@ function Sundmuste_reageerija1() {
     if (locked) return;
 
     const data = extractDragData(e);
-    if (!data) return;  
+    if (!data) return;
 
     const { index, source } = data;
     let item;
@@ -159,13 +166,9 @@ function Sundmuste_reageerija1() {
         </div>
       </div>
       <div className="buttons">
+        <button onClick={reset}>Alusta uuesti</button>
         {!locked ? (
-          <>
-            <button className="primary" onClick={checkOrder}>
-              Kontrolli
-            </button>
-            <button onClick={reset}>Alusta uuesti</button>
-          </>
+          <button className="primary" onClick={checkOrder}>Esita valikud</button>
         ) : (
           <button className="primary" onClick={() => navigate('/sundmuste_reageerija2_leht')}>
             Edasi
@@ -177,9 +180,20 @@ function Sundmuste_reageerija1() {
           {message}
         </div>
       )}
+      {locked && (
+        <div className="explanations">
+          <h2>Selgitused valikute kohta:</h2>
+          <ul>
+            {slots.map((it, i) => (
+              <li key={i}>
+                <strong>{it}:</strong> {explanations[it]}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
-
 
 export default Sundmuste_reageerija1;

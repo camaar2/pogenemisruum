@@ -5,10 +5,10 @@ import '../CSS/Infoturbe_juht2.css';
 export default function Infoturbe_juht2() {
   const navigate = useNavigate();
   const correctOrder = [
-    "Install viirusetõrje",
-    "Luba reaalajas skaneerimine",
-    "Värskenda turvabaas",
-    "Keela tundmatud manusfailid"
+    { text: "Install viirusetõrje", explanation: "Viirusetõrje tuleb paigaldada esmalt, et see saaks kohe pahavara tuvastada." },
+    { text: "Luba reaalajas skaneerimine", explanation: "Reaalajas skaneerimine kontrollib uusi faile ja tegevusi koheselt." },
+    { text: "Värskenda turvabaas", explanation: "Turvabaasi uuendamine tagab, et viirusetõrje tunneb uusi pahavaratüüpe." },
+    { text: "Keela tundmatud manusfailid", explanation: "Manusfailide blokeerimine vähendab pahavara sisenemise võimalust e-kirjade kaudu." }
   ];
   const distractors = [
     "Luba automaatne uuendus",
@@ -22,7 +22,7 @@ export default function Infoturbe_juht2() {
   const [locked, setLocked] = useState(false);
 
   useEffect(() => {
-    const all = shuffle([...correctOrder, ...distractors]);
+    const all = shuffle([...correctOrder.map(c => c.text), ...distractors]);
     setChoices(all);
     setSlots(Array(correctOrder.length).fill(null));
     setStatus(Array(correctOrder.length).fill('neutral'));
@@ -30,7 +30,7 @@ export default function Infoturbe_juht2() {
 
   function shuffle(arr) {
     return arr.map(a => ({ sort: Math.random(), value: a }))
-      .sort((a,b) => a.sort - b.sort)
+      .sort((a, b) => a.sort - b.sort)
       .map(o => o.value);
   }
 
@@ -44,14 +44,14 @@ export default function Infoturbe_juht2() {
     const { index, from } = JSON.parse(e.dataTransfer.getData('application/json'));
     let newSlots = [...slots], newChoices = [...choices];
     let item = from === 'choices' ? choices[index] : slots[index];
-    if (from === 'choices') newChoices.splice(index,1);
+    if (from === 'choices') newChoices.splice(index, 1);
     else newSlots[index] = null;
     if (newSlots[i]) newChoices.push(newSlots[i]);
     newSlots[i] = item;
     setChoices(newChoices);
     setSlots(newSlots);
     setStatus(Array(correctOrder.length).fill('neutral'));
-    setMessage({ text:'', type:'' });
+    setMessage({ text: '', type: '' });
     setHint('');
   }
   function onDropChoices(e) {
@@ -65,39 +65,43 @@ export default function Infoturbe_juht2() {
       setChoices(newChoices);
       setSlots(newSlots);
       setStatus(Array(correctOrder.length).fill('neutral'));
-      setMessage({ text:'', type:'' });
+      setMessage({ text: '', type: '' });
       setHint('');
     }
   }
   function checkOrder() {
-    let stat = slots.map((v,i) => v===correctOrder[i] ? 'correct' : 'wrong');
+    const stat = slots.map((v, i) => (v === correctOrder[i].text ? 'correct' : 'wrong'));
     setStatus(stat);
     if (slots.includes(null)) {
-      setMessage({ text:'Kõik kastid tuleb täita enne kontrolli.', type:'error' });
+      setMessage({ text: 'Kõik kastid tuleb täita enne kontrolli.', type: 'error' });
       return;
     }
-    if (stat.every(s=>'correct'===s)) {
-      setMessage({ text:'🎉 Tubli! Turvatarkvara on õigesti paigaldatud.', type:'success' });
+    if (stat.every(s => s === 'correct')) {
+      setMessage({ text: '🎉 Tubli! Turvatarkvara on õigesti paigaldatud.', type: 'success' });
       setLocked(true);
     } else {
-      setMessage({ text:'❌ Mõned sammud on valed.', type:'error' });
-      if (slots[0]!==correctOrder[0]) setHint('Kontrolli, kas viirusetõrje tõesti paigaldatakse esimesena.');
-      else if (choices.length>0) setHint('Üleliigsed sammud jäid valikutesse: need ei kuulu järgmiste kavasse.');
-      else setHint('Vaata sammu järjekorda ja turvakonfiguratsiooni seadeid üle.');
+      setMessage({ text: '❌ Mõned sammud on valed.', type: 'error' });
+      if (slots[0] !== correctOrder[0].text) {
+        setHint('Kontrolli, kas viirusetõrje tõesti paigaldatakse esimesena.');
+      } else if (choices.length > 0) {
+        setHint('Üleliigsed sammud jäid valikutesse: need ei kuulu järgmiste kavasse.');
+      } else {
+        setHint('Vaata sammu järjekorda ja turvakonfiguratsiooni seadeid üle.');
+      }
     }
   }
   function resetPuzzle() {
-    const all = shuffle([...correctOrder, ...distractors]);
+    const all = shuffle([...correctOrder.map(c => c.text), ...distractors]);
     setChoices(all);
     setSlots(Array(correctOrder.length).fill(null));
     setStatus(Array(correctOrder.length).fill('neutral'));
-    setMessage({ text:'', type:'' });
+    setMessage({ text: '', type: '' });
     setHint('');
     setLocked(false);
   }
 
   return (
-    <div className={`software-puzzle ${locked?'correct-bg':message.type==='error'?'incorrect-bg':''}`}>
+    <div className={`software-puzzle ${locked ? 'correct-bg' : message.type === 'error' ? 'incorrect-bg' : ''}`}>
       <h1>Turvatarkvara paigaldamine</h1>
       <p className="scenario">
         <em>
@@ -111,21 +115,29 @@ export default function Infoturbe_juht2() {
       </p>
       <div className="puzzle-container">
         <div className="slots" onDragOver={onDragOver} onDrop={onDropChoices}>
-          {slots.map((v,i) => (
-            <div key={i} className={`slot ${status[i]}`} draggable={!locked&&!!v}
-                 onDragStart={e=>onDragStart(e,i,'slots')}
-                 onDragOver={onDragOver}
-                 onDrop={e=>onDropSlot(e,i)}>
-              {v||<span className="placeholder">Lohista siia</span>}
+          {slots.map((v, i) => (
+            <div
+              key={i}
+              className={`slot ${status[i]}`}
+              draggable={!locked && !!v}
+              onDragStart={e => onDragStart(e, i, 'slots')}
+              onDragOver={onDragOver}
+              onDrop={e => onDropSlot(e, i)}
+            >
+              {v || <span className="placeholder">Lohista siia</span>}
             </div>
           ))}
         </div>
         <div className="choices" onDragOver={onDragOver} onDrop={onDropChoices}>
           <p>Saadaval sammud</p>
           <div className="choices-container">
-            {choices.map((v,i)=>(
-              <div key={i} className="choice" draggable={!locked}
-                   onDragStart={e=>onDragStart(e,i,'choices')}>
+            {choices.map((v, i) => (
+              <div
+                key={i}
+                className="choice"
+                draggable={!locked}
+                onDragStart={e => onDragStart(e, i, 'choices')}
+              >
                 {v}
               </div>
             ))}
@@ -133,17 +145,37 @@ export default function Infoturbe_juht2() {
         </div>
       </div>
       <div className="buttons">
-        {!locked?(
+        {!locked ? (
           <>
-            <button className="primary" onClick={checkOrder}>Kontrolli järjekord</button>
+            <button className="primary" onClick={checkOrder}>
+              Esita valikud
+            </button>
             <button onClick={resetPuzzle}>Alusta uuesti</button>
           </>
-        ):(
-          <button className="primary" onClick={()=>navigate('/infoturbe_juht3_leht')}>Edasi</button>
+        ) : (
+          <button className="primary" onClick={() => navigate('/infoturbe_juht3_leht')}>
+            Edasi
+          </button>
         )}
       </div>
-      {message.text&&<div className={`message ${message.type==='success'?'message-correct':'message-incorrect'}`}>{message.text}</div>}
-      {hint&&<div className="hint-box">{hint}</div>}
+      {message.text && (
+        <div className={`message ${message.type === 'success' ? 'message-correct' : 'message-incorrect'}`}>
+          {message.text}
+        </div>
+      )}
+      {hint && <div className="hint-box">{hint}</div>}
+      {message.text && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {correctOrder.map((item, idx) => (
+              <li key={idx}>
+                <strong>{item.text}:</strong> {item.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

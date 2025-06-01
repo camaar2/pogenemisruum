@@ -3,17 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Audiitor2.css';
 
 const allMeasures = [
-  "Pilve turvalahendus",
-  "Regulaarne sissetungitestimine",
-  "Töötajate koolitus",
-  "Andmete krüpteerimine",
-  "Juurdepääsu kontroll"
+  { text: "Pilve turvalahendus", explanation: "Pilve turvalahendus tagab, et kriitilised andmed on kaitstud ka hooldusaja jooksul." },
+  { text: "Regulaarne sissetungitestimine", explanation: "Sissetungitestimine aitab avastada haavatavusi ja ennetada rünnakuid hooldusajal." },
+  { text: "Töötajate koolitus", explanation: "Koolitus ei too kohe tehnilist kaitset hooldusaja ajal ja seega pole prioriteet." },
+  { text: "Andmete krüpteerimine", explanation: "Andmete krüpteerimine kaitseb andmeid, kuid prioriteetsemad on teenuste taastamine." },
+  { text: "Juurdepääsu kontroll", explanation: "Juurdepääsu kontroll on oluline, kuid hooldusajal on kriitilisem rakendada pilve turvalahendust ja testimist." }
 ];
 const correctMeasures = ["Pilve turvalahendus", "Regulaarne sissetungitestimine"];
 
 export default function Audiitor2() {
   const navigate = useNavigate();
-  const [measures] = useState(allMeasures);
   const [selected, setSelected] = useState([]);
   const [checked, setChecked] = useState(false);
   const [feedback, setFeedback] = useState("");
@@ -65,42 +64,54 @@ export default function Audiitor2() {
         Ülesanne on valida <strong>{correctMeasures.length}</strong> peamist meetet.
       </p>
       <ul className="measure-list">
-        {measures.map(m => (
+        {allMeasures.map(m => (
           <li
-            key={m}
-            onClick={() => toggleMeasure(m)}
+            key={m.text}
+            onClick={() => toggleMeasure(m.text)}
             className={
-              selected.includes(m)
+              selected.includes(m.text)
                 ? checked
-                  ? correctMeasures.includes(m)
+                  ? correctMeasures.includes(m.text)
                     ? 'selected-correct'
                     : 'selected-incorrect'
                   : 'selected'
                 : ''
             }
           >
-            <input type="checkbox" checked={selected.includes(m)} readOnly /> {m}
+            <input type="checkbox" checked={selected.includes(m.text)} readOnly /> {m.text}
           </li>
         ))}
       </ul>
       <div className="buttons">
+        <button className="reset" onClick={handleReset}>
+          Alusta uuesti
+        </button>
         {!checked ? (
-          <button className="primary" onClick={handleSubmit} disabled={selected.length === 0}>
-            Esita
+          <button className="primary submit" onClick={handleSubmit} disabled={selected.length === 0}>
+            Esita valikud
           </button>
         ) : (
-          <button className="primary" onClick={handleReset}>
-            Alusta uuesti
-          </button>
-        )}
-        {checked && feedback.startsWith('Õige') && (
-          <button onClick={() => navigate('/audiitor3_leht')}>
-            Edasi
-          </button>
+          feedback.startsWith("Õige") && (
+            <button className="primary next" onClick={() => navigate('/audiitor3_leht')}>
+              Edasi
+            </button>
+          )
         )}
       </div>
       {feedback && <div className={`feedback ${feedbackClass}`}>{feedback}</div>}
       {report && <div className="report">{report}</div>}
+      {checked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {allMeasures.map(m => (
+              <li key={m.text}>
+                <strong>{m.text}:</strong> {m.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

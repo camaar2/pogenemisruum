@@ -2,7 +2,7 @@
   max-width: 600px;
   margin: 0rem auto;
   padding: 1.5rem;
-  background: #f9fcff;
+  background-color: #ffffff;
   border: 1px solid #dde4eb;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -64,9 +64,10 @@ button {
   cursor: pointer;
 }
 button.primary {
-  background: #e4067e;
-  color: #fff;
+  background-color: #e4067e;
+  color: white;
 }
+button.primary:hover { background-color: #e4067e; }
 button.primary:disabled {
   background: #aa1352;
   cursor: not-allowed;

@@ -3,25 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Rakendaja1.css';
 
 const correctOrder = [
-  "Seadista ruuteri ACL-id",
-  "Paigalda tulemüür",
-  "Paigalda IDS/IPS",
-  "Rakenda VPN-ühendus",
-  "Tugevda lõppseadmed"
+  { text: "Seadista ruuteri ACL-id", explanation: "ACL-id piiritlevad võrgu juurdepääsu esmalt, vältides volitamata liiklust." },
+  { text: "Paigalda tulemüür", explanation: "Tulemüür filtreerib ja blokeerib ebaseaduslikku liiklust võrku.</em>" },
+  { text: "Paigalda IDS/IPS", explanation: "IDS/IPS tuvastab ja reageerib kahtlasele tegevusele reaalajas." },
+  { text: "Rakenda VPN-ühendus", explanation: "VPN-ühendus krüpteerib andmeedastuse turvaliseks kaugtööks." },
+  { text: "Tugevda lõppseadmed", explanation: "Lõppseadmete tugevdamine hoiab ära pahatahtliku tarkvara leviku." }
 ];
 
 export default function Rakendaja1() {
   const navigate = useNavigate();
-  const [steps, setSteps] = useState(() => [...correctOrder].sort(() => Math.random() - 0.5));
+  const [steps, setSteps] = useState(() => [...correctOrder].map(p => p.text).sort(() => Math.random() - 0.5));
   const [locked, setLocked] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleDragStart = (e, idx) => {
     e.dataTransfer.setData("text/plain", idx);
   };
-
   const handleDragOver = e => e.preventDefault();
-
   const handleDrop = (e, idx) => {
     e.preventDefault();
     if (locked) return;
@@ -35,14 +33,14 @@ export default function Rakendaja1() {
 
   const handleSubmit = () => {
     setLocked(true);
-    const allCorrect = steps.every((s, i) => s === correctOrder[i]);
+    const allCorrect = steps.every((s, i) => s === correctOrder[i].text);
     setMessage(allCorrect
       ? "🎉 Õige järjestus! Võrgu kaitse valmis."
       : "❌ Vale järjestus. Proovi uuesti.");
   };
 
   const handleReset = () => {
-    setSteps([...correctOrder].sort(() => Math.random() - 0.5));
+    setSteps([...correctOrder].map(p => p.text).sort(() => Math.random() - 0.5));
     setLocked(false);
     setMessage("");
   };
@@ -52,7 +50,6 @@ export default function Rakendaja1() {
   const containerClass = locked
     ? message.startsWith("🎉") ? "correct-bg" : "incorrect-bg"
     : "";
-
   const messageClass = locked
     ? message.startsWith("🎉") ? "message-correct" : "message-incorrect"
     : "";
@@ -62,7 +59,7 @@ export default function Rakendaja1() {
       <h1>Võrgu kaitse seadistamine</h1>
       <p className="scenario">
         <em>
-          Turvealane ründevektor nõuab korrektset konfiguratsiooni etapiti: 
+          Turvealane ründevektor nõuab korrektset konfiguratsiooni etapiti:
           esmalt piirangud ACL-idega, seejärel tulemüür, IDS/IPS, kaugühendus VPN-iga ja lõppseadmete tugevdamine.
         </em>
       </p>
@@ -85,7 +82,7 @@ export default function Rakendaja1() {
             onDragOver={handleDragOver}
             onDrop={e => handleDrop(e, idx)}
             className={locked
-              ? step === correctOrder[idx] ? "correct" : "incorrect"
+              ? step === correctOrder[idx].text ? "correct" : "incorrect"
               : ""}
           >
             {step}
@@ -93,11 +90,9 @@ export default function Rakendaja1() {
         ))}
       </ul>
       <div className="buttons">
+        <button onClick={handleReset}>Alusta uuesti</button>
         {!locked ? (
-          <>
-            <button className="primary" onClick={handleSubmit}>Kontrolli järjekorda</button>
-            <button onClick={handleReset}>Alusta uuesti</button>
-          </>
+          <button className="primary" onClick={handleSubmit}>Esita valikud</button>
         ) : message.startsWith("🎉") ? (
           <button className="primary" onClick={handleNext}>Edasi</button>
         ) : (
@@ -105,6 +100,18 @@ export default function Rakendaja1() {
         )}
       </div>
       {message && <div className={`message ${messageClass}`}>{message}</div>}
+      {locked && (
+        <div className="explanations">
+          <h3>Selgitused valikute kohta:</h3>
+          <ul>
+            {correctOrder.map((item, idx) => (
+              <li key={idx}>
+                <strong>{item.text}:</strong> {item.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
