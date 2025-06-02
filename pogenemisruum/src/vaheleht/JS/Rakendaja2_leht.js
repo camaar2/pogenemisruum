@@ -20,7 +20,7 @@ const tutorialSections = [
     content: `
 - • Iga arvuti või server, mis on internetti ühendatud, saab teateid teistelt masinatelt. Kui lubad kõik ühendused, võib ründaja proovida otse sinu arvutiga rääkida.  
 - **Tundmatud sissetulevad ühendused** peavad olema keelatud, et hoida ründajad eemal – lase läbi ainult need IP-aadressid, mida sa tead ja usaldad.  
-- **Blokeeri kõik peale lubatu**: kujuta, et majja on kaks ust. Kui oled lahti jätnud mõlemad, saab igaüks sisse tulla. Kui lased sisse ainult sõprade nimekirjas olevate inimeste nimedest koosneva nimekirja, hoiavad ustel olevad turvamehed ülejäänud eemale.  
+- **Blokeeri kõik peale lubatu**: kujuta, et majal on kaks ust. Kui oled lahti jätnud mõlemad, saab igaüks sisse tulla. Kui lased sisse ainult sõprade nimekirjas olevate inimeste nimedest koosneva nimekirja, hoiavad ustel olevad turvamehed ülejäänud eemale.  
 - **Logi igat katset**: kui keegi proovib sinuga ühendust luua, tee sellest kirje (log) – siis saad hiljem vaadata, kes ja millal siia ligi üritas pääseda.  
 - **Teavita turvatiimi**: kui mõni tundmatu IP-aadress üritab pidevalt ühendust luua, saadab süsteem kohe teate turvameeskonnale, kes saab uurida, kas see on oht või lihtsalt eksitus.  
 - • See on nagu maja turvalukkude valik – sul on nimekiri inimestest, kellel on õigused majja siseneda. Kui keegi nimekirjas ei ole, ei saa ta uksi avada. Samuti pead vaatama, kes uksele koputab (logima), ja kui keegi on kahtlane, helistama turvameeskonnale (teavitama).`
@@ -32,7 +32,7 @@ const tutorialSections = [
 - • Kui valid **kõigi ühenduste lubamise**, on see nagu jätta oma maja uks lahti – keegi võib sisse minna ja vaadata su kommikarpe või varastada telekat.  
 - • Tulemüür (või ruuteri ACL-id) on nagu turvamees ukse ees: ta küsib, kes sa oled, ja laseb sisse ainult need, keda sa usaldad. Kui aga oled lubanud kõigil ukse taga seista, läheb see turvamees ära magama.  
 - • Ilma tulemüürita või ACL-ideta saavad ründajad hõlpsasti proovida üle võtta süsteemi – näiteks sisestada pahavara, lugeda andmeid või rikkuda faile.  
-- • Kujuta ette, et su maja ees pole ust – möödakäijad võivad igal ajal sisse kõndida ega pea isegi koputama. Sama juhtub arvutiga, kui lubad iga IP-aadressil su serveriga rääkida.  
+- • Kujuta ette, et su maja ees pole ust – möödakäijad võivad igal ajal sisse kõndida ega pea isegi koputama. Sama juhtub arvutiga, kui lubad igal IP-aadressil su serveriga rääkida.  
 - • Seetõttu tuleb valida rangelt reeglid, millistele aadressidele lubad siseneda – muidu läheb süsteem haavatavaks kõigile pahatahtlikele katsetele.`
 },
 {

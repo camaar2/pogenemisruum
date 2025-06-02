@@ -28,7 +28,7 @@ const tutorialSections = [
     id: 3,
     title: "Linkide ja manusfailide kontroll",
     content: `
-- **Kahtlad lingid** e-kirjas võivad viia sattuma võltsitud veebisaidile, mis näeb välja nagu tõeline.  
+- **Kahtlased lingid** e-kirjas võivad viia võltsitud veebisaidile, mis näeb välja nagu tõeline.  
 - • Kui näed koodi või veidrat aadressi (nt “http://bit.ly/xxxxx” või “http://secure-bank.example”), ära klõpsa, vaid ava oma brauseris otse panga ametlik aadress (nt https://www.bank.ee).  
 - **Manused** (nt .exe, .zip, .docx) võivad sisaldada pahavara, mis paigaldub, kui failid avad.  
 - Manuste kontrollimiseks:  
@@ -36,17 +36,6 @@ const tutorialSections = [
 -    2. Kui fail on .exe, .scr või .bat, on see eriti ohtlik – püüab käivitada programmi.  
 -    3. Kasuta turvatarkvara (viirusetõrje), et esmalt skaneerida faili enne avamist.  
 - • Kui sa pole kindel, küsi selle saatjalt eraldi (telefonitsi või ametlikult veebisaidilt), kas nad tõesti selle faili saatsid.`
-},
-{
-    id: 4,
-    title: "Vihjete kasutamine",
-    content: `
-- • Paljud e-posti rakendused ja veebisaitide turvatööriistad pakuvad **“Vihje” nuppu** või “Report phishing” võimalust.  
-- • See on nagu sinine info- või turvanool, mille vajutamisel saad rohkem teada, miks rakendus kahtlustab, et kiri võib olla pahatahtlik.  
-- • Kui sa ei ole kindel, kas kiri on turvaline, kasuta seda nuppu:  
--    1. Rakendus näitab, millised omadused (domeen, lingid, manusfailid) tekitavad kahtlusi.  
--    2. Samuti saad saata teate turvatiimile, et nad saaksid uurida, kas tegemist on tõelise teate või pettusega.  
-- • Kui kasutad “Vihje” nuppu, õpid samm-sammult ära, mida jälgida ja miks just need märgid on olulised.`
 }
 ];
 

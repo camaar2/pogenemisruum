@@ -11,11 +11,11 @@ const tutorialSections = [
   - **Intsidentide prioriseerimine** on protsess, kus hinnatakse turvaohtude või intsidentide kriitilisust, määrates, millised olukorrad nõuavad **viivitamatut reageerimist**.  
   - • Kui tekib rünnak või turvarisk, peab kohe otsustama, kas see on nii tõsine, et tuleb kohe tegutseda (näiteks süsteemi lukustamine või teenuse peatamine), või saab sellega tegeleda jooksvalt hiljem.  
   - • Prioriseerimine aitab meeskonnal ressursse õigesti jaotada, et kõige kriitilisemad probleemid lahendada esimesena.  
-  - • Näiteks: kui mingi serverisse on tungitud ja selle kaudu varastatakse andmeid, on see kõrge prioriteediga intsident; kui avastatakse lihtsalt kahtlane logi sõnum, võib selle prioriteet olla madalam.`
+  - • Näiteks: kui mingisse serverisse on tungitud ja selle kaudu varastatakse andmeid, on see kõrge prioriteediga intsident; kui avastatakse lihtsalt kahtlane logi sõnum, võib selle prioriteet olla madalam.`
     },
     {
       id: 2,
-      title: "Miks massiline andmeleke kriitiline?",
+      title: "Miks on massiline andmeleke kriitiline?",
       content: `
   - **Massiline andmeleke** tähendab olukorda, kus avalikustuvad tuhanded või miljonid inimeste isikuandmed (nt e-kirjad, paroolid, kontaktandmed).  
   - See on äärmiselt kriitiline, sest:  
@@ -51,8 +51,8 @@ const tutorialSections = [
   - **Riigiasutuste infosüsteemid** (nagu Siseministeeriumi omad) hoiavad tundlikku ja eriti olulist infot (nt kodanike registrid, turbeinfo).  
   - • Kui sellise riigi infosüsteemi vastu suunatakse rünnak, on see automaatselt kõrgeim prioriteet, sest võib kahjustada **riiklikku julgeolekut** ja rahvatervist.  
   - **Automaatne prioriteet**: riiklike süsteemide rikkumine nõuab kiiret tegutsemist, kaasates eri asutused, politsei ja julgeolekuagentuurid, et jälitada ründeallikaid ja taastada andmete terviklikkus.  
-  - • Kui keegi häkkeritena siseneb süsteemi, kust hoitakse passide andmeid või politsei juhtumeid, võib see viia ohtlike olukordadeni (nt valeidentiteedid, vargused). Sellisel juhul tuleb reageerida viivitamatult, et hoida ära suuremad katastroofid.  
-  - • Selline intsident nõuab kohe valmis meeskonna kaasamist ja rahvusvahelist koostööd, kui ründaja on välisriigis baseeruv grupp.`
+  - • Kui keegi häkkeritena siseneb süsteemi, kus hoitakse passide andmeid või politsei juhtumeid, võib see viia ohtlike olukordadeni (nt valeidentiteedid, vargused). Sellisel juhul tuleb reageerida viivitamatult, et hoida ära suuremad katastroofid.  
+  - • Selline intsident nõuab kohe valmis meeskonna kaasamist ja rahvusvahelist koostööd, kui ründaja on välisriigis asuv grupeering.`
     }
   ];
 

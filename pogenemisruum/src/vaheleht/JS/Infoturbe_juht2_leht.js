@@ -9,7 +9,7 @@ const tutorialSections = [
     title: "Viirusetõrje paigaldamine",
     content: `
 - **Viirusetõrje** on programm, mis aitab kaitsta arvutit või serverit pahatahtlike programmide (viirused) eest.  
-- • **Paigaldamine** tähendab, et tarkvara installeeritakse arvutisse, et selle põhifailid (südamiku osad) ja taustaprotsessid (teenused) hakkaksid tööle.  
+- • **Paigaldamine** tähendab, et tarkvara installeeritakse arvutisse, et selle põhifailid ja taustaprotsessid (teenused) hakkaksid tööle.  
 - • Kui installid viirusetõrje, paned arvutisse valvekoera, kes haistab ja takistab pahavara enne, kui see su arvutis midagi halba teeb.  
 - • Installiprotsess võib küsida luba mõningate failide eemaldamiseks või süsteemimuudatuste tegemiseks, et viirusetõrje saaks skaneerimist alustada.`
 },
@@ -28,7 +28,7 @@ const tutorialSections = [
     content: `
 - **Turvabaas** ehk viirusetunnuste andmebaas sisaldab kirjeldusi (allkirju ja mustreid) tuntud pahavarast.  
 - **Värskendamine** tähendab, et viirusetõrje laadib internetist alla kõige uuemad kirjelduse failid, mis lisavad tuvastusvõimekust uute viiruste ja pahavara vastu.  
-- • Kui turvabaas on vana, ei pruugi viirusetõrje teada viimaseid häkkerite loodud viirusi. Uuendades turvabaasi, annad viirusetõrjele uue “sõrmejälje” info, et ta leiaks ka viiruseid, mis on äsja ilmunud.  
+- • Kui turvabaas on vana, ei pruugi viirusetõrje teada viimaseid häkkerite loodud viiruseid. Uuendades turvabaasi, annad viirusetõrjele uue “sõrmejälje” info, et ta leiaks ka viiruseid, mis on äsja ilmunud.  
 - • Tavaliselt värskendatakse turvabaasi automaatselt, kuid selle saab ka käsitsi kontrollida või määrata, et värskendused tuleksid iga päev või iga tund.`
 },
 {

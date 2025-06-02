@@ -6,7 +6,7 @@ import '../CSS/common.css';
 const tutorialSections = [
     {
       id: 1,
-      title: "Andmekaitseameti teavitamine",
+      title: "Andmekaitseamet",
       content: `
   - **Andmekaitseamet** on Eesti riigiasutus, mis jälgib, et organisatsioonid hoiaksid inimeste isikuandmeid kaitstult.  
   - • Kui tekib isikuandmete lekkimine või rikkumine (näiteks keegi varastab või avaldab saladuslikke andmeid), tuleb sellest teatada andmekaitseametile 72 tunni jooksul.  

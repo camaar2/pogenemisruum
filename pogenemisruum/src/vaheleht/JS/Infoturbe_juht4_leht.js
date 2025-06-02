@@ -28,10 +28,10 @@ const tutorialSections = [
     id: 3,
     title: "Tuntud süsteemiprotsesside eristamine",
     content: `
-- **Süsteemiprotsessid** on programmid, mis töötavad taustal nii Windowsis kui Linuxis ja on osa operatsioonisüsteemist. Näiteks Windowsis teevad mitmed osad tööd faili- või võrgijuhtimisega, kasutades protsessinimesid nagu **svchost.exe** või **explorer.exe**.  
+- **Süsteemiprotsessid** on programmid, mis töötavad taustal nii Windowsis kui Linuxis ja on osa operatsioonisüsteemist. Näiteks Windowsis teevad mitmed osad tööd faili- või võrgujuhtimisega, kasutades protsessinimesid nagu **svchost.exe** või **explorer.exe**.  
 - • **Õige asukoht**: reaalsed **svchost.exe** ja **explorer.exe** asuvad alati kaustas **C:\\Windows\\System32** (või 64-bit süsteemis ka **C:\\Windows\\SysWOW64**).  
-- • Kui leiad **svchost.exe** mõnes muus kaustas (nt **C:\\Users\\Sina\\svchost.exe**), on see kindlasti pahavara, mis üritab end kehastada reaalseks protsessiks.  
-- • Kui näed ressursside juhtimisel käimas programmi nimega “svchost.exe”, kontrolli Path (faili asukohta). Kui see on ikkagi “C:\\Windows\\System32\\svchost.exe”, siis kõik on korras – see on tõeline Windowsi komponent. Kui pole, siis on see nagu võlts autovahetus dokumentidest, mida ei tohi usaldada.  
+- • Kui leiad **svchost.exe** mõnes muus kaustas (nt **C:\\Users\\Sina\\svchost.exe**), on see tõenäoliselt pahavara.  
+- • Kui näed ressursside juhtimisel käimas programmi nimega “svchost.exe”, kontrolli faili asukohta. Kui see on ikkagi “C:\\Windows\\System32\\svchost.exe”, siis kõik on korras – see on tõeline Windowsi komponent. Kui pole, siis on see nagu võlts dokument, mida ei tohi usaldada.  
 - • **Lihtne kontroll**: ava Task Manager (Ctrl+Shift+Esc) ja otsi loendist “svchost.exe”. Kuna neid on mitu korraga, klõpsa igaühel parema nupuga ja vali “Open file location”. Kui see suunab kausta väljaspool **System32**, võib tegemist olla pahavaraga.`
 },
 {
@@ -41,8 +41,8 @@ const tutorialSections = [
 - **Manused** on failid, mis on kaasas e-kirjadega (nt Wordi dokumendid, arhiivifailid või PDF-id). Ründajad võivad panna pahavarafaili manusena, ootuses, et sa selle avad.  
 - **Allkirja kontroll** tähendab, et iga digitaalne dokument või programm võib olla varustatud **digitaalse allkirjaga** – see on nagu elektrooniline templimärk, mis ütleb, kes faili lõi ja et seda poleks muudetud.  
 - • Kui soovid avada faili, mis on manusena saadetud, parem klõpsa failil, vali “Properties” (Atribuudid) ja “Digital Signatures” (Digitaalallkirjad). Kui allkirja pole või see on valesti registreeritud (polnud usaldusväärne allikas), ära ava faili.  
-- • **Usaldusväärsed allikad**: kui saad faili mõnelt tuttavalt, kelle e-posti aadress on kindlalt teada, on oht väiksem. Kui aga saad failiga e-kirja aadressilt, mis tundub võlts (nt **tootja@amaz0n.com** vs õige **info@amazon.com**), ära ava manusfaili enne, kui oled kontrollinud saatjat.  
-- • **Nõuanne**: seadista e-posti server või viirusetõrje nii, et ta skaneerib automaatselt kõik manused. Kui süsteem teavitab “kahtlus: allkirja ei leitud” või “allkirja allikas pole tunnustatud”, jäta manus avamata ja kustuta või küsi saatjalt täpsust.`
+- • **Usaldusväärsed allikad**: kui saad faili mõnelt tuttavalt, kelle e-posti aadress on kindlalt teada, on oht väiksem. Kui aga saad faili e-kirja aadressilt, mis tundub võlts (nt **tootja@amaz0n.com** vs õige **info@amazon.com**), ära ava manusfaili enne, kui oled kontrollinud saatjat.  
+- • **Nõuanne**: seadista e-posti server või viirusetõrje nii, et ta skaneerib automaatselt kõik manused. Kui süsteem teavitab “kahtlus: allkirja ei leitud” või “allkirja allikas pole usaldusväärne”, jäta manus avamata ja kustuta või küsi saatjalt täpsustust.`
 }
 ];
 

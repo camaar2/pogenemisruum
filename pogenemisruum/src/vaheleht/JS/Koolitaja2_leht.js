@@ -26,17 +26,17 @@ const tutorialSections = [
       id: 3,
       title: "Lühike juhend (infograafika)",
       content: `
-  - **Infograafika** on nagu piltidega rullitud skeem, mis selgitab samm-sammult olulisi asju – see on visuaalne “tähestik”, kus iga pilt räägib loo.  
-    - Mõtle, et kokaraamat muutub „õpetuseks piltide“ abil – näed, kuidas pannid paigutada ja mis järjekorras neid kuumutada.  
-  - • Näiteks turvalise parooli valimine võib olla kujutatud punktidena:  
+  - **Infograafika** on nagu piltidega skeem, mis selgitab samm-sammult olulisi asju – see on visuaalne “tähestik”, kus iga pilt räägib loo.  
+    - Mõtle, et kokaraamat muutub õpetuseks piltide abil – näed, kuidas pannid paigutada ja mis järjekorras neid kuumutada.  
+  - • Turvalise parooli valimine võib olla kujutatud punktidena:  
     1. Kasuta vähemalt 8 tähte  
     2. Lisa suur- ja väiketähti  
     3. Lisa numbreid ja sümboleid  
-  - • Infograafikat on hea järgida ja aitab teavet kiiresti meenutada, kuna inforikkad pildid ja lühitekstid jäävad paremini meelde.`
+  - • Infograafikat on hea järgida ja see aitab teavet kiiresti meenutada, kuna inforikkad pildid ja lühitekstid jäävad paremini meelde.`
     },
     {
       id: 4,
-      title: "Lühiformaadis samm-sammult juhend",
+      title: "Lühiformaadis samm-sammuline juhend",
       content: `
   - **Lühiformaadis juhend** on nagu “telefoninoteeringud” ehk bullet-pointidena kirja pandud sammud, mida saad kohe järgida.  
     - Kujuta ette, et sa ei viitsi lugeda pikka teaduskirja, aga vajad kiiret “mõtle, tee nii, mis järjekorras” lühikokkuvõtet.  
@@ -53,8 +53,8 @@ const tutorialSections = [
       content: `
   - **Pikk tehniline tekst** sobib neile, kes tahavad detailset selgitust, miks ja kuidas turvasüsteem töötab.  
     - See on nagu mitu peatükki põhjalikus raamatus, mis räägib kõike krüpteerimise kohta alates ajaloost kuni kaasaegsete kasutusvõimalusteni.  
-  - • Samas võib see arvutipõlvede kauge lugemine tunduda “liiga raske” neile, kes ei ole tehnoloogiaga varem kokku puutunud.  
-  - • Sellepärast on mõistlik kombineerida pikk tehniline tekst koos lühikeste juhendite, infograafika ja videoõpetustega – nii leiab iga algaja sobiva taseme.`
+  - • Samas võib see lugemine tunduda “liiga raske” neile, kes ei ole tehnoloogiaga varem kokku puutunud.  
+  - • Sellepärast on mõistlik kombineerida pikk tehniline tekst koos lühikeste juhendite, infograafika ja videoõpetustega – nii leiab iga algaja sobiva õppevormi.`
     }
   ];
 

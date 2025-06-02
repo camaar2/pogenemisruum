@@ -50,11 +50,11 @@ const tutorialSections = [
         title: "Miks tugevdada lõppseadmeid?",
         content: `
     - **Lõppseadmed** on arvutid, sülearvutid ja serverid, mida inimesed igapäevaselt kasutavad.  
-    - • Kui need seadmed pole kaitstud, võivad ründajad seadmesse nakatada viirusi või varastada andmeid.  
+    - • Kui need seadmed pole kaitstud, võivad ründajad seadmesse tõmmata viirusi või varastada andmeid.  
     - **Paroolide haldus ja viirusetõrje**:  
 
         - • **Paroolid** peaksid olema pikad ja keerulised (vähemalt 8 tähemärki, suured ja väikesed tähed, numbrid ja sümbolid).  
-        - • **Viirusetõrje** tarkvara skaneerib faile ja otsib pahavara, kustutades või panne kõrvale kahtlased failid.  
+        - • **Viirusetõrje** tarkvara skaneerib faile ja otsib pahavara, kustutades või pannes kõrvale kahtlased failid.  
 
     - **Tarkvarauuenduste regulaarne paigaldus**:  
 

@@ -11,7 +11,7 @@ const tutorialSections = [
 Süsteemide riskide tuvastamine on protsess, mille käigus hinnatakse erinevate IT-komponentide
 haavatavusi ja ohukohti. Selle eesmärk on:
 - Mõista, millised komponendid on **kriitilisemad** ettevõtte toimimiseks
-- Hindada võimalike rünnakute mõjusid ja tõenäosust
+- Hinnata võimalike rünnakute mõjusid ja tõenäosust
 - Prioriseerida kaitsemeetmeid ressursside optimaalseks kasutamiseks
 `
   },
@@ -20,7 +20,7 @@ haavatavusi ja ohukohti. Selle eesmärk on:
     title: "Miks on veebiserver riskantne komponent?",
     content: `
 Veebiserverid on sageli **avalikkusele avatud** ja töötavad standardsete portidega, mistõttu:
-- Neid skannitakse ja testitakse pidevalt automatiseeritud tööriistadega
+- Neid skanneeritakse ja testitakse pidevalt automatiseeritud tööriistadega
 - Tuntud rünnemeetodid hõlmavad **SQL injection'i**, **XSS-i** ja brauseripõhiseid haavatavusi
 - Turvariskide vähendamiseks kasutatakse tulemüüre, sisendi valideerimist ja regulaarselt uuendusi
 `
@@ -31,7 +31,7 @@ Veebiserverid on sageli **avalikkusele avatud** ja töötavad standardsete porti
     content: `
 Andmebaasid hoiavad **konfidentsiaalseid** ja ärikriitilisi andmeid:
 - Andmeleke võib põhjustada finants- ja mainekahju
-- Juhtumipiiralamise meetmed: juurdepääsuõiguste range haldus, krüpteerimine ja auditilogid
+- Juhtumi meetmed: juurdepääsuõiguste range haldus, krüpteerimine ja auditilogid
 - Tavalised tööd: SQL päringute turvalisus, turvaliste ühenduste kasutamine
 `
   },
@@ -41,8 +41,8 @@ Andmebaasid hoiavad **konfidentsiaalseid** ja ärikriitilisi andmeid:
     content: `
 E-posti serverid on ründevektor **petusõnumite** ja **pahavaraga**:
 - Phishing-sõnumid võivad petta kasutajat klikkima pahatahtlikule lingile
-- Kitevad manusfailid võivad sisaldada pahavara või skripte
-- Kaitseks kasutatakse spamifiltreid, manuse kontrolli ja teavitusprotokolle
+- Manusfailid võivad sisaldada pahavara või skripte
+- **Kaitseks** kasutatakse spamifiltreid, manuse kontrolli ja teavitusprotokolle
 `
   },
   {
@@ -63,7 +63,7 @@ Riskide prioriseerimine aitab keskenduda kõige olulisematele ohukohtadele:
 - **Lülitid ja ruuterid** võivad olla ründevektoriks, kui kasutusel on vaikekasutajanimi/salasõna või vananenud püsivara  
 - **Traadita pääsupunktid (WAP-id)**, kus nõrk WiFi-krüpteering (nt WEP) lubab pahatahtlikel seadmetel võrku ühendada  
 - **Halduse portide** (SSH, Telnet) avatus avalikkusele võimaldab ründajal seadet üle võtta  
-- Kaitseks: muuda vaikeseaded, uuenda püsivara, kasuta SSH (loomine) asemele Telneti keelamist, piiratud ligipääs (ACL-id)`
+- **Kaitseks**: muuda vaikeseaded, uuenda püsivara, kasuta SSH (loomine) asemele Telneti keelamist, piiratud ligipääs (ACL-id)`
   },
   {
     id: 7,
@@ -71,7 +71,7 @@ Riskide prioriseerimine aitab keskenduda kõige olulisematele ohukohtadele:
     content: `
 - **USB-seadmed** (mälupulgad, kõvakettad) võivad levitada pahavara (nt autorun)  
 - **Mobiilseadmed** (nutitelefonid, tahvelarvutid) võivad pääseda töövõrku VPN-i kaudu ning tuua kaasa pahatahtliku rakenduse või valede õiguste jagamise  
-- Kaitseks: keela autorun, luba ainult kontrollitud USB-seadmeid (MDM-tarkvara), kehtesta mobiilsidepoliitika ja lubatud rakenduste nimekiri`
+- **Kaitseks**: keela autorun, luba ainult kontrollitud USB-seadmeid (MDM-tarkvara), kehtesta mobiilsidepoliitika ja lubatud rakenduste nimekiri`
   },
   {
     id: 8,

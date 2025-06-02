@@ -12,7 +12,7 @@ const tutorialSections =
 - **Operatsiooniline info** käsitleb igapäevaseid tegevusi ja protseduure, mis on vajalikud süsteemide haldamiseks.  
 - • Mõtle, et operatsiooniline info on nagu köögis retsept – see ütleb täpselt, mida iga päev süüa valmistades teha tuleb (nt kuidas registreerida uus kasutajakonto või kuidas kontrollida, et server töötab).  
 - **Strateegiline info** seab pikaajalised eesmärgid, prioriteedid ja suunised, mis toetavad otsuste tegemist kõrgemal tasemel.  
-- • Strateegiline info on nagu pere pikaajaline toitumiskava – see ütleb, milliseid toite millal ja miks poest osta ja planeerida, et pere tervis püsiks hea aastate kaupa.`
+- • Strateegiline info on nagu pere pikaajaline toitumiskava – see ütleb, milliseid toite poest osta ja planeerida, et pere tervis püsiks hea aastate kaupa.`
 },
 {
         id: 2,

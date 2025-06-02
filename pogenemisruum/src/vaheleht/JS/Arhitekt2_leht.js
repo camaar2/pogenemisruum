@@ -11,14 +11,14 @@ const tutorialSections = [
   - • Paroolivahetus iga **90 päeva** tagant on tavaline soovitus, et vähendada **brute-force** rünnakute mõju.  
     - **Brute-force rünnak** tähendab seda, et pahatahtlik tarkvara või inimene proovib järjest erinevaid paroole, kuni leiab õige.  
     - Kujuta ette, et keegi proovib su koduukse avada, proovides igat võimalikku võtme varianti – kui vahetad parooli sageli, on raskem õiget võtit leida.  
-  - • Liiga pikk intervall (nt **10 aastat**) jätab parooli liiga kaua muutmata ja annab ründajal aega proovida tuhandeid paroole.  
+  - • Liiga pikk intervall (nt **10 aastat**) jätab parooli liiga kaua muutmata ja annab ründajale aega proovida tuhandeid paroole.  
     - Kui kasutad sama parooli nii kaua, on see nagu unustaksid oma värava lukku vahetada – keegi, kes on selle varasemalt varastanud, saab ikka sisse.`
     },
     {
       id: 2,
       title: "Andmete krüpteerimine",
       content: `
-  - **Andmete krüpteerimine** tähendab, et muudad tundlikud andmed saladuseks (koodiks), mida saab lugeda ainult õige võtmega.  
+  - **Andmete krüpteerimine** tähendab, et muudad tundlikud andmed salajaseks (koodiks), mida saab lugeda ainult õige võtmega.  
     - Kujuta seda kui sa kirjutaksid salakeeles paberile või suled ümbriku, mille luku avamiseks on vaja õiget võtit - kui keegi võõras näeb seda, näeb ainult segast teksti.  
   - • **AES-256** on laialdaselt kasutatav ja tugev krüptoskeem (nagu väga turvaline lukk), mida usaldavad pangad ja valitsused.  
     - Kui salvestad või saadad andmeid (nt pangakonto numbreid või terviseandmeid), krüpteerib AES-256 need nii, et ilma võtmeta ei saa keegi neist aru.  
@@ -61,8 +61,8 @@ const tutorialSections = [
       id: 6,
       title: "Mida vältida?",
       content: `
-  - • **Paroolivahetus iga 10 aasta tagant** on ebapiisav, sest keegi võib su parooli juba mitu korda ära kasutada või kräkkinud variante veebis jagada.    
-  - • **Tarkvarauuenduste vältimine** (näiteks jätta telefon või arvuti “värskendamata”) nõrgestab turvasüsteeme, sest iga uuendus parandab avastatud haavatavusi.  
+  - • **Paroolivahetus iga 10 aasta tagant** on ebapiisav, sest keegi võib su parooli juba mitu korda ära kasutada.    
+  - • **Tarkvarauuenduste vältimine** (näiteks jätad telefoni või arvuti “värskendamata”) nõrgestab turvasüsteeme, sest iga uuendus parandab avastatud haavatavusi.  
     - Arvutimaailmas on uuendused nagu raviplaanid – kui sa neid ei kasuta, jäävad haavad avatud ja tervist rikkuda (ründajad võivad neid ära kasutada).  
   - • **Võrguliikluse filtreerimise puudumine** tähendab, et kõik liiklus pääseb läbi – ka need andmepaketid, mis püüavad võtta su süsteemi üle.  
     - See on nagu maja ukse lahti tegemine – keegi võib ilma kutsumata sisse tulla, sest sa ei ole paigaldanud “Mitte siseneda” märki ega turvameest ukse taha kutsunud.`

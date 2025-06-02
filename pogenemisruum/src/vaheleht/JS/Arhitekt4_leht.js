@@ -13,7 +13,7 @@ const tutorialSections = [
   - • Kujuta ette, et saadad sõpradele salasõnumi – paned selle lukustatud ümbrikusse ja ainult saaja, kellel on õige võti, saab seda lugeda. TLS toimib täpselt nii arvutite vahel.  
   - • Näited:  
     – E-posti kaudu saadetud sõnumid (SMTP TLS)  
-    – Veebilehtede külastamine (HTTPS kone)  
+    – Veebilehtede külastamine (HTTPS)  
     – Failiedastus (FTP üle TLS ehk FTPS)  
   - • Kui TLS puudub, liigub info “avatult” üle interneti (nagu postkaart), mida saab pealt kuulata või võltsida.  
   `
@@ -24,7 +24,7 @@ const tutorialSections = [
       content: `
   - **AES (Advanced Encryption Standard)** on parooliga lukustatud kast, kus sama võti avab ja sulgeb selle kasti.  
   - • See on sümmeetriline krüptimine: nii saatmisel kui vastuvõtmisel kasutatakse ühte ja sama “võtit” ehk salajast koodi.  
-  - • Kujuta ette, et sul on üks tugev metallist kast ja võtmetega juhe. Kui paned sinna salajase paberi (sinu pangakonto andmed), peab saaja teadma sama võtme, et kasti avada ja sõnumit lugeda.  
+  - • Kujuta ette, et sul on üks tugev metallist kast ja võtmetega juhe. Kui paned sinna salajase paberi (sinu pangakonto andmed), peab saaja teada sama võtme, et kasti avada ja sõnumit lugeda.  
   - • Sobib andmete salvestamiseks ja jagamiseks turvaliselt, näiteks:  
     – Failid kõvakettal või USB-mälul  
     – Andmebaaside saladuslikud kirjed  
@@ -43,7 +43,7 @@ const tutorialSections = [
   - • Kui keegi tahab saata sulle salateate, kasutab ta sinu avalikku võtit. Ainult sina, kes tead privaatvõtme salakoodi, saad kasti avada ja kirja lugeda.  
   - • Sobib võtmevahetuseks ja digitaalallkirjade loomiseks:  
     – **Võtmevahetus**: saadad sõbrale avaliku võtme, tema saadab sulle enda avaliku võtme – nii saate krüpteerida sõnumeid, mida ainult kumbki teist saab avada.  
-    – **Digitaalallkiri**: kui edastad dokumenti, saad seda “allkirjastada” privaatvõtmega – vastuvõtja kontrollib seda avaliku võtmega, et sa tõesti selle dokument saatsid (kui digiallkiri klapib, dokument on ehtne ning seda pole muudetud).  
+    – **Digitaalallkiri**: kui edastad dokumenti, saad seda “allkirjastada” privaatvõtmega – vastuvõtja kontrollib seda avaliku võtmega, et sa tõesti selle dokumendi saatsid (kui digiallkiri klapib, dokument on ehtne ning seda pole muudetud).  
   - • Kui RSA privaatvõti kaotsi läheb või lekib, kaotad ligipääsu oma kirjadele ja keegi teine võib sinu nime all pahandusi teha, seega peab privaatvõti olema rangelt hoitud.  
   `
     }

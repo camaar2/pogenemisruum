@@ -9,8 +9,8 @@ const tutorialSections = [
     title: "Võrgu segmentimine",
     content: `
 - **Võrgu segmentimine** tähendab, et jagame suuri võrke väiksemateks osadeks (subnetid või VLAN-id), et hoida eri seadmed ja teenused eraldi.  
-- • Kujuta ette, et sinu maja on suur ja saad panna iga toa eraldi turvauksi taha. Kui peaks keegi sisse murdma ühte tuppa, ei pääse ta automaatselt teistesse tubadesse. Sama kehtib võrgu kohta: kui pahavara satub ühte segmenti, ei saa ta lihtsalt teistesse liikuda.  
-- **Subnet** (alamvõrk) on võrgu alagrupp väiksemas mõõtkavas, millel on oma IP-vahemik (nt 192.168.1.x võib olla üks alamvõrk ja 192.168.2.x teine).  
+- • Kujuta ette, et sinu maja on suur ja saad panna iga toa eraldi turvaukse taha. Kui peaks keegi sisse murdma ühte tuppa, ei pääse ta automaatselt teistesse tubadesse. Sama kehtib võrgu kohta: kui pahavara satub ühte segmenti, ei saa ta lihtsalt teistesse liikuda.  
+- **Subnet** (alamvõrk) on võrgu alamgrupp väiksemas mõõtkavas, millel on oma IP-vahemik (nt 192.168.1.x võib olla üks alamvõrk ja 192.168.2.x teine).  
 - **VLAN** (Virtual LAN) on tarkvara abil loodud eraldus, mis jagab füüsilise võrgu mitmeks loogiliseks osaks ilma, et peaksid kaableid ümber tõstma.  
 - • Võrgusegmendi saab panna eraldi „ruumi“ või „õue“, kus on ainult teatud seadmed (nt printerid eraldi, tööarvutid eraldi). See piirab pahavara liikumist ja hoiab kriitilised serverid turvalisemad.  
 - • Samuti saab kehtestada eraldi reeglid (tulemüür või ACL), mis lubavad või keelavad liiklust iga segmendi vahel – nii saad kontrollida täpselt, kes ja millal millisesse ossa ligi pääseb.`

@@ -23,15 +23,15 @@ const tutorialSections = [
     title: "Kuidas hoida paroole turvaliselt?",
     content: `
     - • Kasuta **unikaalseid ja keerulisi paroole** igal kontol: väldi lihtsaid sõnu ja lisa suured tähed, väiketähed, numbrid ja sümbolid (nt “Kass!2025**”).  
-  - • **Paroolihaldur** (nt KeePass, Bitwarden) aitab meelde jätta eri paroole: paroolihaldur salvestab kõik su paroolid ühte kaitstud ja lukustatud „kasti“.  
-  - • Paroolihaldur on nagu tugev turvalukk, kuhu kogud kõik oma võtmed (paroolid) – sa pead meenutama vaid ühe peavõtit (peaparooli), ülejäänud paroolid tulenevad turvalisest rakendusest.`
+  - • **Paroolihaldur** (nt LastPass, Bitwarden) aitab meelde jätta eri paroole: paroolihaldur salvestab kõik su paroolid ühte kaitstud ja lukustatud „kasti“.  
+  - • Paroolihaldur on nagu tugev turvalukk, kuhu kogud kõik oma võtmed (paroolid) – sa pead teadma vaid ühte peavõtit (peaparooli), ülejäänud paroolid tulenevad turvalisest rakendusest.`
   },
   {
     id: 4,
     title: "Mis on kahefaktoriline autentimine (2FA)?",
     content: `
     - • **2FA (kahefaktoriline autentimine)** nõuab lisaks paroolile veel teist tõestusviisi, näiteks SMS-iga saadetud ühekordset koodi või autentimisrakenduse (Google Authenticator) koodi.  
-  - • Kui logid pangakontole, sisestad esmalt paroooli (esimene faktor) ja seejärel saadetakse telefonile kood, mille sisestad eraldi (teine faktor).  
+  - • Kui logid pangakontole sisse, sisestad esmalt paroooli (esimene faktor) ja seejärel saadetakse telefonile kood, mille sisestad eraldi (teine faktor).  
   - • See tähendab, et isegi kui ründaja teab su parooli, ei saa ta sisse, sest tal pole su telefoni.`
   },
   {

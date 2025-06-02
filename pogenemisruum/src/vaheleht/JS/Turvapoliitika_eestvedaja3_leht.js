@@ -20,7 +20,7 @@ const tutorialSections = [
   - **Ligipääsukontrollide logid** dokumenteerivad, kes ja millal süsteemidesse sisse logis (nt kasutajanimi, kuupäev, kellaaeg).  
   - • Ligipääsukontrolli logid on nagu uksekaartide registriraamat, kus on kirjas, kes kasutas võtit ruumil, kui ta sinna sisenes või lahkus.  
   - • Auditi jaoks aitab see logi tuvastada, kas keegi on püüdnud ebaseaduslikult sisse logida või kas keegi on kasutanud teise inimese kontot.  
-  - • Näiteks kui töötaja ütleb, et ta ei loginud süsteemi kell 10, aga log näitab, et tema konto kasutas süsteemi, tekib küsimus, kes tegelikult sisenes.  
+  - • Näiteks kui töötaja ütleb, et ta ei loginud süsteemi kell 10, aga logi näitab, et tema konto kasutas süsteemi, tekib küsimus, kes tegelikult sisenes.  
   - • Auditi käigus vaadatakse neid logisid, et veenduda, kas ligipääs on korrektselt lubatud ja et kahtlased sündmused on dokumenteeritud.`
     },
     {

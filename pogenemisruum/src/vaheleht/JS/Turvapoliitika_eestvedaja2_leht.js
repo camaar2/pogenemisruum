@@ -12,7 +12,7 @@ const tutorialSections = [
 - • Krüptovõtmed on nagu salajased võtmed:  
 - •   **Ühine (sümmeetriline) krüpto** kasutab sama võtit andmete krüpteerimiseks ja dekrüpteerimiseks (nagu lukuga kast, mille avamiseks ja sulgemiseks on üks ja sama võti).  
 - •   **Avalik-privaatne (asümmeetriline) krüpto** kasutab kahte eri võtit – ühte krüpteerimiseks (avalik võti) ja teist dekrüpteerimiseks (privaatne võti) (nagu postkast, kus igaüks saab kirju sinna saata, aga ainult postkastiomanik saab kirju lugeda).  
-- • Kui saadad kellelegi salasõna, teisendada see enne teksti lisades krüpteeritud kujule, nii et ka keegi, kes teiselt poolt võrgu­liiklust kuulab, ei suuda teksti mõista ilma õige võtmeta.  
+- • Kui saadad kellelegi salasõna, teisenda see enne teksti lisades krüpteeritud kujule, nii et ka keegi, kes teiselt poolt võrgu­liiklust kuulab, ei suuda teksti mõista ilma õige võtmeta.  
 - • Näiteks: kui saadad pangaandmeid, kasutatakse krüpteerimist, et keegi kolmas ei saaks sinu kontonumbrit ja salajast koodi pealt lugeda.  
 - • Krüpteerimine aitab ka salvestatud andmeid automaatselt kaitsta – kui kõvaketas varastatakse, ei saa varas andmeid kasutada, kuna tal pole õiget võtit.`  
 },
@@ -22,7 +22,7 @@ const tutorialSections = [
     content: `
 - **Teadlikkuse tõstmine** hõlmab regulaarselt koolitusi, simulatsioone ja infoturbe juhendamist, et vähendada inimelementidest tulenevaid riske nagu andmepüük või sotsiaalinsenerlus.  
 - **Andmepüük (phishing)** tähendab petukaartide saatmist e-kirja või sõnumi teel, mille eesmärk on kedagi petta klõpsama kahtlasel lingil või jagama paroole (näiteks “Kinnitage oma konto, klõpsates siin”).  
-- **Sotsiaalinsenerlus** on ründemeetod, kus häkker püüab inimese usaldust äratada (nt valetab, et on IT-tugi), et saada ligipääs salajatele andmetele (näiteks küsib paroole otse).  
+- **Sotsiaalinsenerlus** on ründemeetod, kus häkker püüab inimese usaldust äratada (nt valetab, et on IT-tugi), et saada ligipääs salajastele andmetele (näiteks küsib paroole otse).  
 - • Kujuta ette, et keegi helistab ja ütleb, et on sinu töökoha IT-inimene ning palub jagada paroole, sest arvuti olevat nakatunud – õige koolitus aitab sul mõista, et tihti ei küsi keegi seda telefonitsi ilma ametliku kirjavahetuseta.  
 - **Simulatsioonid** on harjutused, kus saadetakse test-andmepüügikiri (ilma tegeliku rünnakuta) ja vaadatakse, kas keegi klõpsab lingil; see aitab selgitada, kuidas tegelik rünnak võib välja näha.  
 - • Regulaarne harjutamine ja juhendamine tugevdab organisatsiooni turvakultuuri ning vähendab inimlike eksimuste tõenäosust – kui töötaja teab, mida jälgida, ei lase ta endale arvutisse pahavara.`  
