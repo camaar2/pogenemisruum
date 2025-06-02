@@ -72,7 +72,8 @@ function Turvapoliitika_eestvedaja1() {
       <h1>Õiguslike nõuete tuvastamine</h1>
       <div className="instructions">
         <p>
-          Vali seadused ja direktiivid, mis kehtivad küberturbe valdkonnas. Kokku on <strong>{allLaws.filter(l => l.correct).length}</strong> nõuet:
+          Vali seadused ja direktiivid, mis kehtivad küberturbe valdkonnas. Kokku on <strong>{allLaws.filter(l => l.correct).length}</strong> nõuet.
+          Kui oled valmis, vajuta „Esita valikud“.
         </p>
       </div>
       <ul className="law-list">

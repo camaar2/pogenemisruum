@@ -18,12 +18,12 @@ function TurvapoliitikaEestvedaja() {
       </p>
       <h2>Mängude ülevaade</h2>
 
-      <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>
+      <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on kokku umbes 10 minutit:</p>
       <ul>
-        <li><strong>Riikliku tasandi ohtude tuvastamine</strong></li>
-        <li><strong>Turvapoliitika strateegia valik</strong></li>
-        <li><strong>Rakendamise juhendamine</strong></li>
-        <li><strong>Rahvusvaheline koostöö ja kriisi järelvalve</strong></li>
+        <li><strong>Õiguslike nõuete tuvastamine</strong></li>
+        <li><strong>Vastavusmeetmete määratlemine</strong></li>
+        <li><strong>Auditiks valmistumine</strong></li>
+        <li><strong>Reageerimine rikkumistele</strong></li>
       </ul>
       <Link to="/turvapoliitika_eestvedaja1_leht">
         <button>Liigu edasi</button>

@@ -73,7 +73,7 @@ function Turvapoliitika_eestvedaja3() {
       <div className="instructions">
         <p>
           Vali andmed ja dokumendid, mis peavad auditiks valmis olema. Kokku on&nbsp;
-          <strong>{allItems.filter(i => i.correct).length}</strong>:
+          <strong>{allItems.filter(i => i.correct).length}</strong>. Kui oled valmis, vajuta „Esita valikud“.
         </p>
       </div>
       <ul className="item-list">

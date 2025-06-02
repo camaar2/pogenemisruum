@@ -73,7 +73,7 @@ function Turvapoliitika_eestvedaja2()  {
       <div className="instructions">
         <p>
           Vali meetmed, mis aitavad täita küberturbe <strong>õiguslikke</strong> nõudeid. Kokku on&nbsp;
-          <strong>{allMeasures.filter(m => m.correct).length}</strong>:
+          <strong>{allMeasures.filter(m => m.correct).length}</strong>. Kui oled valmis, vajuta „Esita valikud“.
         </p>
       </div>
       <ul className="measure-list">

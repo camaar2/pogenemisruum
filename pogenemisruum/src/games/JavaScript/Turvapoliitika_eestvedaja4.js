@@ -68,7 +68,6 @@ function Turvapoliitika_eestvedaja4() {
   };
 
   const handleFinish = () => {
-    alert('Tubli! Oled edukalt lõpetanud Küberõiguse ja Vastavuse spetsialisti koolituse!');
     navigate('/');
   };
 
@@ -78,7 +77,7 @@ function Turvapoliitika_eestvedaja4() {
       <div className="instructions">
         <p>
           Vali õiged tegevused andmerikkumise korral. Kokku on&nbsp;
-          <strong>{allActions.filter(a => a.correct).length}</strong>:
+          <strong>{allActions.filter(a => a.correct).length}</strong>. Kui oled valmis, vajuta „Esita valikud“.
         </p>
       </div>
       <ul className="action-list">
