@@ -2,106 +2,142 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Kuberturvalisuse_uurija3.css';
 
-function shuffleArray(arr) {
-  const copy = [...arr];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+const logs = [
+  {
+    id: 1,
+    title: 'Väljuv ühendus 185.123.45.67:4444',
+    description: 'TCP · non-standard port',
+    isValuable: true,
+    explanation: 'Tundmatu IP ja C2-sarnane port (4444) viitavad pahalaste juhtkanalile.'
+  },
+  {
+    id: 2,
+    title: 'DNS päring windowsupdate.com',
+    description: 'Tavapärane teenus',
+    isValuable: false,
+    explanation: 'Legitiimne Windows Update’i domeen.'
+  },
+  {
+    id: 3,
+    title: 'HTTP POST /upload.php · 10 MB',
+    description: 'Andmeväljavedu',
+    isValuable: true,
+    explanation: 'Suur POST tundmatule lehele on andmeeksfiltreerimise tunnus.'
+  },
+  {
+    id: 4,
+    title: 'SMB admin sisselogimine kell 03:17',
+    description: 'Väljastpoolt tööaega',
+    isValuable: true,
+    explanation: 'Tavapäratu aeg ja kõrgprivilegeeritud konto – võimalik sissetung.'
+  },
+  {
+    id: 5,
+    title: 'TLS ühendus github.com',
+    description: 'Arendaja töö',
+    isValuable: false,
+    explanation: 'Tavaline lähtekoodi tõmbamine – ei ole anomaalia.'
+  },
+  {
+    id: 6,
+    title: 'ICMP echo gateway-le',
+    description: 'Ping test',
+    isValuable: false,
+    explanation: 'Tavaline võrgukasutus.'
+  },
+  {
+    id: 7,
+    title: 'Korduvad RDP vead 203.0.113.10-st',
+    description: 'Brute-force kahtlus',
+    isValuable: true,
+    explanation: 'Ebaõnnestunud RDP-katsetused viitavad sisselogimisründele.'
+  },
+  {
+    id: 8,
+    title: 'NTP liiklus pool.ntp.org-i',
+    description: 'Kella sünk',
+    isValuable: false,
+    explanation: 'Tavapärane NTP liiklus.'
   }
-  return copy;
-}
-
-const issues = [
-  { id: 1, name: "Parool puudub administraatori paneelil", level: "high" },
-  { id: 2, name: "Aegunud tarkvara versioon",               level: "medium" },
-  { id: 3, name: "Kahtlane PowerShelli skript",              level: "high" },
-  { id: 4, name: "HTTPS puudub veebilehel",                  level: "medium" },
-  { id: 5, name: "Varukoopiad tegemata",                     level: "low" },
-  { id: 6, name: "Logifailid pole kaitstud",                 level: "low" }
 ];
 
+const shuffle = a => a.sort(() => 0.5 - Math.random());
+const generate = () => shuffle(logs).slice(0, 6);
+
 function Kuberturvalisuse_uurija3() {
-  const navigate = useNavigate();
+  const nav = useNavigate();
+  const [items, setItems] = useState(generate());
+  const [sel, setSel] = useState([]);
+  const [msg, setMsg] = useState('');
+  const [lock, setLock] = useState(false);
+  const [ok, setOk] = useState(false);
 
-  const [rows, setRows] = useState(() => shuffleArray(issues));
-  const [answers, setAnswers] = useState({});
-  const [msg, setMsg] = useState("");
-  const [locked, setLocked] = useState(false);
+  const valIds = items.filter(i => i.isValuable).map(i => i.id);
 
-  const change = (id, val) => setAnswers((p) => ({ ...p, [id]: val }));
+  const toggle = id => {
+    if (lock) return;
+    setSel(s => (s.includes(id) ? s.filter(x => x !== id) : [...s, id]));
+  };
 
-  const check = () => {
-    const allFilled = rows.every((r) => answers[r.id]);
-    const allRight = rows.every((r) => answers[r.id] === r.level);
-
-    if (allFilled && allRight) {
-      setMsg("✅ Täpne töö! Oled õigesti hinnanud tõsiduse. Jätkame järgmisena.");
-      setLocked(true);
-    } else {
-      setMsg("⚠️ Mõni tase ei klapi. Kontrolli ja proovi uuesti.");
-    }
+  const submit = () => {
+    const good = JSON.stringify(sel.sort()) === JSON.stringify(valIds.sort());
+    setLock(true);
+    setOk(good);
+    setMsg(good ? 'Tublilt märgatud anomaaliad!' : 'Vigane komplekt – proovi uuesti.');
   };
 
   const reset = () => {
-    setRows(shuffleArray(issues));
-    setAnswers({});
-    setMsg("");
-    setLocked(false);
+    setItems(generate());
+    setSel([]);
+    setMsg('');
+    setLock(false);
+    setOk(false);
   };
 
-  const next = () => navigate("/kuberturvalisuse_uurija4");
-
   return (
-    <div className="criticality-card">
-      <h1>3. ETAPP: Probleemide tõsidus</h1>
-      <p>Vali iga probleemi jaoks sobiv tase:</p>
+    <div className={`research-game ${lock ? (ok ? 'correct-bg' : 'incorrect-bg') : ''}`}>
+      <h1>Võrguliikluse anomaalia tuvastamine</h1>
+      <p className="instructions">
+        Vali <strong>{valIds.length}</strong> logisündmust, mis viitavad kahtlasele tegevusele.
+      </p>
 
-      <table className="crit-table">
-        <thead>
-          <tr>
-            <th>Probleem</th>
-            <th>Tase</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => {
-            let cls = "";
-            if (locked) {
-              cls = answers[row.id] === row.level ? "correct" : "incorrect";
-            }
-            return (
-              <tr key={row.id} className={cls}>
-                <td>{row.name}</td>
-                <td>
-                  <select
-                    value={answers[row.id] || ""}
-                    onChange={(e) => change(row.id, e.target.value)}
-                    disabled={locked}
-                  >
-                    <option value="">Vali…</option>
-                    <option value="high">Kõrge</option>
-                    <option value="medium">Keskmine</option>
-                    <option value="low">Madal</option>
-                  </select>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="sources">
+        {items.map(i => (
+          <label key={i.id} className="source">
+            <input type="checkbox" disabled={lock} checked={sel.includes(i.id)} onChange={() => toggle(i.id)} />
+            <span className="source-text">
+              <strong>{i.title}</strong>
+              <span className="desc"> – {i.description}</span>
+            </span>
+          </label>
+        ))}
+      </div>
 
       <div className="buttons">
-        {!locked ? (
+        {!lock ? (
           <>
-            <button onClick={check}>Esita valikud</button>
-            <button onClick={reset}>Alusta uuesti</button>
+            <button onClick={reset}>Uuesti</button>
+            <button onClick={submit}>Esita</button>
           </>
         ) : (
-          <button onClick={next}>Edasi</button>
+          <button onClick={() => nav('/kuberturbe_uurija4')}>Edasi</button>
         )}
       </div>
 
-      {msg && <div className="message">{msg}</div>}
+      {msg && <div className={`message ${ok ? 'message-correct' : 'message-incorrect'}`}>{msg}</div>}
+
+      {lock && ok && (
+        <div className="explanations">
+          <h2>Selgitused:</h2>
+          <ul>
+            {items.filter(i => i.isValuable).map(i => (
+              <li key={i.id}>
+                <strong>{i.title}:</strong> {i.explanation}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
