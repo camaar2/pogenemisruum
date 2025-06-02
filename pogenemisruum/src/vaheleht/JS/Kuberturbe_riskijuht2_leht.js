@@ -9,8 +9,8 @@ const tutorialSections = [
       title: "Uuenduste allalaadimine",
       content: `
   - **Uuenduste allalaadimine** tähendab, et võtad ette turvapaigad või tarkvarauuendused otse tarkvaratootja ametlikult veebisaidilt või värskenduskontrolli kaudu.  
-    - Kujuta ette, et saad postkastist teavituse, kus on kirjas, et uks tuleb parandada enne talve; sa lähed otse ehituspoeni, et osta ehtsaid osasid, mitte osta võõrastest kohtadest.  
-  - • **Kontrolli failide terviklikkust ja digiallkirja** tähendab, et enne installimist veendud, et allalaaditud fail on puutumata ja ohutu (nagu kontrolliksid kingitusel tempelimärki, et see pole võlts).  
+      
+  - • **Kontrolli failide terviklikkust ja digiallkirja** tähendab, et enne installimist veendud, et allalaaditud fail on puutumata ja ohutu (nagu kontrolliksid kingitusel templimärki, et see pole võlts).  
   - • Miks see oluline on? Kui sa ei kontrolli, võib keegi petta sind laadima alla pahatahtliku faili, mis näeb välja nagu ametlik uuendus, aga tegelikult paigutab sinu arvutisse viiruse.  
   `
     },

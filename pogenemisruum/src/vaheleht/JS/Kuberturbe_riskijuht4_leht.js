@@ -9,7 +9,7 @@ const tutorialSections = [
       title: "IP blokeerimine tulemüüris",
       content: `
   - **IP-aadressi blokeerimine** tulemüüri reeglites on esimene samm operatiivses reageerimises.  
-    - Kujuta ette, et ütled enda maja ees igale autole, mis kannab vale numbritahvlit, et ärgu pöördugu sinu tänavale – tulemüür teeb sama arvutis: ta peatab pahavara, mis tuleb teatud IP-lt.  
+      
   - • See peatab pahavara ühendused ja annab aega olukorra hindamiseks.  
     - Näide: kui näed, et mingi arvuti proovib uuesti ja uuesti sinu serverisse sisse logida, saad tulemüüri kaudu keelata selle konkreetse IP-aadressi, nii et ta ei pääse enam ligi.  
   - • Mida edasi teha?  
@@ -24,7 +24,7 @@ const tutorialSections = [
   - Pärast blokeerimist **teavita turvameeskonda** ja eskaleeri juhtum vastavalt protseduuridele.  
     - See on nagu olukord kui su maja välisvalvur peatab kahtlase mehe tänaval, ta helistab kohe politseisse ja annab neile loa olukorda lähivaatuses hinnata.  
   - • **Eskaleerimine** tähendab, et saadad info edasi järgmisele tasandile:  
-    1. Rünne on tuvastanud ja edastatud analüütikutele (operatiivtiim)  
+    1. Rünne on tuvastatud ja edastatud analüütikutele (operatiivne meeskond)  
     2. Kui see on keerulisem intsident, kaasatakse turvajuhid või IT-juht.  
   - • Koostöös saab analüütik uurida rünnet süvitsi:  
     - Analüütik kontrollib, kas blokeeritud IP püüdis ligipääsu mitmesse erinevasse süsteemi.  
@@ -37,15 +37,15 @@ const tutorialSections = [
       id: 3,
       title: "Miks mitte serveri taaskäivitus?",
       content: `
-  - • Serveri **taaskäivitamine** võib ajutiselt peatada rünnaku, kuid ei lahenda juurpõhjust (sellega ei summuta maavärina allikat).  
-    - Kui su toas puhkes tuli ja sa katkestad voolu, võib leek lakata korraks, kuid probleem endiselt põleb seina taga – taaskäivitus ei kustuta põlemise põhjust, vaid ainult nähtava tule.  
+  - • Serveri **taaskäivitamine** võib ajutiselt peatada rünnaku, kuid ei lahenda juurpõhjust.  
+    - Kui su toas puhkes tuli ja sa katkestad voolu, võib leek lakata korraks, kuid probleem on endiselt seal. Taaskäivitus ei kustuta põlemise põhjust, vaid ainult nähtava tule.  
   - • Rünnaku juurpõhjus võib olla:  
     1. Pahavara elav protsess mälu sees (RAM), mis laadib end automaatselt pärast taaskäivitust uuesti.  
-    2. Põhitegiurünnaku serveris (nt haavatavus tarkvaras), mis laseb ründajal tagasi tulla.  
+    2. Haavatavus tarkvaras, mis laseb ründajal tagasi tulla.  
   - • Mida teha selle asemel?  
     1. Korja esmalt digitaalne tõendusmaterjal (logifailid, mälu koopia), enne kui süsteemi seisu muudad.  
     2. Rakenda sobivad turvameetmed (nt haavatavuste parandus).  
-    3. Seejärel, kui oled juurpõhjuse teada saanud, saab vajadusel turvaliselt taaskäivitada, veendumaks, et uued turvakonfiguratsioonid jõustuvad. `
+    3. Seejärel, kui oled juurpõhjuse teada saanud, saab vajadusel turvaliselt serveri taaskäivitada, veendumaks, et uued turvakonfiguratsioonid jõustuvad. `
     },
     {
       id: 4,
@@ -54,10 +54,10 @@ const tutorialSections = [
   - • **Kõigi ühenduste sulgemine** ja süsteemi täielik lammutamine on ülemäära radikaalne meetod, mis võib viia ettevõtte teenuste kättesaadavuse languseni (nagu sulgeksid hotelli kõik uksed, et peatada varas, see on augu kaevamine – ei tohi teha kõike korraga, sest ka tavalised külalised ei saa sisse).  
     - Algajale selgitus: kujuta ette, et kui keegi tekitab maja taga väikse segaduse, ei hakka sa kogu maja lammutama, vaid paned kokku kiirelt ühekordse plaadi uksele ja uurid seejärel põhjalikumalt, mis juhtus.  
   - • Proportsionaalsed meetmed on:  
-    1. Blokeerid kahtlase liikluse (IP või port).  
-    2. Uurida juurpõhjus (logid, pahavara analüüs) ja rakendada kohest korrektset turvaparandust (plaastrid).  
+    1. Blokeerid kahtlane liiklus (IP või port).  
+    2. Uurida juurpõhjust (logid, pahavara analüüs) ja rakendada kohest korrektset turvaparandust.  
     3. Hoida ülejäänud teenused töös, nii et kliendid või kasutajad ei kannataks (kui tõrge puudutab ainult ühte rakendust, lahka vaid seda osa, mitte kogu masinat).  
-  - • Eesmärk on **säilitada teenuste kättesaadavus** ning **valida sobivad meetmed vastavad olukorrale**: liiga radikaalsed sammud võivad põhjustada tarbetuid katkestusi ja lisariske.`
+  - • Eesmärk on **säilitada teenuste kättesaadavus** ning **valida sobivad meetmed vastavalt olukorrale**: liiga radikaalsed sammud võivad põhjustada tarbetuid katkestusi ja lisariske.`
     }
   ]
   ;
