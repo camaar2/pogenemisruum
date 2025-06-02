@@ -55,7 +55,7 @@ function Kuberturbe_riskijuht3() {
   return (
     <div className={`devops-stage3 ${isLocked ? 'correct-bg' : (message && !isLocked ? 'incorrect-bg' : '')}`}>
       <h1>Süsteemide monitooring ja logide analüüs</h1>
-      <p>Vormi tabelis märgi logirida, mis viitavad turvariskile:</p>
+      <p>Vormi tabelis märgi logirida, mis viitavad turvariskile. Kui oled valmis, vajuta „Esita valikud“.</p>
 
       <table className="logs-table">
         <thead>

@@ -41,10 +41,10 @@ function Koolitaja3() {
   return (
     <div className="stage stage3">
       <h2>Simulatsioon (õngitsuskirjade test)</h2>
-      <p>Vastake järgmistele küsimustele õngitsuskirjade kampaania kohta:</p>
+      <p>Vastake järgmistele küsimustele õngitsuskirjade kampaania kohta. Kui oled valmis, vajuta „Esita valikud“.</p>
 
       <div className="question-block">
-        <h3>1. Milline õngitsuskirjade kampaania sobib kõige paremini töötaja nõrkemise testimiseks?</h3>
+        <h3>1. Milline õngitsuskirjade kampaania sobib kõige paremini töötaja testimiseks?</h3>
         <div className="options">
           <label>
             <input

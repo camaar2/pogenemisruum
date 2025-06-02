@@ -120,7 +120,7 @@ function Sundmuste_reageerija1() {
       <div className="instructions">
         <p>
           Lohista sündmused õigesse järjekorda (1 = kõrgeim kriitilisus). 
-          Kokku on <strong>{correctEvents.length}</strong> intsidendi kategooriat.
+          Kokku on <strong>{correctEvents.length}</strong> intsidendi kategooriat. Kui oled valmis, vajuta „Esita valikud“.
         </p>
       </div>
       <div className="puzzle-container">

@@ -48,7 +48,7 @@ function Kuberturbe_riskijuht4() {
   return (
     <div className={`devops-stage4 ${isLocked ? 'correct-bg' : (feedback && !isLocked ? 'incorrect-bg' : '')}`}>
       <h1>Operatiivne reageerimine – ründe tõrjumine</h1>
-      <p>IP 123.45.67.89 üritab pidevalt siseneda serverisse. Mida teed?</p>
+      <p>IP 123.45.67.89 üritab pidevalt siseneda serverisse. Mida teed? Kui oled valmis, vajuta „Esita valikud“.</p>
 
       <div className="options">
         {options.map(option => (

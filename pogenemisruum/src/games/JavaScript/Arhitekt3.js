@@ -104,7 +104,6 @@ export default function Arhitekt3() {
     const compId = e.dataTransfer.getData("compId");
     let item = null;
 
-    // Eemalda komponendi kõigist listidest
     let newPool = [...pool];
     const idxPool = newPool.findIndex(c => c.id === compId);
     if (idxPool >= 0) {
@@ -128,7 +127,6 @@ export default function Arhitekt3() {
     }
     if (!item) return;
 
-    // Lisa tsooni
     if (zone === "pool") {
       newPool.push(item);
       setPool(newPool);
@@ -193,8 +191,8 @@ export default function Arhitekt3() {
     >
       <h2>Võrgu Segmenteerimise Mäng</h2>
       <p>
-        Aseta komponendid õigesse tsooni (Perimeter, DMZ, Internal). Osa on
-        distractorid.
+        Aseta komponendid õigesse tsooni (Perimeter, DMZ, Internal). Mõni on
+        üleliigne. Kui oled valmis, vajuta „Esita valikud“.
       </p>
 
       <div className="game-area">

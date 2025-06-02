@@ -71,8 +71,8 @@ function Sundmuste_reageerija3() {
 
   return (
     <div className={`incident-response ${isLocked ? (isCorrect ? "correct-bg" : "incorrect-bg") : ""}`}>
-      <h2>Intsidendi reageerimise tegevuste järjestamine</h2>
-      <p>Järjesta tegevused õiges järjekorras:</p>
+      <h2>Intsidendi reageerimismeetmete järjestamine</h2>
+      <p>Järjesta tegevused õiges järjekorras. Kui oled valmis, vajuta „Esita valikud“.</p>
       <ul className="steps-list">
         {steps.map((step, index) => (
           <li

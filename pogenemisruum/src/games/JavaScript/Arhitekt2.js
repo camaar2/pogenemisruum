@@ -114,7 +114,6 @@ function Arhitekt2() {
   };
 
   const checkColumns = () => {
-    // Peab olema kõik elemendid paigas ja õigesse veergu
     const allPlaced = correctColumn.length + incorrectColumn.length === standardsItems.length;
     const allCorrect =
       correctColumn.every(item => item.correctColumn === "correct") &&
@@ -146,7 +145,7 @@ function Arhitekt2() {
     <div className={`security-standards ${isLocked ? "correct-bg" : message.includes("valesti") ? "incorrect-bg" : ""}`}>
       <h1>Turvastandardite ja protseduuride seadmine</h1>
       <p>
-        Lohista standardid õige veergu: <strong>"Soovitatav/Õige tava"</strong> ja <strong>"Vale või ebapiisav tava"</strong>.
+        Lohista standardid õige veergu: <strong>"Soovitatav/Õige tava"</strong> ja <strong>"Vale või ebapiisav tava". </strong>Kui oled valmis, vajuta „Esita valikud“.
       </p>
       <div className="drag-container">
         <div className="pool">

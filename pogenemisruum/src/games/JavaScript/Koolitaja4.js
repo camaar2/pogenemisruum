@@ -73,8 +73,8 @@ function Koolitaja4() {
 
   return (
     <div className={`stage stage4 ${isLocked ? "correct-bg" : feedback.includes("valesti") ? "incorrect-bg" : ""}`}>
-      <h2>Viimane phishing-indikaatorite tuvastamine</h2>
-      <p>Märgi iga üksus kui <strong>„Phish”</strong> või <strong>„Safe”</strong>:</p>
+      <h2>Phishing-indikaatorite tuvastamine</h2>
+      <p>Märgi iga üksus kui <strong>„Phish”</strong> või <strong>„Safe”</strong>. Kui oled valmis, vajuta „Esita valikud“.</p>
 
       <table className="indicators-table">
         <thead>

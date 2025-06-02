@@ -20,7 +20,7 @@ function KuberturvalisuseArhitekt() {
       <h2>Mängude ülevaade</h2>
       <p>Siin saad selles rollis lahendada järgmisi mänge:</p>
       <ul>
-        <li><strong>Digifortressi ehitamine: süsteemide riskide kaardistamine</strong></li>
+        <li><strong>Riskide tuvastamine süsteemides</strong></li>
         <li><strong>Turvastandardite ja protseduuride seadmine</strong></li>
         <li><strong>Võrgu segmenteerimine ja õigesse tsooni paigutamine</strong></li>
         <li><strong>Krüptopoliitikate ja stsenaariumite sobitamine</strong></li>

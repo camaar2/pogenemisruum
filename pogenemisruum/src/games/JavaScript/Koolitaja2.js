@@ -52,7 +52,7 @@ function Koolitaja2() {
   return (
     <div className="stage stage2">
       <h2>Koolitusmaterjalide loomine</h2>
-      <p>Vali materjalid, mis sobivad kõige paremini kontoritöötajatele:</p>
+      <h3>1. Vali materjalid, mis sobivad kõige paremini kontoritöötajatele (2 õiget)</h3>
       <ul className="options">
         {materials.map(material => (
           <li key={material}

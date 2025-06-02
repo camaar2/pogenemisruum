@@ -60,7 +60,7 @@ function Kuberturbe_riskijuht2() {
   return (
     <div className={`devops-stage2 ${isLocked ? 'correct-bg' : (message && !isLocked ? 'incorrect-bg' : '')}`}>
       <h1>Turvauuenduste ja automaatika seadistamine</h1>
-      <p>Järjesta käsud õiges järjekorras:</p>
+      <p>Järjesta käsud õiges järjekorras. Kui oled valmis, vajuta „Esita valikud“.</p>
       <ul className="steps-list">
         {steps.map((step, index) => (
           <li

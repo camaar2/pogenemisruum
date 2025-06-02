@@ -78,7 +78,7 @@ function Kuberturbe_riskijuht1() {
   return (
     <div className={`devops-stage1 ${isLocked ? 'correct-bg' : (message && !isLocked ? 'incorrect-bg' : '')}`}>
       <h1>Serveri algseadistus</h1>
-      <p>Vali õiged seaded serveri turvaliseks seadistamiseks:</p>
+      <p>Vali õiged seaded serveri turvaliseks seadistamiseks. Kui oled valmis, vajuta „Esita valikud“.</p>
 
       <table className="options-table">
         <thead>

@@ -124,7 +124,7 @@ export default function Arhitekt1() {
     >
       <h1>Riskide tuvastamine süsteemides</h1>
       <p>
-        Vali igale süsteemile kõige olulisem turvarisk, mis vajab esmast kaitset.
+        Vali igale süsteemile kõige olulisem turvarisk, mis vajab esmast kaitset. Kui oled valmis, vajuta „Esita valikud“.
       </p>
 
       {systems.map(system => (

@@ -72,7 +72,7 @@ export default function Sundmuste_reageerija2() {
       <h1>Intsidendi kommunikatsiooni harjutus</h1>
 
       <div className="instructions">
-        <p>Vali kommunikatsioonistrateegia, mida jagada partneritele intsidendi teavitamiseks:</p>
+        <p>Vali kommunikatsioonistrateegia, mida jagada partneritele intsidendi teavitamiseks. Kui oled valmis, vajuta „Esita valikud“.</p>
       </div>
 
       <ul className="option-list">

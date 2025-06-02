@@ -138,8 +138,8 @@ function Arhitekt4() {
         ? (feedback.includes("Kõik") ? "correct-bg" : "")
         : (feedback.includes("vigu") ? "incorrect-bg" : "")
     }`}>
-      <h2>Encryption Policy Match Game</h2>
-      <p>Lohista stsenaariumid sobiva krüptopoliitika alla. Ole ettevaatlik distractoritega!</p>
+      <h2>Krüptopoliitikate ja stsenaariumite sobitamine</h2>
+      <p>Lohista stsenaariumid sobiva krüptopoliitika alla. Mõni on üleliigne. Kui oled valmis, vajuta „Esita valikud“.</p>
       <div className="game-layout">
         <div className="pool" onDragOver={handleDragOver} onDrop={handleDropOnPool}>
           <h3>Stsenaariumid</h3>

@@ -62,7 +62,6 @@ function generateOptions() {
   shuffleArray(distractors);
   const selected = [...correct];
   let i = 0;
-  // lisame kaks eksitavat valikut
   while (selected.length < correct.length + 2 && i < distractors.length) {
     selected.push(distractors[i]);
     i++;
@@ -100,11 +99,11 @@ function Sundmuste_reageerija4() {
       sel.every((v, i) => v === correctNames[i]);
 
     if (ok) {
-      setFeedback('Tubli! Kõik vajalikud containment-meetmed on valitud.');
+      setFeedback('Tubli! Kõik vajalikud meetmed on valitud.');
       setIsCorrect(true);
       setIsLocked(true);
     } else {
-      setFeedback('Vale valik! Palun proovi uuesti või lähtesta valikud.');
+      setFeedback('Vale valik! Palun proovi uuesti.');
       setIsCorrect(false);
       setIsLocked(true);
     }
@@ -119,8 +118,8 @@ function Sundmuste_reageerija4() {
 
   return (
     <div className="containment-selection">
-      <h2>Containment & Eradication strateegia</h2>
-      <p>Vali meetmed, mis sobivad intsidendi containment- ja eradikatsioonistrateegiaks:</p>
+      <h2>Piiramise ja likvideerimise strateegia</h2>
+      <p>Vali meetmed, mis sobivad piiramise ja likvideerimise strateegiaks. Kui oled valmis, vajuta „Esita valikud“.</p>
       <ul className="action-list">
         {options.map(opt => (
           <li
