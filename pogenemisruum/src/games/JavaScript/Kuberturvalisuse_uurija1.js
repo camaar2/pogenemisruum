@@ -8,66 +8,59 @@ const allItems = [
     title: 'OpenSSL 3.0.2 buffer overflow',
     description: 'CVSS 9.8 · PoC avalik',
     isValuable: true,
-    explanation:
-      'Kriitiline RCE haavatavus juba avaliku exploitiga — tuleb lappida kohe.'
+    explanation: 'Kriitiline kaugkoodi auk avaliku exploitiga – paigaldada kohe.'
   },
   {
     id: 2,
     title: 'Apache Tomcat info-disclosure',
     description: 'CVSS 4.3 · exploit puudub',
     isValuable: false,
-    explanation:
-      'Keskmise tasemega puudus ilma aktiivse kuritarvituseta; võib oodata tavapärase paigaga.'
+    explanation: 'Keskmine risk, ei kuritarvitata.'
   },
   {
     id: 3,
     title: 'Adobe Reader use-after-free',
     description: 'CVSS 8.2 · kampaaniad nähtud',
     isValuable: true,
-    explanation:
-      'Kõrge riskiga haavatavus, mida on päriselus sihtitud – eelisjärjekorras.'
+    explanation: 'Kõrge risk, juba rünnatakse – paigaldada esimesena.'
   },
   {
     id: 4,
     title: 'Legacy Telnet teenus',
     description: 'Ei ole CVE-d, ent krüpteerimata',
     isValuable: true,
-    explanation:
-      'Konfiguratsiooni-põhine oht: krüpteerimata teenus, mida saab hõlpsalt kuritarvitada.'
+    explanation: 'Krüpteerimata Telnet on kergesti kuritarvitav – lülita välja.'
   },
   {
     id: 5,
     title: 'Python-raamatukogu minor-patch',
     description: 'CVSS 3.1 · parandus saadaval',
     isValuable: false,
-    explanation:
-      'Madala mõjuga kolmanda osapoole parandus; ei vaja kiiret tähelepanu.'
+    explanation: 'Madala mõjuga parandus, võib oodata.'
   },
   {
     id: 6,
     title: 'Windows PrintNightmare variatsioon',
     description: 'CVSS 8.8 · mass-skannimine käib',
     isValuable: true,
-    explanation:
-      'Aktuaalne kampaania – kriitiline privileegide tõstmise viga, mille vastu skannerid juba otsivad.'
+    explanation: 'Kriitiline õiguste tõstmine, aktiivselt otsitakse – paigalda kohe.'
   },
   {
     id: 7,
     title: 'Nginx versiooniuuendus 1.26',
     description: 'Release notes: performance only',
     isValuable: false,
-    explanation:
-      'Sisaldab vaid jõudluse parandusi, turvarisk praktiliselt puudub.'
+    explanation: 'Ainult jõudluse uuendus, turvarisk puudub.'
   },
   {
     id: 8,
     title: 'IoT-kaamera kõvakooditud parool',
     description: 'CVE-2024-10001 · CVSS 9.0',
     isValuable: true,
-    explanation:
-      'Kõrge skooriga haavatavus, mille puhul ründaja pääseb otse seadmesse.'
+    explanation: 'Väga kõrge risk – ründaja pääseb otse seadmele ligi.'
   }
 ];
+
 
 function shuffleArray(arr) {
   const copy = [...arr];

@@ -66,6 +66,11 @@ import TurvapoliitikaEestvedaja1Leht from './vaheleht/JS/Turvapoliitika_eestveda
 import TurvapoliitikaEestvedaja2Leht from './vaheleht/JS/Turvapoliitika_eestvedaja2_leht';
 import TurvapoliitikaEestvedaja3Leht from './vaheleht/JS/Turvapoliitika_eestvedaja3_leht';
 import TurvapoliitikaEestvedaja4Leht from './vaheleht/JS/Turvapoliitika_eestvedaja4_leht';
+import KuberturvalisuseUurija1Leht from './vaheleht/JS/Kuberturvalisuse_uurija1_leht';
+import KuberturvalisuseUurija2Leht from './vaheleht/JS/Kuberturvalisuse_uurija2_leht';
+import KuberturvalisuseUurija3Leht from './vaheleht/JS/Kuberturvalisuse_uurija3_leht';
+import KuberturvalisuseUurija4Leht from './vaheleht/JS/Kuberturvalisuse_uurija4_leht';
+
 
 import Infoturbe_juht1 from './games/JavaScript/Infoturbe_juht1';
 import Infoturbe_juht2 from './games/JavaScript/Infoturbe_juht2';
@@ -188,6 +193,10 @@ function App() {
         <Route path="/turvapoliitika_eestvedaja2_leht" element={<TurvapoliitikaEestvedaja2Leht />} />
         <Route path="/turvapoliitika_eestvedaja3_leht" element={<TurvapoliitikaEestvedaja3Leht />} />
         <Route path="/turvapoliitika_eestvedaja4_leht" element={<TurvapoliitikaEestvedaja4Leht />} />
+        <Route path="/kuberturvalisuse_uurija1_leht" element={<KuberturvalisuseUurija1Leht />} />
+        <Route path="/kuberturvalisuse_uurija2_leht" element={<KuberturvalisuseUurija2Leht />} />
+        <Route path="/kuberturvalisuse_uurija3_leht" element={<KuberturvalisuseUurija3Leht />} />
+        <Route path="/kuberturvalisuse_uurija4_leht" element={<KuberturvalisuseUurija4Leht />} />
 
         {/* Mängude marsruudid */}
         <Route path="/infoturbe_juht1" element={<Infoturbe_juht1 />} />

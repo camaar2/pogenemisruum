@@ -15,7 +15,7 @@ const logs = [
     title: 'DNS päring windowsupdate.com',
     description: 'Tavapärane teenus',
     isValuable: false,
-    explanation: 'Legitiimne Windows Update’i domeen.'
+    explanation: 'Reaalne Windows Update’i domeen.'
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const logs = [
     title: 'SMB admin sisselogimine kell 03:17',
     description: 'Väljastpoolt tööaega',
     isValuable: true,
-    explanation: 'Tavapäratu aeg ja kõrgprivilegeeritud konto – võimalik sissetung.'
+    explanation: 'Ebatavaline aeg ja kõrgprivilegeeritud konto – võimalik sissetung.'
   },
   {
     id: 5,

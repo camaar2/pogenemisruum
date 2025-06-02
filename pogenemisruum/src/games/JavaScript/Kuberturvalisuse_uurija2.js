@@ -22,7 +22,7 @@ const allItems = [
     title: 'Protsess süstib koodi explorer.exe-sse',
     description: 'Process injection',
     isValuable: true,
-    explanation: 'Koodi süstimine teise protsessi on levinud pahavara taktik.'
+    explanation: 'Koodi süstimine teise protsessi on levinud pahavara taktika.'
   },
   {
     id: 4,

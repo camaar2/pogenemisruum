@@ -12,7 +12,6 @@ const pairs = [
 
 const shuffle = a => [...a].sort(() => 0.5 - Math.random());
 
-/* ---------- komponent ---------- */
 
 function Kuberturvalisuse_uurija4() {
   const navigate = useNavigate();
@@ -67,13 +66,11 @@ function Kuberturvalisuse_uurija4() {
 
   return (
     <div className="research-game">
-      {/* --- pealkiri & juhised --- */}
       <h1>Leidlikud paarid</h1>
       <p className="instructions">
         Sobita <strong>iga</strong> sündmus õigesti selgitusega. Klõpsa esimesena vasakul, seejärel paremal.
       </p>
 
-      {/* --- laud --- */}
       <div className="pair-board">
         <div className="pair-column">
           <h2>Sündmus</h2>
@@ -104,14 +101,12 @@ function Kuberturvalisuse_uurija4() {
         </div>
       </div>
 
-      {/* --- sõnum --- */}
       {message && (
         <div className={`message ${allDone ? 'message-correct' : 'message-incorrect'}`}>
           {message}
         </div>
       )}
 
-      {/* --- nupud --- */}
       <div className="buttons">
         {!locked ? (
           <>

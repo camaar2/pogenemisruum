@@ -7,17 +7,24 @@ function KuberturvalisuseUurija() {
     <div className="job-page">
       <h1>Küberturvalisuse uurija</h1>
       <p>
-        Selles rollis oled vastutav digitaalsete tõendite kogumise, analüüsi ja
-        forensilise ahela dokumenteerimise eest. Iga ülesanne viib sind sammukese lähemale
-        tõendite terviklikkuse ja usaldusväärsuse tagamisele.
+        Küberturvalisuse uurija ülesanneteks on digitaalsete tõendite kogumine, analüüsimine
+        ning tervikliku forensilise ahela dokumenteerimine. Roll hõlmab andmekandjate,
+        logifailide ja võrgujälgede süstemaatilist talletamist, et säilitada tõendite
+        puutumatus ning tagada nende õiguslik kasutatavus. Uurija koostab üksikasjalikke
+        aruandeid, mis sisaldavad tehnilisi järeldusi, ajajooni ja kriitilise tähtsusega
+        leidude selgitusi. Töös tehakse koostööd süsteemiadministraatorite, juristide ja
+        õiguskaitseorganitega, et koordineerida tõendite konfiskeerimist, tagada kettapiltide
+        korrektsus ning toetada võimalikke kohtumenetlusi. Lisaks kavandab uurija korduvaid
+        protseduure järelkontrolliks, juhendab meeskonda tõendite käitlemises ja nõustab
+        juhtkonda pahavara- või andmeleketega seotud intsidentide lahendamisel.
       </p>
 
-      <h2>Mängud:</h2>
+      <h2>Mängud</h2>
       <ul>
         <li><strong>Tõendite ahela sammude järjestamine</strong></li>
         <li><strong>Logianomaaliate tuvastamine</strong></li>
         <li><strong>Probleemide tõsidus</strong></li>
-        <li><strong>Oht ja Lahendus</strong></li>
+        <li><strong>Oht ja lahendus</strong></li>
       </ul>
 
       <Link to="/kuberturvalisuse_uurija1_leht">
@@ -28,4 +35,5 @@ function KuberturvalisuseUurija() {
 }
 
 export default KuberturvalisuseUurija;
+
 

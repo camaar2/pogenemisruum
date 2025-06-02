@@ -17,8 +17,6 @@
   font-style: italic;
   margin-bottom: 1rem;
 }
-
-/* --- Nupud --- */
 .buttons {
   margin-top: 1rem;
   display: flex;
@@ -44,7 +42,6 @@
   cursor: not-allowed;
 }
 
-/* --- Sõnumid --- */
 .message {
   font-weight: 600;
   margin-top: 1rem;
@@ -53,17 +50,9 @@
 .message-correct   { color: #1a7f1a; }
 .message-incorrect { color: #aa1352; }
 
-/* --- Taustad (juhuks kui kasutad neid) --- */
 .correct-bg   { background: #e6ffea; }
 .incorrect-bg { background: #ffe6e6; }
 
-
-
-/* ------------------------------------------------------------------
-   PAARITAMISE LAUD („Leidlikud paarid“)
------------------------------------------------------------------- */
-
-/* Kaheveeruline paigutus */
 .pair-board {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -71,14 +60,12 @@
   margin-top: 1rem;
 }
 
-/* Veeru pealkiri */
 .pair-column h2 {
   margin: 0 0 0.5rem;
   font-size: 1.05rem;
   text-align: center;
 }
 
-/* Üks valikukaart vasakul või paremal */
 .pair-card {
   background: #f7f9fc;
   border: 1px solid #d6dee9;
@@ -86,17 +73,14 @@
   padding: 0.75rem;
   cursor: pointer;
   transition: background 0.15s, filter 0.15s;
-  user-select: none;
 }
 
 .pair-card:hover { filter: brightness(0.97); }
 
-/* Aktiivselt valitud kaart */
 .pair-card.selected {
   background: #cfe8ff;
 }
 
-/* Paari leitud (lukustatud) kaart */
 .paired {
   background: #d4f8da;
   cursor: default;
