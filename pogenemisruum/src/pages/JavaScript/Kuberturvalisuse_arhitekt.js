@@ -7,8 +7,14 @@ function KuberturvalisuseArhitekt() {
     <div className="job-page">
       <h1>Küberturvalisuse arhitekt</h1>
       <p>
-        Küberturvalisuse arhitekt disainib ja planeerib organisatsiooni turvalahenduste arhitektuuri.
-        Ta valib sobivad tehnoloogiad ja tagab, et kõik süsteemid vastaksid turvastandarditele.
+        Küberturvalisuse arhitekt on ekspert, kes vastutab organisatsiooni turvalahenduste tervikliku 
+        arhitektuuri loomise, planeerimise ja täiustamise eest. Ta hindab olemasolevaid süsteeme ja infrastruktuuri, 
+        tuvastab turvanõrkused ja riskid ning kavandab ja rakendab sobivad turvameetmed. Küberturvalisuse arhitekt valib ja 
+        integreerib parimad tehnoloogilised lahendused, koostab ja kinnitab turvastandardeid ning protseduure, et kindlustada 
+        organisatsiooni digitaalsete varade kaitse. Ta teeb koostööd nii IT-meeskondade kui ka äriüksustega, et tagada kõigi 
+        tehnoloogiliste uuenduste vastavus organisatsiooni küberturvalisuse strateegiatele ning regulatsioonidele. Lisaks on tema 
+        ülesanne korraldada regulaarseid turvauuenduste ja testide läbiviimist, et ennetada võimalikke ründeid ning pidevalt 
+        täiustada süsteemide vastupidavust.
       </p>
 
       <h2>Mängude ülevaade</h2>

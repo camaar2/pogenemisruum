@@ -7,8 +7,13 @@ function KuberturbeRiskijuht() {
     <div className="job-page">
       <h1>Küberturbe riskijuht</h1>
       <p>
-        Selles rollis on sinu ülesanne kiiresti ja õigesti seadistada, uuendada ja kaitsta organisatsiooni servereid ning infrastruktuuri. 
-        Iga etapp viib sind lähemale turvalise süsteemi loomisele.
+        Küberturbe riskijuhi roll organisatsioonis on tagada serverite ja infrastruktuuri pidev 
+        kaitstus ja toimimine. Tema ülesandeks on tuvastada ja hinnata küberriske, rakendada ennetavaid 
+        meetmeid ning juhtida kiiret ja täpset reageerimist avastatud turvaintsidentidele. Küberturbe riskijuht 
+        jälgib serverite ja süsteemide konfiguratsiooni, haldab ja automatiseerib turvauuendusi ning viib läbi 
+        regulaarset süsteemide monitooringut ja logide analüüsi, et tuvastada võimalikke turvaintsidente ja ründeid varakult. 
+        Lisaks korraldab ta operatiivset reageerimist ja koostab täpsed juhised ja protseduurid intsidentide lahendamiseks, et 
+        minimeerida võimalikku kahju ning tagada süsteemide kiire taastumine ja jätkusuutlik turvalisus.
       </p>
 
       <h2>Mängud:</h2>

@@ -7,10 +7,17 @@ function TurvapoliitikaEestvedaja() {
     <div className="job-page">
       <h1>Turvapoliitika eestvedaja</h1>
       <p>
-        Küberõiguse ja vastavuse spetsialist tagab, et organisatsiooni küberturbe tegevused vastavad seadustele, määrustele ja sisemistele poliitikatele.
-        Ta töötab välja juhiseid ja kontrollimehhanisme, et maandada juriidilisi riske.
+        Turvapoliitika eestvedaja ülesanne organisatsioonis on juhtida ja koordineerida küberturvalisuse 
+        valdkonna poliitika kujundamist ja rakendamist. Ta vastutab selle eest, et organisatsiooni küberturvalisuse
+        meetmed oleksid kooskõlas seaduste, regulatsioonide ja sisemiste nõuetega, tagades samal ajal organisatsiooni 
+        vastupidavuse ja valmisoleku küberohtudele reageerimisel. Turvapoliitika eestvedaja töötab välja strateegilisi 
+        suuniseid ja protsesse, korraldab regulaarseid koolitusi ning teostab järelvalvet nende rakendamise üle. Samuti 
+        juhib ta koostööd rahvusvaheliste partneritega kriisiolukordade haldamisel ning jälgib kriisijärgsete meetmete efektiivsust. 
+        Tema ülesanne on ka tagada organisatsiooni kõrge teadlikkus küberturvalisuse teemadel, vältida võimalikke ohte ning vähendada 
+        võimalike intsidentidega seotud riske.
       </p>
       <h2>Mängude ülevaade</h2>
+
       <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>
       <ul>
         <li><strong>Riikliku tasandi ohtude tuvastamine</strong></li>
