@@ -27,9 +27,10 @@ export default function Norkustestija4() {
   const [message, setMessage] = useState('');
 
   const scenario =
-    "Caesari šifri demomstraatori ülesanne on näidata, kuidas lihtsalt nihkega krüpteerimine töötab. " +
-    "Antud süsteem kasutab lihtsat tähenihkesüsteemi, kus iga täht nihkub ASCII järjekorras. " +
-    "Sisesta nihke väärtus, et taastada originaalne tekst. Õige nihke puhul ilmub puhas sõnum!";
+  "Caesari nihke ülesanne demonstreerib lihtsat tähenihkesüsteemi: iga täht nihkub täisarvulise väärtuse võrra. " +
+  "Sellel süsteemil nihutab krüpteerimine teksti ASCII järjekorras. " +
+  "Sinu ülesanne on sisestada õige nihke väärtus, et taastada originaalne tekst. Kui õige nihe on sisestatud, kuvatakse puhastatud sõnum. " +
+  "Vead nihke sees ei anna tähendusrikast väljundit. Proovi tuvastada, millist täisarvulise nihkega väärtust krüpteerimiseks kasutati.";
 
   const handleDecode = () => {
     const shiftNum = parseInt(shift, 10);
@@ -42,7 +43,7 @@ export default function Norkustestija4() {
     setDecoded(result);
     setChecked(true);
     if (shiftNum === CORRECT_SHIFT) {
-      setMessage('🎉 Õige nihe! Sõnum lahtimurdetud edukalt.');
+      setMessage('🎉 Õige nihe! Sõnum on edukalt lahtimurtud.');
     } else {
       setMessage('❌ Pole õige nihke väärtus. Proovi uuesti.');
     }
@@ -69,40 +70,40 @@ export default function Norkustestija4() {
       : 'message-incorrect'
     : '';
 
-  return (
-    <div className={`caesar-puzzle-container ${containerClass}`}>
-      <h1>Caesari šifri lahtimurdmine</h1>
-      <p className="scenario"><em>{scenario}</em></p>
-      <p>Antud on järgmine krüpteeritud sõnum:</p>
-      <div className="encoded-message"><code>{ENCODED_MESSAGE}</code></div>
-      <p>Sisestage nihke väärtus (täisarv), millega krüpteerimine viidi läbi:</p>
-      <div className="input-area">
-        <input
-          type="number"
-          value={shift}
-          onChange={e => setShift(e.target.value)}
-          placeholder="Näiteks 5"
-          disabled={checked}
-        />
-        {!checked ? (
-          <button className="primary" onClick={handleDecode} disabled={!shift}>
-            Dekodeeri
-          </button>
-        ) : message.startsWith('🎉') ? (
-          <button className="primary" onClick={handleEnd}>
-            Lõpeta mäng
-          </button>
-        ) : (
-          <button onClick={handleReset}>Proovi uuesti</button>
-        )}
-      </div>
-      {decoded && (
-        <div className="decoded-message">
-          <h3>Lahtimurdetud tekst:</h3>
-          <p><code>{decoded}</code></p>
+    return (
+      <div className={`caesar-puzzle-container ${containerClass}`}>
+        <h1>Caesari nihke lahtimurdmine</h1>
+        <p className="scenario"><em>{scenario}</em></p>
+        <p>Krüpteeritud sõnum allpool näitab, milline tekst tekkis pärast tähenihet. Sinu eesmärk on sisestada õige nihke väärtus, et taastada originaal. Nihe on täisarvuline, näiteks 1 nihutab “A” → “B”, 5 nihutab “A” → “F” jne.</p>
+        <div className="encoded-message"><code>{ENCODED_MESSAGE}</code></div>
+        <p>Sisestage nihke väärtus (täisarv), millega krüpteerimine viidi läbi:</p>
+        <div className="input-area">
+          <input
+            type="number"
+            value={shift}
+            onChange={e => setShift(e.target.value)}
+            placeholder="Näiteks 5"
+            disabled={checked}
+          />
+          {!checked ? (
+            <button className="primary" onClick={handleDecode} disabled={!shift}>
+              Dekodeeri
+            </button>
+          ) : message.startsWith('🎉') ? (
+            <button className="primary" onClick={handleEnd}>
+              Lõpeta mäng
+            </button>
+          ) : (
+            <button onClick={handleReset}>Proovi uuesti</button>
+          )}
         </div>
-      )}
-      {message && <div className={`message ${messageClass}`}>{message}</div>}
-    </div>
-  );
-}
+        {decoded && (
+          <div className="decoded-message">
+            <h3>Lahtimurtud tekst:</h3>
+            <p><code>{decoded}</code></p>
+          </div>
+        )}
+        {message && <div className={`message ${messageClass}`}>{message}</div>}
+      </div>
+    );
+  }

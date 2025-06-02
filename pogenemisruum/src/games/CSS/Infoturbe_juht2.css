@@ -1,8 +1,10 @@
-html, body {
+.infoturbe-juht2-wrapper html,
+.infoturbe-juht2-wrapper body {
   margin: 0;
   padding: 0;
 }
-.software-puzzle {
+
+.infoturbe-juht2-wrapper .software-puzzle {
   max-width: 720px;
   margin: 0 auto;
   margin-top: 0;
@@ -14,31 +16,42 @@ html, body {
   font-family: Arial, sans-serif;
   transition: background 0.5s;
 }
-.software-puzzle.correct-bg {
+.infoturbe-juht2-wrapper .software-puzzle.correct-bg {
   background: #e6ffea;
 }
-.software-puzzle.incorrect-bg {
+.infoturbe-juht2-wrapper .software-puzzle.incorrect-bg {
   background: #ffe6e6;
 }
-.scenario {
+
+.infoturbe-juht2-wrapper .scenario {
   font-style: italic;
   text-align: center;
   margin-bottom: 1rem;
 }
-.instruction {
+
+.infoturbe-juht2-wrapper .instruction {
   text-align: center;
   margin-bottom: 1.5rem;
   font-weight: bold;
 }
-.puzzle-container {
+
+.infoturbe-juht2-wrapper .instructions {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.infoturbe-juht2-wrapper .puzzle-container {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
-.slots {
+
+.infoturbe-juht2-wrapper .slots {
   flex: 1;
 }
-.slot {
+
+.infoturbe-juht2-wrapper .slot {
   background: #ffffff;
   border: 2px solid #ccc;
   border-radius: 0.25rem;
@@ -50,40 +63,47 @@ html, body {
   margin-bottom: 0.5rem;
   cursor: grab;
 }
-.slot.correct {
+.infoturbe-juht2-wrapper .slot.correct {
   border-color: #4caf50;
 }
-.slot.wrong {
+.infoturbe-juht2-wrapper .slot.wrong {
   border-color: #f44336;
 }
-.placeholder {
+
+.infoturbe-juht2-wrapper .placeholder {
   color: #999;
   font-style: italic;
 }
-.choices {
+
+.infoturbe-juht2-wrapper .choices {
   flex: 1;
 }
-.choices p {
+
+.infoturbe-juht2-wrapper .choices p {
   margin: 0 0 0.5rem 0;
   font-weight: bold;
 }
-.choices-container {
+
+.infoturbe-juht2-wrapper .choices-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-.choice {
+
+.infoturbe-juht2-wrapper .choice {
   background: #ffffff;
   border: 2px solid #ccc;
   border-radius: 0.25rem;
   padding: 0.5rem;
   cursor: grab;
 }
-.buttons {
+
+.infoturbe-juht2-wrapper .buttons {
   text-align: center;
   margin-bottom: 1rem;
 }
-button {
+
+.infoturbe-juht2-wrapper button {
   padding: 0.75rem 1.5rem;
   border: 1px solid #ccc;
   background: #ffffff;
@@ -91,27 +111,30 @@ button {
   border-radius: 0.25rem;
   margin: 0 0.5rem;
 }
-button.primary {
-  background: #3498db;
+
+.infoturbe-juht2-wrapper button.primary {
+  background: #e4067e;
   color: #fff;
   border-color: #3498db;
 }
-button.primary:disabled {
-  background: #ccc;
+.infoturbe-juht2-wrapper button.primary:disabled {
+  background: #aa1352;
   cursor: not-allowed;
 }
-.message {
+
+.infoturbe-juht2-wrapper .message {
   text-align: center;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
-.message-correct {
+.infoturbe-juht2-wrapper .message-correct {
   color: green;
 }
-.message-incorrect {
+.infoturbe-juht2-wrapper .message-incorrect {
   color: red;
 }
-.hint-box {
+
+.infoturbe-juht2-wrapper .hint-box {
   background: #fff3cd;
   border: 1px solid #ffeeba;
   padding: 0.75rem;
@@ -120,25 +143,25 @@ button.primary:disabled {
   font-size: 0.9rem;
 }
 
-.explanations {
+.infoturbe-juht2-wrapper .explanations {
   margin-top: 1rem;
   background: #f0f8ff;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
   padding: 1rem;
 }
-.explanations h3 {
+.infoturbe-juht2-wrapper .explanations h3 {
   margin-top: 0;
   font-size: 1.1rem;
 }
-.explanations ul {
+.infoturbe-juht2-wrapper .explanations ul {
   list-style-type: disc;
   margin: 0.5rem 0 0 1.5rem;
 }
-.explanations li {
+.infoturbe-juht2-wrapper .explanations li {
   margin-bottom: 0.5rem;
 }
 
-.software-puzzle h1 {
+.infoturbe-juht2-wrapper .software-puzzle h1 {
   text-align: center;
 }

@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Norkustestija1.css';
 
 const allSources = [
-  { id: 1, title: "Avalik serverite info", isRelevant: true, explanation: "Avalik serverite info annab ülevaate hostinimedest ja IP-aadressidest." },
+  { id: 1, title: "Avalik serverite info", isRelevant: true, explanation: "Avalik serverite info annab ülevaate hosti-nimedest ja IP-aadressidest." },
   { id: 2, title: "WHOIS info", isRelevant: true, explanation: "WHOIS info sisaldab registreerija andmeid ja domeeni vanust, mis aitab kaardistada sihtmärki." },
-  { id: 3, title: "Subdomeeni otsing", isRelevant: true, explanation: "Subdomeeni otsing paljastab alamnimesid, mida ründija võib kasutada." },
+  { id: 3, title: "Subdomeeni otsing", isRelevant: true, explanation: "Subdomeeni otsing paljastab alamnimesid, mida ründaja võib kasutada." },
   { id: 4, title: "Võltsitud reklaamid", isRelevant: false, explanation: "Võltsitud reklaamid ei anna tehnilist informatsiooni sihtsüsteemi kohta." },
-  { id: 5, title: "Sotsiaalmeedia jälgimine", isRelevant: false, explanation: "Sotsiaalmeedia jälgimine võib leida teadet, kuid ei anna täpset tehnilist kaardistust." },
+  { id: 5, title: "Sotsiaalmeedia jälgimine", isRelevant: false, explanation: "Sotsiaalmeedia jälgimine võib anda mingit infot, kuid ei anna täpset tehnilist kaardistust." },
   { id: 6, title: "Turvaraportid", isRelevant: true, explanation: "Turvaraportid sisaldavad teadaolevaid haavatavusi ja testitulemusi." },
   { id: 7, title: "Blogi ja foorumid", isRelevant: false, explanation: "Blogi ja foorumid pakuvad üldist infot, kuid pole alati usaldusväärsed tehnilised allikad." },
   { id: 8, title: "Avalikud turvaanalüüsid", isRelevant: true, explanation: "Avalikud turvaanalüüsid annavad süvaülevaate ohustest ja nõrkustest." },
@@ -76,9 +76,13 @@ export default function Norkustestija1() {
       <h1>Sihikeskkonna kaardistamine</h1>
       <p className="scenario"><em>{scenario}</em></p>
       <p className="description">
-        Siin on {sources.length} avalikku allikat, millest {correctCount} aitavad 
-        täpsete turvaandmete kogumisel (nt WHOIS, subdomeenid, avalikud auditid). 
-        Vali need {correctCount} allikat, mis annavad usaldusväärse aluse haavatavuste analüüsiks.
+        Sul on ees kuus potentsiaalset allikat. Nende hulgast vali täpselt {correctCount} allikat, mis:
+        <ul className="criteria-list">
+          <li><strong>Annavad tehnilise ülevaate:</strong> nagu serverite IP-aadressid ja teenuste konfiguratsioon.</li>
+          <li><strong>Pakuvad domeeniga seotud detaile:</strong> nagu subdomeenide loendid, et leida kõik sihtmärgi alamdomeenid.</li>
+          <li><strong>Sisaldavad turvaanalüüse või audititulemusi:</strong> nagu avalikud turvaanalüüsid, mis näitavad tuntud haavatavusi.</li>
+        </ul>
+        Välista allikad, mis ei paku täpset tehnilist infot. Kui oled valmis, klõpsa „Esita valikud“. 
       </p>
       <div className="sources">
         {sources.map(source => {

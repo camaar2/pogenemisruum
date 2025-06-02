@@ -33,7 +33,7 @@ export default function Digi_toendite_uurija2() {
       id: 5, 
       line: '2023-05-01 08:20:00 - INFO - Admin-kasutaja sisse logitud', 
       anomaly: false,
-      explanation: "Legitiimne administraatori sisselogimine, pole anomaalia."
+      explanation: "Reaalne administraatori sisselogimine, pole anomaalia."
     }
   ];
 
@@ -52,11 +52,11 @@ export default function Digi_toendite_uurija2() {
     const falsePositives = logid.filter(l => !l.anomaly && selected[l.id]).length;
     setChecked(true);
     if (correctCount === totalAnomalies && falsePositives === 0) {
-      setMessage(`🎉 Tubli! Tuvastatud kõik ${totalAnomalies} anomaaliat.`);
+      setMessage(`🎉 Tubli! Tuvastasid ${totalAnomalies} anomaaliat.`);
     } else {
       setMessage(
         `❌ Tuvastatud õigesti ${correctCount}/${totalAnomalies}, ` +
-        `valepositiivseid: ${falsePositives}. Kontollige ja proovi uuesti.`
+        `valepositiivseid: ${falsePositives}. Kontrollige ja proovi uuesti.`
       );
     }
   };
@@ -84,10 +84,19 @@ export default function Digi_toendite_uurija2() {
   return (
     <div className={`log-anomaly ${containerClass}`}>
       <h1>Logianomaaliate tuvastamine</h1>
+
+      <p className="instructions">
+        Allolevas tabelis on 5 logikirjet, millest 2 viitavad potentsiaalsetele turvariskidele (WARNING ja ERROR tasemel). Teie eesmärk on valida ainult need read, mis sisaldavad anomaaliaid:
+        <ul className="criteria-list">
+          <li>Kirjed, mis viitavad volitamata tegevusele.</li>
+          <li>Kirjed, mis viitavad ebaõnnestunud või kahtlasele tegevusele.</li>
+        </ul>
+        Kui olete õige arvu anomaaliaridasid valinud, vajutage “Esita valikud”. Pärast esitamist kuvatakse iga rea kohta lühike selgitus.
+      </p>
+
       <p className="scenario">
         <em>
-          Logianalüüs on kriitiline samm turvaintsidentide avastamisel. Vali ainult need
-          WARNING ja ERROR tasemel read, mis viitavad turvariskidele.
+
         </em>
       </p>
       <p className="instruction">

@@ -5,7 +5,7 @@ import '../CSS/Norkustestija2.css';
 const tools = [
   { id: 1, name: "Nmap", correctTarget: "network", explanation: "Nmap on võrguskanner, mis avastab avatud pordid ja teenused võrgu tasandil." },
   { id: 2, name: "Nikto", correctTarget: "web", explanation: "Nikto on veebiserveri skanner, mis tuvastab HTTP-teenuse haavatavusi." },
-  { id: 3, name: "SQL Injector", correctTarget: "database", explanation: "SQL Injector testib andmebaasiserveri haavatavust SQL-süstide suhtes." },
+  { id: 3, name: "SQL Injector", correctTarget: "database", explanation: "SQL Injector testib andmebaasiserveri haavatavust SQL-injectionite suhtes." },
   { id: 4, name: "SMTP Checker", correctTarget: "mail", explanation: "SMTP Checker kontrollib meilisüsteemi konfiguratsiooni ja turvalisust." }
 ];
 
@@ -25,10 +25,9 @@ export default function Norkustestija2() {
   const [feedback, setFeedback] = useState("");
 
   const scenario =
-    "Sihtsüsteemide kaardistamisel on oluline kasutada õigeid skannimis- ja testimistööriistu, " +
-    "et tuvastada võimalikud haavatavused igal tasandil. " +
-    "Lohista iga tööriist vastavale sihtsüsteemile, mis sobib antud tööriista põhifunktsiooni jaoks. " +
-    "Eesmärk on asetada kõik neli tööriista õigetesse kohtadesse, et tagada täielik ülevaade.";
+    "Sihikeskkonna kaardistamiseks on vaja valida ja asetada iga testitööriist sobivasse kategooriasse. " +
+    "Igal tööriistal on konkreetne põhifunktsioon. " +
+    "Õige paigutus tagab, et saame avastada haavatavusi igal tasandil.";
 
   const handleDragStart = (e, toolId) => {
     e.dataTransfer.setData("toolId", toolId);
@@ -84,6 +83,16 @@ export default function Norkustestija2() {
     <div className={`cyadvice-stage2 ${containerClass}`}>
       <h1>Tööriistade sobitamine sihtsüsteemidega</h1>
       <p className="scenario"><em>{scenario}</em></p>
+      <p className="instructions">
+        Loenda alltoodud neli tööriista ja tõmba igaüks sellesse sihtsüsteemi kohta, kus tema põhifunktsioon vastab sihtkeskkonnale:
+        <ul className="criteria-list">
+          <li><strong>Nmap →</strong> uurib avatud porte ja teenuseid.</li>
+          <li><strong>Nikto →</strong> skaneerib HTTP/HTTPS teenust haavatavuste suhtes.</li>
+          <li><strong>SQL Injector →</strong> testib SQL-süstide abil haavatavusi.</li>
+          <li><strong>SMTP Checker → </strong> kontrollib ? süsteemi turvalisust ja konfiguratsiooni.</li>
+        </ul>
+        Kõigi tööriistade õige paigutus tagab, et saame tuvastada haavatavusi igal tehnilisel tasandil. Kui kõik neli on õigesse kohta lohistatud, klõpsa „Esita valikud“.
+      </p>
       <div className="game-container">
         <div className="pool">
           <h2>Tööriistade komplekt</h2>

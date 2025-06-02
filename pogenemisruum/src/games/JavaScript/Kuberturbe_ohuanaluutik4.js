@@ -6,12 +6,12 @@ const correctChainWithExplanations = [
   {
     text: "Järeleluurimine",
     explanation:
-      "Selle sammuga vargad või ründajad koguvad infot sihtmärgi kohta – näiteks otsitakse haavatavusi ja kindlaks tehakse tõhusaim sisenemiseks vajalik viis."
+      "Selle sammuga koguvad vargad või ründajad infot sihtmärgi kohta – näiteks otsitakse haavatavusi ja tehakse kindlaks tõhusaim sisenemiseks vajalik viis."
   },
   {
     text: "Relvastamine",
     explanation:
-      "Selles etapis valmistatakse ette vajalik pahatahtlik kood või tööriistad (nt exploit, pahavara kaaperdatud masinatega) sissetungiks."
+      "Selles etapis valmistatakse ette vajalik pahatahtlik kood või tööriistad sissetungiks."
   },
   {
     text: "Levitamine",
@@ -21,12 +21,12 @@ const correctChainWithExplanations = [
   {
     text: "Eksploitatsioon",
     explanation:
-      "Siin ründaja kasutab leitud viga või haavatavust, et omada juurdepääsu sihtmärgi süsteemile (näiteks 0-day või miskihämmastav SQL-inject)."
+      "Siin ründaja kasutab leitud viga või haavatavust, et omada juurdepääsu sihtmärgi süsteemile (näiteks 0-day või SQL-injektioon)."
   },
   {
     text: "Paigaldamine",
     explanation:
-      "Kui päästik on vajutatud, paigaldatakse juurdepääsu tagamiseks backdoor või muu püsiv komponent, mis võimaldab kaugjuurdepääsu."
+      "Paigaldatakse juurdepääsu tagamiseks backdoor või muu püsiv komponent, mis võimaldab kaugjuurdepääsu."
   },
   {
     text: "Käsklus ja Juhtimine",
@@ -62,7 +62,6 @@ function Kuberturbe_ohuanaluutik4() {
   const [isLocked, setIsLocked] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
 
-
   const handleDragStart = (e, item) => {
     e.dataTransfer.setData("text/plain", item);
   };
@@ -75,6 +74,7 @@ function Kuberturbe_ohuanaluutik4() {
     const item = e.dataTransfer.getData("text/plain");
     let newPool = [...pool];
     let newSlots = [...slots];
+
     if (newPool.includes(item)) {
       newPool = newPool.filter(i => i !== item);
     } else {
@@ -111,7 +111,6 @@ function Kuberturbe_ohuanaluutik4() {
       setIsLocked(false);
       return;
     }
-
     const allCorrect = slots.every(
       (s, i) => s === correctChainWithExplanations[i].text
     );
@@ -150,9 +149,11 @@ function Kuberturbe_ohuanaluutik4() {
     <div className={`killchain-game ${containerClass}`}>
       <h1>Ründe ahela etappide kokkupanek</h1>
       <p className="instructions">
-        Sul on 7 põhisammu ründe ahelas ja mõned segajad. Lohista sammud allpool
-        asuvast saadaolevate valikute kastist oma õigetesse kohtadesse vasakusse paneeli. 
-        Üleliigsed etapid jäta saadaolevate hulka.
+        Allolevas poolis on 7 õiget ründeetappi ja 3 eksitavat etappi. Teie eesmärk on
+        lohistada etapid vasakul asuvasse järjekorrarakku, asetades need õigesse toimuvasse järjekorda.
+        <ul className="criteria-list">
+        </ul>
+        Kui olete kõik 7 etappi paigutanud oma kohale, vajutage “Esita valikud”. Pärast õiget paigutust kuvatakse iga etapi kohta lühike selgitus.
       </p>
 
       <div className="game-container">
@@ -210,7 +211,9 @@ function Kuberturbe_ohuanaluutik4() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleReset}>Alusta uuesti</button>
+            <button className="reset-button" onClick={handleReset}>
+              Alusta uuesti
+            </button>
             <button className="primary" onClick={handleCheckOrder}>
               Esita valikud
             </button>

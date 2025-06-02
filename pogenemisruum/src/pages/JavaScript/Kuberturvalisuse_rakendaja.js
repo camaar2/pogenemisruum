@@ -7,8 +7,7 @@ function KuberturvalisuseRakendaja() {
     <div className="job-page">
       <h1>Küberturvalisuse rakendaja</h1>
       <p>
-        Küberturvalisuse rakendaja ülesanne on seadistada ja juurutada turvakontrolle võrku ning süsteemidesse,
-        et kaitsta organisatsiooni võimalike rünnakute eest.
+      Küberturvalisuse rakendaja vastutab organisatsiooni turvapoliitikate ja -lahenduste praktilise elluviimise eest. Tema ülesanne on konfigureerida ja hallata turvakontrollisüsteeme (nt tulemüürid, IDS/IPS, VPN-id) ning tagada nende korrektne integreerimine võrku ja seadmetesse. Rakendaja paigaldab ja uuendab turvatarkvara, korraldab automaatseid haavatavusskaneeringuid ning reageerib ilmnenud hoiatussignaalidele. Ta koostab ja haldab detailseid konfiguratsioonidokumente ja tööprotsesse, mis kirjeldavad kehtestatud turvameetmeid ning vastutusvaldkondi nende järelevalve ja hoolduse jaoks. Rakendaja teeb tihedat koostööd võrguinseneride, süsteemiadministraatorite ja arendusmeeskonnaga, et ühildada turvanõuded olemasolevate süsteemide ning uute projektidega. Lisaks jälgib ta pidevalt turvasündmusi logifailidest ja hoiatustest ning koostab regulaarseid aruandeid turvaseisundi kohta, andes soovitusi parandusmeetmete rakendamiseks ja protsesside täiustamiseks.
       </p>
       <h2>Mängude ülevaade</h2>
       <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>

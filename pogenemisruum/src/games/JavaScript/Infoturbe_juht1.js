@@ -4,10 +4,10 @@ import '../CSS/Infoturbe_juht1.css';
 
 const allPossibleRules = [
   { id: 1, name: 'Veebiliiklus (HTTP/HTTPS)', correct: 'allow', hint: 'Veebilehitsemine toimub peamiselt sadamate 80 ja 443 kaudu.', explanation: "Veebilehitsemine peab olema lubatud, sest HTTPS krüpteerib andmeedastuse." },
-  { id: 2, name: 'E-posti liiklus (SMTP)', correct: 'allow', hint: 'Sisse- ja väljaminev e-post liigub tavaliselt sadama 25 kaudu.', explanation: "E-post on äri toimimiseks hädavajalik ja töötab turvaliselt sadamal 25." },
-  { id: 3, name: 'Kahtlane port 666 (IRC)', correct: 'block', hint: 'Port 666 ei ole tavaline teenuseport ning võib peita pahatahtlikku tegevust.', explanation: "Port 666 pole tavakasutuses ja võib olla pahatahtlike rakenduste tarvis." },
+  { id: 2, name: 'E-posti liiklus (SMTP)', correct: 'allow', hint: 'Sisse- ja väljaminev e-post liigub tavaliselt sadama 25 kaudu.', explanation: "E-post on äri toimimiseks hädavajalik ja töötab turvaliselt port 25-l." },
+  { id: 3, name: 'Kahtlane port 666 (IRC)', correct: 'block', hint: 'Port 666 ei ole tavaline teenuseport ning võib peita pahatahtlikku tegevust.', explanation: "Port 666 pole tavakasutuses ja võib olla pahatahtlike rakenduste jaoks." },
   { id: 4, name: 'Turvaline SSH (port 22)', correct: 'allow', hint: 'SSH krüpteerib kogu liikluse ning töötab sadamal 22.', explanation: "SSH krüpteerib ühenduse julgeoleku tagamiseks." },
-  { id: 5, name: 'Ebaturvaline Telnet (port 23)', correct: 'block', hint: 'Telnet edastab andmed lahtiselt ja töötab sadamal 23.', explanation: "Telnet ei krüpteeri andmeid ja seetõttu on see turvarisk." },
+  { id: 5, name: 'Telnet (port 23)', correct: 'block', hint: 'Telnet edastab andmed lahtiselt ja töötab sadamal 23.', explanation: "Telnet ei krüpteeri andmeid ja seetõttu on see turvarisk." },
   { id: 6, name: 'DNS päringud (port 53)', correct: 'allow', hint: 'DNS „tõlgib“ nimesid IP-aadressideks sadama 53 kaudu.', explanation: "DNS on vajalik, et suunata domeeninimed õigele IP-aadressile." },
   { id: 7, name: 'FTP failiedastus (port 21)', correct: 'allow', hint: 'FTP ei ole krüpteeritud ning liigub sadamal 21.', explanation: "FTP võimaldab turvalist failiedastust, kui seda õigesti hallata." }
 ];
@@ -75,12 +75,16 @@ export default function Infoturbe_juht1() {
       <h1>Tulemüüri reeglite valik</h1>
       <p className="scenario">
         <em>
-          Sa oled küberanalüütik, kelle ülesanne on vastutava korporatsiooni võrgu tulemüüri õigesti konfigureerida.
-          Iga liiklusvoog tuleb kas lubada või blokeerida, tagades samal ajal turvalisuse ja töökindluse.
+          Infoturbe juhi ülesanne on vastutava korporatsiooni võrgu tulemüüri korrektselt konfigureerida. 
+          Liiklusvoogude puhul tuleb igat protokolli hinnata kas lubamise või blokeerimise alusel, et tagada nii töökindlus kui turvalisus.
         </em>
       </p>
       <p className="instruction">
-        Määra iga rea puhul, kas see liiklus <strong>lubada</strong> või <strong>blokeerida</strong>:
+        Määrata tuleb, kas iga alljärgnev liiklus tuleks <strong>lubada</strong> või <strong>blokeerida</strong>:
+      </p>
+
+      <p className="instructions">
+        Kui kõik valikud on tehtud, klõpsake nupul “Esita valikud”.
       </p>
 
       <table className="rule-table">

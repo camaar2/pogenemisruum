@@ -5,8 +5,8 @@ import '../CSS/Audiitor2.css';
 const allMeasures = [
   { text: "Pilve turvalahendus", explanation: "Pilve turvalahendus tagab, et kriitilised andmed on kaitstud ka hooldusaja jooksul." },
   { text: "Regulaarne sissetungitestimine", explanation: "Sissetungitestimine aitab avastada haavatavusi ja ennetada rünnakuid hooldusajal." },
-  { text: "Töötajate koolitus", explanation: "Koolitus ei too kohe tehnilist kaitset hooldusaja ajal ja seega pole prioriteet." },
-  { text: "Andmete krüpteerimine", explanation: "Andmete krüpteerimine kaitseb andmeid, kuid prioriteetsemad on teenuste taastamine." },
+  { text: "Töötajate koolitus", explanation: "Koolitus ei too kohe tehnilist kaitset hooldusaja jooksul ja seega pole prioriteet." },
+  { text: "Andmete krüpteerimine", explanation: "Andmete krüpteerimine kaitseb andmeid, kuid teenuste taastamine rohkem prioriteet." },
   { text: "Juurdepääsu kontroll", explanation: "Juurdepääsu kontroll on oluline, kuid hooldusajal on kriitilisem rakendada pilve turvalahendust ja testimist." }
 ];
 const correctMeasures = ["Pilve turvalahendus", "Regulaarne sissetungitestimine"];
@@ -36,7 +36,7 @@ export default function Audiitor2() {
       setFeedback("Õige! Kõik vajalikud meetmed valitud.");
       setReport(`Audit kokkuvõte: ${scenario} Soovitatud meetmed turvanõrkuste vähendamiseks: ${correctMeasures.join(', ')}. ${reference}.`);
     } else {
-      setFeedback("Vale valik! Kontrolli, et valitud meetmed katavad hooldusaja riskid.");
+      setFeedback("Vale valik! Kontrolli, et valitud meetmed taastavad teenuste turvalisuse hooldusaja jooksul.");
     }
   };
 
@@ -59,10 +59,13 @@ export default function Audiitor2() {
       <h2>Turvameetmete kava</h2>
       <p className="scenario"><em>{scenario}</em></p>
       <p className="description">
-        Et viia IT-infrastruktuur kiiresti turvalisse olekusse ja vähendada hooldusaja tekitatud avatusi,
-        vali need meetmed, mis taastavad kaitse ja annavad turvalisuskontrollile katvuse hooldusakna vältel.
-        Ülesanne on valida <strong>{correctMeasures.length}</strong> peamist meetet.
+        Hooldusaken jättis süsteemid ajutiselt ilma kaitseta. Sinu ülesanne on valida need kaks peamist turvameedet, mis:
       </p>
+      <ul className="criteria-list">
+        <li><strong>Katab otsese teenuste taastamise:</strong> vali lahendus, mis tagab kiire ja usaldusväärse kaitse hooldusaja jooksul.</li>
+        <li><strong>Testib ja ennetab rünnakuid:</strong> vali meetod, mis aitab leida ja sulgeda haavatavused kohe pärast hooldusakna lõppu.</li>
+      </ul>
+      <p>Vali täpselt <strong>{correctMeasures.length}</strong> meedet. Kui oled valmis, klõpsa “Esita valikud”.</p>
       <ul className="measure-list">
         {allMeasures.map(m => (
           <li

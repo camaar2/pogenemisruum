@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Rakendaja3.css';
 
 const tools = [
-  { id: 1, name: "Virusetõrje tarkvara", correct: true, explanation: "Tuletõrje tarkvara skaneerib ja eemaldab pahavara enne süsteemi kahjustamist." },
+  { id: 1, name: "Virusetõrje tarkvara", correct: true, explanation: "Virusetõrje tarkvara skanneerib ja eemaldab pahavara enne süsteemi kahjustamist." },
   { id: 2, name: "Tulemüür", correct: true, explanation: "Tulemüür filtreerib võrguühendused, blokeerides pahatahtliku liikluse." },
   { id: 3, name: "USB autorun lubatud", correct: false, explanation: "USB autorun’i lubamine võib viia automaatsete pahavarainstallatsioonideni." },
   { id: 4, name: "Andmete varundussüsteem", correct: true, explanation: "Varundussüsteem tagab kriitiliste andmete taastamise rikke või ründe korral." },
@@ -59,19 +59,20 @@ export default function Rakendaja3() {
       <h1>Turvatööriistade valik</h1>
       <p className="scenario">
         <em>
-          Eesmärk on paigaldada vaid need tööriistad, mis tõeliselt tugevdavad
-          teie keskkonna turvalisust. Liiga palju või valesid tööriistu võib
-          tekitada keerukust või isegi turvaauke.
+          Lihtsuse ja tõhususe tagamiseks tuleb keskkonda valida vaid terviklikud ja toimivad kaitselahendused. Liiga paljude või sobimatute tööriistade kasutamine võib tekitada haldusraskusi või jätta turvavõrgustiku lüngad.
         </em>
       </p>
       <p className="instruction">
-        Märgi <strong>{correctCount}</strong> tööriista, mis aitavad:
-        <ul>
-          <li>Tuua pahavara tuvastamise tasandisse, mis peatab viirused ja troojalased.</li>
-          <li>Filtreerida võrguliiklust, blokeerides pahatahtlikud ühendused.</li>
-          <li>Säilitada kriitilised andmed turvaliselt ja taastada need rikke korral.</li>
-          <li>Tuvastada ja reageerida sissetungikatsetele reaalajas.</li>
-        </ul>
+          Märgi <strong>{correctCount}</strong> tööriista, mis tagavad suures osas keskkonna kaitse:
+      </p>
+      <ul>
+        <li>Eemalda viirused enne, kui need süsteemi kahjustavad.</li>
+        <li>Filtreeri võrguliiklust, et blokeerida pahatahtlik ja volitamata liiklus.</li>
+        <li>Säilita kriitilised andmed turvaliselt ja võimalda nende taastamist ründe või rikke korral.</li>
+        <li>Tuvasta ja reageeri sissetungikatsetele ning anomaaliatele reaalajas.</li>
+      </ul>
+      <p className="instructions">
+        Kui oled valinud õige tööriistade kombinatsiooni, klõpsa nupul “Esita valikud”.
       </p>
 
       <div className="tools-grid">

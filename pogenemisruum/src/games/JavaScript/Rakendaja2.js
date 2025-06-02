@@ -3,10 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/Rakendaja2.css';
 
 const rules = [
-  { id: 1, text: 'Luba ainult HTTPS liiklus', correct: true, explanation: "HTTPS tagab andmete krüpteerimise ja turvalisuse." },
-  { id: 2, text: 'Luba kogu liiklus ilma piiranguteta', correct: false, explanation: "See reegel avab võrgu turvariskidele, kuna kõik liiklus lubatud." },
-  { id: 3, text: 'Keela tundmatud sissetulevad ühendused', correct: true, explanation: "Tundmatute ühenduste blokeerimine vähendab volitamata juurdepääsu riski." },
-  { id: 4, text: 'Luba FTP liiklus igast allikast', correct: false, explanation: "FTP pole turvaline ja ei tohiks olla lubatud ilma piiranguteta." }
+  {
+    id: 1,
+    text: 'Luba ainult HTTPS liiklus',
+    correct: true,
+    explanation: 'HTTPS-ühenduste lubamine tagab, et andmeedastus on krüpteeritud ja turvaline.'
+  },
+  {
+    id: 2,
+    text: 'Luba kogu liiklus ilma piiranguteta',
+    correct: false,
+    explanation: 'Igasuguse liikluse lubamine avab võrgu pahatahtlikele rünnakutele ja turvarikkumistele.'
+  },
+  {
+    id: 3,
+    text: 'Keela tundmatud sissetulevad ühendused',
+    correct: true,
+    explanation: 'Tundmatute ühenduste keelamine vähendab volitamata juurdepääsu riski.'
+  },
+  {
+    id: 4,
+    text: 'Luba FTP liiklus igast allikast',
+    correct: false,
+    explanation: 'FTP-liikluse lubamine ilma piiranguteta jätab võrgu krüptimata failiedastusele ja turvarikkumistele avatuks.'
+  }
 ];
 
 export default function Rakendaja2() {
@@ -55,7 +75,7 @@ export default function Rakendaja2() {
       <h1>Tulemüüri reeglite optimeerimine</h1>
       <p className="scenario">
         <em>
-          Tulemüür on võrgu esimene kaitsekihi, mis filtreerib sissetulevat ja väljaminevat liiklust.
+          Tulemüür on võrgu esimene kaitsekiht, mis filtreerib sissetulevat ja väljaminevat liiklust.
           Õige reeglite komplekt tagab, et lubatud ning krüpteeritud ühendused toimivad,
           samal ajal kui pahatahtlik või tundmatu liiklus jääb blokeerituks.
         </em>
@@ -64,6 +84,11 @@ export default function Rakendaja2() {
         Vali <strong>{correctCount}</strong> reeglit, mis on vajalikud turvalise tulemüüri konfiguratsiooniks:
         blokeerivad ebaturvalist või volitamata liiklust, kuid lubavad usaldusväärseid HTTPS- ja admin-ühendusi.
       </p>
+
+      <p className="instructions">
+        Kui oled valinud õiged reeglid, klõpsa nupul “Esita valikud”.
+      </p>
+
       <ul className="rule-list">
         {rules.map(r => {
           let cls = '';

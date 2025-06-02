@@ -15,14 +15,14 @@ const allSources = [
     title: "Sotsiaalmeedia kuulujutt",
     description: "Allikas: tundmatu postitus, vähe fakte",
     isValuable: false,
-    explanation: "Kuulujutt sotsiaalmeedias ilma viideteta ei pruugi olla õige – puuduvad tõendavad faktid, seega pole seda turvalise teabe kogumiseks tasemel allikaks võtta."
+    explanation: "Kuulujutt sotsiaalmeedias ilma viideteta ei pruugi olla tõene – puuduvad tõesust näitavad faktid."
   },
   {
     id: 3,
     title: "Anonüümne postitus turvafoorumis",
     description: "Mainib potentsiaalseid 0-day ründeid",
     isValuable: true,
-    explanation: "Postituses tõstetakse esile tehnilised nüansid (0-day ründed), mis võivad viidata uudsele haavatavusele – seega tasub tõsisemalt uurida ja käsitleda kui väärtuslikku vihjet."
+    explanation: "Postituses tõstetakse esile tehnilised nüansid (0-day ründed), mis võivad viidata uuele haavatavusele – seega tasub tõsisemalt uurida ja käsitleda."
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const allSources = [
     title: "Sisemine intsident",
     description: "Juhuslik test, mille kohta vähe andmeid",
     isValuable: false,
-    explanation: "Kui tegemist on ainult juhusliku sisemise testiga, võib selle põhjal üldistada olla problemaatiline. Puuduvad tõendid, et sama muster mõjutaks teisi süsteeme."
+    explanation: "Kui tegemist on ainult juhusliku sisemise testiga, võib selle põhjal üldistada olla liiga vara. Puuduvad tõendid, et sama muster mõjutaks teisi süsteeme."
   },
   {
     id: 7,
@@ -55,9 +55,9 @@ const allSources = [
   {
     id: 8,
     title: "Klikkiva pealkirjaga artikkel",
-    description: "Sensatsiooniline pealkiri, vähe konkreetseid fakte",
+    description: "Väga hästi kirjutatud pealkiri, vähe konkreetseid fakte",
     isValuable: false,
-    explanation: "Sensatsiooniline pealkiri ilma faktipõhise sisuta ja viideteta kipub olema pinnapealne. Sellist infot ei tohiks pidada usaldusväärseks ohuteabeks ilma allikakinnitusteta."
+    explanation: "Väga hästi kirjutatud pealkiri ilma faktipõhise sisuta ja viideteta kipub olema pinnapealne. Sellist infot ei tohiks pidada usaldusväärseks ohuteabeks ilma allikakinnitusteta."
   }
 ];
 
@@ -139,8 +139,17 @@ function Kuberturbe_ohuanaluutik1() {
   return (
     <div className={`threat-collection ${isLocked ? (messageType === 'message-correct' ? 'correct-bg' : 'incorrect-bg') : ''}`}>
       <h1>Ohuteabe kogumine</h1>
+
       <p className="instructions">
-        Vali täpselt <strong>{valuableIds.length}</strong> potentsiaalselt väärtuslikku allikat – aitame turvaohtude jälitamisel!
+        Sinu ülesanne on vaadata allolevaid viit erinevat teabeallikat ja 
+        hinnata, millised neist tõenäoliselt sisaldavad usaldusväärset ja 
+        tõendatud ohuteavet. Märgi ainult need, mis vastavad järgnevatele kriteeriumidele:
+        <ul className="criteria-list">
+          <li><strong>Allika usaldusväärsus:</strong> Kas info pärineb ametlikust või tuntud turvaallikast (nt CERT, tunnustatud turvafirma, ekspertkonverents)?</li>
+          <li><strong>Tehniline detail:</strong> Kas allikas sisaldab konkreetseid tehnilisi detaile (näiteks 0-day mainimist, haavatavuse koodinäited, reaalajas logid)?</li>
+          <li><strong>Võimalik mõjukus:</strong> Kas see info aitab ennetada või tõrjuda tõsist rünnakut organisatsioonis (nt varajane indikaator, mis võib aidata rünnakut ennetada, enne kui see toimub)?</li>
+        </ul>
+        Märgi täpselt <strong>{valuableIds.length}</strong> allikat. Kui oled valmis, vajuta „Esita valikud“.
       </p>
 
       <div className="sources">
@@ -163,11 +172,17 @@ function Kuberturbe_ohuanaluutik1() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleReset}>Alusta uuesti</button>
-            <button onClick={handleSubmit}>Esita valikud</button>
+            <button className="reset-button" onClick={handleReset}>
+              Alusta uuesti
+            </button>
+            <button className="submit-button" onClick={handleSubmit}>
+              Esita valikud
+            </button>
           </>
         ) : (
-          <button onClick={handleNext}>Edasi</button>
+          <button className="next-button" onClick={handleNext}>
+            Edasi
+          </button>
         )}
       </div>
 

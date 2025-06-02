@@ -4,7 +4,7 @@ import '../CSS/Rakendaja1.css';
 
 const correctOrder = [
   { text: "Seadista ruuteri ACL-id", explanation: "ACL-id piiritlevad võrgu juurdepääsu esmalt, vältides volitamata liiklust." },
-  { text: "Paigalda tulemüür", explanation: "Tulemüür filtreerib ja blokeerib ebaseaduslikku liiklust võrku.</em>" },
+  { text: "Paigalda tulemüür", explanation: "Tulemüür filtreerib ja blokeerib ebaseaduslikku liiklust võrku." },
   { text: "Paigalda IDS/IPS", explanation: "IDS/IPS tuvastab ja reageerib kahtlasele tegevusele reaalajas." },
   { text: "Rakenda VPN-ühendus", explanation: "VPN-ühendus krüpteerib andmeedastuse turvaliseks kaugtööks." },
   { text: "Tugevda lõppseadmed", explanation: "Lõppseadmete tugevdamine hoiab ära pahatahtliku tarkvara leviku." }
@@ -35,7 +35,7 @@ export default function Rakendaja1() {
     setLocked(true);
     const allCorrect = steps.every((s, i) => s === correctOrder[i].text);
     setMessage(allCorrect
-      ? "🎉 Õige järjestus! Võrgu kaitse valmis."
+      ? "🎉 Õige järjestus! Tubli!"
       : "❌ Vale järjestus. Proovi uuesti.");
   };
 
@@ -60,16 +60,18 @@ export default function Rakendaja1() {
       <p className="scenario">
         <em>
           Turvealane ründevektor nõuab korrektset konfiguratsiooni etapiti:
-          esmalt piirangud ACL-idega, seejärel tulemüür, IDS/IPS, kaugühendus VPN-iga ja lõppseadmete tugevdamine.
         </em>
       </p>
       <ol className="logic-list">
-        <li><strong>Seadista ruuteri ACL-id</strong>: piiritle, kes ja mis aadressid saavad võrku pääseda.</li>
-        <li><strong>Paigalda tulemüür</strong>: filtreeri sissetulev ja väljaminev liiklus keskeltläbi.</li>
-        <li><strong>Paigalda IDS/IPS</strong>: tuvastab ja blokeerib kahtlast tegevust reaalajas.</li>
-        <li><strong>Rakenda VPN-ühendus</strong>: võimalda turvaline kaugtöötlus krüpteeritud tunneli kaudu.</li>
-        <li><strong>Tugevda lõppseadmed</strong>: uuenda paroolid, lülita sisse viirusetõrje ja luba ainult lubatud teenused.</li>
+        <li>Piiritle, kes ja mis aadressid saavad võrku pääseda.</li>
+        <li>Filtreeri sissetulev ja väljaminev liiklus keskeltläbi.</li>
+        <li>Tuvastab ja blokeerib kahtlast tegevust reaalajas.</li>
+        <li>Võimalda turvaline kaugtöötlus krüpteeritud tunneli kaudu.</li>
+        <li>Uuenda paroolid, lülita sisse viirusetõrje ja luba ainult lubatud teenused.</li>
       </ol>
+      <p className="instructions">
+        Kui oled valinud õige järjekorra, klõpsa nupul “Esita valikud”.
+      </p>
       <p className="instruction">
         Paiguta <strong>{correctOrder.length}</strong> sammu korrektse loogika järgi.
       </p>

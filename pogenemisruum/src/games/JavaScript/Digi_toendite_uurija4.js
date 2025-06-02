@@ -135,21 +135,43 @@ export default function Digi_toendite_uurija4() {
   const handleEnd = () => navigate('/');
 
   return (
-    <div className={`digital-memory ${message.startsWith('🎉') ? 'correct-bg' : message ? 'incorrect-bg' : ''}`}>
+    <div
+      className={`digital-memory ${
+        message.startsWith("🎉") ? "correct-bg" : message ? "incorrect-bg" : ""
+      }`}
+    >
       <h1>Digitaalse tõendi mälumäng</h1>
       <p className="scenario">
-        <em>Mälumäng digitaalse forensika tõenditega: lohista kokku iga tõendi nimi tema kirjeldusega.</em>
+        <em>
+          Mälumäng digitaalse forensika tõenditega: lohista kokku iga tõendi nimi
+          tema kirjeldusega.
+        </em>
       </p>
+
+      {/* Lisatud õige tekstiosa: */}
+      <p className="instructions">
+        Kui olete kõik paarid kokku sidunud, vajutage “Esita valikud”. Pärast esitamist
+        kuvatakse iga paari kohta lühike selgitus.
+      </p>
+
       <p className="instruction">
-        Sobita kokku <strong>{evidencePairs.length}</strong> paari: tõendi nimi ↔ kirjeldus.
+        Sobita kokku <strong>{evidencePairs.length}</strong> paari: tõendi nimi ↔
+        kirjeldus.
       </p>
+
       <div className="cards-grid">
         {cards.map((card, idx) => (
           <div
             key={card.id}
-            className={`card ${card.flipped || card.matched ? 'flipped' : ''}`}
+            className={`card ${
+              card.flipped || card.matched ? "flipped" : ""
+            }`}
             onClick={() => handleCardClick(idx)}
-            style={card.matched ? { border: `3px solid ${colorMap[card.pairId]}` } : {}}
+            style={
+              card.matched
+                ? { border: `3px solid ${colorMap[card.pairId]}` }
+                : {}
+            }
           >
             <div className="card-inner">
               <div className="card-front"></div>
@@ -158,6 +180,7 @@ export default function Digi_toendite_uurija4() {
           </div>
         ))}
       </div>
+
       <div className="buttons">
         <button className="reset" onClick={handleReset}>
           Alusta uuesti
@@ -172,16 +195,22 @@ export default function Digi_toendite_uurija4() {
           </button>
         )}
       </div>
+
       {message && (
-        <div className={`message ${message.startsWith('🎉') ? 'message-correct' : 'message-incorrect'}`}>
+        <div
+          className={`message ${
+            message.startsWith("🎉") ? "message-correct" : "message-incorrect"
+          }`}
+        >
           {message}
         </div>
       )}
+
       {matchesFound === evidencePairs.length && (
         <div className="explanations">
           <h3>Selgitused valikute kohta:</h3>
           <ul>
-            {evidencePairs.map(p => (
+            {evidencePairs.map((p) => (
               <li key={p.id}>
                 <strong>{p.toend}:</strong> {p.explanation}
               </li>

@@ -19,13 +19,13 @@ const allThreats = [
     id: 3,
     text: "Potentsiaalne paroolileke",
     correctPriority: "high",
-    explanation: "Paroolileke võib viia kiirelt volitamata juurdepääsuni – see on kriitiline turvaoht, mis nõuab kohe tegemist."
+    explanation: "Paroolileke võib viia kiirelt volitamata juurdepääsuni – see on kriitiline turvaoht, mis nõuab kohe tähelepanu."
   },
   {
     id: 4,
     text: "Võimalik phishing-kampaania",
     correctPriority: "low",
-    explanation: "Kuigi phishing on ohtlik, ei ole hetkel kindlaid tõendeid konkreetsete sise-andmete ründe kohta – madala prioriteediga ülevaatus ja jälgimine piisab."
+    explanation: "Kuigi phishing on ohtlik, ei ole hetkel kindlaid tõendeid konkreetsete siseandmete ründe kohta – madala prioriteediga ülevaatus ja jälgimine piisab."
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const allThreats = [
     id: 7,
     text: "Telnet port 23 avatud",
     correctPriority: "low",
-    explanation: "Telnet on vananenud ja ebaturvaline, aga suletav või vaatlus madala prioriteediga, sest hetkel pole rünnet tuvastatud."
+    explanation: "Telnet on vananenud ja ebaturvaline, sobib madal prioriteet, sest hetkel pole rünnet tuvastatud."
   },
   {
     id: 8,
@@ -75,7 +75,7 @@ function shuffleArray(array) {
 }
 
 function generateThreats() {
-  const count = Math.floor(Math.random() * 4) + 6;
+  const count = Math.floor(Math.random() * 4) + 6; // juhuslikult 6–9 ohtu
   return shuffleArray(allThreats).slice(0, count);
 }
 
@@ -94,6 +94,7 @@ function Kuberturbe_ohuanaluutik3() {
 
   const handlePriorityChange = (id, value) => {
     if (isLocked) return;
+    setMessage("");
     setPriorities(prev => ({ ...prev, [id]: value }));
   };
 
@@ -139,16 +140,24 @@ function Kuberturbe_ohuanaluutik3() {
   return (
     <div className={`risk-prioritization ${containerClass}`}>
       <h1>Riskide prioriseerimine</h1>
+
       <div className="instructions">
-        <p>Sul on tuvastatud <strong>{total}</strong> ohtu.</p>
+        <p>Sul on tuvastatud <strong>{total}</strong> erinevat turvaohtu.</p>
+        <p>Prioriteetide valikuks kasuta:</p>
+        <ul className="criteria-list">
+          <li>
+            <span className="high-label">Kõrge</span>: oht, mis võib tekitada kohest ja ulatuslikku kahju. Nende ohtude arv on <strong>{highCount}</strong>.
+          </li>
+          <li>
+            <span className="medium-label">Keskmine</span>: oht, mis nõuab kiiret reageerimist, aga ei tekita kohe katastroofi. Nende ohtude arv on <strong>{medCount}</strong>.
+          </li>
+          <li>
+            <span className="low-label">Madal</span>: oht, mille puhul piisab tavapärasest turvalahendusest ja jälgimisest. Nende ohtude arv on <strong>{lowCount}</strong>.
+          </li>
+        </ul>
         <p>
-          Vali <strong className="high-label">kõrge</strong> prioriteet ohtudele, mille mõju on võrreldav 0-day lunavara levikuga; neid on {highCount}.
-        </p>
-        <p>
-          Vali <strong className="medium-label">keskmine</strong> prioriteet tavameetmetega tõrjutavatele rünnetele; neid on {medCount}.
-        </p>
-        <p>
-          Vali <strong className="low-label">madal</strong> prioriteet riskidele, mille korral standardsed turvareeglid on piisavad; neid on {lowCount}.
+          Kui oled valmis, määra igale reale sobiv prioriteet ja vajuta “Esita valikud”.  
+          Pärast õiget vastamist näed iga rea kohta selgitust, miks see prioriteet rakendus.
         </p>
       </div>
 
@@ -183,11 +192,17 @@ function Kuberturbe_ohuanaluutik3() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button onClick={handleReset}>Alusta uuesti</button>
-            <button className="primary" onClick={handleSubmit}>Esita valikud</button>
+            <button className="reset-button" onClick={handleReset}>
+              Alusta uuesti
+            </button>
+            <button className="submit-button" onClick={handleSubmit}>
+              Esita valikud
+            </button>
           </>
         ) : (
-          <button className="primary" onClick={handleNext}>Edasi</button>
+          <button className="next-button" onClick={handleNext}>
+            Edasi
+          </button>
         )}
       </div>
 
@@ -196,13 +211,24 @@ function Kuberturbe_ohuanaluutik3() {
           {message}
         </div>
       )}
+
       {isLocked && isCorrect && (
         <div className="explanations">
           <h2>Selgitused prioriteetide kohta:</h2>
           <ul>
             {threats.map(threat => (
               <li key={threat.id}>
-                <strong>{threat.text} ({threat.correctPriority}):</strong> {threat.explanation}
+                <strong>
+                  {threat.text} (
+                  <span className={`${threat.correctPriority}-label`}>
+                    {threat.correctPriority === 'high'
+                      ? 'kõrge'
+                      : threat.correctPriority === 'medium'
+                      ? 'keskmine'
+                      : 'madal'}
+                  </span>
+                  ):
+                </strong> {threat.explanation}
               </li>
             ))}
           </ul>

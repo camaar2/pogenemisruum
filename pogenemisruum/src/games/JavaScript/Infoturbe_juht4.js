@@ -24,7 +24,7 @@ const initialFiles = [
     hint:
       "Windowsi protsessid paiknevad System32 kaustas – neid ei tasu kergekäeliselt eemaldada.",
     explanation:
-      "See on legitiimne Windowsi protsess: svchost.exe töötab System32 kaustas ja kuulub OS-i normaalsele tegevusele.",
+      "See on reaalne Windowsi protsess: svchost.exe töötab System32 kaustas ja kuulub OS-i normaalsele tegevusele.",
     isMalware: false
   },
   {
@@ -36,7 +36,7 @@ const initialFiles = [
     hint:
       "Vaata skripti sisu – kas seal on viiteid kaevandamisele või muule ebatavalisele?",
     explanation:
-      "See skript on pahavara: miner-tool.sh asub süsteemi crontab-kausta lähedal ja sisaldab krüptominingu koodi.",
+      "See skript on pahavara: miner-tool.sh asub süsteemi crontab-kausta lähedal ja sisaldab krüpto-miningu koodi.",
     isMalware: true
   },
   {
@@ -46,7 +46,7 @@ const initialFiles = [
     description:
       "Tavaline tekstiredaktor Program Files kaustas.",
     hint:
-      "Legitiimsed rakendused installitakse autoritatiseeritud tootjate poolt.",
+      "Reaalsed rakendused installitakse autoritatiseeritud tootjate poolt.",
     explanation:
       "See on turvaline rakendus: texteditor.exe paikneb Program Files kaustas ja on usaldusväärsest allikast.",
     isMalware: false
@@ -129,11 +129,13 @@ export default function Infoturbe_juht4() {
     <div className={`malware-game ${locked ? "correct-bg" : (message.type === "error" && !locked) ? "incorrect-bg" : ""}`}>
       <h1>Pahavara tuvastamine</h1>
       <p className="storyline">
-        Oled digitaalse forensiku rollis: sinu ülesanne on eristada süsteemis {malwareCount} pahatahtlikku faili.
+        Oled digitaalse forensiku rollis: sinu ülesanne on eristada süsteemis <strong>{malwareCount}</strong> pahatahtlikku faili.
       </p>
       <p className="instruction">
-        Märgi täpselt <strong>{malwareCount}</strong> faili <em>pahavaraks</em> ja ülejäänud <strong>{safeCount}</strong> faili <em>ohutuks</em>.<br/>
-        Vajadusel kasuta iga faili juures nuppu “Vihje”.
+        Märgi täpselt <strong>{malwareCount}</strong> faili <em>pahavaraks</em> ja ülejäänud <strong>{safeCount}</strong> faili <em>ohutuks</em>.
+      </p>
+      <p className="instructions">
+        Kui kõik valikud on tehtud, klõpsake nupul “Esita valikud”.
       </p>
 
       <div className="file-list">
@@ -185,7 +187,7 @@ export default function Infoturbe_juht4() {
         ))}
       </div>
 
-      <div className="buttons">
+      <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
         <button onClick={handleReset}>Alusta uuesti</button>
         {!locked ? (
           <button className="primary" onClick={handleSubmit}>Esita valikud</button>

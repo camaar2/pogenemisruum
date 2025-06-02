@@ -81,10 +81,16 @@ export default function Audiitor4() {
     <div className={`cyadvice-stage4 ${containerClass}`}>
       <h2>Järelevalve ja audit</h2>
       <p className="instructions"><em>{scenario}</em></p>
+
       <p className="description">
-        Valitud järelmeetmed aitavad tuvastada ja reageerida turvaohtudele regulaarse monitooringu kaudu.
-        Vali <strong>{correctRecommendations.length}</strong> peamist meetet, mis tagavad infoajastuse ja rünnakute varajase avastamise.
+        Pärast lõplikku rakendust tuleb luua järelmeetmete kava, mis tagab turvalisuse pideva monitooringu ja kiire reageerimise:
       </p>
+      <ul className="criteria-list">
+        <li><strong>Regulaarne turvatestimine:</strong> vali meetmed, mis võimaldavad perioodiliselt testida haavatavusi.</li>
+        <li><strong>Reaalajas järelevalve:</strong> vali meetmed, mis tagavad logide ja sündmuste pideva analüüsi.</li>
+      </ul>
+
+      <p>Vali täpselt <strong>{correctRecommendations.length}</strong> peamist järelmeetet. Kui oled valmis, klõpsa “Esita valikud”.</p>
       <ul className="recommendation-list">
         {options.map(item => (
           <li
@@ -104,6 +110,7 @@ export default function Audiitor4() {
           </li>
         ))}
       </ul>
+
       <div className="buttons">
         <button className="reset" onClick={handleReset}>
           Alusta uuesti
@@ -120,8 +127,10 @@ export default function Audiitor4() {
           )
         )}
       </div>
+
       {feedback && <div className={`feedback ${messageClass}`}>{feedback}</div>}
       {report && <div className="report">{report}</div>}
+
       {checked && (
         <div className="explanations">
           <h3>Selgitused valikute kohta:</h3>

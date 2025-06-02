@@ -37,7 +37,7 @@ export default function Digi_toendite_uurija1() {
   const handleSubmit = () => {
     setChecked(true);
     if (items.every((it, i) => it === correctOrder[i].text)) {
-      setMessage('🎉 Ahela sammud on korrektset järjekorda asetatud. Jätka järgmise etapi juurde.');
+      setMessage('🎉 Ahela sammud on korrektset järjekorda asetatud. Tubli!');
     } else {
       setMessage(
         '❌ Mõned sammud ei vasta nõutud loogikale. Vaata üle ja proovi uuesti.'
@@ -74,22 +74,15 @@ export default function Digi_toendite_uurija1() {
         õigesse järjekorda:
       </p>
       <ol className="logic-list">
-        <li>
-          <strong>Tõendite konfiskeerimine:</strong> eemalda seadmed, et peatada andmete muutmine.
-        </li>
-        <li>
-          <strong>Järelduse ahela vorm täidetud:</strong> dokumenteeri konfiskeerimine vastavalt standarditele.
-        </li>
-        <li>
-          <strong>Digitaalse salvestusseadme arestimine:</strong> aresti kettad ja mälupulgad, et vältida sekkumist.
-        </li>
-        <li>
-          <strong>Forenseeriline kujutis tehtud:</strong> loo bititasandiline kloon, et analüüsida koopiat.
-        </li>
-        <li>
-          <strong>Analüüs laboris:</strong> vii läbi detailne uurimine koopial, et tuvastada pahatahtlik tegevus.
-        </li>
+        <li>Eemalda seadmed, et peatada andmete muutmine.</li>
+        <li>Dokumenteeri konfiskeerimine vastavalt standarditele.</li>
+        <li>Konfiskeeri kettad ja mälupulgad, et vältida sekkumist.</li>
+        <li>Loo bititasandiline kloon, et analüüsida koopiat.</li>
+        <li>Vii läbi detailne uurimine koopial, et tuvastada pahatahtlik tegevus.</li>
       </ol>
+      <p className="instructions">
+        Kui olete ahela õigesti järjestanud, vajutage “Esita valikud”.
+      </p>
       <ul className="chain-list">
         {items.map((item, idx) => (
           <li
@@ -98,7 +91,13 @@ export default function Digi_toendite_uurija1() {
             onDragStart={e => handleDragStart(e, idx)}
             onDragOver={handleDragOver}
             onDrop={e => handleDrop(e, idx)}
-            className={!checked ? '' : item === correctOrder[idx].text ? 'correct' : 'incorrect'}
+            className={
+              !checked
+                ? ''
+                : item === correctOrder[idx].text
+                ? 'correct'
+                : 'incorrect'
+            }
           >
             {item}
           </li>

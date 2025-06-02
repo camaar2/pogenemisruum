@@ -2,12 +2,13 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
 header {
   margin-bottom: 0;
   padding-bottom: 0;
 }
 
-.phishing-game {
+.software-puzzle {
   max-width: 720px;
   margin: 0 auto !important;
   margin-top: 0 !important;
@@ -20,21 +21,19 @@ header {
   transition: background 0.5s;
 }
 
-.phishing-game.correct-bg {
+.software-puzzle.correct-bg {
   background: #e6ffea !important;
 }
-.phishing-game.incorrect-bg {
+
+.software-puzzle.incorrect-bg {
   background: #ffe6e6 !important;
 }
 
-.phishing-game,
-.phishing-game.correct-bg,
-.phishing-game.incorrect-bg,
 input[type="radio"] + span {
   background: #ffffff !important;
 }
 
-.phishing-game h1 {
+.software-puzzle h1 {
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -105,7 +104,10 @@ input[type="radio"] + span {
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
+  margin: 0 auto;
+  display: block;
 }
+
 .hint-box {
   background: #000000;
   border: 1px solid #ffd54f;
@@ -119,6 +121,7 @@ input[type="radio"] + span {
   text-align: center;
   margin-bottom: 1rem;
 }
+
 button {
   padding: 0.75rem 1.5rem;
   background: #ffffff;
@@ -127,12 +130,14 @@ button {
   cursor: pointer;
   margin: 0 0.5rem;
 }
+
 button.primary {
-  background: #3498db;
+  background: #e4067e;
   color: #fff;
 }
+
 button.primary:disabled {
-  background: #ccc;
+  background: #aa1352;
   cursor: not-allowed;
 }
 
@@ -146,4 +151,10 @@ button.primary:disabled {
 }
 .message-incorrect {
   color: red;
+}
+
+.rule-table td:nth-child(2),
+.rule-table td:nth-child(3) {
+  text-align: center;
+  vertical-align: middle;
 }

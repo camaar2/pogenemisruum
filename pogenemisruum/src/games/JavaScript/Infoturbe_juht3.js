@@ -13,7 +13,7 @@ const initialEmails = [
     hint:
       "Saatja domeen on swedbank.ee – ametlik Swedbanki domeen. Kiri ei sisalda kahtlaseid linke.",
     explanation:
-      "Selle e-kirja saatja on ametlik ja sõnum ei sunni sind tegema kiireid turvariske tähendavaid toiminguid, seega ei ole see andmepüügisõnum.",
+      "Saatja on tõepoolest Swedbank ja sõnum ei nõua kiiret tegutsemist turvariski tõttu. Kui sa ei ole ootamas erakorralist teavitust, on see tõenäoliselt üldine hoiatus, mitte andmepüük.",
     isPhishing: false
   },
   {
@@ -26,7 +26,7 @@ const initialEmails = [
     hint:
       "Saatja on usaldusväärne ning sõnum ei sunni tegema midagi turvariskset.",
     explanation:
-      "Sõnum tuleb usaldusväärselt domeenilt ning ei paku kahtlaseid linke; tegemist on legitiimse infoga töötajatele.",
+      "Kirjas mainitud tegevus on siseringi teavitus, mis ei nõua tundlike andmete jagamist ega suuna kahtlastele linkidele – tegemist on reaalse infoga töötajatele.",
     isPhishing: false
   },
   {
@@ -39,7 +39,7 @@ const initialEmails = [
     hint:
       "Posti domeen on õige ja link viib ametlikule saidile.",
     explanation:
-      "Kirja domeen ja lingid on korrektsed ega sunni sisestama isikuandmeid – turvaline kiri.",
+      "Kirja domeen ja lingid on ametlikud ning ei palu sisestada tundlikke andmeid – turvaline kiri.",
     isPhishing: false
   },
   {
@@ -52,7 +52,7 @@ const initialEmails = [
     hint:
       "Domeen on valetatud (“amazzon.com”), õige on amazon.com.",
     explanation:
-      "Saatja domeen on vale (“amazzon.com” asemel “amazon.com”) ning link suunab pahatahtlikule saidile – tegu on andmepüügi e-kirjaga.",
+      "Saatja domeen on vale (“amazzon.com” mitte “amazon.com”) ning link viib pahatahtlikule saidile – tegu on andmepüügi e-kirjaga.",
     isPhishing: true
   }
 ];
@@ -83,7 +83,7 @@ export default function Infoturbe_juht3() {
 
   const handleSubmit = () => {
     if (Object.keys(selections).length < emails.length) {
-      setMessage({ text: 'Vali kõigi kirjade puhul “Phishing” või “Safe”.', type: 'error' });
+      setMessage({ text: 'Palun märgi iga kirja puhul “Phishing” või “Safe”.', type: 'error' });
       return;
     }
     setChecked(true);
@@ -102,7 +102,7 @@ export default function Infoturbe_juht3() {
 
     if (allCorrect) {
       setMessage({
-        text: `🎉 Õige! Märkisid ${phishingCount} kahtlast ja ${safeCount} turvalist kirja õigesti.`,
+        text: `🎉 Õige! Märkisid kirjad õigesti.`,
         type: 'success'
       });
       setLocked(true);
@@ -125,11 +125,13 @@ export default function Infoturbe_juht3() {
     <div className={`phishing-game ${locked ? 'correct-bg' : checked ? 'incorrect-bg' : ''}`}>
       <h1>Andmepüügi tuvastamine</h1>
       <p className="scenario">
-        <em>Sinu ülesanne on eraldada usaldusväärsed e-kirjad kahtlastest.</em>
+        <em>Ülesanne on tuvastada, millised e-kirjad on ohutud ja millised kahtlased.</em>
       </p>
       <p className="instruction">
-        Märgi täpselt <strong>{phishingCount}</strong> kiri “Phishing” ja ülejäänud <strong>{safeCount}</strong> “Safe”.<br/>
-        Vajadusel kasuta iga kirja juures nuppu “Vihje”, et saada lisainfot.
+        Märgi täpselt <strong>{phishingCount}</strong> “Phishing” ja ülejäänud <strong>{safeCount}</strong> “Safe”.
+      </p>
+      <p className="instructions">
+        Kui kõik valikud on tehtud, klõpsake nupul “Esita valikud”.
       </p>
 
       <div className="email-list">
@@ -187,13 +189,13 @@ export default function Infoturbe_juht3() {
         ))}
       </div>
 
-      <div className="buttons">
+      <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
         {!checked ? (
           <>
+            <button onClick={handleReset}>Alusta uuesti</button>
             <button className="primary" onClick={handleSubmit}>
               Esita valikud
             </button>
-            <button onClick={handleReset}>Alusta uuesti</button>
           </>
         ) : locked ? (
           <button className="primary" onClick={() => navigate('/infoturbe_juht4_leht')}>

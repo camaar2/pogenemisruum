@@ -131,11 +131,11 @@ function Koolitaja4() {
       <div className="buttons">
         {!isLocked ? (
           <>
-            <button className="submit-button" onClick={handleSubmit}>
-              Esita valikud
-            </button>
             <button className="reset-button" onClick={handleReset}>
               Alusta uuesti
+            </button>
+            <button className="submit-button" onClick={handleSubmit}>
+              Esita valikud
             </button>
           </>
         ) : (

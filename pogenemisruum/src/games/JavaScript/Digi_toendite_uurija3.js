@@ -42,7 +42,7 @@ export default function Digi_toendite_uurija3() {
     setChecked(true);
     const correctCount = pairs.filter(p => slots[p.pairId] === p.pairId).length;
     if (correctCount === pairs.length) {
-      setMessage('🎉 Kõik sobitused õiged! Jätka järgmise etapi juurde.');
+      setMessage('🎉 Kõik sobitused on õiged! Tubli!');
     } else {
       setMessage(`❌ Õigesti: ${correctCount}/${pairs.length}. Mõned sobitused valed või puuduvad. Proovi uuesti.`);
     }
@@ -71,6 +71,10 @@ export default function Digi_toendite_uurija3() {
       <p className="scenario"><em>{scenario}</em></p>
       <p className="instruction">
         Sobitage <strong>{pairs.length}</strong> faili oma kirjeldustega loogiliselt kokku.
+      </p>
+      {/* Lisatud tekstiosa nagu soovitud: */}
+      <p className="instructions">
+        Kui olete kõik sobitused teinud, vajutage “Esita valikud”. Pärast esitamist kuvatakse iga sobituse kohta lühike selgitus.
       </p>
 
       <div className="matching-container">

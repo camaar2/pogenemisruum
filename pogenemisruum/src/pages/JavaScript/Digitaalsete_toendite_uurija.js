@@ -7,8 +7,7 @@ function DigitaalseteToenditeUurija() {
     <div className="job-page">
       <h1>Digitaalsete tõendite uurija</h1>
       <p>
-        Digitaalsete tõendite uurija (forensic analyst) kogub ja analüüsib digitaalseid tõendeid,
-        et aidata uurijatel mõista küberintsidente ja tagada, et tõendid oleksid kohtus kasutuskõlblikud.
+      Digitaalsete tõendite uurija vastutab organisatsiooni küberintsidentide uurimise ja tõendite haldamise eest. Ta kogub, säilitab ja analüüsib erinevaid digitaalseid andmeallikaid (näiteks logifaile ja failisüsteemi koopiad), et parandada intsidentide kulgemist ja tuvastada pahatahtlik tegevus. Töö hõlmab tõendite kogumist kooskõlas kehtestatud chain-of-custody protseduuridega, andmete korrapärast analüüsimist spetsiaalsete tööriistade abil ning tehniliste raportite koostamist, millel on juriidiline väärtus. Lisaks teeb uurija koostööd IT-turvatiimide, õiguskaitseasutuste ja juristidega, selgitades antud tõendite olulisust ning tagades, et kõik sammud on dokumenteeritud ja kohtus tunnistatavad. Ta annab soovitusi turvaküsimuste leevendamiseks, et tulevikus analoogseid intsidente ennetada.
       </p>
       <h2>Mängude ülevaade</h2>
       <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>

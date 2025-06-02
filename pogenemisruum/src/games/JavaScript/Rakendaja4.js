@@ -64,12 +64,17 @@ export default function Rakendaja4() {
       <h1>Turvameetmete teadmiste kontroll</h1>
       <p className="scenario">
         <em>
-          Selles etapis testime sinu arusaamist võrgu turvameetmetest ja autentimisest.
-          Loe iga küsimus hoolikalt ja vali kõige täpsem vastus.
+          Selles etapis hindame sinu teadmisi võrgu turvameetmete ja autentimise vallas.
+          Loe iga küsimust tähelepanelikult ja vali vastus, mis kõige täpsemalt kirjeldab õiget toimingut.
         </em>
       </p>
       <p className="instruction">
         Vasta <strong>{total}</strong> küsimusele:
+      </p>
+
+      {/* Lisatud nupu klõpsamise juhend: */}
+      <p className="instructions">
+        Kui oled valinud vastused, klõpsa nupul „Esita valikud“.
       </p>
 
       <div className="questions-container">

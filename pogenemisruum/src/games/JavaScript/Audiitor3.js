@@ -87,8 +87,9 @@ export default function Audiitor3() {
       <h2>Lahenduse rakendamise juhendamine</h2>
       <p className="description"><em>{scenario}</em></p>
       <p className="instructions">
-        Selle etapi eesmärk on tagada, et valitud turvameetmed viiakse praktikas ellu järjekindlalt ja tõhusalt.
-        Vali need sammud, mis katavad nii tehnilised, protseduurilised kui ka testimismeetmed. Kokku tuleb valida <strong>{correctTasks.length}</strong> meetet.
+        <ul className="criteria-list">
+        </ul>
+        Vali täpselt <strong>{correctTasks.length}</strong> sammu, mis kindlustavad turvameetmete õige ja tõhusa rakenduse. Kui oled valmis, klõpsa „Esita valikud“.
       </p>
       <ul className="task-list">
         {taskOptions.map(item => (
