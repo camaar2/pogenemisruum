@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/pogenemisruum/static/css/main.94395700.css",
-    "main.js": "/pogenemisruum/static/js/main.dc8c6710.js",
+    "main.css": "/pogenemisruum/static/css/main.7047ca26.css",
+    "main.js": "/pogenemisruum/static/js/main.eee2d142.js",
     "static/js/453.9882067e.chunk.js": "/pogenemisruum/static/js/453.9882067e.chunk.js",
     "static/media/Gagalin.otf": "/pogenemisruum/static/media/Gagalin.6bc229310548650a1f24.otf",
     "static/media/background.svg": "/pogenemisruum/static/media/background.665b87c248622ca7afee.svg",
     "index.html": "/pogenemisruum/index.html",
-    "main.94395700.css.map": "/pogenemisruum/static/css/main.94395700.css.map",
-    "main.dc8c6710.js.map": "/pogenemisruum/static/js/main.dc8c6710.js.map",
+    "main.7047ca26.css.map": "/pogenemisruum/static/css/main.7047ca26.css.map",
+    "main.eee2d142.js.map": "/pogenemisruum/static/js/main.eee2d142.js.map",
     "453.9882067e.chunk.js.map": "/pogenemisruum/static/js/453.9882067e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.94395700.css",
-    "static/js/main.dc8c6710.js"
+    "static/css/main.7047ca26.css",
+    "static/js/main.eee2d142.js"
   ]
 }
