@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../CSS/Koolitaja1.css';
 
 function Koolitaja1() {
   const [answers, setAnswers] = useState({ q1: '', q2: '' });
   const [error, setError] = useState('');
   const [isCorrect, setIsCorrect] = useState(false);
+  const navigate = useNavigate();
 
   const handleAnswerChange = (e) => {
     setAnswers({ ...answers, [e.target.name]: e.target.value });
@@ -28,8 +30,12 @@ function Koolitaja1() {
     setIsCorrect(false);
   };
 
+  const handleNext = () => {
+    navigate('/koolitaja2');
+  };
+
   return (
-    <div className="knowledge-check">
+    <div className={`knowledge-check ${isCorrect ? 'correct-bg' : ''}`}>
       <h1>Teadmiste hindamine</h1>
       <p>Vasta järgmistele küsimustele, et näidata oma teadlikkust küberturvalisuse ohtudest:</p>
 
@@ -110,12 +116,20 @@ function Koolitaja1() {
       )}
 
       <div className="buttons">
-        <button className="reset-button" onClick={handleReset}>
-          Alusta uuesti
-        </button>
-        <button className="submit-button" onClick={handleSubmit}>
-          Esita valikud
-        </button>
+        {!isCorrect ? (
+          <>
+            <button className="reset-button" onClick={handleReset}>
+              Alusta uuesti
+            </button>
+            <button className="submit-button" onClick={handleSubmit}>
+              Esita valikud
+            </button>
+          </>
+        ) : (
+          <button className="submit-button" onClick={handleNext}>
+            Edasi
+          </button>
+        )}
       </div>
     </div>
   );

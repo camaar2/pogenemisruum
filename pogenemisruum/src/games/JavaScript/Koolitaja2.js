@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../CSS/Koolitaja2.css';
 
 function Koolitaja2() {
@@ -8,6 +9,7 @@ function Koolitaja2() {
   const [answers, setAnswers] = useState({ q2: '', q3: '' });
   const [error, setError] = useState('');
   const [isCorrect, setIsCorrect] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMaterial = (material) => {
     setError('');
@@ -49,8 +51,12 @@ function Koolitaja2() {
     setIsCorrect(false);
   };
 
+  const handleNext = () => {
+    navigate('/koolitaja3');
+  };
+
   return (
-    <div className="stage stage2">
+    <div className={`stage stage2 ${isCorrect ? 'correct-bg' : ''}`}>
       <h2>Koolitusmaterjalide loomine</h2>
       <h3>1. Vali materjalid, mis sobivad kõige paremini kontoritöötajatele (2 õiget)</h3>
       <ul className="options">
@@ -152,21 +158,29 @@ function Koolitaja2() {
             <strong>Video</strong> ja <strong>Interaktiivne test</strong> on kontoritöötajatele sobivaimad materjalid, kuna need on lühikesed, visuaalsed ja võimaldavad praktilist osalust. “Pikk tehniline tekst” võib olla liiga aeganõudev ja keeruline igapäevaselt kontoris töötavatele inimestele.
           </p>
           <p>
-            Paroolide minimaalne pikkus <strong>12 tähemärki</strong> tagab piisava keerukuse ja raskendab ründajate elu, kes püüavad parooli ära arvata või murda. Lühiksemad paroolid (nt 6 või 8 tähemärki) on sageli kergemini murretavad.
+            Paroolide minimaalne pikkus <strong>12 tähemärki</strong> tagab piisava keerukuse ja raskendab ründajate elu, kes püüavad parooli ära arvata või murda.
           </p>
           <p>
-            <strong>Kahefaktoriline autentimine (2FA)</strong> tähendab, et peale parooli nõutakse veel täiendavat kinnitust (näiteks SMS-kood või autentimisäpp). See annab olulise täiendava kihi turvalisust, sest kui keegi saab su parooli kätte, ei piisa sellest siiski sisselogimiseks.
+            <strong>Kahefaktoriline autentimine (2FA)</strong> tähendab, et peale parooli nõutakse veel täiendavat kinnitust (näiteks SMS-kood või autentimisäpp).
           </p>
         </div>
       )}
 
       <div className="buttons">
-        <button className="reset-button" onClick={handleReset}>
-          Alusta uuesti
-        </button>
-        <button className="submit-button" onClick={handleSubmit}>
-          Esita valikud
-        </button>
+        {!isCorrect ? (
+          <>
+            <button className="reset-button" onClick={handleReset}>
+              Alusta uuesti
+            </button>
+            <button className="submit-button" onClick={handleSubmit}>
+              Esita valikud
+            </button>
+          </>
+        ) : (
+          <button className="submit-button" onClick={handleNext}>
+            Edasi
+          </button>
+        )}
       </div>
     </div>
   );

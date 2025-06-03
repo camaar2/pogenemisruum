@@ -73,6 +73,7 @@ function Sundmuste_reageerija3() {
     <div className={`incident-response ${isLocked ? (isCorrect ? "correct-bg" : "incorrect-bg") : ""}`}>
       <h2>Intsidendi reageerimismeetmete järjestamine</h2>
       <p>Järjesta tegevused õiges järjekorras. Kui oled valmis, vajuta „Esita valikud“.</p>
+
       <ul className="steps-list">
         {steps.map((step, index) => (
           <li
@@ -86,6 +87,7 @@ function Sundmuste_reageerija3() {
           </li>
         ))}
       </ul>
+
       <div className="buttons">
         <button onClick={handleReset}>Alusta uuesti</button>
         {!isLocked ? (
@@ -98,7 +100,15 @@ function Sundmuste_reageerija3() {
           )
         )}
       </div>
-      {feedback && <div className="feedback">{feedback}</div>}
+
+      {feedback && (
+        <div className={`feedback ${
+          feedback.startsWith("Intsidenti reageerimise") ? 'feedback-correct' : 'feedback-incorrect'
+        }`}>
+          {feedback}
+        </div>
+      )}
+
       {isLocked && isCorrect && (
         <div className="explanations">
           <h3>Selgitused:</h3>

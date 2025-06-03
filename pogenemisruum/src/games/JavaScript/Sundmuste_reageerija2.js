@@ -58,9 +58,9 @@ export default function Sundmuste_reageerija2() {
   };
 
   const handleReset = () => {
-    if (locked) return;
     setSelected('');
     setFeedback('');
+    setLocked(false);
   };
 
   return (

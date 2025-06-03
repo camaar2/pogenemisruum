@@ -5,27 +5,22 @@ export default function KKK() {
     {
       q: "Kas platvorm sobib täielikele algajatele?",
       a:
-        "Jah. Iga mängu eel on lühike slaid, mis tutvustab vajalikke mõisteid ja annab näpunäiteid. Ei ole vaja eelteadmisi programmeerimisest ega küberturvalisusest—õppimine toimub samm‑sammult mängu käigus.",
+        "Jah. Iga mängu eel on lühike slaid, mis tutvustab vajalikke mõisteid ja annab näpunäiteid. Ei ole vaja eelteadmisi programmeerimisest ega küberturvalisusest. Õppimine toimub samm‑sammult mängu käigus.",
     },
     {
-      q: "Kas saan platvormi kasutada klassiruumis ilma registreerimiseta?",
+      q: "Kas saan platvormi kasutada ilma registreerimiseta?",
       a:
-        "Praegune prototüüp ei nõua sisselogimist. Õpetaja saab lihtsalt jagada lingi ning õpilased saavad alustada mängimist kohe – tulemused kuvatakse kohapeal brauseris.",
+        "Praegune prototüüp ei nõua sisselogimist. Tulemused kuvatakse iga mängu järel.",
     },
     {
-      q: "Kuidas mängude tulemusi tulevikus salvestatakse?",
+      q: "Kuidas mängude tulemusi salvestatakse?",
       a:
-        "Valmivas täisversioonis lisatakse kasutajakontod ja turvaline andmebaas (nt Firebase), mille abil saab jälgida edenemist, analüüsida testide tulemusi ja kohandada raskusastet.",
+        "Valmivas täisversioonis lisatakse kasutajakontod ja andmebaas, mille abil saab jälgida edenemist, analüüsida mängude tulemusi ja kohandada raskusastet.",
     },
     {
       q: "Milliseid seadmeid ja brausereid platvorm toetab?",
       a:
-        "Rakendus on ehitatud Reactile ja testitud kaasaegsetes brauserites (Chrome, Firefox, Edge, Safari) nii lauaarvutis kui ka mobiilis. Parima kasutuskogemuse saamiseks soovitame uuemaid brausereid.",
-    },
-    {
-      q: "Kuidas on tagatud minu andmete turvalisus?",
-      a:
-        "Platvorm järgib GDPR‑i ja NIS2 nõudeid. Isikuandmeid ei koguta ilma selge nõusolekuta ning kõik salvestatud andmed krüpteeritakse nii transportimisel (TLS) kui ka puhkeolekus.",
+        "Rakendus on ehitatud Reacti baasil ja testitud kaasaegsetes brauserites (Chrome, Firefox, Edge, Safari). Parima kasutuskogemuse saamiseks soovitame uuemaid brausereid.",
     },
   ];
 
