@@ -13,9 +13,9 @@ function KuberturvalisuseRakendaja() {
       <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>
       <ul>
         <li><strong>Võrgu kaitse seadistamine</strong></li>
-        <li><strong>Turvaprofiilide loomine</strong></li>
-        <li><strong>Ligipääsupoliitikate haldamine</strong></li>
-        <li><strong>Teenuste turvamine</strong></li>
+        <li><strong>Tulemüüri reeglite optimeerimine</strong></li>
+        <li><strong>Turvatööriistade valik</strong></li>
+        <li><strong>Turvameetmete teadmiste kontroll</strong></li>
       </ul>
       <Link to="/rakendaja1_leht">
         <button>Liigu edasi</button>

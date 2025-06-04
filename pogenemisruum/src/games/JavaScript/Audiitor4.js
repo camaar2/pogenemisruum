@@ -79,7 +79,7 @@ export default function Audiitor4() {
 
   return (
     <div className={`cyadvice-stage4 ${containerClass}`}>
-      <h2>Järelevalve ja audit</h2>
+      <h2>Järelvalve ja audit</h2>
       <p className="instructions"><em>{scenario}</em></p>
 
       <p className="description">

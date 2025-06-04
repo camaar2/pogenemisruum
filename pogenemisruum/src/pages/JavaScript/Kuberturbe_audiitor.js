@@ -15,7 +15,7 @@ function KuberturbeAudiitor() {
         <li><strong>Riskianalüüs</strong></li>
         <li><strong>Turvameetmete kava</strong></li>
         <li><strong>Lahenduse rakendamise juhendamine</strong></li>
-        <li><strong>Lõplik audit ja järelevalve</strong></li>
+        <li><strong>Lõplik audit ja järelvalve</strong></li>
       </ul>
       <Link to="/audiitor1_leht">
         <button>Liigu edasi</button>

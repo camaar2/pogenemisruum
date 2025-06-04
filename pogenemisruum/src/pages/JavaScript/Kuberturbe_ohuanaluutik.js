@@ -15,7 +15,7 @@ function KuberturbeOhuanaluutik() {
         <li><strong>Ohuteabe kogumine</strong></li>
         <li><strong>Andmete analüüs</strong></li>
         <li><strong>Riskide prioriseerimine</strong></li>
-        <li><strong>Kill Chain kokkupanek</strong></li>
+        <li><strong>Ründe ahela etappide kokkupanek</strong></li>
       </ul>
       <Link to="/kuberturbe_ohuanaluutik1_leht">
         <button>Liigu edasi</button>

@@ -21,10 +21,10 @@ function KuberturvalisuseUurija() {
 
       <h2>Mängud</h2>
       <ul>
-        <li><strong>Tõendite ahela sammude järjestamine</strong></li>
-        <li><strong>Logianomaaliate tuvastamine</strong></li>
-        <li><strong>Probleemide tõsidus</strong></li>
-        <li><strong>Oht ja lahendus</strong></li>
+        <li><strong>Haavatavuste prioriseerimine</strong></li>
+        <li><strong>Pahavara indikaatorite tuvastamine</strong></li>
+        <li><strong>Võrguliikluse anomaalia tuvastamine</strong></li>
+        <li><strong>Leidlikud paarid</strong></li>
       </ul>
 
       <Link to="/kuberturvalisuse_uurija1_leht">

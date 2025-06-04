@@ -12,9 +12,9 @@ function DigitaalseteToenditeUurija() {
       <h2>Mängude ülevaade</h2>
       <p>Siin saad selles rollis lahendada järgmisi mänge, mille eeldatav kestus on 10 minutit:</p>
       <ul>
-        <li><strong>Chain-of-Custody Ordering</strong></li>
+        <li><strong>Tõendite ahela sammude järjestamine</strong></li>
         <li><strong>Logianomaaliate tuvastamine</strong></li>
-        <li><strong>Digitaalsete artefaktide sobitamine</strong></li>
+        <li><strong>Digitaalse tõendi sobitamine</strong></li>
         <li><strong>Digitaalse tõendi mälumäng</strong></li>
       </ul>
       <Link to="/digi_toendite_uurija1_leht">
